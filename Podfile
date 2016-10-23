@@ -6,16 +6,5 @@ target 'OnePercent' do
   use_frameworks!
 
   # Pods for OnePercent
-
-  target 'OnePercentTests' do
-pod 'SwiftyTimer'
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'OnePercentUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
+  pod 'SwiftyTimer'
 end
