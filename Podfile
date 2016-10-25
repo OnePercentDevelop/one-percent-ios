@@ -7,4 +7,5 @@ target 'OnePercent' do
 
   # Pods for OnePercent
   pod 'SwiftyTimer'
+  pod 'Firebase/Core'
 end
