@@ -1,12 +1,89 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Kag-yG-mNH">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--당첨자-->
+        <scene sceneID="Te0-bl-2k2">
+            <objects>
+                <viewController id="odt-6k-vkr" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0al-d6-DTv"/>
+                        <viewControllerLayoutGuide type="bottom" id="Eg4-id-h18"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OFV-iE-rPm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="당첨자" id="2kH-U9-im6"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q5H-hZ-f9l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1063" y="129"/>
+        </scene>
+        <!--더보기-->
+        <scene sceneID="BTv-dF-1Ez">
+            <objects>
+                <viewController id="NEw-Xh-BgO" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xk3-ku-6AK"/>
+                        <viewControllerLayoutGuide type="bottom" id="wPz-I8-0jH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4Ie-0k-KAl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="더보기" id="JgD-Sz-WaA"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rwv-H4-vby" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1062" y="832"/>
+        </scene>
+        <!--투표-->
+        <scene sceneID="SaF-5R-euP">
+            <objects>
+                <viewController id="Nut-SB-GTa" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="O99-Pj-nH1"/>
+                        <viewControllerLayoutGuide type="bottom" id="FMr-SK-S22"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Iaz-Sy-I9g">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="투표" id="j84-PX-d61"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xno-jR-mDF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1063" y="-526"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="vbz-ls-0Yg">
+            <objects>
+                <tabBarController id="Kag-yG-mNH" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="fBW-sU-ZGh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="dzT-Vn-sOS" kind="relationship" relationship="viewControllers" id="NFW-p8-g0D"/>
+                        <segue destination="Nut-SB-GTa" kind="relationship" relationship="viewControllers" id="LBA-lv-1fz"/>
+                        <segue destination="odt-6k-vkr" kind="relationship" relationship="viewControllers" id="YLy-U3-Aj4"/>
+                        <segue destination="NEw-Xh-BgO" kind="relationship" relationship="viewControllers" id="ZnQ-3H-j3g"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rqe-1y-8r8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="111" y="-198"/>
+        </scene>
+        <!--1percent-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="OnePercent" customModuleProvider="target" sceneMemberID="viewController">
@@ -28,13 +105,35 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" title="1percent" id="l5v-PV-Ynu">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="z86-jC-XbW"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="timeLabel" destination="z9P-5u-zqe" id="qFM-wW-ksk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="131.78410794602701"/>
+            <point key="canvasLocation" x="2000.8" y="-1239.1304347826087"/>
+        </scene>
+        <!--홈-->
+        <scene sceneID="jNg-KG-6PP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dzT-Vn-sOS" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="홈" id="Kg2-Jg-Lvf"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vtr-N1-iZw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="SzR-7d-AdR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uZw-l7-6iS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1061.5999999999999" y="-1239.1304347826087"/>
         </scene>
     </scenes>
 </document>
