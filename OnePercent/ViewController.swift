@@ -27,11 +27,7 @@ class ViewController: UIViewController {
     
     fileprivate func updateTodayLeftTime() {
     //viewController?.todayLeftTimeSecond = interactor.todayLeftSecond
-//        print("a\(Date())")
-        
-    dateformat()
-        
-      //timeLabel.text = "\(Date())"
+        dateformat()
     }
     
     fileprivate func stopTimer() {
@@ -60,56 +56,18 @@ class ViewController: UIViewController {
     }
     
     func dateformat() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm:ss"
-        let dateTime = formatter.string(from: Date())
-        let dateFormatter = DateFormatter()
+        let calendar = NSCalendar.current
+        var tomorrow = calendar.date(byAdding: .day, value: 1, to: Date())
+        tomorrow = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: tomorrow!)
+        let remainingTime = stringFromTimeInterval(interval: tomorrow!.timeIntervalSince(Date()))
         
-        dateFormatter.dateFormat = "yyyy-mm-dd"
-        let onTime = dateFormatter.string(from: Date())
-        
-        let cal = NSCalendar(calendarIdentifier:NSCalendar.Identifier(rawValue: NSGregorianCalendar))!
-        //cal.date(byAdding: <#T##DateComponents#>, to: <#T##Date#>, options: <#T##NSCalendar.Options#>)
-        
-        //print(dateTime)
-        
-//        let deformatter = DateFormatter()
-//        deformatter.dateFormat = "hh:mm:ss"
-//
-//        let onTime = "11:00:00"
-//        let timeFromDate = deformatter.date(from: onTime)
-//        print(timeFromDate)
-        /*
-         let calendar = NSCalendar.currentCalendar()
-         
-         // Replace the hour (time) of both dates with 00:00
-         let date1 = calendar.startOfDayForDate(firstDate)
-         let date2 = calendar.startOfDayForDate(secondDate)
-         
-         let flags = NSCalendarUnit.Day
-         let components = calendar.components(flags, fromDate: date1, toDate: date2, options: [])
-         
-         components.day
-         */
-//        let calendar = Calendar.current
-//        
-//        let date1 = calendar.startOfDay(for: Date())
-//        let date2 = calendar.startOfDay(for: timeFromDate!)
-//        //let date2 = calendar.startOfDay(for: Date())
-//        //let flags = CFCalendarUnit.day
-////        
-////        let components = calendar.dateComponents([.minute], from: date2, to: date1)
-////        print(components.minute!)
-//        let remainingTime = date1.timeIntervalSince(date2)
-//        let t = stringFromTimeInterval(interval: remainingTime)
-//        //print(t)
+        timeLabel.text = remainingTime
+        // Do any additional setup after loading the view, typically from a nib.
 
     }
     
     func stringFromTimeInterval(interval:TimeInterval) -> String {
-        
         let ti = Int(interval)
-        //print(ti)
         let seconds = ti % 60
         let minutes = (ti / 60) % 60
         let hours = (ti / 3600)
