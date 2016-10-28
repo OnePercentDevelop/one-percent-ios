@@ -14,6 +14,7 @@
 		C92EC0441DBD1D58005D7D8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C92EC0431DBD1D58005D7D8B /* Assets.xcassets */; };
 		C92EC0471DBD1D58005D7D8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C92EC0451DBD1D58005D7D8B /* LaunchScreen.storyboard */; };
 		C9C610581DBF539F005849C3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9C610571DBF539F005849C3 /* GoogleService-Info.plist */; };
+		C9C6108F1DC1B696005849C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C6108E1DC1B696005849C3 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		C92EC0461DBD1D58005D7D8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C92EC0481DBD1D58005D7D8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9C610571DBF539F005849C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C9C6108E1DC1B696005849C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Sources/LoginViewController.swift; sourceTree = "<group>"; };
 		D90E4C80152C792A97308648 /* Pods_OnePercentUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnePercentUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD5D3F20F52375E1D82A2789 /* Pods-OnePercentTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePercentTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnePercentTests/Pods-OnePercentTests.release.xcconfig"; sourceTree = "<group>"; };
 		E666AEE99FF67B194C2EAED3 /* Pods-OnePercentUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePercentUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnePercentUITests/Pods-OnePercentUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 		C9C610551DBF520C005849C3 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				C9C6108B1DC1B62C005849C3 /* Login */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -117,6 +120,14 @@
 			children = (
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		C9C6108B1DC1B62C005849C3 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				C9C6108E1DC1B696005849C3 /* LoginViewController.swift */,
+			);
+			name = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9C6108F1DC1B696005849C3 /* LoginViewController.swift in Sources */,
 				C92EC03F1DBD1D58005D7D8B /* ViewController.swift in Sources */,
 				C92EC03D1DBD1D58005D7D8B /* AppDelegate.swift in Sources */,
 			);
