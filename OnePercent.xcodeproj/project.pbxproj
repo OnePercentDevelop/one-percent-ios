@@ -15,6 +15,7 @@
 		C92EC0471DBD1D58005D7D8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C92EC0451DBD1D58005D7D8B /* LaunchScreen.storyboard */; };
 		C98EB05B1DC2EA6400B22C16 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05A1DC2EA6400B22C16 /* VoteViewController.swift */; };
 		C98EB05D1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05C1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift */; };
+		C98EB0601DC3464900B22C16 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05F1DC3464900B22C16 /* User.swift */; };
 		C9C610581DBF539F005849C3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9C610571DBF539F005849C3 /* GoogleService-Info.plist */; };
 		C9C6108F1DC1B696005849C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C6108E1DC1B696005849C3 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
@@ -35,6 +36,7 @@
 		C92EC0481DBD1D58005D7D8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C98EB05A1DC2EA6400B22C16 /* VoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VoteViewController.swift; path = Sources/VoteViewController.swift; sourceTree = "<group>"; };
 		C98EB05C1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VoteCollectionViewCell.swift; path = Sources/VoteCollectionViewCell.swift; sourceTree = "<group>"; };
+		C98EB05F1DC3464900B22C16 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C9C610571DBF539F005849C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C9C6108E1DC1B696005849C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Sources/LoginViewController.swift; sourceTree = "<group>"; };
 		D90E4C80152C792A97308648 /* Pods_OnePercentUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnePercentUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,9 +122,18 @@
 			name = Vote;
 			sourceTree = "<group>";
 		};
+		C98EB05E1DC3462800B22C16 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				C98EB05F1DC3464900B22C16 /* User.swift */,
+			);
+			name = Class;
+			sourceTree = "<group>";
+		};
 		C9C610551DBF520C005849C3 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				C98EB05E1DC3462800B22C16 /* Class */,
 				C98EB0591DC2EA4400B22C16 /* Vote */,
 				C9C6108B1DC1B62C005849C3 /* Login */,
 			);
@@ -271,6 +282,7 @@
 			files = (
 				C98EB05B1DC2EA6400B22C16 /* VoteViewController.swift in Sources */,
 				C9C6108F1DC1B696005849C3 /* LoginViewController.swift in Sources */,
+				C98EB0601DC3464900B22C16 /* User.swift in Sources */,
 				C98EB05D1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift in Sources */,
 				C92EC03F1DBD1D58005D7D8B /* ViewController.swift in Sources */,
 				C92EC03D1DBD1D58005D7D8B /* AppDelegate.swift in Sources */,

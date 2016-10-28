@@ -14,8 +14,10 @@ class VoteViewController: UIViewController {
     
     @IBAction func voteSendButton(_ sender: AnyObject) {
         if selectedItem != nil {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
-            self.present(vc!, animated: true, completion: nil)
+            if User.sharedInstance.emptyId == "" {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
+                self.present(vc!, animated: true, completion: nil)
+            }
         } else {
             let alertController = UIAlertController(title: "", message: "보기를 선택해주세요ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.default, handler: nil))
@@ -78,6 +80,8 @@ extension VoteViewController: UICollectionViewDelegate {
         let cell = voteCollectionView.cellForItem(at: indexPath)
         selectedItem = indexPath.row
         cell?.backgroundColor = UIColor.cyan
+        
+        
     }
     
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

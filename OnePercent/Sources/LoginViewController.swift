@@ -26,6 +26,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         passwordTextField.isSecureTextEntry = true
         
+        logInButton.addTarget(self, action: #selector(LoginViewController.loginButtonClick), for: .touchUpInside)
+        
         idTextField.rx.text
             .observeOn(MainScheduler.instance)
             .subscribe { s in
@@ -65,6 +67,14 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func loginButtonClick() {
+        //id = idTextField.text!
+        //password = passwordTextField.text!
+        //User.init(id: idTextField.text!, password: passwordTextField.text!)
+        User.sharedInstance.emptyId = idTextField.text!
+        User.sharedInstance.emptyPassword = passwordTextField.text!
+        self.dismiss(animated: true)
+    }
 
     /*
     // MARK: - Navigation
