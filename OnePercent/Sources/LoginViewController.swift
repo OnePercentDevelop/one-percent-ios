@@ -14,11 +14,14 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
     @IBOutlet weak var logInButton: UIButton!
     
-    let disposeBag = DisposeBag()
+    @IBAction func backButton(_ sender: AnyObject) {
+        self.dismiss(animated: true)
+    }
     
+    let disposeBag = DisposeBag()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordTextField.isSecureTextEntry = true
@@ -32,17 +35,17 @@ class LoginViewController: UIViewController {
 
         
         let userIdValid = idTextField.rx.text.asDriver().map {
-            //$0!.utf8.count > 5 && $0.rangeOfCharacterFromSet(NSCharacterSet.decimalDigitCharacterSet(), options: NSString.CompareOptions(), range: nil) != nil && $0.rangeOfCharacterFromSet(NSCharacterSet.letterCharacterSet()) != nil
             $0!.utf8.count > 10 && $0?.rangeOfCharacter(from: NSCharacterSet.decimalDigits, options: NSString.CompareOptions(), range: nil) != nil && $0?.rangeOfCharacter(from: NSCharacterSet.letters) == nil
         }
+        
         let userPasswordValid = passwordTextField.rx.text.asDriver().map {
             ($0?.utf8.count)! >= 4 && ($0?.utf8.count)! <= 10 && $0?.rangeOfCharacter(from: NSCharacterSet.decimalDigits, options: NSString.CompareOptions(), range: nil) != nil && $0?.rangeOfCharacter(from: NSCharacterSet.letters) != nil
-            
         }
         
         let credentialsValid: Driver<Bool> = Driver.combineLatest(userIdValid, userPasswordValid) {
             $0 && $1
         }
+        
         credentialsValid.drive(onNext: {
             self.logInButton.isEnabled = $0
             if $0 {
@@ -53,14 +56,6 @@ class LoginViewController: UIViewController {
 
         })
         .addDisposableTo(disposeBag)
-
-        //let userPasswordValid = passwordTextField.rx.text.asDriver().map {
-//            ($0?.utf8.count)! > 9
-        
-        
-        //        let userPasswordValid = passwordTextField.text.map {
-//            (s: String)
-//        }
         
         // Do any additional setup after loading the view.
     }
