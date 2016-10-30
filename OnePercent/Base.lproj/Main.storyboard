@@ -96,6 +96,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="signUpButton:" destination="n5o-UH-Etq" eventType="touchUpInside" id="CHe-Dp-F7y"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zJR-Yz-mMY">
                                 <frame key="frameInset" minX="67" minY="88" width="240" height="128"/>
@@ -121,6 +124,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q4I-OU-WDf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1774" y="-527"/>
+        </scene>
+        <!--회원가입-->
+        <scene sceneID="q4h-yu-thd">
+            <objects>
+                <viewController storyboardIdentifier="SignUpViewController" title="회원가입" id="ZD4-Is-3oq" customClass="SignUpViewController" customModule="OnePercent" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eCd-GO-laL"/>
+                        <viewControllerLayoutGuide type="bottom" id="QCS-ui-7iF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FZQ-KY-7be">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UVd-e8-1ie" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2481" y="-527"/>
         </scene>
         <!--투표-->
         <scene sceneID="SaF-5R-euP">
@@ -259,6 +280,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2000.8" y="-1239.1304347826087"/>
+        </scene>
+        <!--Setting View Controller-->
+        <scene sceneID="B7q-U0-PQO">
+            <objects>
+                <viewController storyboardIdentifier="SettingViewController" id="c3E-v4-zfF" customClass="SettingViewController" customModule="OnePercent" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VE5-ux-Qwd"/>
+                        <viewControllerLayoutGuide type="bottom" id="SKX-3N-vtb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eb2-U0-BtJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jGo-JQ-3W7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2729" y="-1239"/>
         </scene>
         <!--홈-->
         <scene sceneID="jNg-KG-6PP">

@@ -20,6 +20,12 @@ class LoginViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
+    @IBAction func signUpButton(_ sender: AnyObject) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController")
+        self.present(vc!, animated: true, completion: nil)
+    }
+    
+    
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
