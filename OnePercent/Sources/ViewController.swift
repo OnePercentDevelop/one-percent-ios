@@ -16,7 +16,8 @@ class ViewController: UIViewController {
     var timer: Timer?
     
     // MARK: - IBAction
-
+    
+    // MARK: - FilePrivate Function
     fileprivate func startTimer() {
         if timer != nil {
             stopTimer()
@@ -37,6 +38,7 @@ class ViewController: UIViewController {
         timer = nil
     }
     
+    // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -57,6 +59,7 @@ class ViewController: UIViewController {
         stopTimer()
     }
     
+    // MARK: - Personal Function
     func dateformat() {
         let calendar = NSCalendar.current
         var tomorrow = calendar.date(byAdding: .day, value: 1, to: Date())

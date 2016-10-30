@@ -75,7 +75,7 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Private function
+    // MARK: - Personal function
     func loginButtonClick() {
         //id = idTextField.text!
         //password = passwordTextField.text!

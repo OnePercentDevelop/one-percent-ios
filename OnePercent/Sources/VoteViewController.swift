@@ -12,10 +12,9 @@ class VoteViewController: UIViewController {
 
     // MARK: - Property
     var selectedItem : Int? = nil
-    
-    // MARK: - IBAction
     @IBOutlet weak var voteCollectionView: UICollectionView!
     
+    // MARK: - IBAction
     @IBAction func voteSendButton(_ sender: AnyObject) {
         if selectedItem != nil {
             /*if User.sharedInstance.emptyId == "" {
@@ -26,8 +25,6 @@ class VoteViewController: UIViewController {
             let alertController = UIAlertController(title: "", message: "보기를 선택해주세요ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
-
-            
         }
     }
     
