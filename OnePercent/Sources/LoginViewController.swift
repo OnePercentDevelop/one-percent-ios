@@ -11,11 +11,14 @@ import RxCocoa
 import RxSwift
 
 class LoginViewController: UIViewController {
-
+    // MARK: - Property
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var logInButton: UIButton!
     
+    let disposeBag = DisposeBag()
+
+    // MARK: - IBAction
     @IBAction func backButton(_ sender: AnyObject) {
         self.dismiss(animated: true)
     }
@@ -26,8 +29,7 @@ class LoginViewController: UIViewController {
     }
     
     
-    let disposeBag = DisposeBag()
-
+    // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordTextField.isSecureTextEntry = true
@@ -73,6 +75,7 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Private function
     func loginButtonClick() {
         //id = idTextField.text!
         //password = passwordTextField.text!

@@ -11,9 +11,11 @@ import SwiftyTimer
 
 class ViewController: UIViewController {
 
+    // MARK: - Property
     @IBOutlet weak var timeLabel: UILabel!
-    
     var timer: Timer?
+    
+    // MARK: - IBAction
 
     fileprivate func startTimer() {
         if timer != nil {

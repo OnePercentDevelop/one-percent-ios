@@ -30,19 +30,19 @@
 		ADD3843C8BACA77BEABA1A28 /* Pods-OnePercent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePercent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnePercent/Pods-OnePercent.debug.xcconfig"; sourceTree = "<group>"; };
 		B08C263D874AC3AB2E759998 /* Pods-OnePercent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePercent.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnePercent/Pods-OnePercent.release.xcconfig"; sourceTree = "<group>"; };
 		C92EC0391DBD1D58005D7D8B /* OnePercent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePercent.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C92EC03C1DBD1D58005D7D8B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C92EC03E1DBD1D58005D7D8B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C92EC03C1DBD1D58005D7D8B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/AppDelegate.swift; sourceTree = "<group>"; };
+		C92EC03E1DBD1D58005D7D8B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Sources/ViewController.swift; sourceTree = "<group>"; };
 		C92EC0411DBD1D58005D7D8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C92EC0431DBD1D58005D7D8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C92EC0431DBD1D58005D7D8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
 		C92EC0461DBD1D58005D7D8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C92EC0481DBD1D58005D7D8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C92EC0481DBD1D58005D7D8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		C98EB05A1DC2EA6400B22C16 /* VoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VoteViewController.swift; path = Sources/VoteViewController.swift; sourceTree = "<group>"; };
 		C98EB05C1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VoteCollectionViewCell.swift; path = Sources/VoteCollectionViewCell.swift; sourceTree = "<group>"; };
-		C98EB05F1DC3464900B22C16 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C98EB05F1DC3464900B22C16 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Sources/User.swift; sourceTree = "<group>"; };
 		C9C610571DBF539F005849C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C9C6108E1DC1B696005849C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Sources/LoginViewController.swift; sourceTree = "<group>"; };
-		C9F0D37E1DC649C300B9B03B /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		C9F0D3811DC64BD500B9B03B /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		C9F0D37E1DC649C300B9B03B /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpViewController.swift; path = Sources/SignUpViewController.swift; sourceTree = "<group>"; };
+		C9F0D3811DC64BD500B9B03B /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = Sources/SettingViewController.swift; sourceTree = "<group>"; };
 		D90E4C80152C792A97308648 /* Pods_OnePercentUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnePercentUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD5D3F20F52375E1D82A2789 /* Pods-OnePercentTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePercentTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnePercentTests/Pods-OnePercentTests.release.xcconfig"; sourceTree = "<group>"; };
 		E666AEE99FF67B194C2EAED3 /* Pods-OnePercentUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePercentUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnePercentUITests/Pods-OnePercentUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -104,14 +104,9 @@
 		C92EC03B1DBD1D58005D7D8B /* OnePercent */ = {
 			isa = PBXGroup;
 			children = (
-				C9C610561DBF5215005849C3 /* Resources */,
 				C9C610551DBF520C005849C3 /* Sources */,
-				C92EC03C1DBD1D58005D7D8B /* AppDelegate.swift */,
-				C92EC03E1DBD1D58005D7D8B /* ViewController.swift */,
-				C92EC0401DBD1D58005D7D8B /* Main.storyboard */,
-				C92EC0431DBD1D58005D7D8B /* Assets.xcassets */,
-				C92EC0451DBD1D58005D7D8B /* LaunchScreen.storyboard */,
-				C92EC0481DBD1D58005D7D8B /* Info.plist */,
+				C9C610561DBF5215005849C3 /* Resources */,
+				C9F0D3851DC659CF00B9B03B /* Supports */,
 			);
 			path = OnePercent;
 			sourceTree = "<group>";
@@ -136,11 +131,10 @@
 		C9C610551DBF520C005849C3 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				C9F0D3801DC64BC000B9B03B /* Setting */,
-				C9F0D37D1DC6496800B9B03B /* SignUp */,
-				C98EB05E1DC3462800B22C16 /* Class */,
-				C98EB0591DC2EA4400B22C16 /* Vote */,
-				C9C6108B1DC1B62C005849C3 /* Login */,
+				C92EC03C1DBD1D58005D7D8B /* AppDelegate.swift */,
+				C9F0D3861DC65A3000B9B03B /* ViewComponents */,
+				C9F0D3881DC65A7800B9B03B /* CustomViews */,
+				C9F0D3871DC65A7000B9B03B /* Vipers */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -148,7 +142,9 @@
 		C9C610561DBF5215005849C3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C9C610571DBF539F005849C3 /* GoogleService-Info.plist */,
+				C92EC0401DBD1D58005D7D8B /* Main.storyboard */,
+				C92EC0451DBD1D58005D7D8B /* LaunchScreen.storyboard */,
+				C92EC0431DBD1D58005D7D8B /* Assets.xcassets */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -175,6 +171,50 @@
 				C9F0D3811DC64BD500B9B03B /* SettingViewController.swift */,
 			);
 			name = Setting;
+			sourceTree = "<group>";
+		};
+		C9F0D3831DC64E7600B9B03B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				C92EC03E1DBD1D58005D7D8B /* ViewController.swift */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		C9F0D3851DC659CF00B9B03B /* Supports */ = {
+			isa = PBXGroup;
+			children = (
+				C9C610571DBF539F005849C3 /* GoogleService-Info.plist */,
+				C92EC0481DBD1D58005D7D8B /* Info.plist */,
+			);
+			name = Supports;
+			sourceTree = "<group>";
+		};
+		C9F0D3861DC65A3000B9B03B /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				C98EB05E1DC3462800B22C16 /* Class */,
+				C9F0D3831DC64E7600B9B03B /* Home */,
+				C9F0D3801DC64BC000B9B03B /* Setting */,
+				C9F0D37D1DC6496800B9B03B /* SignUp */,
+				C98EB0591DC2EA4400B22C16 /* Vote */,
+				C9C6108B1DC1B62C005849C3 /* Login */,
+			);
+			name = ViewComponents;
+			sourceTree = "<group>";
+		};
+		C9F0D3871DC65A7000B9B03B /* Vipers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Vipers;
+			sourceTree = "<group>";
+		};
+		C9F0D3881DC65A7800B9B03B /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CustomViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -434,7 +474,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = OnePercent/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.OnePercent.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -448,7 +488,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = OnePercent/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.OnePercent.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";

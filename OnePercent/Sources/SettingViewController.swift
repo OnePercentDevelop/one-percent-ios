@@ -10,6 +10,11 @@ import UIKit
 
 class SettingViewController: UIViewController {
 
+    // MARK: - Property
+
+    // MARK: - IBAction
+
+    // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
 

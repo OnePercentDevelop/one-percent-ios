@@ -10,6 +10,10 @@ import UIKit
 
 class VoteViewController: UIViewController {
 
+    // MARK: - Property
+    var selectedItem : Int? = nil
+    
+    // MARK: - IBAction
     @IBOutlet weak var voteCollectionView: UICollectionView!
     
     @IBAction func voteSendButton(_ sender: AnyObject) {
@@ -26,8 +30,8 @@ class VoteViewController: UIViewController {
             
         }
     }
-    var selectedItem : Int? = nil
     
+    // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -54,8 +58,9 @@ class VoteViewController: UIViewController {
 
 }
 
+// MARK: - public function
 extension VoteViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return 4
     }
@@ -65,7 +70,6 @@ extension VoteViewController: UICollectionViewDataSource {
         
         return cell
     }
-
 }
 
 extension VoteViewController: UICollectionViewDelegate {
@@ -76,17 +80,13 @@ extension VoteViewController: UICollectionViewDelegate {
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         if User.sharedInstance.emptyId == "" {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
             self.present(vc!, animated: true, completion: nil)
         }
-        
         let cell = voteCollectionView.cellForItem(at: indexPath)
         selectedItem = indexPath.row
         cell?.backgroundColor = UIColor.cyan
-        
-        
     }
     
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -94,8 +94,4 @@ extension VoteViewController: UICollectionViewDelegate {
         
         cell?.backgroundColor = UIColor.clear
     }
-
-    
-
-
 }
