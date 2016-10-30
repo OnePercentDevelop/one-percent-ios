@@ -14,7 +14,11 @@ class ViewController: UIViewController {
     // MARK: - Property
     @IBOutlet weak var timeLabel: UILabel!
     var timer: Timer?
-    
+    let voteStartTime = NSCalendar.current.date(bySettingHour: 11, minute: 0, second: 0, of: Date())
+    let voteEndTime = NSCalendar.current.date(bySettingHour: 12, minute: 59, second: 59, of: Date())
+    let anounceStartTime = NSCalendar.current.date(bySettingHour: 18, minute: 45, second: 0, of: Date())
+    //var tomorrowVoteStartTime = NSCalendar.current.date(byAdding: .day, value: 1, to: Date())
+    //tomorrow = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: tomorrow!)
     // MARK: - IBAction
     
     // MARK: - FilePrivate Function
@@ -62,11 +66,25 @@ class ViewController: UIViewController {
     // MARK: - Personal Function
     func dateformat() {
         let calendar = NSCalendar.current
-        var tomorrow = calendar.date(byAdding: .day, value: 1, to: Date())
-        tomorrow = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: tomorrow!)
-        let remainingTime = stringFromTimeInterval(interval: tomorrow!.timeIntervalSince(Date()))
+        var tomorrowVoteStartTime = calendar.date(byAdding: .day, value: 1, to: Date())
+        tomorrowVoteStartTime = calendar.date(bySettingHour: 11, minute: 0, second: 0, of: tomorrowVoteStartTime!)
+        //let remainingTime = stringFromTimeInterval(interval: tomorrow!.timeIntervalSince(Date()))
+        var remainingTime = ""
+        let now = Date()
+        if now > voteStartTime! && now < voteEndTime! {
+            remainingTime = "투표종료까지 남은시간 : " + stringFromTimeInterval(interval: voteEndTime!.timeIntervalSince(Date()))
+        } else if now < voteStartTime! {
+            remainingTime = "투표시작까지 남은시간 : " + stringFromTimeInterval(interval: voteStartTime!.timeIntervalSince(Date()))
+        } else  if now < anounceStartTime! {
+            remainingTime = "발표시작까지 남은시간 : " + stringFromTimeInterval(interval: anounceStartTime!.timeIntervalSince(Date()))
+        } else {
+            remainingTime = "내일 투표시작까지 남은시간 : " + stringFromTimeInterval(interval: tomorrowVoteStartTime!.timeIntervalSince(Date()))
+
+        }
         
         timeLabel.text = remainingTime
+
+        
         // Do any additional setup after loading the view, typically from a nib.
 
     }
