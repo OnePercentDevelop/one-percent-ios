@@ -17,6 +17,10 @@ class ViewController: UIViewController {
     // MARK: - Property
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var entryNumberLabel: UILabel!
+    @IBOutlet weak var productLabel: UILabel!
+    @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var winnerLabel: UILabel!
+    
     var timer: Timer?
     let voteStartTime = NSCalendar.current.date(bySettingHour: 11, minute: 0, second: 0, of: Date())
     let voteEndTime = NSCalendar.current.date(bySettingHour: 12, minute: 59, second: 59, of: Date())
@@ -74,6 +78,37 @@ class ViewController: UIViewController {
                     }
                 }
         }
+        
+        Alamofire
+            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/main.do", method: .get)
+            .log(level: .verbose)
+            .responseObject { (response: DataResponse<HomeInformationResponse>) in
+                print(" : \(response.result.isSuccess)")
+                if let mainResult = response.result.value?.mainResult {
+                    for n in mainResult {
+                        if let question = n.question {
+                            print("ryan : \(question)")
+                            self.questionLabel.text = question
+                        }
+                        if let winner = n.winner {
+                            print("ryan : \(winner)")
+                            self.winnerLabel.text = winner
+                        }
+                        if let giftName = n.giftName {
+                            print("ryan : \(giftName)")
+                            self.productLabel.text = giftName
+                        }
+                        for i in n.example! {
+                            print(i.firstQuestion)
+                            print(i.secondQuestion)
+                            print(i.thirdQuestion)
+                            print(i.fourthQuestion)
+                        }
+                        //png 처리
+                    }
+                }
+            }
+        
          // Do any additional setup after loading the view, typically from a nib.
     }
 

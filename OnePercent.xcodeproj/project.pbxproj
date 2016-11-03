@@ -16,6 +16,7 @@
 		C98EB05B1DC2EA6400B22C16 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05A1DC2EA6400B22C16 /* VoteViewController.swift */; };
 		C98EB05D1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05C1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift */; };
 		C98EB0601DC3464900B22C16 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05F1DC3464900B22C16 /* User.swift */; };
+		C9A93D741DCB0849008B06C2 /* HomeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A93D731DCB0849008B06C2 /* HomeInformation.swift */; };
 		C9C610581DBF539F005849C3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9C610571DBF539F005849C3 /* GoogleService-Info.plist */; };
 		C9C6108F1DC1B696005849C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C6108E1DC1B696005849C3 /* LoginViewController.swift */; };
 		C9CDA7F11DC752290044CB65 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CDA7F01DC752290044CB65 /* HTTPMethod.swift */; };
@@ -43,6 +44,7 @@
 		C98EB05A1DC2EA6400B22C16 /* VoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VoteViewController.swift; path = Sources/VoteViewController.swift; sourceTree = "<group>"; };
 		C98EB05C1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VoteCollectionViewCell.swift; path = Sources/VoteCollectionViewCell.swift; sourceTree = "<group>"; };
 		C98EB05F1DC3464900B22C16 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Sources/User.swift; sourceTree = "<group>"; };
+		C9A93D731DCB0849008B06C2 /* HomeInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInformation.swift; sourceTree = "<group>"; };
 		C9C610571DBF539F005849C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C9C6108E1DC1B696005849C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Sources/LoginViewController.swift; sourceTree = "<group>"; };
 		C9CDA7F01DC752290044CB65 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				C98EB05F1DC3464900B22C16 /* User.swift */,
 				C9CDA7F01DC752290044CB65 /* HTTPMethod.swift */,
 				C9CDA7F81DC889FA0044CB65 /* EntryNumber.swift */,
+				C9A93D731DCB0849008B06C2 /* HomeInformation.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9A93D741DCB0849008B06C2 /* HomeInformation.swift in Sources */,
 				C98EB05B1DC2EA6400B22C16 /* VoteViewController.swift in Sources */,
 				C9CDA7F91DC889FA0044CB65 /* EntryNumber.swift in Sources */,
 				C9F0D37F1DC649C300B9B03B /* SignUpViewController.swift in Sources */,

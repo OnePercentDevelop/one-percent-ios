@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import Alamofire
 
 class VoteViewController: UIViewController {
 
     // MARK: - Property
     var selectedItem : Int? = nil
     @IBOutlet weak var voteCollectionView: UICollectionView!
+    @IBOutlet weak var questionLabel: UILabel!
+    //var question: String?
+    var examples = [String]()
+    
     
     // MARK: - IBAction
     @IBAction func voteSendButton(_ sender: AnyObject) {
@@ -31,6 +36,39 @@ class VoteViewController: UIViewController {
     // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Alamofire
+            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/main.do", method: .get)
+            .log(level: .verbose)
+            .responseObject { (response: DataResponse<HomeInformationResponse>) in
+                print(" : \(response.result.isSuccess)")
+                if let mainResult = response.result.value?.mainResult {
+                    for n in mainResult {
+                        if let question = n.question {
+                            print("ryan : \(question)")
+                            self.questionLabel.text = question
+                        }
+                        
+                        for i in n.example! {
+                            if let q = i.firstQuestion {
+                                self.examples.append(q)
+                            }
+                            if let q = i.secondQuestion {
+                                self.examples.append(q)
+                            }
+
+                            if let q = i.fourthQuestion {
+                                self.examples.append(q)
+                            }
+
+                            if let q = i.firstQuestion {
+                                self.examples.append(q)
+                            }
+                        }
+                    }
+                    self.voteCollectionView.reloadData()
+                }
+        }
 
         // Do any additional setup after loading the view.
     }
@@ -59,11 +97,14 @@ class VoteViewController: UIViewController {
 extension VoteViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 4
+        return examples.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = voteCollectionView.dequeueReusableCell(withReuseIdentifier: "voteCollectionViewCell", for: indexPath) as! VoteCollectionViewCell
+        
+        
+        cell.questionLabel.text = examples[indexPath.row]
         
         return cell
     }

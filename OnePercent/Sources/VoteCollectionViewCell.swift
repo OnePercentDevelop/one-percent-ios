@@ -10,4 +10,5 @@ import UIKit
 
 class VoteCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var questionLabel: UILabel!
 }
