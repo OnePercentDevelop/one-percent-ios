@@ -9,6 +9,9 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Async
+import Alamofire
+import AlamofireObjectMapper
 
 class SignUpViewController: UIViewController {
     
@@ -21,14 +24,47 @@ class SignUpViewController: UIViewController {
     
     @IBOutlet weak var signUpButton: UIButton!
     
-    // MARK: - IBAction    
+    let uuid = UUID().uuidString
+    var id: String? = nil
+    var password: String? = nil
+
+    
+    // MARK: - IBAction
     @IBAction func closeButtonClick(_ sender: AnyObject) {
         self.dismiss(animated: true)
     }
+    
+
     @IBAction func signUpButtonClick(_ sender: AnyObject) {
-        User.sharedInstance.emptyId = idTextField.text!
-        User.sharedInstance.emptyPassword = passwordTextField.text!
-        self.dismiss(animated: true)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년MM월dd일"
+        let todayDate = dateFormatter.string(from: Date())
+
+        print("user: \(self.idTextField.text)")
+        print("user: \(self.passwordTextField.text)")
+
+        let parameters: Parameters = [
+            "user_id" : self.idTextField.text!,
+            "user_password" : self.passwordTextField.text!,
+            "user_token" : uuid,
+            "sign_date" : todayDate
+        ]
+        
+        for i in parameters {
+            print(i.value)
+        }
+        
+        Alamofire.request("http://onepercentserver.azurewebsites.net/OnePercentServer/insertUser.do", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseString { response in
+                print("Success: \(response.result.isSuccess)")
+                print("Response String: \(response.result.value)")
+                if response.result.isSuccess {
+                    User.sharedInstance.emptyId = self.idTextField.text!
+                    User.sharedInstance.emptyPassword = self.passwordTextField.text!
+                    self.dismiss(animated: true)
+                }
+          }      
     }
     
     @IBAction func moveToLoginViewButtonClick(_ sender: AnyObject) {
@@ -43,7 +79,7 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordTextField.isSecureTextEntry = true
-    
+        
         idTextField.rx.text
             .observeOn(MainScheduler.instance)
             .subscribe { s in
@@ -73,8 +109,16 @@ class SignUpViewController: UIViewController {
             }
             
         })
-            .addDisposableTo(disposeBag)
+        .addDisposableTo(disposeBag)
         
+        print("uuid: \(uuid)")
+
+//        let response = Alamofire.request("http://onepercentserver.azurewebsites.net/OnePercentServer/insertUser.do", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+//            .responseString { response in
+//                print("Success: \(response.result.isSuccess)")
+//                print("Response String: \(response.result.value)")
+//                
+//        }
 
         // Do any additional setup after loading the view.
     }

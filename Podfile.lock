@@ -1,5 +1,7 @@
 PODS:
   - Alamofire (4.0.1)
+  - AlamofireImage (3.1.0):
+    - Alamofire (~> 4.0)
   - AlamofireObjectMapper (4.0.0):
     - Alamofire (~> 4.0)
     - ObjectMapper (~> 2.0)
@@ -29,6 +31,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
+  - AlamofireImage (~> 3.1)
   - AlamofireObjectMapper
   - AsyncSwift
   - Firebase/Core
@@ -38,6 +41,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  AlamofireImage: bb8c8351c51cb1633bb6be69b6dbbaff37ce65b7
   AlamofireObjectMapper: 9faa3ce5a240efda1b209009a2d6e1e949227abc
   AsyncSwift: 6ba6ed9ecb51344458063f7c86fe447ab824e313
   Firebase: be473484f0d515e72ffd04acf22f981773c23e58
@@ -52,6 +56,6 @@ SPEC CHECKSUMS:
   RxSwift: a930cd662f5b4a7ca9dc3518585dba91dadf497c
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
 
-PODFILE CHECKSUM: 8d1be3f0027b5d9116439b2d30ab6838b097f97b
+PODFILE CHECKSUM: 112d09f31e9bc86e958ed9c7d96a15985422fd62
 
 COCOAPODS: 1.1.1
