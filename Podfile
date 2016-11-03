@@ -8,9 +8,13 @@ target 'OnePercent' do
   # Pods for OnePercent
   pod 'SwiftyTimer'
   pod 'Firebase/Core'
-  
+  pod 'Alamofire', '~> 4.0'
+  pod 'AlamofireObjectMapper'
+  pod 'AsyncSwift'
+
   # MARK: - Rx Libs
   pod 'RxSwift',    '~> 3.0'
   pod 'RxCocoa',    '~> 3.0'
+
 end
 

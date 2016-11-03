@@ -18,14 +18,10 @@ class LoginViewController: UIViewController {
     
     let disposeBag = DisposeBag()
 
+    
     // MARK: - IBAction
     @IBAction func backButton(_ sender: AnyObject) {
         self.dismiss(animated: true)
-    }
-    
-    @IBAction func signUpButton(_ sender: AnyObject) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController")
-        self.present(vc!, animated: true, completion: nil)
     }
     
     

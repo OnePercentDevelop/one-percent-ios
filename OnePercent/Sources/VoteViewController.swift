@@ -78,7 +78,7 @@ extension VoteViewController: UICollectionViewDelegate {
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if User.sharedInstance.emptyId == "" {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController")
             self.present(vc!, animated: true, completion: nil)
         }
         let cell = voteCollectionView.cellForItem(at: indexPath)

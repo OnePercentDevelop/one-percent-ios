@@ -8,17 +8,20 @@
 
 import UIKit
 import SwiftyTimer
+import Alamofire
+import AlamofireObjectMapper
+import Async
 
 class ViewController: UIViewController {
 
     // MARK: - Property
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var entryNumberLabel: UILabel!
     var timer: Timer?
     let voteStartTime = NSCalendar.current.date(bySettingHour: 11, minute: 0, second: 0, of: Date())
     let voteEndTime = NSCalendar.current.date(bySettingHour: 12, minute: 59, second: 59, of: Date())
     let anounceStartTime = NSCalendar.current.date(bySettingHour: 18, minute: 45, second: 0, of: Date())
-    //var tomorrowVoteStartTime = NSCalendar.current.date(byAdding: .day, value: 1, to: Date())
-    //tomorrow = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: tomorrow!)
+
     // MARK: - IBAction
     
     // MARK: - FilePrivate Function
@@ -45,7 +48,33 @@ class ViewController: UIViewController {
     // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년MM월dd일"
+        var todayDate = dateFormatter.string(from: Date())
+        print("date: \(todayDate)")
+     
+        let URL = "http://onepercentserver.azurewebsites.net/OnePercentServer/votenumber.do"
+        let parameters: Parameters = ["vote_date": todayDate]
+
+        Alamofire
+            .request(URL, parameters: parameters)
+            //.request(URL, method: .GET, parameters: todayDate )
+            .log(level:  .verbose)
+            .responseObject { (response: DataResponse<OnePercentResponse>) in
+                
+                print("ryan : \(response.result.isSuccess)")
+                //if (response.result.value?.voteResult) != nil {
+                if let voteresult = response.result.value?.voteResult {
+                    for n in voteresult {
+                        if let number = n.number {
+                            print("ryan : \(number)")
+                            self.entryNumberLabel.text = String(number)
+                        }
+                    }
+                }
+        }
+         // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
