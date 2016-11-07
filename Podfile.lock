@@ -28,6 +28,7 @@ PODS:
     - RxSwift (~> 3.0)
   - RxSwift (3.0.0)
   - SwiftyTimer (2.0.0)
+  - SwiftyUserDefaults (3.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - RxCocoa (~> 3.0)
   - RxSwift (~> 3.0)
   - SwiftyTimer
+  - SwiftyUserDefaults
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
@@ -55,7 +57,8 @@ SPEC CHECKSUMS:
   RxCocoa: 0a2f3ae381cf16f4021a4cee7a4420f83058a965
   RxSwift: a930cd662f5b4a7ca9dc3518585dba91dadf497c
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
+  SwiftyUserDefaults: 0f1d45fc3aafb9064dac661e367f8f83fe21a4b4
 
-PODFILE CHECKSUM: 112d09f31e9bc86e958ed9c7d96a15985422fd62
+PODFILE CHECKSUM: 715145e0d6b082d14863e99a3f852e9235e4abb4
 
 COCOAPODS: 1.1.1

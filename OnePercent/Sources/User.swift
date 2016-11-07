@@ -7,20 +7,25 @@
 //
 
 import Foundation
+import SwiftyUserDefaults
 
-class User {
-    static let sharedInstance: User = {
-        let instance = User(id: "", password: "", token: "")
-        return instance
-    }()
-    
-    var emptyId: String
-    var emptyPassword: String
-    var emptyToken: String
-    
-    init(id: String, password: String, token: String) {
-        emptyId = id
-        emptyPassword = password
-        emptyToken = token
-    }
+//class User {
+//    static let sharedInstance: User = {
+//        let instance = User(id: "", password: "", token: "")
+//        return instance
+//    }()
+//    
+//    var emptyId: String
+//    var emptyPassword: String
+//    var emptyToken: String
+//    
+//    init(id: String, password: String, token: String) {
+//        emptyId = id
+//        emptyPassword = password
+//        emptyToken = token
+//    }
+//}
+
+extension DefaultsKeys {
+    static let isSignIn = DefaultsKey<Bool>("isSignIn")
 }

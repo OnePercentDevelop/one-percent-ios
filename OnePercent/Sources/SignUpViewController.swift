@@ -12,6 +12,7 @@ import RxCocoa
 import Async
 import Alamofire
 import AlamofireObjectMapper
+import SwiftyUserDefaults
 
 class SignUpViewController: UIViewController {
     
@@ -62,8 +63,7 @@ class SignUpViewController: UIViewController {
                     if let state = response.result.value?.signUpResult?.first?.state {
                         print("state: \(state)")
                         if state == "success" {
-                            User.sharedInstance.emptyId = self.idTextField.text!
-                            User.sharedInstance.emptyPassword = self.passwordTextField.text!
+                            Defaults[.isSignIn] = true
                             self.dismiss(animated: true)
                         } else {
                             let alertController = UIAlertController(title: "", message: "회원가입 실패.", preferredStyle: UIAlertControllerStyle.alert)
@@ -120,14 +120,6 @@ class SignUpViewController: UIViewController {
             .addDisposableTo(disposeBag)
         
         print("uuid: \(uuid)")
-        
-        //        let response = Alamofire.request("http://onepercentserver.azurewebsites.net/OnePercentServer/insertUser.do", method: .post, parameters: parameters, encoding: JSONEncoding.default)
-        //            .responseString { response in
-        //                print("Success: \(response.result.isSuccess)")
-        //                print("Response String: \(response.result.value)")
-        //
-        //        }
-        
         // Do any additional setup after loading the view.
     }
     

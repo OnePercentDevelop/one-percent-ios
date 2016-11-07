@@ -12,7 +12,8 @@ target 'OnePercent' do
   pod 'AlamofireObjectMapper'
   pod 'AsyncSwift'
   pod 'AlamofireImage', '~> 3.1'
-  
+  pod 'SwiftyUserDefaults'
+
   # MARK: - Rx Libs
   pod 'RxSwift',    '~> 3.0'
   pod 'RxCocoa',    '~> 3.0'

@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import Alamofire
+import SwiftyUserDefaults
 
 class LoginViewController: UIViewController {
     // MARK: - Property
@@ -90,8 +91,7 @@ class LoginViewController: UIViewController {
                     if let state = response.result.value?.loginResult?.first?.state {
                         print("state: \(state)")
                         if state == "success" {
-                            User.sharedInstance.emptyId = self.idTextField.text!
-                            User.sharedInstance.emptyPassword = self.passwordTextField.text!
+                            Defaults[.isSignIn] = true
                             self.dismiss(animated: true)
                         } else {
                             let alertController = UIAlertController(title: "", message: "아이디혹은 비밀번호가 잘못되었습니다.", preferredStyle: UIAlertControllerStyle.alert)

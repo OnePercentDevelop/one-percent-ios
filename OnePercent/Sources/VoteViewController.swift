@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-
+import SwiftyUserDefaults
 class VoteViewController: UIViewController {
 
     // MARK: - Property
@@ -22,10 +22,6 @@ class VoteViewController: UIViewController {
     // MARK: - IBAction
     @IBAction func voteSendButton(_ sender: AnyObject) {
         if selectedItem != nil {
-            /*if User.sharedInstance.emptyId == "" {
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
-                self.present(vc!, animated: true, completion: nil)
-            }*/
         } else {
             let alertController = UIAlertController(title: "", message: "보기를 선택해주세요ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.default, handler: nil))
@@ -118,7 +114,7 @@ extension VoteViewController: UICollectionViewDelegate {
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if User.sharedInstance.emptyId == "" {
+        if Defaults[.isSignIn] == false {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController")
             self.present(vc!, animated: true, completion: nil)
         }

@@ -8,7 +8,6 @@
 
 import Foundation
 import ObjectMapper
-import Alamofire
 
 class HomeInformationResponse: Mappable {
     var mainResult: [HomeInformation]?
