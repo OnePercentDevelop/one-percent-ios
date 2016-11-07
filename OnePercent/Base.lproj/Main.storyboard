@@ -36,6 +36,13 @@
                     <view key="view" contentMode="scaleToFill" id="4Ie-0k-KAl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6qI-Ir-KNF">
+                                <frame key="frameInset" minX="161" minY="411" width="52" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="로그아웃"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="더보기" id="JgD-Sz-WaA"/>
@@ -47,7 +54,7 @@
         <!--Login View Controller-->
         <scene sceneID="bfB-II-zac">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="n5o-UH-Etq" customClass="LoginViewController" customModule="OnePercent" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="n5o-UH-Etq" customClass="LoginViewController" customModule="OnePercent" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="D7o-kD-uIj"/>
                         <viewControllerLayoutGuide type="bottom" id="beE-u4-ekq"/>
@@ -91,6 +98,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="NXB-qi-sll"/>
                     <connections>
                         <outlet property="idTextField" destination="23X-It-K3W" id="OjT-od-f7U"/>
                         <outlet property="logInButton" destination="NYM-DV-MWI" id="gvW-Nx-InP"/>
@@ -99,7 +107,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q4I-OU-WDf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2455" y="-533"/>
+            <point key="canvasLocation" x="3583" y="-527"/>
         </scene>
         <!--회원가입-->
         <scene sceneID="q4h-yu-thd">
@@ -159,6 +167,7 @@
                                 </state>
                                 <connections>
                                     <action selector="moveToLoginViewButtonClick:" destination="ZD4-Is-3oq" eventType="touchUpInside" id="UGq-Fj-yoe"/>
+                                    <segue destination="n5o-UH-Etq" kind="show" id="Zgf-eS-UMi"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WKE-fT-kdw">
@@ -184,7 +193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UVd-e8-1ie" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1790" y="-532"/>
+            <point key="canvasLocation" x="2728.8000000000002" y="-532.0839580209896"/>
         </scene>
         <!--투표-->
         <scene sceneID="SaF-5R-euP">
@@ -266,7 +275,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="투표" id="j84-PX-d61"/>
+                    <navigationItem key="navigationItem" title="투표" id="S7C-55-3tW"/>
                     <connections>
                         <outlet property="questionLabel" destination="K5P-TQ-KqN" id="3dL-tV-7zL"/>
                         <outlet property="voteCollectionView" destination="Sh0-s3-RlI" id="Mkp-Z8-Bc9"/>
@@ -274,7 +283,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xno-jR-mDF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1061.5999999999999" y="-526.6866566716642"/>
+            <point key="canvasLocation" x="2000.8" y="-526.6866566716642"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="vbz-ls-0Yg">
@@ -287,7 +296,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="dzT-Vn-sOS" kind="relationship" relationship="viewControllers" id="NFW-p8-g0D"/>
-                        <segue destination="Nut-SB-GTa" kind="relationship" relationship="viewControllers" id="LBA-lv-1fz"/>
+                        <segue destination="20i-uM-UaT" kind="relationship" relationship="viewControllers" id="LBA-lv-1fz"/>
                         <segue destination="odt-6k-vkr" kind="relationship" relationship="viewControllers" id="YLy-U3-Aj4"/>
                         <segue destination="NEw-Xh-BgO" kind="relationship" relationship="viewControllers" id="ZnQ-3H-j3g"/>
                     </connections>
@@ -430,6 +439,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uZw-l7-6iS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1061.5999999999999" y="-1239.1304347826087"/>
+        </scene>
+        <!--투표-->
+        <scene sceneID="ZTX-Q8-JSf">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="20i-uM-UaT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="투표" id="j84-PX-d61"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kss-4z-Sb1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Nut-SB-GTa" kind="relationship" relationship="rootViewController" id="5db-7J-7g0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WBW-cz-Qhq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1061.5999999999999" y="-526.6866566716642"/>
         </scene>
     </scenes>
 </document>

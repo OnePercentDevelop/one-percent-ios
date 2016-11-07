@@ -64,7 +64,9 @@ class SignUpViewController: UIViewController {
                         print("state: \(state)")
                         if state == "success" {
                             Defaults[.isSignIn] = true
+                            Defaults[.id] = self.idTextField.text!
                             self.dismiss(animated: true)
+                            
                         } else {
                             let alertController = UIAlertController(title: "", message: "회원가입 실패.", preferredStyle: UIAlertControllerStyle.alert)
                             alertController.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.default, handler: nil))
@@ -76,10 +78,11 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func moveToLoginViewButtonClick(_ sender: AnyObject) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
-        //self.present(vc!, animated: true, completion: nil)
-        self.show(vc!, sender: self)
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        //self.navigationController?.pushViewController(vc, animated: true)
+        //self.show(vc!, sender: self)
+        //present(vc, animated: true, completion: nil)
+
     }
     
     // MARK: - Recycle Function

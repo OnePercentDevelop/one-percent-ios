@@ -27,5 +27,6 @@ import SwiftyUserDefaults
 //}
 
 extension DefaultsKeys {
-    static let isSignIn = DefaultsKey<Bool>("isSignIn")
+    static let isSignIn = DefaultsKey<Bool>("false")
+    static let id = DefaultsKey<String>("id")
 }

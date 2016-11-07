@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
         }
         
         let userPasswordValid = passwordTextField.rx.text.asDriver().map {
-            ($0?.utf8.count)! >= 4 && ($0?.utf8.count)! <= 10 && $0?.rangeOfCharacter(from: NSCharacterSet.decimalDigits, options: NSString.CompareOptions(), range: nil) != nil && $0?.rangeOfCharacter(from: NSCharacterSet.letters) != nil
+            ($0?.utf8.count)! >= 4 && ($0?.utf8.count)! <= 10 /*&& $0?.rangeOfCharacter(from: NSCharacterSet.decimalDigits, options: NSString.CompareOptions(), range: nil) != nil && $0?.rangeOfCharacter(from: NSCharacterSet.letters) != nil*/
         }
         
         let credentialsValid: Driver<Bool> = Driver.combineLatest(userIdValid, userPasswordValid) {
@@ -92,6 +92,8 @@ class LoginViewController: UIViewController {
                         print("state: \(state)")
                         if state == "success" {
                             Defaults[.isSignIn] = true
+                            Defaults[.id] = self.idTextField.text!
+                            self.parent?.dismiss(animated: true)
                             self.dismiss(animated: true)
                         } else {
                             let alertController = UIAlertController(title: "", message: "아이디혹은 비밀번호가 잘못되었습니다.", preferredStyle: UIAlertControllerStyle.alert)
