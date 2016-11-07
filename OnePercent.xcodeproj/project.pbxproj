@@ -13,6 +13,8 @@
 		C92EC0421DBD1D58005D7D8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C92EC0401DBD1D58005D7D8B /* Main.storyboard */; };
 		C92EC0441DBD1D58005D7D8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C92EC0431DBD1D58005D7D8B /* Assets.xcassets */; };
 		C92EC0471DBD1D58005D7D8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C92EC0451DBD1D58005D7D8B /* LaunchScreen.storyboard */; };
+		C95338591DCEE0EE00FDE4F3 /* SignUpResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95338581DCEE0EE00FDE4F3 /* SignUpResult.swift */; };
+		C953385B1DCEE10B00FDE4F3 /* LoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C953385A1DCEE10B00FDE4F3 /* LoginResult.swift */; };
 		C98EB05B1DC2EA6400B22C16 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05A1DC2EA6400B22C16 /* VoteViewController.swift */; };
 		C98EB05D1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05C1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift */; };
 		C98EB0601DC3464900B22C16 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05F1DC3464900B22C16 /* User.swift */; };
@@ -41,6 +43,8 @@
 		C92EC0431DBD1D58005D7D8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
 		C92EC0461DBD1D58005D7D8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C92EC0481DBD1D58005D7D8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		C95338581DCEE0EE00FDE4F3 /* SignUpResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpResult.swift; sourceTree = "<group>"; };
+		C953385A1DCEE10B00FDE4F3 /* LoginResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginResult.swift; sourceTree = "<group>"; };
 		C98EB05A1DC2EA6400B22C16 /* VoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VoteViewController.swift; path = Sources/VoteViewController.swift; sourceTree = "<group>"; };
 		C98EB05C1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VoteCollectionViewCell.swift; path = Sources/VoteCollectionViewCell.swift; sourceTree = "<group>"; };
 		C98EB05F1DC3464900B22C16 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Sources/User.swift; sourceTree = "<group>"; };
@@ -137,6 +141,8 @@
 				C9CDA7F01DC752290044CB65 /* HTTPMethod.swift */,
 				C9CDA7F81DC889FA0044CB65 /* EntryNumber.swift */,
 				C9A93D731DCB0849008B06C2 /* HomeInformation.swift */,
+				C95338581DCEE0EE00FDE4F3 /* SignUpResult.swift */,
+				C953385A1DCEE10B00FDE4F3 /* LoginResult.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -366,6 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9A93D741DCB0849008B06C2 /* HomeInformation.swift in Sources */,
+				C95338591DCEE0EE00FDE4F3 /* SignUpResult.swift in Sources */,
 				C98EB05B1DC2EA6400B22C16 /* VoteViewController.swift in Sources */,
 				C9CDA7F91DC889FA0044CB65 /* EntryNumber.swift in Sources */,
 				C9F0D37F1DC649C300B9B03B /* SignUpViewController.swift in Sources */,
@@ -376,6 +383,7 @@
 				C9CDA7F71DC75FAA0044CB65 /* AlamofireLogger.swift in Sources */,
 				C9CDA7F11DC752290044CB65 /* HTTPMethod.swift in Sources */,
 				C98EB05D1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift in Sources */,
+				C953385B1DCEE10B00FDE4F3 /* LoginResult.swift in Sources */,
 				C92EC03F1DBD1D58005D7D8B /* ViewController.swift in Sources */,
 				C92EC03D1DBD1D58005D7D8B /* AppDelegate.swift in Sources */,
 			);

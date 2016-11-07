@@ -9,6 +9,7 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import Alamofire
 
 class LoginViewController: UIViewController {
     // MARK: - Property
@@ -76,9 +77,30 @@ class LoginViewController: UIViewController {
         //id = idTextField.text!
         //password = passwordTextField.text!
         //User.init(id: idTextField.text!, password: passwordTextField.text!)
-        User.sharedInstance.emptyId = idTextField.text!
-        User.sharedInstance.emptyPassword = passwordTextField.text!
-        self.dismiss(animated: true)
+        let parameters: Parameters = [
+            "user_id" : self.idTextField.text!,
+            "user_password" : self.passwordTextField.text!,
+        ]
+        for i in parameters {
+            print("parameters: \(i.value)")
+        }
+        Alamofire.request("http://onepercentserver.azurewebsites.net/OnePercentServer/login.do?user_id=\(self.idTextField.text!)&user_password=\(self.passwordTextField.text!)" )
+            .responseObject { (response: DataResponse<LoginResultResponse>) in
+                if response.result.isSuccess {
+                    if let state = response.result.value?.loginResult?.first?.state {
+                        print("state: \(state)")
+                        if state == "success" {
+                            User.sharedInstance.emptyId = self.idTextField.text!
+                            User.sharedInstance.emptyPassword = self.passwordTextField.text!
+                            self.dismiss(animated: true)
+                        } else {
+                            let alertController = UIAlertController(title: "", message: "아이디혹은 비밀번호가 잘못되었습니다.", preferredStyle: UIAlertControllerStyle.alert)
+                            alertController.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alertController, animated: true, completion: nil)
+                        }
+                    }
+                }
+        }
     }
 
     /*

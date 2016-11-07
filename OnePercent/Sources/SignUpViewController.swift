@@ -17,7 +17,7 @@ class SignUpViewController: UIViewController {
     
     // MARK: - Property
     let disposeBag = DisposeBag()
-
+    
     @IBOutlet weak var idTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
@@ -27,23 +27,23 @@ class SignUpViewController: UIViewController {
     let uuid = UUID().uuidString
     var id: String? = nil
     var password: String? = nil
-
+    
     
     // MARK: - IBAction
     @IBAction func closeButtonClick(_ sender: AnyObject) {
         self.dismiss(animated: true)
     }
     
-
+    
     @IBAction func signUpButtonClick(_ sender: AnyObject) {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy년MM월dd일"
         let todayDate = dateFormatter.string(from: Date())
-
+        
         print("user: \(self.idTextField.text)")
         print("user: \(self.passwordTextField.text)")
-
+        
         let parameters: Parameters = [
             "user_id" : self.idTextField.text!,
             "user_password" : self.passwordTextField.text!,
@@ -56,15 +56,23 @@ class SignUpViewController: UIViewController {
         }
         
         Alamofire.request("http://onepercentserver.azurewebsites.net/OnePercentServer/insertUser.do", method: .post, parameters: parameters, encoding: JSONEncoding.default)
-            .responseString { response in
-                print("Success: \(response.result.isSuccess)")
-                print("Response String: \(response.result.value)")
+            .log(level: .verbose)
+            .responseObject { (response: DataResponse<SignUpResultResponse>) in
                 if response.result.isSuccess {
-                    User.sharedInstance.emptyId = self.idTextField.text!
-                    User.sharedInstance.emptyPassword = self.passwordTextField.text!
-                    self.dismiss(animated: true)
+                    if let state = response.result.value?.signUpResult?.first?.state {
+                        print("state: \(state)")
+                        if state == "success" {
+                            User.sharedInstance.emptyId = self.idTextField.text!
+                            User.sharedInstance.emptyPassword = self.passwordTextField.text!
+                            self.dismiss(animated: true)
+                        } else {
+                            let alertController = UIAlertController(title: "", message: "회원가입 실패.", preferredStyle: UIAlertControllerStyle.alert)
+                            alertController.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alertController, animated: true, completion: nil)
+                        }
+                    }
                 }
-          }      
+            }
     }
     
     @IBAction func moveToLoginViewButtonClick(_ sender: AnyObject) {
@@ -75,7 +83,7 @@ class SignUpViewController: UIViewController {
     }
     
     // MARK: - Recycle Function
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordTextField.isSecureTextEntry = true
@@ -109,34 +117,34 @@ class SignUpViewController: UIViewController {
             }
             
         })
-        .addDisposableTo(disposeBag)
+            .addDisposableTo(disposeBag)
         
         print("uuid: \(uuid)")
-
-//        let response = Alamofire.request("http://onepercentserver.azurewebsites.net/OnePercentServer/insertUser.do", method: .post, parameters: parameters, encoding: JSONEncoding.default)
-//            .responseString { response in
-//                print("Success: \(response.result.isSuccess)")
-//                print("Response String: \(response.result.value)")
-//                
-//        }
-
+        
+        //        let response = Alamofire.request("http://onepercentserver.azurewebsites.net/OnePercentServer/insertUser.do", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        //            .responseString { response in
+        //                print("Success: \(response.result.isSuccess)")
+        //                print("Response String: \(response.result.value)")
+        //
+        //        }
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
