@@ -18,18 +18,23 @@ class VoteViewController: UIViewController {
     //var question: String?
     var examples = [String]()
     
-    
     // MARK: - IBAction
     @IBAction func voteSendButton(_ sender: AnyObject) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년MM월dd일"
+        let todayDate = dateFormatter.string(from: Date())
+        
         if selectedItem != nil {
-//            let parameters: Parameters = [
-//                "user_id" : ,
-//                "vote_date" :
-//                "vote_answer" : ,
-//                ]
-//            
-//            Alamofire
-//                .request("onepercentserver.azurewebsites.net/OnePercentServer/insertVote.do", method: .post, parameters: <#T##Parameters?#>, encoding: <#T##ParameterEncoding#>, headers: <#T##HTTPHeaders?#>)
+            let parameters: Parameters = [
+                "user_id" : Defaults[.id],
+                "vote_date" : todayDate,
+                "vote_answer" : selectedItem! + 1 ,
+                ]
+            
+            Alamofire
+                .request("http://onepercentserver.azurewebsites.net/OnePercentServer/insertVote.do", method: .post, parameters: parameters)
+                .log(level: .verbose)
+            
         } else {
             let alertController = UIAlertController(title: "", message: "보기를 선택해주세요ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.default, handler: nil))
@@ -119,7 +124,7 @@ extension VoteViewController: UICollectionViewDelegate {
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Defaults[.isSignIn]: \(Defaults[.isSignIn])")
+        //print("Defaults[.isSignIn]: \(Defaults[.isSignIn])")
         if Defaults[.isSignIn] == false {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController")
             self.present(vc!, animated: true, completion: nil)

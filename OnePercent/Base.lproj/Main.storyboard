@@ -28,7 +28,7 @@
         <!--더보기-->
         <scene sceneID="BTv-dF-1Ez">
             <objects>
-                <viewController id="NEw-Xh-BgO" sceneMemberID="viewController">
+                <viewController id="NEw-Xh-BgO" customClass="MoreViewController" customModule="OnePercent" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xk3-ku-6AK"/>
                         <viewControllerLayoutGuide type="bottom" id="wPz-I8-0jH"/>
@@ -41,6 +41,9 @@
                                 <frame key="frameInset" minX="161" minY="411" width="52" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="로그아웃"/>
+                                <connections>
+                                    <action selector="logOutButtonClick:" destination="NEw-Xh-BgO" eventType="touchUpInside" id="XVO-NN-t87"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
