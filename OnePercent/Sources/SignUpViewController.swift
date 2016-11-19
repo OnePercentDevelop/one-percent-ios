@@ -39,24 +39,18 @@ class SignUpViewController: UIViewController {
     @IBAction func signUpButtonClick(_ sender: AnyObject) {
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년MM월dd일"
+        dateFormatter.dateFormat = "yyyy.MM.dd"
         let todayDate = dateFormatter.string(from: Date())
-        
-        print("user: \(self.idTextField.text)")
-        print("user: \(self.passwordTextField.text)")
-        
+
         let parameters: Parameters = [
             "user_id" : self.idTextField.text!,
             "user_password" : self.passwordTextField.text!,
             "user_token" : uuid,
-            "sign_date" : todayDate
-        ]
+            "sign_date" : todayDate,
+       ]
+        let url = "http://onepercentserver.azurewebsites.net/OnePercentServer/insertUser.do"
         
-        for i in parameters {
-            print(i.value)
-        }
-        
-        Alamofire.request("http://onepercentserver.azurewebsites.net/OnePercentServer/insertUser.do", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .log(level: .verbose)
             .responseObject { (response: DataResponse<SignUpResultResponse>) in
                 if response.result.isSuccess {
@@ -73,8 +67,11 @@ class SignUpViewController: UIViewController {
                             self.present(alertController, animated: true, completion: nil)
                         }
                     }
+                    
                 }
             }
+        
+        
     }
     
     @IBAction func moveToLoginViewButtonClick(_ sender: AnyObject) {

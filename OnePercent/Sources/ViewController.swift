@@ -10,7 +10,6 @@ import UIKit
 import SwiftyTimer
 import Alamofire
 import AlamofireObjectMapper
-import Async
 import AlamofireImage
 
 class ViewController: UIViewController {
@@ -22,11 +21,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var winnerLabel: UILabel!
     @IBOutlet weak var productImageView: UIImageView!
-    
     var timer: Timer?
-    let voteStartTime = NSCalendar.current.date(bySettingHour: 11, minute: 0, second: 0, of: Date())
-    let voteEndTime = NSCalendar.current.date(bySettingHour: 12, minute: 59, second: 59, of: Date())
-    let anounceStartTime = NSCalendar.current.date(bySettingHour: 18, minute: 45, second: 0, of: Date())
+    let voteStartTime = NSCalendar.current.date(bySettingHour: 6, minute: 0, second: 0, of: Date())
+    let voteEndTime = NSCalendar.current.date(bySettingHour: 14, minute: 0, second: 0, of: Date())
+    let anounceStartTime = NSCalendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: Date())
     
     // MARK: - IBAction
     
@@ -60,7 +58,7 @@ class ViewController: UIViewController {
         var todayDate = dateFormatter.string(from: Date())
         print("date: \(todayDate)")
         
-        let URL = "http://onepercentserver.azurewebsites.net/OnePercentServer/votenumber.do"
+        let URL = "http://onepercentserver.azurewebsites.net/OnePercentServer/voteNumber.do"
         let parameters: Parameters = ["vote_date": todayDate]
         
         Alamofire
@@ -159,8 +157,7 @@ class ViewController: UIViewController {
         } else  if now < anounceStartTime! {
             remainingTime = "발표시작까지 남은시간 : " + stringFromTimeInterval(interval: anounceStartTime!.timeIntervalSince(Date()))
         } else {
-            remainingTime = "내일 투표시작까지 남은시간 : " + stringFromTimeInterval(interval: tomorrowVoteStartTime!.timeIntervalSince(Date()))
-            
+            remainingTime = "내일 투표시작까지 남은시간 : " + stringFromTimeInterval(interval: tomorrowVoteStartTime!.timeIntervalSince(Date()))            
         }
         
         timeLabel.text = remainingTime
