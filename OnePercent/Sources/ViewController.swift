@@ -16,10 +16,12 @@ class ViewController: UIViewController {
     
     // MARK: - Property
     @IBOutlet weak var timeLabel: UILabel!
+    
+    @IBOutlet weak var timeBeforeStateLabel: UILabel!
+    
+    @IBOutlet weak var nowStateLabel: UILabel!
     @IBOutlet weak var entryNumberLabel: UILabel!
     @IBOutlet weak var productLabel: UILabel!
-    @IBOutlet weak var questionLabel: UILabel!
-    @IBOutlet weak var winnerLabel: UILabel!
     @IBOutlet weak var productImageView: UIImageView!
     var timer: Timer?
     let voteStartTime = NSCalendar.current.date(bySettingHour: 6, minute: 0, second: 0, of: Date())
@@ -86,14 +88,14 @@ class ViewController: UIViewController {
                 print(" : \(response.result.isSuccess)")
                 if let mainResult = response.result.value?.mainResult {
                     for n in mainResult {
-                        if let question = n.question {
-                            print("ryan : \(question)")
-                            self.questionLabel.text = question
-                        }
-                        if let winner = n.winner {
-                            print("ryan : \(winner)")
-                            self.winnerLabel.text = winner
-                        }
+//                        if let question = n.question {
+//                            print("ryan : \(question)")
+//                            self.questionLabel.text = question
+//                        }
+//                        if let winner = n.winner {
+//                            print("ryan : \(winner)")
+//                            self.winnerLabel.text = winner
+//                        }
                         if let giftName = n.giftName {
                             print("ryan : \(giftName)")
                             self.productLabel.text = giftName
@@ -148,20 +150,30 @@ class ViewController: UIViewController {
         var tomorrowVoteStartTime = calendar.date(byAdding: .day, value: 1, to: Date())
         tomorrowVoteStartTime = calendar.date(bySettingHour: 11, minute: 0, second: 0, of: tomorrowVoteStartTime!)
         //let remainingTime = stringFromTimeInterval(interval: tomorrow!.timeIntervalSince(Date()))
-        var remainingTime = ""
+        var nowState = ""
         let now = Date()
         if now > voteStartTime! && now < voteEndTime! {
-            remainingTime = "투표종료까지 남은시간 : " + stringFromTimeInterval(interval: voteEndTime!.timeIntervalSince(Date()))
+            timeBeforeStateLabel.text = "투표종료까지 남은시간"
+            nowState = "투표 중"
+            
+            //remainingTime = "투표종료까지 남은시간 : " + stringFromTimeInterval(interval: voteEndTime!.timeIntervalSince(Date()))
         } else if now < voteStartTime! {
-            remainingTime = "투표시작까지 남은시간 : " + stringFromTimeInterval(interval: voteStartTime!.timeIntervalSince(Date()))
+            timeBeforeStateLabel.text = "투표시작까지 남은시간"
+            nowState = "투표 대기 중"
+            //remainingTime = "투표시작까지 남은시간 : " + stringFromTimeInterval(interval: voteStartTime!.timeIntervalSince(Date()))
         } else  if now < anounceStartTime! {
-            remainingTime = "발표시작까지 남은시간 : " + stringFromTimeInterval(interval: anounceStartTime!.timeIntervalSince(Date()))
+            timeBeforeStateLabel.text = "발표시작까지 남은시간"
+            nowState = "결과 집계 중"
+           // remainingTime = "발표시작까지 남은시간 : " + stringFromTimeInterval(interval: anounceStartTime!.timeIntervalSince(Date()))
         } else {
-            remainingTime = "내일 투표시작까지 남은시간 : " + stringFromTimeInterval(interval: tomorrowVoteStartTime!.timeIntervalSince(Date()))            
+            timeBeforeStateLabel.text = "내일 투표시작까지 남은시간"
+            nowState = "당첨자발표중"
+           // remainingTime = "내일 투표시작까지 남은시간 : " + stringFromTimeInterval(interval: tomorrowVoteStartTime!.timeIntervalSince(Date()))
         }
         
-        timeLabel.text = remainingTime
-        
+        nowStateLabel.text = nowState
+        timeLabel.text = stringFromTimeInterval(interval: tomorrowVoteStartTime!.timeIntervalSince(Date()))//remainingTime
+       
         
         // Do any additional setup after loading the view, typically from a nib.
         

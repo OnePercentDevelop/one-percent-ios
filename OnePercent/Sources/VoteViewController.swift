@@ -18,6 +18,7 @@ class VoteViewController: UIViewController {
     //var question: String?
     var examples = [String]()
     
+    @IBOutlet weak var voteEntryWinnerView: UIView!
     // MARK: - IBAction
     @IBAction func voteSendButton(_ sender: AnyObject) {
         let dateFormatter = DateFormatter()
@@ -32,8 +33,10 @@ class VoteViewController: UIViewController {
                 ]
             
             Alamofire
-                .request("http://onepercentserver.azurewebsites.net/OnePercentServer/insertVote.do", method: .post, parameters: parameters)
+                .request("http://onepercentserver.azurewebsites.net/OnePercentServer/insertVote.do", method: .post, parameters: parameters, encoding: JSONEncoding.default)
                 .log(level: .verbose)
+//                .responseObject { (response : DataResponse<>) in
+//            }
             
         } else {
             let alertController = UIAlertController(title: "", message: "보기를 선택해주세요ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
@@ -45,6 +48,7 @@ class VoteViewController: UIViewController {
     // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
+        voteEntryWinnerView.isHidden = true
         
         Alamofire
             .request("http://onepercentserver.azurewebsites.net/OnePercentServer/main.do", method: .get)
@@ -80,6 +84,7 @@ class VoteViewController: UIViewController {
         }
 
         // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -112,6 +117,7 @@ extension VoteViewController: UICollectionViewDataSource {
         let cell = voteCollectionView.dequeueReusableCell(withReuseIdentifier: "voteCollectionViewCell", for: indexPath) as! VoteCollectionViewCell
         cell.questionLabel.text = examples[indexPath.row]
         
+        cell.voteResultView.isHidden = true
         return cell
     }
 }
@@ -120,7 +126,8 @@ extension VoteViewController: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         let cell = voteCollectionView.cellForItem(at: indexPath)
         
-        cell?.backgroundColor = UIColor.blue
+        cell?.backgroundColor = UIColor(red: 85, green: 160, blue: 214)
+        
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -129,14 +136,29 @@ extension VoteViewController: UICollectionViewDelegate {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController")
             self.present(vc!, animated: true, completion: nil)
         }
+        
         let cell = voteCollectionView.cellForItem(at: indexPath)
+        
         selectedItem = indexPath.row
-        cell?.backgroundColor = UIColor.cyan
+        cell?.backgroundColor = UIColor(red: 85, green: 160, blue: 214)
+        
+        
+        
     }
     
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = voteCollectionView.cellForItem(at: indexPath)
         
-        cell?.backgroundColor = UIColor.clear
+        cell?.backgroundColor = UIColor(red: 217, green: 217, blue: 217)
+    }
+}
+
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        let newRed = CGFloat(red)/255
+        let newGreen = CGFloat(green)/255
+        let newBlue = CGFloat(blue)/255
+        
+        self.init(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
     }
 }

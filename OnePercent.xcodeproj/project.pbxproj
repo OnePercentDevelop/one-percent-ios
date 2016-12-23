@@ -20,6 +20,8 @@
 		C98EB05D1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05C1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift */; };
 		C98EB0601DC3464900B22C16 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05F1DC3464900B22C16 /* User.swift */; };
 		C9A93D741DCB0849008B06C2 /* HomeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A93D731DCB0849008B06C2 /* HomeInformation.swift */; };
+		C9BFF70C1DEC4E5400C7F76A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BFF70B1DEC4E5400C7F76A /* MainTabBarController.swift */; };
+		C9BFF70E1DEC592A00C7F76A /* OnePercentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BFF70D1DEC592A00C7F76A /* OnePercentButton.swift */; };
 		C9C610581DBF539F005849C3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9C610571DBF539F005849C3 /* GoogleService-Info.plist */; };
 		C9C6108F1DC1B696005849C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C6108E1DC1B696005849C3 /* LoginViewController.swift */; };
 		C9CDA7F11DC752290044CB65 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CDA7F01DC752290044CB65 /* HTTPMethod.swift */; };
@@ -51,6 +53,8 @@
 		C98EB05C1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VoteCollectionViewCell.swift; path = Sources/VoteCollectionViewCell.swift; sourceTree = "<group>"; };
 		C98EB05F1DC3464900B22C16 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Sources/User.swift; sourceTree = "<group>"; };
 		C9A93D731DCB0849008B06C2 /* HomeInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInformation.swift; sourceTree = "<group>"; };
+		C9BFF70B1DEC4E5400C7F76A /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		C9BFF70D1DEC592A00C7F76A /* OnePercentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnePercentButton.swift; sourceTree = "<group>"; };
 		C9C610571DBF539F005849C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C9C6108E1DC1B696005849C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Sources/LoginViewController.swift; sourceTree = "<group>"; };
 		C9CDA7F01DC752290044CB65 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 				C9F0D37D1DC6496800B9B03B /* SignUp */,
 				C98EB0591DC2EA4400B22C16 /* Vote */,
 				C9C6108B1DC1B62C005849C3 /* Login */,
+				C9BFF70B1DEC4E5400C7F76A /* MainTabBarController.swift */,
 			);
 			name = ViewComponents;
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 		C9F0D3881DC65A7800B9B03B /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				C9BFF70D1DEC592A00C7F76A /* OnePercentButton.swift */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -398,6 +404,8 @@
 				C953385B1DCEE10B00FDE4F3 /* LoginResult.swift in Sources */,
 				C92EC03F1DBD1D58005D7D8B /* ViewController.swift in Sources */,
 				C92EC03D1DBD1D58005D7D8B /* AppDelegate.swift in Sources */,
+				C9BFF70E1DEC592A00C7F76A /* OnePercentButton.swift in Sources */,
+				C9BFF70C1DEC4E5400C7F76A /* MainTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

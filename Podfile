@@ -13,7 +13,7 @@ target 'OnePercent' do
   pod 'AsyncSwift'
   pod 'AlamofireImage', '~> 3.1'
   pod 'SwiftyUserDefaults'
-
+  pod ‘RealmSwift’ 
   # MARK: - Rx Libs
   pod 'RxSwift',    '~> 3.0'
   pod 'RxCocoa',    '~> 3.0'
