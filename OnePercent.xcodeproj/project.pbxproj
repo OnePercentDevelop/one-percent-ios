@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0DC80B8A6F45DF6C60CE2EB4 /* Pods_OnePercent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D81F9C6D7691B2043DC12A /* Pods_OnePercent.framework */; };
+		C91D92F51E0CED7D007B5034 /* OnePercentColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91D92F41E0CED7D007B5034 /* OnePercentColor.swift */; };
 		C92EC03D1DBD1D58005D7D8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EC03C1DBD1D58005D7D8B /* AppDelegate.swift */; };
 		C92EC03F1DBD1D58005D7D8B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EC03E1DBD1D58005D7D8B /* ViewController.swift */; };
 		C92EC0421DBD1D58005D7D8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C92EC0401DBD1D58005D7D8B /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 		A1093B9C83B53C7D8589CC21 /* Pods_OnePercentTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnePercentTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADD3843C8BACA77BEABA1A28 /* Pods-OnePercent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePercent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnePercent/Pods-OnePercent.debug.xcconfig"; sourceTree = "<group>"; };
 		B08C263D874AC3AB2E759998 /* Pods-OnePercent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePercent.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnePercent/Pods-OnePercent.release.xcconfig"; sourceTree = "<group>"; };
+		C91D92F41E0CED7D007B5034 /* OnePercentColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnePercentColor.swift; sourceTree = "<group>"; };
 		C92EC0391DBD1D58005D7D8B /* OnePercent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePercent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C92EC03C1DBD1D58005D7D8B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/AppDelegate.swift; sourceTree = "<group>"; };
 		C92EC03E1DBD1D58005D7D8B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Sources/ViewController.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				C9BFF70D1DEC592A00C7F76A /* OnePercentButton.swift */,
+				C91D92F41E0CED7D007B5034 /* OnePercentColor.swift */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				C97B1AB41DD06AA7009CC477 /* MoreViewController.swift in Sources */,
 				C9C6108F1DC1B696005849C3 /* LoginViewController.swift in Sources */,
 				C9CDA7F51DC75DAC0044CB65 /* Alamofire+OnePercent.swift in Sources */,
+				C91D92F51E0CED7D007B5034 /* OnePercentColor.swift in Sources */,
 				C9F0D3821DC64BD500B9B03B /* SettingViewController.swift in Sources */,
 				C98EB0601DC3464900B22C16 /* User.swift in Sources */,
 				C9CDA7F71DC75FAA0044CB65 /* AlamofireLogger.swift in Sources */,

@@ -42,7 +42,6 @@ class ViewController: UIViewController {
     }
     
     fileprivate func updateTodayLeftTime() {
-        //viewController?.todayLeftTimeSecond = interactor.todayLeftSecond
         dateformat()
     }
     
@@ -54,78 +53,7 @@ class ViewController: UIViewController {
     // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년MM월dd일"
-        var todayDate = dateFormatter.string(from: Date())
-        print("date: \(todayDate)")
-        
-        let URL = "http://onepercentserver.azurewebsites.net/OnePercentServer/voteNumber.do"
-        let parameters: Parameters = ["vote_date": todayDate]
-        
-        Alamofire
-            .request(URL, parameters: parameters)
-            //.request(URL, method: .GET, parameters: todayDate )
-            .log(level:  .verbose)
-            .responseObject { (response: DataResponse<OnePercentResponse>) in
-                
-                print("ryan : \(response.result.isSuccess)")
-                //if (response.result.value?.voteResult) != nil {
-                if let voteresult = response.result.value?.voteResult {
-                    for n in voteresult {
-                        if let number = n.number {
-                            print("ryan : \(number)")
-                            self.entryNumberLabel.text = String(number)
-                        }
-                    }
-                }
-        }
-        
-        Alamofire
-            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/main.do", method: .get)
-            .log(level: .verbose)
-            .responseObject { (response: DataResponse<HomeInformationResponse>) in
-                print(" : \(response.result.isSuccess)")
-                if let mainResult = response.result.value?.mainResult {
-                    for n in mainResult {
-//                        if let question = n.question {
-//                            print("ryan : \(question)")
-//                            self.questionLabel.text = question
-//                        }
-//                        if let winner = n.winner {
-//                            print("ryan : \(winner)")
-//                            self.winnerLabel.text = winner
-//                        }
-                        if let giftName = n.giftName {
-                            print("ryan : \(giftName)")
-                            self.productLabel.text = giftName
-                        }
-                        for i in n.example! {
-                            print(i.firstQuestion)
-                            print(i.secondQuestion)
-                            print(i.thirdQuestion)
-                            print(i.fourthQuestion)
-                        }
-                        //png 처리
-                        if let giftPng = n.giftPng {
-                           var url = "http://onepercentserver.azurewebsites.net/OnePercentServer/resources/common/image/" + giftPng
-//                            Alamofire.request(url).responseImage { response in
-//                                print(response.request)
-//                                print(response.response)
-//                                debugPrint(response.result)
-//                                
-//                                if let image = response.result.value {
-//                                    print("image downloaded: \(image)")
-//                                    
-//                                }
-//                            }
-                            self.productImageView.af_setImage(withURL: NSURL(string: url) as! URL)
-
-                        }
-                        
-                    }
-                }
-        }
+        alamofireFunction()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -149,32 +77,25 @@ class ViewController: UIViewController {
         let calendar = NSCalendar.current
         var tomorrowVoteStartTime = calendar.date(byAdding: .day, value: 1, to: Date())
         tomorrowVoteStartTime = calendar.date(bySettingHour: 11, minute: 0, second: 0, of: tomorrowVoteStartTime!)
-        //let remainingTime = stringFromTimeInterval(interval: tomorrow!.timeIntervalSince(Date()))
         var nowState = ""
         let now = Date()
+
         if now > voteStartTime! && now < voteEndTime! {
             timeBeforeStateLabel.text = "투표종료까지 남은시간"
             nowState = "투표 중"
-            
-            //remainingTime = "투표종료까지 남은시간 : " + stringFromTimeInterval(interval: voteEndTime!.timeIntervalSince(Date()))
         } else if now < voteStartTime! {
             timeBeforeStateLabel.text = "투표시작까지 남은시간"
             nowState = "투표 대기 중"
-            //remainingTime = "투표시작까지 남은시간 : " + stringFromTimeInterval(interval: voteStartTime!.timeIntervalSince(Date()))
         } else  if now < anounceStartTime! {
             timeBeforeStateLabel.text = "발표시작까지 남은시간"
             nowState = "결과 집계 중"
-           // remainingTime = "발표시작까지 남은시간 : " + stringFromTimeInterval(interval: anounceStartTime!.timeIntervalSince(Date()))
         } else {
             timeBeforeStateLabel.text = "내일 투표시작까지 남은시간"
             nowState = "당첨자발표중"
-           // remainingTime = "내일 투표시작까지 남은시간 : " + stringFromTimeInterval(interval: tomorrowVoteStartTime!.timeIntervalSince(Date()))
         }
         
         nowStateLabel.text = nowState
-        timeLabel.text = stringFromTimeInterval(interval: tomorrowVoteStartTime!.timeIntervalSince(Date()))//remainingTime
-       
-        
+        timeLabel.text = stringFromTimeInterval(interval: tomorrowVoteStartTime!.timeIntervalSince(Date()))
         // Do any additional setup after loading the view, typically from a nib.
         
     }
@@ -186,6 +107,69 @@ class ViewController: UIViewController {
         let hours = (ti / 3600)
         
         return String(format: "%0.2d:%0.2d:%0.2d",hours,minutes,seconds)
+    }
+    
+    func alamofireFunction() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년MM월dd일"
+        let todayDate = dateFormatter.string(from: Date())
+        
+        let URL = "http://onepercentserver.azurewebsites.net/OnePercentServer/voteNumber.do"
+        let parameters: Parameters = ["vote_date": todayDate]
+        
+        Alamofire
+            .request(URL, parameters: parameters)
+            .log(level:  .verbose)
+            .responseObject { (response: DataResponse<OnePercentResponse>) in
+                
+                print("ryan : \(response.result.isSuccess)")
+                if let voteresult = response.result.value?.voteResult {
+                    for n in voteresult {
+                        if let number = n.number {
+                            print("ryan : \(number)")
+                            self.entryNumberLabel.text = String(number)
+                        }
+                    }
+                }
+        }
+        
+        Alamofire
+            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/main.do", method: .get)
+            .log(level: .verbose)
+            .responseObject { (response: DataResponse<HomeInformationResponse>) in
+                print(" : \(response.result.isSuccess)")
+                if let mainResult = response.result.value?.mainResult {
+                    for n in mainResult {
+                        if let giftName = n.giftName {
+                            print("ryan : \(giftName)")
+                            self.productLabel.text = giftName
+                        }
+                        for i in n.example! {
+                            print(i.firstQuestion)
+                            print(i.secondQuestion)
+                            print(i.thirdQuestion)
+                            print(i.fourthQuestion)
+                        }
+                        //png 처리
+                        if let giftPng = n.giftPng {
+                            let url = "http://onepercentserver.azurewebsites.net/OnePercentServer/resources/common/image/" + giftPng
+                            //                            Alamofire.request(url).responseImage { response in
+                            //                                print(response.request)
+                            //                                print(response.response)
+                            //                                debugPrint(response.result)
+                            //
+                            //                                if let image = response.result.value {
+                            //                                    print("image downloaded: \(image)")
+                            //
+                            //                                }
+                            //                            }
+                            self.productImageView.af_setImage(withURL: NSURL(string: url) as! URL)
+                            
+                        }
+                        
+                    }
+                }
+        }
     }
 }
 

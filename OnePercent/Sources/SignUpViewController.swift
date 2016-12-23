@@ -75,7 +75,7 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func moveToLoginViewButtonClick(_ sender: AnyObject) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        _ = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         //self.navigationController?.pushViewController(vc, animated: true)
         //self.show(vc!, sender: self)
         //present(vc, animated: true, completion: nil)

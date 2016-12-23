@@ -199,7 +199,7 @@
             </objects>
             <point key="canvasLocation" x="2481" y="-510"/>
         </scene>
-        <!--투표-->
+        <!--Calendar Appearance Delegate-->
         <scene sceneID="SaF-5R-euP">
             <objects>
                 <viewController id="Nut-SB-GTa" customClass="VoteViewController" customModule="OnePercent" customModuleProvider="target" sceneMemberID="viewController">
@@ -228,22 +228,27 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mac-gE-7ts">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="15" id="KAg-on-SJo"/>
-                                            <constraint firstAttribute="width" constant="15" id="vcd-on-guo"/>
+                                            <constraint firstAttribute="height" constant="20" id="KAg-on-SJo"/>
+                                            <constraint firstAttribute="width" constant="20" id="vcd-on-guo"/>
                                         </constraints>
-                                        <state key="normal" image="icon_date_right"/>
+                                        <state key="normal" title=" &gt; ">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qba-Wx-Weh">
                                         <state key="normal" title="Button">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="calendarOpenButton:" destination="Nut-SB-GTa" eventType="touchUpInside" id="ole-qM-3mB"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPv-Cy-snQ">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="15" id="G1B-0j-1XC"/>
-                                            <constraint firstAttribute="width" constant="5" id="hf1-o3-PbL"/>
+                                            <constraint firstAttribute="height" constant="20" id="G1B-0j-1XC"/>
+                                            <constraint firstAttribute="width" constant="20" id="hf1-o3-PbL"/>
                                         </constraints>
-                                        <state key="normal" image="icon_date_left">
+                                        <state key="normal" title=" &lt; ">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
                                     </button>
@@ -400,6 +405,53 @@
                                     <constraint firstItem="r7N-Dy-40O" firstAttribute="top" secondItem="90n-gg-AYv" secondAttribute="bottom" constant="26" id="t6H-tl-Mra"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MAc-xF-uNV">
+                                <frame key="frameInset" minX="4" minY="115" width="367" height="495"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ELF-aW-vKv" customClass="CVCalendarView" customModule="CVCalendar">
+                                        <frame key="frameInset" minY="101" width="367" height="317"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.75686274509999996" green="0.79607843140000001" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="calendarAppearanceDelegate" destination="Nut-SB-GTa" id="h0K-LH-ra8"/>
+                                            <outlet property="calendarDelegate" destination="Nut-SB-GTa" id="H9G-GQ-rQ4"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wgS-BQ-3qR" customClass="CVCalendarMenuView" customModule="CVCalendar">
+                                        <frame key="frameInset" minY="67" width="367" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.33333333329999998" green="0.62745098040000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="menuViewDelegate" destination="Nut-SB-GTa" id="AZW-cw-03f"/>
+                                        </connections>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3v-B5-wXQ">
+                                        <frame key="frameInset" minX="65" minY="23" width="256" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udC-9r-ZR7">
+                                        <frame key="frameInset" minX="329" minY="18" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="선택"/>
+                                        <connections>
+                                            <action selector="dateSelectButton:" destination="Nut-SB-GTa" eventType="touchUpInside" id="TXL-0J-DP8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edR-mf-I6x">
+                                        <frame key="frameInset" minX="8" minY="19" width="39" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="today"/>
+                                        <connections>
+                                            <action selector="todayMonthView" destination="Nut-SB-GTa" eventType="touchUpInside" id="cqk-Vl-5AH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -424,6 +476,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="투표" id="S7C-55-3tW"/>
                     <connections>
+                        <outlet property="calendarOpenButton" destination="qba-Wx-Weh" id="5p2-k9-Zst"/>
+                        <outlet property="calendarSelectView" destination="MAc-xF-uNV" id="COx-Wn-kSn"/>
+                        <outlet property="calendarView" destination="ELF-aW-vKv" id="Fxb-ct-IBB"/>
+                        <outlet property="menuView" destination="wgS-BQ-3qR" id="z80-5A-3dM"/>
+                        <outlet property="monthLabel" destination="d3v-B5-wXQ" id="eRZ-aF-2Zf"/>
                         <outlet property="questionLabel" destination="K5P-TQ-KqN" id="3dL-tV-7zL"/>
                         <outlet property="voteCollectionView" destination="Sh0-s3-RlI" id="Mkp-Z8-Bc9"/>
                         <outlet property="voteEntryWinnerView" destination="22V-YL-0BP" id="DKI-Kb-taq"/>
@@ -606,7 +663,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dzT-Vn-sOS" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="홈" image="home_choose_btn_x2" id="Kg2-Jg-Lvf"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vtr-N1-iZw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vtr-N1-iZw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -626,7 +683,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="20i-uM-UaT" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="투표" image="vote_choose_btn_x2" id="j84-PX-d61"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Kss-4z-Sb1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kss-4z-Sb1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -647,7 +704,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Rcg-xT-nlD" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="당첨자" image="prize_choose_btn_x2" id="2kH-U9-im6"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="gTj-a6-rw3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gTj-a6-rw3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -667,7 +724,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="foO-PG-HS6" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="더보기" image="more_choose_btn_x2" id="JgD-Sz-WaA"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="SKI-Ee-EeV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SKI-Ee-EeV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -685,8 +742,6 @@
     <resources>
         <image name="home_choose_btn_x2" width="25" height="25"/>
         <image name="home_circle" width="805" height="796"/>
-        <image name="icon_date_left" width="10" height="22"/>
-        <image name="icon_date_right" width="10" height="22"/>
         <image name="icon_person" width="16" height="16"/>
         <image name="information" width="60" height="60"/>
         <image name="more_choose_btn_x2" width="25" height="25"/>
