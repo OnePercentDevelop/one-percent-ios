@@ -111,7 +111,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q4I-OU-WDf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3583" y="-527"/>
+            <point key="canvasLocation" x="3862" y="-1239"/>
         </scene>
         <!--회원가입-->
         <scene sceneID="q4h-yu-thd">
@@ -197,9 +197,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UVd-e8-1ie" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2481" y="-510"/>
+            <point key="canvasLocation" x="3148" y="-1239"/>
         </scene>
-        <!--Calendar Appearance Delegate-->
+        <!--투표-->
         <scene sceneID="SaF-5R-euP">
             <objects>
                 <viewController id="Nut-SB-GTa" customClass="VoteViewController" customModule="OnePercent" customModuleProvider="target" sceneMemberID="viewController">
@@ -234,6 +234,9 @@
                                         <state key="normal" title=" &gt; ">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="moveToTomorrow:" destination="Nut-SB-GTa" eventType="touchUpInside" id="2cr-1o-RLU"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qba-Wx-Weh">
                                         <state key="normal" title="Button">
@@ -251,6 +254,9 @@
                                         <state key="normal" title=" &lt; ">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
+                                        <connections>
+                                            <action selector="moveToYesterDay:" destination="Nut-SB-GTa" eventType="touchUpInside" id="jf0-lH-l1q"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -405,53 +411,6 @@
                                     <constraint firstItem="r7N-Dy-40O" firstAttribute="top" secondItem="90n-gg-AYv" secondAttribute="bottom" constant="26" id="t6H-tl-Mra"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MAc-xF-uNV">
-                                <frame key="frameInset" minX="4" minY="115" width="367" height="495"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ELF-aW-vKv" customClass="CVCalendarView" customModule="CVCalendar">
-                                        <frame key="frameInset" minY="101" width="367" height="317"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.75686274509999996" green="0.79607843140000001" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <outlet property="calendarAppearanceDelegate" destination="Nut-SB-GTa" id="h0K-LH-ra8"/>
-                                            <outlet property="calendarDelegate" destination="Nut-SB-GTa" id="H9G-GQ-rQ4"/>
-                                        </connections>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wgS-BQ-3qR" customClass="CVCalendarMenuView" customModule="CVCalendar">
-                                        <frame key="frameInset" minY="67" width="367" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.33333333329999998" green="0.62745098040000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <outlet property="menuViewDelegate" destination="Nut-SB-GTa" id="AZW-cw-03f"/>
-                                        </connections>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3v-B5-wXQ">
-                                        <frame key="frameInset" minX="65" minY="23" width="256" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udC-9r-ZR7">
-                                        <frame key="frameInset" minX="329" minY="18" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="선택"/>
-                                        <connections>
-                                            <action selector="dateSelectButton:" destination="Nut-SB-GTa" eventType="touchUpInside" id="TXL-0J-DP8"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edR-mf-I6x">
-                                        <frame key="frameInset" minX="8" minY="19" width="39" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="today"/>
-                                        <connections>
-                                            <action selector="todayMonthView" destination="Nut-SB-GTa" eventType="touchUpInside" id="cqk-Vl-5AH"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -477,10 +436,6 @@
                     <navigationItem key="navigationItem" title="투표" id="S7C-55-3tW"/>
                     <connections>
                         <outlet property="calendarOpenButton" destination="qba-Wx-Weh" id="5p2-k9-Zst"/>
-                        <outlet property="calendarSelectView" destination="MAc-xF-uNV" id="COx-Wn-kSn"/>
-                        <outlet property="calendarView" destination="ELF-aW-vKv" id="Fxb-ct-IBB"/>
-                        <outlet property="menuView" destination="wgS-BQ-3qR" id="z80-5A-3dM"/>
-                        <outlet property="monthLabel" destination="d3v-B5-wXQ" id="eRZ-aF-2Zf"/>
                         <outlet property="questionLabel" destination="K5P-TQ-KqN" id="3dL-tV-7zL"/>
                         <outlet property="voteCollectionView" destination="Sh0-s3-RlI" id="Mkp-Z8-Bc9"/>
                         <outlet property="voteEntryWinnerView" destination="22V-YL-0BP" id="DKI-Kb-taq"/>
@@ -489,6 +444,71 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xno-jR-mDF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1773.5999999999999" y="-510.49475262368821"/>
+        </scene>
+        <!--Calendar Appearance Delegate-->
+        <scene sceneID="keX-Ic-2m9">
+            <objects>
+                <viewController storyboardIdentifier="CalendarViewController" id="UAi-DL-jjZ" customClass="CalendarViewController" customModule="OnePercent" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0Dy-xS-yQr"/>
+                        <viewControllerLayoutGuide type="bottom" id="7TT-Ed-IHd"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="IyH-Ml-Npe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eIv-1D-pnJ" customClass="CVCalendarMenuView" customModule="CVCalendar">
+                                <frame key="frameInset" minX="20" minY="170" width="343" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.62484580590000005" green="0.67219107720000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="menuViewDelegate" destination="UAi-DL-jjZ" id="PY1-mk-9Wj"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bVJ-wP-usX" customClass="CVCalendarView" customModule="CVCalendar">
+                                <frame key="frameInset" minX="20" minY="197" width="343" height="359"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.98431372549999996" green="0.86274509799999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="calendarAppearanceDelegate" destination="UAi-DL-jjZ" id="gma-VK-npt"/>
+                                    <outlet property="calendarDelegate" destination="UAi-DL-jjZ" id="faO-Av-fEg"/>
+                                </connections>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzB-yd-Z58">
+                                <frame key="frameInset" minX="83" minY="132" width="217" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAm-fS-Y4u">
+                                <frame key="frameInset" minX="20" minY="132" width="39" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="today"/>
+                                <connections>
+                                    <action selector="gotoTodayButton" destination="UAi-DL-jjZ" eventType="touchUpInside" id="fkf-Wz-63h"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LB3-SH-yIf">
+                                <frame key="frameInset" minX="321" minY="123" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="ok"/>
+                                <connections>
+                                    <action selector="selectDoneButton:" destination="UAi-DL-jjZ" eventType="touchUpInside" id="34Z-1a-Rwr"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="calendarView" destination="bVJ-wP-usX" id="BNn-pz-Xvo"/>
+                        <outlet property="menuView" destination="eIv-1D-pnJ" id="XpA-Cd-QAw"/>
+                        <outlet property="monthLabel" destination="rzB-yd-Z58" id="NfV-Hn-rJ6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mf4-0p-bCX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2480.8000000000002" y="-510.49475262368821"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="vbz-ls-0Yg">

@@ -17,6 +17,7 @@
 		C940CE541E1248EF00E2AF9E /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940CE531E1248EF00E2AF9E /* Vote.swift */; };
 		C940CE561E124E0300E2AF9E /* Prize.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940CE551E124E0300E2AF9E /* Prize.swift */; };
 		C940CE581E124EBC00E2AF9E /* MyVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940CE571E124EBC00E2AF9E /* MyVote.swift */; };
+		C940CE5A1E125CDE00E2AF9E /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940CE591E125CDE00E2AF9E /* CalendarViewController.swift */; };
 		C95338591DCEE0EE00FDE4F3 /* SignUpResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95338581DCEE0EE00FDE4F3 /* SignUpResult.swift */; };
 		C953385B1DCEE10B00FDE4F3 /* LoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C953385A1DCEE10B00FDE4F3 /* LoginResult.swift */; };
 		C97B1AB41DD06AA7009CC477 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B1AB31DD06AA7009CC477 /* MoreViewController.swift */; };
@@ -54,6 +55,7 @@
 		C940CE531E1248EF00E2AF9E /* Vote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vote.swift; sourceTree = "<group>"; };
 		C940CE551E124E0300E2AF9E /* Prize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prize.swift; sourceTree = "<group>"; };
 		C940CE571E124EBC00E2AF9E /* MyVote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyVote.swift; sourceTree = "<group>"; };
+		C940CE591E125CDE00E2AF9E /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		C95338581DCEE0EE00FDE4F3 /* SignUpResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpResult.swift; sourceTree = "<group>"; };
 		C953385A1DCEE10B00FDE4F3 /* LoginResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginResult.swift; sourceTree = "<group>"; };
 		C97B1AB31DD06AA7009CC477 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoreViewController.swift; path = Sources/MoreViewController.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				C98EB0591DC2EA4400B22C16 /* Vote */,
 				C9C6108B1DC1B62C005849C3 /* Login */,
 				C9BFF70B1DEC4E5400C7F76A /* MainTabBarController.swift */,
+				C940CE591E125CDE00E2AF9E /* CalendarViewController.swift */,
 			);
 			name = ViewComponents;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				C95338591DCEE0EE00FDE4F3 /* SignUpResult.swift in Sources */,
 				C98EB05B1DC2EA6400B22C16 /* VoteViewController.swift in Sources */,
 				C940CE561E124E0300E2AF9E /* Prize.swift in Sources */,
+				C940CE5A1E125CDE00E2AF9E /* CalendarViewController.swift in Sources */,
 				C9CDA7F91DC889FA0044CB65 /* EntryNumber.swift in Sources */,
 				C9F0D37F1DC649C300B9B03B /* SignUpViewController.swift in Sources */,
 				C97B1AB41DD06AA7009CC477 /* MoreViewController.swift in Sources */,
