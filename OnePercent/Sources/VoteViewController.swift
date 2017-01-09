@@ -22,6 +22,8 @@ class VoteViewController: UIViewController {
     @IBOutlet weak var voteEntryWinnerView: UIView!
     @IBOutlet weak var calendarOpenButton: UIButton!
     
+    @IBOutlet weak var nowStateLabel: UILabel!
+    @IBOutlet weak var voteSendButton: OnePercentButton!
     @IBAction func moveToYesterDay(_ sender: AnyObject) {
         
     }
@@ -33,6 +35,11 @@ class VoteViewController: UIViewController {
     var examples = [String]()
     let dateFormatter = DateFormatter()
     var todayDate: String!
+    
+//    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//    var nowStateText: String = ""
+    var nowstate: String!
+    
     
     // MARK: - IBAction
     @IBAction func calendarOpenButton(_ sender: AnyObject) {
@@ -71,7 +78,7 @@ class VoteViewController: UIViewController {
     // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
-        voteEntryWinnerView.isHidden = true
+//        voteEntryWinnerView.isHidden = true
         initAlamofireFunction()
         
         dateFormatter.dateFormat = "yyyy년MM월dd일"
@@ -82,6 +89,50 @@ class VoteViewController: UIViewController {
         
         //calendar init
         calendarViewController = (self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as! CalendarViewController)
+
+        nowstate = Time.sharedInstance.getNowStateText()
+        if nowstate == "투표중" {
+            voteSendButton.setTitle("투표중intext", for: .normal)
+            voteSendButton.isHidden = false //투표전
+            voteEntryWinnerView.isHidden = true
+            voteCollectionView.allowsSelection = true
+            //투표전 
+            nowStateLabel.isHidden = true
+            //투표후
+           // nowStateLabel.isHidden = false
+            //nowStateLabel.text = "오늘의 투표에 이미 참여하셨습니다"
+       
+
+        } else if nowstate == "투표대기중" {
+            voteSendButton.setTitle(nowstate, for: .normal)
+            voteSendButton.isHidden = true
+            voteEntryWinnerView.isHidden = true
+            voteCollectionView.allowsSelection = false
+            nowStateLabel.isHidden = false
+            nowStateLabel.text = "투표시작을 기다려주세요"
+        } else if nowstate == "결과 집계 중" {
+            voteSendButton.isHidden = true
+            voteEntryWinnerView.isHidden = true
+            voteCollectionView.allowsSelection = false
+            nowStateLabel.isHidden = false
+            nowStateLabel.text = "투표결과 집계중입니다"
+
+        } else if nowstate == "당첨자발표중" {
+            voteSendButton.isHidden = true
+            voteEntryWinnerView.isHidden = false
+            voteCollectionView.allowsSelection = false
+            nowStateLabel.isHidden = true
+
+        }
+//        print("timeinstance >>\(appDelegate.time?.getNowStateText())")
+//        nowStateText = (appDelegate.time?.getNowStateText())!
+        
+//        if nowStateText.compare("투표중") == ComparisonResult.orderedSame {
+//            voteSendButton.isEnabled = false
+//        } else {
+//            voteSendButton.isEnabled = true
+//
+//        }
     }
 
         override func didReceiveMemoryWarning() {
@@ -151,7 +202,15 @@ extension VoteViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = voteCollectionView.dequeueReusableCell(withReuseIdentifier: "voteCollectionViewCell", for: indexPath) as! VoteCollectionViewCell
         cell.questionLabel.text = examples[indexPath.row]
-        cell.voteResultView.isHidden = true
+//        cell.voteResultView.isHidden = true
+
+        if nowstate == "당첨자발표중" {
+            cell.voteResultView.isHidden = false
+            cell.chargeImageView.frame = CGRect(origin: cell.bounds.origin , size: CGSize(width: cell.frame.width * 0.5, height: cell.frame.height)) //CGSize(width: cell.frame.width * 0.5, height: cell.frame.height)
+        } else {
+            cell.voteResultView.isHidden = true
+        }
+
         
         return cell
     }
@@ -188,8 +247,7 @@ extension VoteViewController: CalendarViewControllerDelegate {
     func dateSelectDone(date: String) {
         print("Vote date: \(date)")
         calendarOpenButton.setTitle(date, for: .normal)
-    }
-    
+}
 //    public func dateBeforeDate(_ date: Foundation.Date) -> Foundation.Date {
 //        let calendar = calendarViewController?.calendarView.delegate?.calendar?() ?? Calendar.current
 //        var components = Manager.componentsForDate(date, calendar: calendar)

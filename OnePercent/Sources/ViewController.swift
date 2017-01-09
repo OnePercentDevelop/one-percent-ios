@@ -83,19 +83,23 @@ class ViewController: UIViewController {
         if now > voteStartTime! && now < voteEndTime! {
             timeBeforeStateLabel.text = "투표종료까지 남은시간"
             nowState = "투표 중"
+            timeLabel.text = stringFromTimeInterval(interval: voteEndTime!.timeIntervalSince(Date()))
+
         } else if now < voteStartTime! {
+            timeLabel.text = stringFromTimeInterval(interval: voteStartTime!.timeIntervalSince(Date()))
             timeBeforeStateLabel.text = "투표시작까지 남은시간"
             nowState = "투표 대기 중"
         } else  if now < anounceStartTime! {
             timeBeforeStateLabel.text = "발표시작까지 남은시간"
             nowState = "결과 집계 중"
+            timeLabel.text = stringFromTimeInterval(interval: anounceStartTime!.timeIntervalSince(Date()))
         } else {
             timeBeforeStateLabel.text = "내일 투표시작까지 남은시간"
             nowState = "당첨자발표중"
+            timeLabel.text = stringFromTimeInterval(interval: tomorrowVoteStartTime!.timeIntervalSince(Date()))
         }
         
         nowStateLabel.text = nowState
-        timeLabel.text = stringFromTimeInterval(interval: tomorrowVoteStartTime!.timeIntervalSince(Date()))
         // Do any additional setup after loading the view, typically from a nib.
         
     }
@@ -122,7 +126,6 @@ class ViewController: UIViewController {
             .log(level:  .verbose)
             .responseObject { (response: DataResponse<OnePercentResponse>) in
                 
-                print("ryan : \(response.result.isSuccess)")
                 if let voteresult = response.result.value?.voteResult {
                     for n in voteresult {
                         if let number = n.number {

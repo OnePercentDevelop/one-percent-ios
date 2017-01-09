@@ -24,7 +24,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q5H-hZ-f9l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1774" y="137"/>
+            <point key="canvasLocation" x="1774" y="128"/>
         </scene>
         <!--더보기-->
         <scene sceneID="BTv-dF-1Ez">
@@ -53,7 +53,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rwv-H4-vby" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1774" y="790"/>
+            <point key="canvasLocation" x="1774" y="832"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="bfB-II-zac">
@@ -306,6 +306,11 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ewd-SF-xRj">
                                                     <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cYm-qi-LXk">
+                                                            <frame key="frameInset" width="295" height="44"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" red="0.4178145559" green="0.67219107720000004" blue="1" alpha="0.66158150339999999" colorSpace="calibratedRGB"/>
+                                                        </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="36C-23-1ai">
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_person" translatesAutoresizingMaskIntoConstraints="NO" id="KGv-QO-gvh">
@@ -346,6 +351,7 @@
                                             <constraint firstItem="KWO-nW-3MD" firstAttribute="centerY" secondItem="dQn-yj-vD0" secondAttribute="centerY" id="bbK-Eq-Hxv"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="chargeImageView" destination="cYm-qi-LXk" id="e1I-4K-v9h"/>
                                             <outlet property="questionLabel" destination="KWO-nW-3MD" id="JbI-kn-sLT"/>
                                             <outlet property="voteResultView" destination="Ewd-SF-xRj" id="deI-KH-uMA"/>
                                         </connections>
@@ -411,6 +417,13 @@
                                     <constraint firstItem="r7N-Dy-40O" firstAttribute="top" secondItem="90n-gg-AYv" secondAttribute="bottom" constant="26" id="t6H-tl-Mra"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T97-sU-oiB">
+                                <frame key="frameInset" minX="40" minY="480" width="295" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -436,14 +449,16 @@
                     <navigationItem key="navigationItem" title="투표" id="S7C-55-3tW"/>
                     <connections>
                         <outlet property="calendarOpenButton" destination="qba-Wx-Weh" id="5p2-k9-Zst"/>
+                        <outlet property="nowStateLabel" destination="T97-sU-oiB" id="o0P-yU-Lpw"/>
                         <outlet property="questionLabel" destination="K5P-TQ-KqN" id="3dL-tV-7zL"/>
                         <outlet property="voteCollectionView" destination="Sh0-s3-RlI" id="Mkp-Z8-Bc9"/>
                         <outlet property="voteEntryWinnerView" destination="22V-YL-0BP" id="DKI-Kb-taq"/>
+                        <outlet property="voteSendButton" destination="THg-7S-r6w" id="ltl-Fa-Dls"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xno-jR-mDF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1773.5999999999999" y="-510.49475262368821"/>
+            <point key="canvasLocation" x="1773.5999999999999" y="-527.58620689655174"/>
         </scene>
         <!--Calendar Appearance Delegate-->
         <scene sceneID="keX-Ic-2m9">
@@ -508,7 +523,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mf4-0p-bCX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2480.8000000000002" y="-510.49475262368821"/>
+            <point key="canvasLocation" x="2481" y="-528"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="vbz-ls-0Yg">

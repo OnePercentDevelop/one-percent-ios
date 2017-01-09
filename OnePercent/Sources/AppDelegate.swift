@@ -14,10 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+//    var time: Time?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         //FIRApp.configure()
         // Override point for customization after application launch.
+//        time?.startTimer()
+        Time.sharedInstance.startTimer()
         return true
     }
 
@@ -40,6 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
+//        time?.stopTimer()
+        Time.sharedInstance.stopTimer()
+
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
