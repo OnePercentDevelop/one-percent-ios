@@ -11,7 +11,7 @@ import RealmSwift
 
 class MyVote: Object {
     dynamic var myVoteDate = ""
-    dynamic var selectedNumber = ""
+    dynamic var selectedNumber: Int = 0
     
     override static func primaryKey() -> String? {
         return "myVoteDate"

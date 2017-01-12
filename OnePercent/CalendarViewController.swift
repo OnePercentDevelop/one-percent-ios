@@ -10,22 +10,21 @@ import UIKit
 import CVCalendar
 
 class CalendarViewController: UIViewController {
-    let test = ""
     
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calendarView: CVCalendarView!
     @IBAction func selectDoneButton(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
-        let de = delegate?.dateSelectDone(date: selectedDate!)
-        print("date: \(selectedDate)")
-        print("date: \(de)")
+        _ = delegate?.dateSelectDone(date: selectedDate!)
+//        print("date: \(selectedDate)")
+//        print("date: \(de)")
         // TODO: segue 통해서 정한 날짜 이전 화면으로 데이터 전송
     }
-    
+    @IBOutlet weak var monthLabel: UILabel!
+
     let dateFormatter = DateFormatter()
     var todayDate = String()
     var delegate: CalendarViewControllerDelegate?
-    
     
     // MARK: - Calendar Property
     var currentCalendar: Calendar?
@@ -33,9 +32,7 @@ class CalendarViewController: UIViewController {
     var animationFinished = true
     var selectedDate: String?
     
-    
-    @IBOutlet weak var monthLabel: UILabel!
-    
+    // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,6 +49,7 @@ class CalendarViewController: UIViewController {
         // Calendar delegate [Required]
         self.calendarView.calendarDelegate = self
         // Do any additional setup after loading the view.
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -99,7 +97,7 @@ extension CalendarViewController: CVCalendarViewDelegate, CVCalendarMenuViewDele
     
     func didSelectDayView(_ dayView: CVCalendarDayView, animationDidFinish: Bool) {
         selectedDay = dayView
-        
+        print("didSelectDayView")
     }
     
     func presentedDateUpdated(_ date: CVDate) {

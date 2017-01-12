@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyUserDefaults
 import CVCalendar
+import RealmSwift
 
 class VoteViewController: UIViewController {
 
@@ -35,20 +36,15 @@ class VoteViewController: UIViewController {
     var examples = [String]()
     let dateFormatter = DateFormatter()
     var todayDate: String!
-    
-//    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//    var nowStateText: String = ""
     var nowstate: String!
     
+    //realm property
+    var notificationToken: NotificationToken!
+    var realm: Realm!
+
     
     // MARK: - IBAction
     @IBAction func calendarOpenButton(_ sender: AnyObject) {
-        //calendarSelectView.isHidden = false
-        //delegation init
-//        self.calendarViewController.delegate = VoteViewController()
-
-//        let calendarViewController = self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as! CalendarViewController
-        
         calendarViewController?.delegate = self
         calendarViewController?.modalPresentationStyle = .overCurrentContext
         present(calendarViewController!, animated: true, completion: nil)
@@ -56,10 +52,11 @@ class VoteViewController: UIViewController {
     
     @IBAction func voteSendButton(_ sender: AnyObject) {
         if selectedItem != nil {
+            //request
             let parameters: Parameters = [
                 "user_id" : Defaults[.id],
                 "vote_date" : todayDate!,
-                "vote_answer" : selectedItem! + 1 ,
+                "vote_answer" : selectedItem! + 1
                 ]
             
             Alamofire
@@ -67,6 +64,18 @@ class VoteViewController: UIViewController {
                 .log(level: .verbose)
 //                .responseObject { (response : DataResponse<>) in
 //            }
+            
+            //realm
+            
+            let vote = MyVote()
+            vote.myVoteDate = todayDate
+            vote.selectedNumber = selectedItem!
+            
+//            let realm = try! Realm()
+
+            try! realm.write {
+                realm.add(vote)
+            }
             
         } else {
             let alertController = UIAlertController(title: "", message: "보기를 선택해주세요ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
@@ -84,62 +93,15 @@ class VoteViewController: UIViewController {
         dateFormatter.dateFormat = "yyyy년MM월dd일"
         todayDate = dateFormatter.string(from: Date())
         calendarOpenButton.setTitle("\(todayDate!)", for: .normal)
-        
-        // Do any additional setup after loading the view.
-        
-        //calendar init
-        calendarViewController = (self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as! CalendarViewController)
 
-        nowstate = Time.sharedInstance.getNowStateText()
-        if nowstate == "투표중" {
-            voteSendButton.setTitle("투표중intext", for: .normal)
-            voteSendButton.isHidden = false //투표전
-            voteEntryWinnerView.isHidden = true
-            voteCollectionView.allowsSelection = true
-            //투표전 
-            nowStateLabel.isHidden = true
-            //투표후
-           // nowStateLabel.isHidden = false
-            //nowStateLabel.text = "오늘의 투표에 이미 참여하셨습니다"
-       
-
-        } else if nowstate == "투표대기중" {
-            voteSendButton.setTitle(nowstate, for: .normal)
-            voteSendButton.isHidden = true
-            voteEntryWinnerView.isHidden = true
-            voteCollectionView.allowsSelection = false
-            nowStateLabel.isHidden = false
-            nowStateLabel.text = "투표시작을 기다려주세요"
-        } else if nowstate == "결과 집계 중" {
-            voteSendButton.isHidden = true
-            voteEntryWinnerView.isHidden = true
-            voteCollectionView.allowsSelection = false
-            nowStateLabel.isHidden = false
-            nowStateLabel.text = "투표결과 집계중입니다"
-
-        } else if nowstate == "당첨자발표중" {
-            voteSendButton.isHidden = true
-            voteEntryWinnerView.isHidden = false
-            voteCollectionView.allowsSelection = false
-            nowStateLabel.isHidden = true
-
-        }
-//        print("timeinstance >>\(appDelegate.time?.getNowStateText())")
-//        nowStateText = (appDelegate.time?.getNowStateText())!
-        
-//        if nowStateText.compare("투표중") == ComparisonResult.orderedSame {
-//            voteSendButton.isEnabled = false
-//        } else {
-//            voteSendButton.isEnabled = true
-//
-//        }
+        initCalendarFunction()
+        initViewFunction()
     }
 
-        override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
         voteCollectionView.allowsMultipleSelection = false
-        // Dispose of any resources that can be recreated.
     }
     
 
@@ -153,17 +115,15 @@ class VoteViewController: UIViewController {
     }
     */
     
-    // MARK: - Alamofire init
+    // MARK: - init Functions
     func initAlamofireFunction() {
         Alamofire
             .request("http://onepercentserver.azurewebsites.net/OnePercentServer/main.do", method: .get)
             .log(level: .verbose)
             .responseObject { (response: DataResponse<HomeInformationResponse>) in
-                print(" : \(response.result.isSuccess)")
                 if let mainResult = response.result.value?.mainResult {
                     for n in mainResult {
                         if let question = n.question {
-                            print("ryan : \(question)")
                             self.questionLabel.text = question
                         }
                         
@@ -188,7 +148,55 @@ class VoteViewController: UIViewController {
                 }
         }
     }
-
+    
+    func initCalendarFunction() {
+        calendarViewController = (self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as! CalendarViewController)
+    }
+    
+    func initViewFunction() {
+        nowstate = Time.sharedInstance.getNowStateText()
+        if nowstate == "투표중" {
+            voteSendButton.setTitle("투표중intext", for: .normal)
+            voteSendButton.isHidden = false //투표전
+            voteEntryWinnerView.isHidden = true
+            voteCollectionView.allowsSelection = true
+            //투표전
+            nowStateLabel.isHidden = true
+            //투표후
+            // nowStateLabel.isHidden = false
+            //nowStateLabel.text = "오늘의 투표에 이미 참여하셨습니다"
+        } else if nowstate == "투표대기중" {
+            voteSendButton.setTitle(nowstate, for: .normal)
+            voteSendButton.isHidden = true
+            voteEntryWinnerView.isHidden = true
+            voteCollectionView.allowsSelection = false
+            nowStateLabel.isHidden = false
+            nowStateLabel.text = "투표시작을 기다려주세요"
+        } else if nowstate == "결과 집계 중" {
+            voteSendButton.isHidden = true
+            voteEntryWinnerView.isHidden = true
+            voteCollectionView.allowsSelection = false
+            nowStateLabel.isHidden = false
+            nowStateLabel.text = "투표결과 집계중입니다"
+            
+        } else if nowstate == "당첨자발표중" {
+            voteSendButton.isHidden = true
+            voteEntryWinnerView.isHidden = false
+            voteCollectionView.allowsSelection = false
+            nowStateLabel.isHidden = true
+        }
+    }
+    
+    //realm function
+    func setupRealm() {
+        // Log in existing user with username and password
+        let username = "test"  // <--- Update this
+        let password = "test"  // <--- Update this
+    }
+    
+    deinit {
+        notificationToken.stop()
+    }
 }
 
 // MARK: - public function
@@ -209,6 +217,7 @@ extension VoteViewController: UICollectionViewDataSource {
             cell.chargeImageView.frame = CGRect(origin: cell.bounds.origin , size: CGSize(width: cell.frame.width * 0.5, height: cell.frame.height)) //CGSize(width: cell.frame.width * 0.5, height: cell.frame.height)
         } else {
             cell.voteResultView.isHidden = true
+            cell.chargeImageView.frame = CGRect(origin: cell.bounds.origin , size: CGSize(width: cell.frame.width * 0, height: cell.frame.height))
         }
 
         
