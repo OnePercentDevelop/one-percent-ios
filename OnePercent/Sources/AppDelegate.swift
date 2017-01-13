@@ -7,7 +7,10 @@
 //
 
 import UIKit
+import RealmSwift
 //import Firebase
+
+let uiRealm = try! Realm()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
