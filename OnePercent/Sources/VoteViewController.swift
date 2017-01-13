@@ -37,11 +37,7 @@ class VoteViewController: UIViewController {
     let dateFormatter = DateFormatter()
     var todayDate: String!
     var nowstate: String!
-    
-    //realm property
-    var notificationToken: NotificationToken!
-//    var r ealm: Realm!
-
+    var selectedDate: String!
     
     // MARK: - IBAction
     @IBAction func calendarOpenButton(_ sender: AnyObject) {
@@ -51,12 +47,12 @@ class VoteViewController: UIViewController {
     }
     
     @IBAction func voteSendButton(_ sender: AnyObject) {
-        if selectedItem != nil {
+        if selectedItem != nil { //투표
             //request
             let parameters: Parameters = [
                 "user_id" : Defaults[.id],
                 "vote_date" : todayDate!,
-                "vote_answer" : selectedItem! + 1
+                "vote_answer" : selectedItem!
                 ]
             
             Alamofire
@@ -66,17 +62,13 @@ class VoteViewController: UIViewController {
 //            }
             
             //realm
-            
             let newVote = MyVote()
             newVote.myVoteDate = todayDate
             newVote.selectedNumber = selectedItem!
             
-//            let realm = try! Realm()
-
             try! uiRealm.write {
                 uiRealm.add(newVote)
             }
-            
             
         } else {
             let alertController = UIAlertController(title: "", message: "보기를 선택해주세요ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
@@ -106,17 +98,6 @@ class VoteViewController: UIViewController {
         voteCollectionView.allowsMultipleSelection = false
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     // MARK: - init Functions
     func initAlamofireFunction() {
         Alamofire
@@ -124,24 +105,22 @@ class VoteViewController: UIViewController {
             .log(level: .verbose)
             .responseObject { (response: DataResponse<HomeInformationResponse>) in
                 if let mainResult = response.result.value?.mainResult {
-                    for n in mainResult {
-                        if let question = n.question {
+                    for result in mainResult {
+                        if let question = result.question {
                             self.questionLabel.text = question
                         }
                         
-                        for i in n.example! {
-                            if let q = i.firstQuestion {
+                        for example in result.example! {
+                            if let q = example.firstQuestion {
                                 self.examples.append(q)
                             }
-                            if let q = i.secondQuestion {
+                            if let q = example.secondQuestion {
                                 self.examples.append(q)
                             }
-                            
-                            if let q = i.fourthQuestion {
+                            if let q = example.thirdQuestion {
                                 self.examples.append(q)
                             }
-                            
-                            if let q = i.firstQuestion {
+                            if let q = example.fourthQuestion {
                                 self.examples.append(q)
                             }
                         }
@@ -153,20 +132,34 @@ class VoteViewController: UIViewController {
     
     func initCalendarFunction() {
         calendarViewController = (self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as! CalendarViewController)
+        
+        selectedDate = todayDate
     }
     
     func initViewFunction() {
         nowstate = Time.sharedInstance.getNowStateText()
         if nowstate == "투표중" {
-            voteSendButton.setTitle("투표중intext", for: .normal)
-            voteSendButton.isHidden = false //투표전
+            voteSendButton.setTitle("투표하기", for: .normal)
             voteEntryWinnerView.isHidden = true
-            voteCollectionView.allowsSelection = true
-            //투표전
-            nowStateLabel.isHidden = true
-            //투표후
-            // nowStateLabel.isHidden = false
-            //nowStateLabel.text = "오늘의 투표에 이미 참여하셨습니다"
+            
+            if uiRealm.objects(MyVote).count != 0 { //첫투표 x
+                if uiRealm.objects(MyVote).last!.myVoteDate != todayDate! {
+                    //투표전
+                    voteSendButton.isHidden = false
+                    nowStateLabel.isHidden = true
+                    voteCollectionView.allowsSelection = true
+                } else {
+                    //투표후
+                    voteSendButton.isHidden = true
+                    nowStateLabel.isHidden = false
+                    nowStateLabel.text = "오늘의 투표에 이미 참여하셨습니다"
+                    voteCollectionView.allowsSelection = false
+                }
+            } else { //첫투표
+                voteSendButton.isHidden = false
+                nowStateLabel.isHidden = true
+                voteCollectionView.allowsSelection = true
+            }
         } else if nowstate == "투표대기중" {
             voteSendButton.setTitle(nowstate, for: .normal)
             voteSendButton.isHidden = true
@@ -180,7 +173,6 @@ class VoteViewController: UIViewController {
             voteCollectionView.allowsSelection = false
             nowStateLabel.isHidden = false
             nowStateLabel.text = "투표결과 집계중입니다"
-            
         } else if nowstate == "당첨자발표중" {
             voteSendButton.isHidden = true
             voteEntryWinnerView.isHidden = false
@@ -189,43 +181,11 @@ class VoteViewController: UIViewController {
         }
     }
     
-    //realm function
-//    func setupRealm() {
-//        // Log in existing user with username and password
-//        let username = "test"  // <--- Update this
-//        let password = "test"  // <--- Update this
-//        
-//        SyncUser.logIn(with: .usernamePassword(username: username, password: password, register: false), server: URL(string: "http://127.0.0.1:9080")!) { user, error in
-//            guard let user = user else {
-//                fatalError(String(describing: error))
-//            }
-//            
-//            DispatchQueue.main.async {
-//                // Open Realm
-//                let configuration = Realm.Configuration(
-//                    syncConfiguration: SyncConfiguration(user: user, realmURL: URL(string: "realm://127.0.0.1:9080/~/realmtasks")!)
-//                )
-//                self.realm = try! Realm(configuration: configuration)
-//                
-//                // Show initial tasks
-//                func updateVote() {
-//                    if self.items.realm == nil, let list = self.realm.objects(TaskList.self).first {
-//                        self.items = list.items
-//                    }
-//                    self.tableView.reloadData()
-//                }
-//                updateList()
-//                
-//                // Notify us when Realm changes
-//                self.notificationToken = self.realm.addNotificationBlock { _ in
-//                    updateList()
-//                }
-//            }
-//        }
-//    }
-    
-    deinit {
-        notificationToken.stop()
+    func initAnounceResultUIFunction() {
+        voteSendButton.isHidden = true
+        voteEntryWinnerView.isHidden = false
+        voteCollectionView.allowsSelection = false
+        nowStateLabel.isHidden = true
     }
 }
 
@@ -240,14 +200,16 @@ extension VoteViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = voteCollectionView.dequeueReusableCell(withReuseIdentifier: "voteCollectionViewCell", for: indexPath) as! VoteCollectionViewCell
         cell.questionLabel.text = examples[indexPath.row]
-//        cell.voteResultView.isHidden = true
-
-        if nowstate == "당첨자발표중" {
+        
+        if nowstate == "당첨자발표중" || dateFormatter.date(from: selectedDate) != dateFormatter.date(from: todayDate) {
+            print("당첨자발표중 || \(dateFormatter.date(from: selectedDate)) != \(dateFormatter.date(from: todayDate))")
             cell.voteResultView.isHidden = false
             cell.chargeImageView.frame = CGRect(origin: cell.bounds.origin , size: CGSize(width: cell.frame.width * 0.5, height: cell.frame.height)) //CGSize(width: cell.frame.width * 0.5, height: cell.frame.height)
+            initAnounceResultUIFunction()
         } else {
             cell.voteResultView.isHidden = true
             cell.chargeImageView.frame = CGRect(origin: cell.bounds.origin , size: CGSize(width: cell.frame.width * 0, height: cell.frame.height))
+            initViewFunction()
         }
 
         
@@ -284,8 +246,9 @@ extension VoteViewController: UICollectionViewDelegate {
 
 extension VoteViewController: CalendarViewControllerDelegate {
     func dateSelectDone(date: String) {
-        print("Vote date: \(date)")
+        selectedDate = date
         calendarOpenButton.setTitle(date, for: .normal)
+        voteCollectionView.reloadData()
 }
 //    public func dateBeforeDate(_ date: Foundation.Date) -> Foundation.Date {
 //        let calendar = calendarViewController?.calendarView.delegate?.calendar?() ?? Calendar.current

@@ -716,7 +716,7 @@
         <scene sceneID="ZTX-Q8-JSf">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="20i-uM-UaT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="투표" image="vote_choose_btn_x2" id="j84-PX-d61"/>
+                    <tabBarItem key="tabBarItem" title="투표" image="vote_not_choose_btn_x2" id="j84-PX-d61"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kss-4z-Sb1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -782,6 +782,6 @@
         <image name="more_choose_btn_x2" width="25" height="25"/>
         <image name="participants_icon" width="25" height="16"/>
         <image name="prize_choose_btn_x2" width="25" height="25"/>
-        <image name="vote_choose_btn_x2" width="25" height="25"/>
+        <image name="vote_not_choose_btn_x2" width="25" height="25"/>
     </resources>
 </document>
