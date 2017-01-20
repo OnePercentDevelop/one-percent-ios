@@ -6,6 +6,8 @@
 //  Copyright © 2016년 김혜원. All rights reserved.
 //
 
+// TODO: 필요없는 코드 삭제
+
 import UIKit
 import CVCalendar
 
@@ -16,10 +18,9 @@ class CalendarViewController: UIViewController {
     @IBAction func selectDoneButton(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
         _ = delegate?.dateSelectDone(date: selectedDate!)
-//        print("date: \(selectedDate)")
-//        print("date: \(de)")
-        // TODO: segue 통해서 정한 날짜 이전 화면으로 데이터 전송
+        print("date: \(selectedDate)")
     }
+    
     @IBOutlet weak var monthLabel: UILabel!
 
     let dateFormatter = DateFormatter()
@@ -35,6 +36,7 @@ class CalendarViewController: UIViewController {
     // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
+        // TODO: selectedDay init
         
         dateFormatter.dateFormat = "yyyy년MM월dd일"
         todayDate = dateFormatter.string(from: Date())
@@ -48,8 +50,38 @@ class CalendarViewController: UIViewController {
         
         // Calendar delegate [Required]
         self.calendarView.calendarDelegate = self
-        // Do any additional setup after loading the view.
         
+        disablePreviousDays()
+        disableAfterDays()
+
+    }
+    
+    func disablePreviousDays() {
+        dateFormatter.dateFormat = "yyyy년MM월dd일"
+        let appStartDate = dateFormatter.date(from: "2017년1월17일")
+        
+        let calendar = Calendar.current
+        
+        for weekV in calendarView.contentController.presentedMonthView.weekViews {
+            for dayView in weekV.dayViews {
+                if calendar.compare(dayView.date.convertedDate(calendar: calendar)!, to: appStartDate!, toGranularity: .day) == .orderedAscending {
+                    dayView.isUserInteractionEnabled = false
+                    dayView.dayLabel.textColor = calendarView.appearance.dayLabelWeekdayOutTextColor
+                }
+            }
+        }
+    }
+    
+    func disableAfterDays() {
+        let calendar = Calendar.current
+        for weekV in calendarView.contentController.presentedMonthView.weekViews {
+            for dayView in weekV.dayViews {
+                if calendar.compare(dayView.date.convertedDate(calendar: calendar)!, to: Date(), toGranularity: .day) == .orderedDescending {
+                    dayView.isUserInteractionEnabled = false
+                    dayView.dayLabel.textColor = calendarView.appearance.dayLabelWeekdayOutTextColor
+                }
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -64,18 +96,6 @@ class CalendarViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 // MARK: - CVCalendarViewDelegate & CVCalendarMenuViewDelegate
@@ -98,6 +118,28 @@ extension CalendarViewController: CVCalendarViewDelegate, CVCalendarMenuViewDele
     func didSelectDayView(_ dayView: CVCalendarDayView, animationDidFinish: Bool) {
         selectedDay = dayView
         print("didSelectDayView")
+    }
+    
+    func shouldSelectRange() -> Bool {
+        return false
+    }
+    //줄사이 라인
+    func topMarker(shouldDisplayOnDayView dayView: CVCalendarDayView) -> Bool {
+        return true
+    }
+    
+    //오늘날짜에 동그라미쳐짐
+    func preliminaryView(viewOnDayView dayView: DayView) -> UIView {
+        let circleView = CVAuxiliaryView(dayView: dayView, rect: dayView.frame, shape: CVShape.circle)
+        circleView.fillColor = .colorFromCode(0xCCCCCC)
+        return circleView
+    }
+    
+    func preliminaryView(shouldDisplayOnDayView dayView: DayView) -> Bool {
+        if (dayView.isCurrentDay) {
+            return true
+        }
+        return false
     }
     
     func presentedDateUpdated(_ date: CVDate) {
@@ -137,7 +179,14 @@ extension CalendarViewController: CVCalendarViewDelegate, CVCalendarMenuViewDele
             self.view.insertSubview(updatedMonthLabel, aboveSubview: self.monthLabel)
         }
         selectedDate = date.commonDescriptionYYmmdd
+        disablePreviousDays()
+        disableAfterDays()
+        print("presentedDateUpdatedCalled")
         print("selectedDay >> " + "\(date.commonDescriptionYYmmdd)" + ">>" + "\(selectedDate)")
+    }
+    
+    func shouldAutoSelectDayOnMonthChange() -> Bool {
+        return false
     }
 }
 
@@ -169,4 +218,3 @@ extension CalendarViewController {
 protocol CalendarViewControllerDelegate {
     func dateSelectDone(date: String)
 }
-
