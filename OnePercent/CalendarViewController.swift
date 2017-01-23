@@ -12,13 +12,20 @@ import UIKit
 import CVCalendar
 
 class CalendarViewController: UIViewController {
+    // TODO: Seugue로보낸 selectedDate 색칠 -> presentedDateUpdated()
     
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calendarView: CVCalendarView!
     @IBAction func selectDoneButton(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
+        
+        if let day = selectedDay {
+            selectedDate = day.date.commonDescriptionYYmmdd
+        }
+       
         _ = delegate?.dateSelectDone(date: selectedDate!)
         print("date: \(selectedDate)")
+        
     }
     
     @IBOutlet weak var monthLabel: UILabel!
@@ -36,11 +43,9 @@ class CalendarViewController: UIViewController {
     // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
-        // TODO: selectedDay init
         
         dateFormatter.dateFormat = "yyyy년MM월dd일"
         todayDate = dateFormatter.string(from: Date())
-        
         dateFormatter.dateFormat = "yyyy년MM월"
         monthLabel.text = dateFormatter.string(from: Date())
         
@@ -56,9 +61,23 @@ class CalendarViewController: UIViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        print("selcetedApear>>\(selectedDate)")
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    
+    
     func disablePreviousDays() {
         dateFormatter.dateFormat = "yyyy년MM월dd일"
-        let appStartDate = dateFormatter.date(from: "2017년1월17일")
+        // TODO: appStartDate 한번만 선언할수있게
+        let appStartDate = dateFormatter.date(from: "2016년12월17일")
         
         let calendar = Calendar.current
         
@@ -117,7 +136,6 @@ extension CalendarViewController: CVCalendarViewDelegate, CVCalendarMenuViewDele
     
     func didSelectDayView(_ dayView: CVCalendarDayView, animationDidFinish: Bool) {
         selectedDay = dayView
-        print("didSelectDayView")
     }
     
     func shouldSelectRange() -> Bool {
@@ -178,11 +196,9 @@ extension CalendarViewController: CVCalendarViewDelegate, CVCalendarMenuViewDele
             
             self.view.insertSubview(updatedMonthLabel, aboveSubview: self.monthLabel)
         }
-        selectedDate = date.commonDescriptionYYmmdd
+
         disablePreviousDays()
         disableAfterDays()
-        print("presentedDateUpdatedCalled")
-        print("selectedDay >> " + "\(date.commonDescriptionYYmmdd)" + ">>" + "\(selectedDate)")
     }
     
     func shouldAutoSelectDayOnMonthChange() -> Bool {

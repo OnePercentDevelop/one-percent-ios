@@ -238,7 +238,8 @@
                                             <action selector="moveToTomorrow:" destination="Nut-SB-GTa" eventType="touchUpInside" id="2cr-1o-RLU"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qba-Wx-Weh">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qba-Wx-Weh">
+                                        <frame key="frameInset" minX="40" minY="5" width="295" height="29"/>
                                         <state key="normal" title="Button">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -449,6 +450,8 @@
                     <navigationItem key="navigationItem" title="투표" id="S7C-55-3tW"/>
                     <connections>
                         <outlet property="calendarOpenButton" destination="qba-Wx-Weh" id="5p2-k9-Zst"/>
+                        <outlet property="moveToTomorrow" destination="mac-gE-7ts" id="tKc-OL-lkb"/>
+                        <outlet property="moveToYesterDay" destination="UPv-Cy-snQ" id="DuH-8m-MYm"/>
                         <outlet property="nowStateLabel" destination="T97-sU-oiB" id="o0P-yU-Lpw"/>
                         <outlet property="questionLabel" destination="K5P-TQ-KqN" id="3dL-tV-7zL"/>
                         <outlet property="voteCollectionView" destination="Sh0-s3-RlI" id="Mkp-Z8-Bc9"/>
@@ -463,7 +466,7 @@
         <!--Calendar Appearance Delegate-->
         <scene sceneID="keX-Ic-2m9">
             <objects>
-                <viewController storyboardIdentifier="CalendarViewController" id="UAi-DL-jjZ" customClass="CalendarViewController" customModule="OnePercent" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CalendarViewController" modalPresentationStyle="overCurrentContext" id="UAi-DL-jjZ" customClass="CalendarViewController" customModule="OnePercent" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0Dy-xS-yQr"/>
                         <viewControllerLayoutGuide type="bottom" id="7TT-Ed-IHd"/>

@@ -13,7 +13,6 @@ import CVCalendar
 import RealmSwift
 
 class VoteViewController: UIViewController {
-
     // MARK: - calendar property
     var calendarViewController: CalendarViewController?
     
@@ -26,10 +25,44 @@ class VoteViewController: UIViewController {
     @IBOutlet weak var nowStateLabel: UILabel!
     @IBOutlet weak var voteSendButton: OnePercentButton!
     @IBAction func moveToYesterDay(_ sender: AnyObject) {
-        
+        let dateSelectedDate = dateFormatter.date(from: selectedDate)
+        let tomorrow = Calendar.current.date(byAdding: .day, value: -1, to: dateSelectedDate!)
+        let yesterdayString = dateFormatter.string(from: tomorrow!)
+
+        reloadOpenCalendarView(selectedDate: yesterdayString)
     }
+    @IBOutlet weak var moveToYesterDay: UIButton!
+    @IBOutlet weak var moveToTomorrow: UIButton!
 
     @IBAction func moveToTomorrow(_ sender: AnyObject) {
+        let dateSelectedDate = dateFormatter.date(from: selectedDate)
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: dateSelectedDate!)
+        let tomorrowString = dateFormatter.string(from: tomorrow!)
+
+        reloadOpenCalendarView(selectedDate: tomorrowString)
+    }
+    
+    func reloadOpenCalendarView(selectedDate: String) {
+        self.selectedDate = selectedDate
+        calendarOpenButton.setTitle(selectedDate, for: .normal)
+        let appStartDate = dateFormatter.date(from: "2016년12월17일")
+        let dateSelectedDate = dateFormatter.date(from: selectedDate)
+
+
+        if dateSelectedDate?.compare(appStartDate!) == ComparisonResult.orderedSame {
+            moveToYesterDay.isHidden = true
+        } else {
+            moveToYesterDay.isHidden = false
+        }
+        
+        // TODO: 날짜비교로 수정하기
+        if selectedDate == todayDate {
+            moveToTomorrow.isHidden = true
+        } else {
+            moveToTomorrow.isHidden = false
+        }
+        
+        
     }
     
     var selectedItem : Int? = nil
@@ -42,6 +75,7 @@ class VoteViewController: UIViewController {
     // MARK: - IBAction
     @IBAction func calendarOpenButton(_ sender: AnyObject) {
         calendarViewController?.delegate = self
+        calendarViewController?.selectedDate = selectedDate
         calendarViewController?.modalPresentationStyle = .overCurrentContext
         present(calendarViewController!, animated: true, completion: nil)
     }
@@ -85,10 +119,15 @@ class VoteViewController: UIViewController {
         
         dateFormatter.dateFormat = "yyyy년MM월dd일"
         todayDate = dateFormatter.string(from: Date())
-        calendarOpenButton.setTitle("\(todayDate!)", for: .normal)
 
+        
         initCalendarFunction()
-        initViewFunction()
+        
+        //func call
+        reloadOpenCalendarView(selectedDate: todayDate)
+
+        
+        initVoteViewFunction()
         
     }
 
@@ -97,6 +136,12 @@ class VoteViewController: UIViewController {
         
         voteCollectionView.allowsMultipleSelection = false
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        print("Votedisappear>>")
+    }
+    
     
     // MARK: - init Functions
     func initAlamofireFunction() {
@@ -136,7 +181,7 @@ class VoteViewController: UIViewController {
         selectedDate = todayDate
     }
     
-    func initViewFunction() {
+    func initVoteViewFunction() {
         nowstate = Time.sharedInstance.getNowStateText()
         if nowstate == "투표중" {
             voteSendButton.setTitle("투표하기", for: .normal)
@@ -209,7 +254,7 @@ extension VoteViewController: UICollectionViewDataSource {
         } else {
             cell.voteResultView.isHidden = true
             cell.chargeImageView.frame = CGRect(origin: cell.bounds.origin , size: CGSize(width: cell.frame.width * 0, height: cell.frame.height))
-            initViewFunction()
+            initVoteViewFunction()
         }
 
         
@@ -246,17 +291,7 @@ extension VoteViewController: UICollectionViewDelegate {
 
 extension VoteViewController: CalendarViewControllerDelegate {
     func dateSelectDone(date: String) {
-        selectedDate = date
-        calendarOpenButton.setTitle(date, for: .normal)
+        reloadOpenCalendarView(selectedDate: date)
         voteCollectionView.reloadData()
-}
-//    public func dateBeforeDate(_ date: Foundation.Date) -> Foundation.Date {
-//        let calendar = calendarViewController?.calendarView.delegate?.calendar?() ?? Calendar.current
-//        var components = Manager.componentsForDate(date, calendar: calendar)
-//        
-//        components.month! -= 1
-//        let dateBefore = calendar.date(from: components)!
-//        
-//        return dateBefore
-//    }
+    }
 }
