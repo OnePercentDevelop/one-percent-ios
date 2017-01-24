@@ -19,14 +19,12 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var logInButton: UIButton!
     
     let disposeBag = DisposeBag()
-
     
     // MARK: - IBAction
     @IBAction func backButton(_ sender: AnyObject) {
         self.dismiss(animated: true)
     }
-    
-    
+
     // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,9 +80,11 @@ class LoginViewController: UIViewController {
             "user_id" : self.idTextField.text!,
             "user_password" : self.passwordTextField.text!,
         ]
+        
         for i in parameters {
             print("parameters: \(i.value)")
         }
+        
         Alamofire.request("http://onepercentserver.azurewebsites.net/OnePercentServer/login.do?user_id=\(self.idTextField.text!)&user_password=\(self.passwordTextField.text!)" )
             .responseObject { (response: DataResponse<LoginResultResponse>) in
                 if response.result.isSuccess {
@@ -95,6 +95,8 @@ class LoginViewController: UIViewController {
                             Defaults[.id] = self.idTextField.text!
                             self.parent?.dismiss(animated: true)
                             self.dismiss(animated: true)
+                            
+                            // TODO: 내가투표한결과 가져오기
                         } else {
                             let alertController = UIAlertController(title: "", message: "아이디혹은 비밀번호가 잘못되었습니다.", preferredStyle: UIAlertControllerStyle.alert)
                             alertController.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.default, handler: nil))
@@ -103,6 +105,21 @@ class LoginViewController: UIViewController {
                     }
                 }
 
+        }
+    }
+    
+    func loadMyVote() {
+        Alamofire.request("http://onepercentserver.azurewebsites.net/OnePercentServer/voteResult.do?user_id=\(Defaults[.id])")
+            .responseObject { (response: DataResponse<MyVoteResponse>) in
+                if response.result.isSuccess {
+                    if let userVoteList = response.result.value?.uservoteList {
+                        for i in userVoteList {
+                            let newVote = MyVote()
+                            newVote.myVoteDate = i.myVoteDate
+                            newVote.selectedNumber = i.selectedNumber
+                        }
+                    }
+                }
         }
     }
 

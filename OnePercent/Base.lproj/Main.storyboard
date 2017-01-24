@@ -339,6 +339,10 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="guQ-xh-eCZ">
+                                                    <frame key="frameInset" minX="4" minY="12" width="18" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -352,7 +356,8 @@
                                             <constraint firstItem="KWO-nW-3MD" firstAttribute="centerY" secondItem="dQn-yj-vD0" secondAttribute="centerY" id="bbK-Eq-Hxv"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="chargeImageView" destination="cYm-qi-LXk" id="e1I-4K-v9h"/>
+                                            <outlet property="chargeImageView" destination="cYm-qi-LXk" id="F4u-cf-oNm"/>
+                                            <outlet property="mySelectPresentImageView" destination="guQ-xh-eCZ" id="Lg8-De-YNz"/>
                                             <outlet property="questionLabel" destination="KWO-nW-3MD" id="JbI-kn-sLT"/>
                                             <outlet property="voteResultView" destination="Ewd-SF-xRj" id="deI-KH-uMA"/>
                                         </connections>
@@ -778,6 +783,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="check" width="128" height="128"/>
         <image name="home_choose_btn_x2" width="25" height="25"/>
         <image name="home_circle" width="805" height="796"/>
         <image name="icon_person" width="16" height="16"/>

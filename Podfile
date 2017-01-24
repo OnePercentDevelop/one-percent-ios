@@ -15,7 +15,8 @@ target 'OnePercent' do
   pod 'SwiftyUserDefaults'
   pod ‘RealmSwift’
   pod 'CVCalendar', '~> 1.4.1'
-
+  pod 'ObjectMapper+Realm'
+  
   # MARK: - Rx Libs
   pod 'RxSwift',    '~> 3.0'
   pod 'RxCocoa',    '~> 3.0'

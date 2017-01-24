@@ -27,8 +27,10 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
-  - JTAppleCalendar (6.1.1)
   - ObjectMapper (2.2.2)
+  - ObjectMapper+Realm (0.2):
+    - ObjectMapper
+    - RealmSwift
   - Realm (2.2.0):
     - Realm/Headers (= 2.2.0)
   - Realm/Headers (2.2.0)
@@ -47,7 +49,7 @@ DEPENDENCIES:
   - AsyncSwift
   - CVCalendar (~> 1.4.1)
   - Firebase/Core
-  - JTAppleCalendar (~> 6.0)
+  - ObjectMapper+Realm
   - RealmSwift
   - RxCocoa (~> 3.0)
   - RxSwift (~> 3.0)
@@ -67,8 +69,8 @@ SPEC CHECKSUMS:
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  JTAppleCalendar: fc53eb29ec81f8a90969e2d214b3aa610ab4e5b3
   ObjectMapper: 9e385c2295bcc4e16eabbcfc85db801442bba545
+  ObjectMapper+Realm: 8b45dbfa1be145e311a6f93a306c183d630b40a9
   Realm: d95b8fb34c83f1e764b66d319277a62c2b6e4bf5
   RealmSwift: a4fa52d06e946a32ec746b3388374f742e6b8731
   RxCocoa: 50d7564866da9299161e86a263ce12a0873904d8
@@ -76,6 +78,6 @@ SPEC CHECKSUMS:
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
   SwiftyUserDefaults: 0f1d45fc3aafb9064dac661e367f8f83fe21a4b4
 
-PODFILE CHECKSUM: 0a65b3939697241b37169ec9b0eaf3a6fb25c4bc
+PODFILE CHECKSUM: f3a18f07402bbb3006456b2cc59f23cfa9f01fe2
 
 COCOAPODS: 1.1.1

@@ -257,7 +257,25 @@ extension VoteViewController: UICollectionViewDataSource {
             initVoteViewFunction()
         }
 
-        
+        // TODO: 내가 선택한 것 표시
+        let selectedDateVote = uiRealm.objects(MyVote.self).filter("myVoteDate='\(selectedDate)'")
+        let selectedDateVoteNumber = selectedDateVote.first?.selectedNumber
+        if indexPath.row == selectedDateVoteNumber {
+            cell.mySelectPresentImageView.isHidden = false
+        } else {
+            cell.mySelectPresentImageView.isHidden = true
+        }
+        /*
+         
+         var selectedNumber = realm.object(MyVote.self).filter(“myVoteDate=‘\(selctedDate)’”)
+         
+         if indexPath.row == selectdNumber {
+         mySelectPresentLabel.isHidden = false
+         } else {
+         mySelectPresentLabel.isHidden = true
+         }
+         
+         */
         return cell
     }
 }
@@ -292,6 +310,7 @@ extension VoteViewController: UICollectionViewDelegate {
 extension VoteViewController: CalendarViewControllerDelegate {
     func dateSelectDone(date: String) {
         reloadOpenCalendarView(selectedDate: date)
+        
         voteCollectionView.reloadData()
     }
 }
