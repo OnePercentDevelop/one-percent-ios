@@ -24,47 +24,9 @@ class VoteViewController: UIViewController {
     
     @IBOutlet weak var nowStateLabel: UILabel!
     @IBOutlet weak var voteSendButton: OnePercentButton!
-    @IBAction func moveToYesterDay(_ sender: AnyObject) {
-        let dateSelectedDate = dateFormatter.date(from: selectedDate)
-        let tomorrow = Calendar.current.date(byAdding: .day, value: -1, to: dateSelectedDate!)
-        let yesterdayString = dateFormatter.string(from: tomorrow!)
-
-        reloadOpenCalendarView(selectedDate: yesterdayString)
-    }
-    @IBOutlet weak var moveToYesterDay: UIButton!
+        @IBOutlet weak var moveToYesterDay: UIButton!
     @IBOutlet weak var moveToTomorrow: UIButton!
 
-    @IBAction func moveToTomorrow(_ sender: AnyObject) {
-        let dateSelectedDate = dateFormatter.date(from: selectedDate)
-        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: dateSelectedDate!)
-        let tomorrowString = dateFormatter.string(from: tomorrow!)
-
-        reloadOpenCalendarView(selectedDate: tomorrowString)
-    }
-    
-    func reloadOpenCalendarView(selectedDate: String) {
-        self.selectedDate = selectedDate
-        calendarOpenButton.setTitle(selectedDate, for: .normal)
-        let appStartDate = dateFormatter.date(from: "2016년12월17일")
-        let dateSelectedDate = dateFormatter.date(from: selectedDate)
-
-
-        if dateSelectedDate?.compare(appStartDate!) == ComparisonResult.orderedSame {
-            moveToYesterDay.isHidden = true
-        } else {
-            moveToYesterDay.isHidden = false
-        }
-        
-        // TODO: 날짜비교로 수정하기
-        if selectedDate == todayDate {
-            moveToTomorrow.isHidden = true
-        } else {
-            moveToTomorrow.isHidden = false
-        }
-        
-        
-    }
-    
     var selectedItem : Int? = nil
     var examples = [String]()
     let dateFormatter = DateFormatter()
@@ -73,6 +35,23 @@ class VoteViewController: UIViewController {
     var selectedDate: String!
     
     // MARK: - IBAction
+    @IBAction func moveToYesterDay(_ sender: AnyObject) {
+        let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: dateFormatter.date(from: selectedDate)!)
+        let yesterdayString = dateFormatter.string(from: yesterDay!)
+        reloadOpenCalendarView(selectedDate: yesterdayString)
+        initVoteViewFunction()
+        voteCollectionView.reloadData()
+
+    }
+
+    @IBAction func moveToTomorrow(_ sender: AnyObject) {
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: selectedDate)!)
+        let tomorrowString = dateFormatter.string(from: tomorrow!)
+        reloadOpenCalendarView(selectedDate: tomorrowString)
+        initVoteViewFunction()
+        voteCollectionView.reloadData()
+    }
+    
     @IBAction func calendarOpenButton(_ sender: AnyObject) {
         calendarViewController?.delegate = self
         calendarViewController?.selectedDate = selectedDate
@@ -104,6 +83,12 @@ class VoteViewController: UIViewController {
                 uiRealm.add(newVote)
             }
             
+            //확인
+            initVoteViewFunction()
+            voteCollectionView.reloadData()
+
+            
+            
         } else {
             let alertController = UIAlertController(title: "", message: "보기를 선택해주세요ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.default, handler: nil))
@@ -115,20 +100,26 @@ class VoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        voteEntryWinnerView.isHidden = true
+//        initAlamofireFunction()
+//        
+//        dateFormatter.dateFormat = "yyyy년MM월dd일"
+//        todayDate = dateFormatter.string(from: Date())
+//
+//        initCalendarFunction()
+//        reloadOpenCalendarView(selectedDate: todayDate)
+//        initVoteViewFunction()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         initAlamofireFunction()
         
         dateFormatter.dateFormat = "yyyy년MM월dd일"
         todayDate = dateFormatter.string(from: Date())
-
         
         initCalendarFunction()
-        
-        //func call
         reloadOpenCalendarView(selectedDate: todayDate)
-
-        
         initVoteViewFunction()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -139,7 +130,6 @@ class VoteViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        print("Votedisappear>>")
     }
     
     
@@ -177,60 +167,52 @@ class VoteViewController: UIViewController {
     
     func initCalendarFunction() {
         calendarViewController = (self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as! CalendarViewController)
-        
         selectedDate = todayDate
     }
     
     func initVoteViewFunction() {
         nowstate = Time.sharedInstance.getNowStateText()
-        if nowstate == "투표중" {
+        
+        if nowstate == "당첨자발표중" || dateFormatter.date(from: selectedDate) != dateFormatter.date(from: todayDate) {
+            initVoteViewWithHiddenProperty(voteSendButton: true, voteEntryWinnerView: false, voteCollectionView: false, nowStateLabel: true, nowStateLabelTxt: "")
+        } else if nowstate == "투표중" {
             voteSendButton.setTitle("투표하기", for: .normal)
-            voteEntryWinnerView.isHidden = true
-            
-            if uiRealm.objects(MyVote).count != 0 { //첫투표 x
-                if uiRealm.objects(MyVote).last!.myVoteDate != todayDate! {
-                    //투표전
-                    voteSendButton.isHidden = false
-                    nowStateLabel.isHidden = true
-                    voteCollectionView.allowsSelection = true
-                } else {
-                    //투표후
-                    voteSendButton.isHidden = true
-                    nowStateLabel.isHidden = false
-                    nowStateLabel.text = "오늘의 투표에 이미 참여하셨습니다"
-                    voteCollectionView.allowsSelection = false
+                if uiRealm.objects(MyVote.self).count == 0 || uiRealm.objects(MyVote.self).last!.myVoteDate != todayDate! { //투표전
+                    initVoteViewWithHiddenProperty(voteSendButton: false, voteEntryWinnerView: true, voteCollectionView: true, nowStateLabel: true, nowStateLabelTxt: "")
+                } else { //투표후
+                    initVoteViewWithHiddenProperty(voteSendButton: true, voteEntryWinnerView: true, voteCollectionView: false, nowStateLabel: false, nowStateLabelTxt: "오늘의 투표에 이미 참여하셨습니다")
                 }
-            } else { //첫투표
-                voteSendButton.isHidden = false
-                nowStateLabel.isHidden = true
-                voteCollectionView.allowsSelection = true
-            }
         } else if nowstate == "투표대기중" {
+            initVoteViewWithHiddenProperty(voteSendButton: true, voteEntryWinnerView: true, voteCollectionView: false, nowStateLabel: false, nowStateLabelTxt: "투표시작을 기다려주세요")
             voteSendButton.setTitle(nowstate, for: .normal)
-            voteSendButton.isHidden = true
-            voteEntryWinnerView.isHidden = true
-            voteCollectionView.allowsSelection = false
-            nowStateLabel.isHidden = false
-            nowStateLabel.text = "투표시작을 기다려주세요"
         } else if nowstate == "결과 집계 중" {
-            voteSendButton.isHidden = true
-            voteEntryWinnerView.isHidden = true
-            voteCollectionView.allowsSelection = false
-            nowStateLabel.isHidden = false
-            nowStateLabel.text = "투표결과 집계중입니다"
-        } else if nowstate == "당첨자발표중" {
-            voteSendButton.isHidden = true
-            voteEntryWinnerView.isHidden = false
-            voteCollectionView.allowsSelection = false
-            nowStateLabel.isHidden = true
+            initVoteViewWithHiddenProperty(voteSendButton: true, voteEntryWinnerView: true, voteCollectionView: false, nowStateLabel: false, nowStateLabelTxt: "집계중입니다")
         }
     }
     
-    func initAnounceResultUIFunction() {
-        voteSendButton.isHidden = true
-        voteEntryWinnerView.isHidden = false
-        voteCollectionView.allowsSelection = false
-        nowStateLabel.isHidden = true
+    func initVoteViewWithHiddenProperty(voteSendButton: Bool, voteEntryWinnerView: Bool, voteCollectionView: Bool, nowStateLabel: Bool,nowStateLabelTxt: String) {
+        self.voteSendButton.isHidden = voteSendButton
+        self.voteEntryWinnerView.isHidden = voteEntryWinnerView
+        self.voteCollectionView.allowsSelection = voteCollectionView
+        self.nowStateLabel.isHidden = nowStateLabel
+        self.nowStateLabel.text = nowStateLabelTxt
+    }
+
+    func reloadOpenCalendarView(selectedDate: String) {
+        self.selectedDate = selectedDate
+        calendarOpenButton.setTitle(selectedDate, for: .normal)
+        let appStartDate = dateFormatter.date(from: "2016년12월17일")
+        let dateSelectedDate = dateFormatter.date(from: selectedDate)
+        
+        if dateSelectedDate?.compare(appStartDate!) == ComparisonResult.orderedSame {
+            moveToYesterDay.isHidden = true
+        } else {
+            moveToYesterDay.isHidden = false
+        }
+        
+        // TODO: 날짜비교로 수정하기
+        if selectedDate == todayDate { moveToTomorrow.isHidden = true }
+        else { moveToTomorrow.isHidden = false }
     }
 }
 
@@ -247,10 +229,10 @@ extension VoteViewController: UICollectionViewDataSource {
         cell.questionLabel.text = examples[indexPath.row]
         
         if nowstate == "당첨자발표중" || dateFormatter.date(from: selectedDate) != dateFormatter.date(from: todayDate) {
-            print("당첨자발표중 || \(dateFormatter.date(from: selectedDate)) != \(dateFormatter.date(from: todayDate))")
             cell.voteResultView.isHidden = false
-            cell.chargeImageView.frame = CGRect(origin: cell.bounds.origin , size: CGSize(width: cell.frame.width * 0.5, height: cell.frame.height)) //CGSize(width: cell.frame.width * 0.5, height: cell.frame.height)
-            initAnounceResultUIFunction()
+            cell.chargeImageView.frame = CGRect(origin: cell.bounds.origin , size: CGSize(width: cell.frame.width * 0.5, height: cell.frame.height))
+            
+            initVoteViewWithHiddenProperty(voteSendButton: true, voteEntryWinnerView: false, voteCollectionView: false, nowStateLabel: true, nowStateLabelTxt: "")
         } else {
             cell.voteResultView.isHidden = true
             cell.chargeImageView.frame = CGRect(origin: cell.bounds.origin , size: CGSize(width: cell.frame.width * 0, height: cell.frame.height))
@@ -260,22 +242,14 @@ extension VoteViewController: UICollectionViewDataSource {
         // TODO: 내가 선택한 것 표시
         let selectedDateVote = uiRealm.objects(MyVote.self).filter("myVoteDate='\(selectedDate)'")
         let selectedDateVoteNumber = selectedDateVote.first?.selectedNumber
+        print("indexPath.row>>\(indexPath.row)>>selectedNumber>>\(selectedDateVoteNumber)>>realm>>\(selectedDateVote.count)")
         if indexPath.row == selectedDateVoteNumber {
             cell.mySelectPresentImageView.isHidden = false
+            
         } else {
             cell.mySelectPresentImageView.isHidden = true
         }
-        /*
-         
-         var selectedNumber = realm.object(MyVote.self).filter(“myVoteDate=‘\(selctedDate)’”)
-         
-         if indexPath.row == selectdNumber {
-         mySelectPresentLabel.isHidden = false
-         } else {
-         mySelectPresentLabel.isHidden = true
-         }
-         
-         */
+
         return cell
     }
 }
