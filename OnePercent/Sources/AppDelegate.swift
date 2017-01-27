@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 //import Firebase
+import Alamofire
 
 let uiRealm = try! Realm()
 
@@ -24,6 +25,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 //        time?.startTimer()
         Time.sharedInstance.startTimer()
+        print("uuid>>\(UIDevice.current.identifierForVendor!.uuidString)")
+        print("Realm>>\(Realm.Configuration.defaultConfiguration.fileURL!)")
+        print("uiRealm>>\(uiRealm.configuration.fileURL)")
+
+        var url = ""
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        
+        if let lastDownloadedVoteResultDate = uiRealm.objects(Vote.self).last?.voteDate {
+            print("lastDownloadedVoteResultDate>>\(lastDownloadedVoteResultDate)")
+            if lastDownloadedVoteResultDate != dateFormatter.string(from: Date()) {
+                let oneDayAfterLastDownloadedDate = Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: lastDownloadedVoteResultDate)!)
+                url = "http://onepercentserver.azurewebsites.net/OnePercentServer/voteResultSince.do?vote_date=\(dateFormatter.string(from: oneDayAfterLastDownloadedDate!))"
+            }
+        } else { //처음 앱 깔때
+            url = "http://onepercentserver.azurewebsites.net/OnePercentServer/voteResult.do"
+        }
+        Alamofire.request(url)
+            .log(level: .verbose)
+            .responseObject { (response: DataResponse<VoteResponse>) in
+                if let voteTotalResult = response.result.value?.voteTotalResult {
+                    for n in voteTotalResult {
+                        let voteResult = Vote()
+                        voteResult.voteDate = n.voteDate
+                        voteResult.question = n.question
+                        voteResult.ex1 = n.ex1
+                        voteResult.ex2 = n.ex2
+                        voteResult.ex3 = n.ex3
+                        voteResult.ex4 = n.ex4
+                        voteResult.count1 = n.count1
+                        voteResult.count2 = n.count2
+                        voteResult.count3 = n.count3
+                        voteResult.count4 = n.count4
+                        voteResult.entryAmount = n.entryAmount
+                        voteResult.winnerAmount = n.winnerAmount
+                        try! uiRealm.write {
+                            uiRealm.add(voteResult)
+                        }
+                    }
+                }
+        }
         return true
     }
 
