@@ -18,24 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-//    var time: Time?
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         //FIRApp.configure()
         // Override point for customization after application launch.
-//        time?.startTimer()
-        Time.sharedInstance.startTimer()
-        print("uuid>>\(UIDevice.current.identifierForVendor!.uuidString)")
-        print("Realm>>\(Realm.Configuration.defaultConfiguration.fileURL!)")
-        print("uiRealm>>\(uiRealm.configuration.fileURL)")
 
+        Time.sharedInstance.startTimer()
         var url = ""
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         
         if let lastDownloadedVoteResultDate = uiRealm.objects(Vote.self).last?.voteDate {
-            print("lastDownloadedVoteResultDate>>\(lastDownloadedVoteResultDate)")
             if lastDownloadedVoteResultDate != dateFormatter.string(from: Date()) {
                 let oneDayAfterLastDownloadedDate = Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: lastDownloadedVoteResultDate)!)
                 url = "http://onepercentserver.azurewebsites.net/OnePercentServer/voteResultSince.do?vote_date=\(dateFormatter.string(from: oneDayAfterLastDownloadedDate!))"
@@ -89,7 +81,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-//        time?.stopTimer()
         Time.sharedInstance.stopTimer()
 
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
