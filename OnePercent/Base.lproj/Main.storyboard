@@ -357,6 +357,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="chargeImageView" destination="cYm-qi-LXk" id="F4u-cf-oNm"/>
+                                            <outlet property="countLabel" destination="AAX-hk-3sp" id="thF-Am-XyU"/>
                                             <outlet property="mySelectPresentImageView" destination="guQ-xh-eCZ" id="Lg8-De-YNz"/>
                                             <outlet property="questionLabel" destination="KWO-nW-3MD" id="JbI-kn-sLT"/>
                                             <outlet property="voteResultView" destination="Ewd-SF-xRj" id="deI-KH-uMA"/>
@@ -455,6 +456,7 @@
                     <navigationItem key="navigationItem" title="투표" id="S7C-55-3tW"/>
                     <connections>
                         <outlet property="calendarOpenButton" destination="qba-Wx-Weh" id="5p2-k9-Zst"/>
+                        <outlet property="entryNumberLabel" destination="90n-gg-AYv" id="0Ju-e1-Svn"/>
                         <outlet property="moveToTomorrow" destination="mac-gE-7ts" id="tKc-OL-lkb"/>
                         <outlet property="moveToYesterDay" destination="UPv-Cy-snQ" id="DuH-8m-MYm"/>
                         <outlet property="nowStateLabel" destination="T97-sU-oiB" id="o0P-yU-Lpw"/>
@@ -462,6 +464,7 @@
                         <outlet property="voteCollectionView" destination="Sh0-s3-RlI" id="Mkp-Z8-Bc9"/>
                         <outlet property="voteEntryWinnerView" destination="22V-YL-0BP" id="DKI-Kb-taq"/>
                         <outlet property="voteSendButton" destination="THg-7S-r6w" id="ltl-Fa-Dls"/>
+                        <outlet property="winnerNumberLabel" destination="r7N-Dy-40O" id="2IZ-xm-dT6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xno-jR-mDF" userLabel="First Responder" sceneMemberID="firstResponder"/>

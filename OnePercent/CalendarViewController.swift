@@ -20,7 +20,9 @@ class CalendarViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
         
         if let day = selectedDay {
-            selectedDate = day.date.commonDescriptionYYmmdd
+            //selectedDate = day.date.commonDescriptionYYmmddKorean
+            selectedDate = day.date.commonDescriptionYYMMddDot
+
         }
        
         _ = delegate?.dateSelectDone(date: selectedDate!)
@@ -44,7 +46,7 @@ class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dateFormatter.dateFormat = "yyyy년MM월dd일"
+        dateFormatter.dateFormat = "yyyy.MM.dd"
         todayDate = dateFormatter.string(from: Date())
         dateFormatter.dateFormat = "yyyy년MM월"
         monthLabel.text = dateFormatter.string(from: Date())
@@ -75,9 +77,9 @@ class CalendarViewController: UIViewController {
     
     
     func disablePreviousDays() {
-        dateFormatter.dateFormat = "yyyy년MM월dd일"
+        dateFormatter.dateFormat = "yyyy.MM.dd"
         // TODO: appStartDate 한번만 선언할수있게
-        let appStartDate = dateFormatter.date(from: "2016년12월17일")
+        let appStartDate = dateFormatter.date(from: "2016.12.17")
         
         let calendar = Calendar.current
         

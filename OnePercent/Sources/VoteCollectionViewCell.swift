@@ -16,4 +16,9 @@ class VoteCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var chargeImageView: UIImageView!
     
     @IBOutlet weak var mySelectPresentImageView: UIImageView!
+    
+    
+    @IBOutlet weak var countLabel: UILabel!
+    
+    
 }

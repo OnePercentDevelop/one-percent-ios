@@ -26,13 +26,18 @@ class VoteViewController: UIViewController {
     @IBOutlet weak var voteSendButton: OnePercentButton!
         @IBOutlet weak var moveToYesterDay: UIButton!
     @IBOutlet weak var moveToTomorrow: UIButton!
-
+    @IBOutlet weak var entryNumberLabel: UILabel!
+    @IBOutlet weak var winnerNumberLabel: UILabel!
+    
+    
     var selectedItem : Int? = nil
     var examples = [String]()
+    var counts = [Int]()
     let dateFormatter = DateFormatter()
     var todayDate: String!
     var nowstate: String!
     var selectedDate: String!
+    var entryAmount: Int = 0
     
     // MARK: - IBAction
     @IBAction func moveToYesterDay(_ sender: AnyObject) {
@@ -40,6 +45,7 @@ class VoteViewController: UIViewController {
         let yesterdayString = dateFormatter.string(from: yesterDay!)
         reloadOpenCalendarView(selectedDate: yesterdayString)
         initVoteViewFunction()
+        initData()
         voteCollectionView.reloadData()
 
     }
@@ -49,6 +55,7 @@ class VoteViewController: UIViewController {
         let tomorrowString = dateFormatter.string(from: tomorrow!)
         reloadOpenCalendarView(selectedDate: tomorrowString)
         initVoteViewFunction()
+        initData()
         voteCollectionView.reloadData()
     }
     
@@ -99,27 +106,20 @@ class VoteViewController: UIViewController {
     // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
-//        voteEntryWinnerView.isHidden = true
-//        initAlamofireFunction()
-//        
-//        dateFormatter.dateFormat = "yyyy년MM월dd일"
-//        todayDate = dateFormatter.string(from: Date())
-//
-//        initCalendarFunction()
-//        reloadOpenCalendarView(selectedDate: todayDate)
-//        initVoteViewFunction()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        initAlamofireFunction()
-        
-        dateFormatter.dateFormat = "yyyy년MM월dd일"
+//        initAlamofireFunction()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
         todayDate = dateFormatter.string(from: Date())
         
         initCalendarFunction()
         reloadOpenCalendarView(selectedDate: todayDate)
         initVoteViewFunction()
+        initData()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -165,6 +165,37 @@ class VoteViewController: UIViewController {
         }
     }
     
+    func initData() {
+        // TODO: 날짜 선택
+        print("initData>>\(selectedDate!)>>\(uiRealm.objects(Vote.self).filter("voteDate=='\(selectedDate!)'"))>>\(uiRealm.objects(Vote.self).filter("voteDate='\(selectedDate!)'").first)")
+        print("initData01/19>>\("2017.01.19")>>\(uiRealm.objects(Vote.self).filter("voteDate == '2017.01.19'"))>>\(uiRealm.objects(Vote.self).filter("voteDate == '2017.01.19'").first)")
+
+        print("initData01/19>>\("2017.01.19")>>\(uiRealm.objects(Vote.self).filter("voteDate == %@","2017.01.18"))>>\(uiRealm.objects(Vote.self).filter("voteDate == '2017.01.19'").first)")
+        print("initData>>\(uiRealm.objects(Vote.self))")
+
+
+        if let todayVoteInfo = uiRealm.objects(Vote.self).filter("voteDate='\(selectedDate!)'").first {//("voteDate='2017.01.21'").first {
+
+            self.questionLabel.text = (todayVoteInfo.question)
+            self.examples.insert(todayVoteInfo.ex4, at: 0)
+            self.examples.insert(todayVoteInfo.ex3, at: 0)
+            self.examples.insert(todayVoteInfo.ex2, at: 0)
+            self.examples.insert(todayVoteInfo.ex1, at: 0)
+          
+            self.counts.insert(todayVoteInfo.count4, at: 0)
+            self.counts.insert(todayVoteInfo.count3, at: 0)
+            self.counts.insert(todayVoteInfo.count2, at: 0)
+            self.counts.insert(todayVoteInfo.count1, at: 0)
+
+            self.entryAmount = todayVoteInfo.entryAmount
+            self.entryNumberLabel.text = String(entryAmount)
+
+            self.winnerNumberLabel.text = "오늘의 1% 는" + String(todayVoteInfo.winnerAmount) + "명 입니다"
+        } else {
+            print("todayVoteInfoError>>")
+        }
+    }
+    
     func initCalendarFunction() {
         calendarViewController = (self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as! CalendarViewController)
         selectedDate = todayDate
@@ -201,7 +232,7 @@ class VoteViewController: UIViewController {
     func reloadOpenCalendarView(selectedDate: String) {
         self.selectedDate = selectedDate
         calendarOpenButton.setTitle(selectedDate, for: .normal)
-        let appStartDate = dateFormatter.date(from: "2016년12월17일")
+        let appStartDate = dateFormatter.date(from: "2016.12.17")
         let dateSelectedDate = dateFormatter.date(from: selectedDate)
         
         if dateSelectedDate?.compare(appStartDate!) == ComparisonResult.orderedSame {
@@ -230,7 +261,11 @@ extension VoteViewController: UICollectionViewDataSource {
         
         if nowstate == "당첨자발표중" || dateFormatter.date(from: selectedDate) != dateFormatter.date(from: todayDate) {
             cell.voteResultView.isHidden = false
-            cell.chargeImageView.frame = CGRect(origin: cell.bounds.origin , size: CGSize(width: cell.frame.width * 0.5, height: cell.frame.height))
+            let count = counts[indexPath.row]
+            let rate:CGFloat = CGFloat(count) / CGFloat(entryAmount)
+            print("count>>\(count)>>\(indexPath.row)>>rate>>\(rate)")
+            cell.countLabel.text = String(count)
+            cell.chargeImageView.frame = CGRect(origin: cell.bounds.origin , size: CGSize(width: cell.frame.width * rate, height: cell.frame.height))
             
             initVoteViewWithHiddenProperty(voteSendButton: true, voteEntryWinnerView: false, voteCollectionView: false, nowStateLabel: true, nowStateLabelTxt: "")
         } else {
@@ -284,7 +319,8 @@ extension VoteViewController: UICollectionViewDelegate {
 extension VoteViewController: CalendarViewControllerDelegate {
     func dateSelectDone(date: String) {
         reloadOpenCalendarView(selectedDate: date)
-        
+        initVoteViewFunction()
+        initData()
         voteCollectionView.reloadData()
     }
 }
