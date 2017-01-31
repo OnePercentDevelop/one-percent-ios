@@ -20,19 +20,14 @@ class CalendarViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
         
         if let day = selectedDay {
-            //selectedDate = day.date.commonDescriptionYYmmddKorean
             selectedDate = day.date.commonDescriptionYYMMddDot
-
         }
        
         _ = delegate?.dateSelectDone(date: selectedDate!)
-        print("date: \(selectedDate)")
-        
     }
     
     @IBOutlet weak var monthLabel: UILabel!
 
-    let dateFormatter = DateFormatter()
     var todayDate = String()
     var delegate: CalendarViewControllerDelegate?
     
@@ -46,10 +41,9 @@ class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        todayDate = dateFormatter.string(from: Date())
-        dateFormatter.dateFormat = "yyyy년MM월"
-        monthLabel.text = dateFormatter.string(from: Date())
+        todayDate = Time.sharedInstance.dateFomatter.string(from: Date())
+
+        monthLabel.text = Time.sharedInstance.dateyyyyMM(date: Date())
         
         //calendar
         // Menu delegate [Required]
@@ -65,8 +59,6 @@ class CalendarViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
-        print("selcetedApear>>\(selectedDate)")
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -77,15 +69,13 @@ class CalendarViewController: UIViewController {
     
     
     func disablePreviousDays() {
-        dateFormatter.dateFormat = "yyyy.MM.dd"
         // TODO: appStartDate 한번만 선언할수있게
-        let appStartDate = dateFormatter.date(from: "2016.12.17")
         
         let calendar = Calendar.current
         
         for weekV in calendarView.contentController.presentedMonthView.weekViews {
             for dayView in weekV.dayViews {
-                if calendar.compare(dayView.date.convertedDate(calendar: calendar)!, to: appStartDate!, toGranularity: .day) == .orderedAscending {
+                if calendar.compare(dayView.date.convertedDate(calendar: calendar)!, to: Time.sharedInstance.getAppStartDate(), toGranularity: .day) == .orderedAscending {
                     dayView.isUserInteractionEnabled = false
                     dayView.dayLabel.textColor = calendarView.appearance.dayLabelWeekdayOutTextColor
                 }

@@ -11,55 +11,27 @@ import SwiftyTimer
 import UIKit
 
 class Time {
-    var timer: Timer?
- 
 //    private let voteStartTime = NSCalendar.current.date(bySettingHour: 6, minute: 0, second: 0, of: Date())
 //    private let voteEndTime = NSCalendar.current.date(bySettingHour: 14, minute: 0, second: 0, of: Date())
 //    private let anounceStartTime = NSCalendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: Date())
-
-    private let voteStartTime = NSCalendar.current.date(bySettingHour: 17, minute: 38, second: 0, of: Date())
-    private let voteEndTime = NSCalendar.current.date(bySettingHour: 18, minute: 35, second: 0, of: Date())
-    private let anounceStartTime = NSCalendar.current.date(bySettingHour: 19, minute: 36, second: 0, of: Date())
+    let dateFomatter = DateFormatter()
+    
+    
+    private let voteStartTime = NSCalendar.current.date(bySettingHour: 16, minute: 38, second: 0, of: Date())
+    private let voteEndTime = NSCalendar.current.date(bySettingHour: 16, minute: 39, second: 0, of: Date())
+    private let anounceStartTime = NSCalendar.current.date(bySettingHour: 16, minute: 58, second: 0, of: Date())
     private var  tomorrowVoteStartTime = NSCalendar.current.date(byAdding: .day, value: 1, to: Date())
+    private let appStartDate: Date!
 
-    
-    private var nowStateText: String = ""
-    private var timeBeforeStateText: String = ""
-    private var timeBeforeText: String = ""
-    
-    
     static let sharedInstance: Time = {
         let instance = Time()
         return instance
     }()
     
     init() {
-        tomorrowVoteStartTime = NSCalendar.current.date(bySettingHour: 11, minute: 0, second: 0, of: tomorrowVoteStartTime!)
-    }
-    
-    func dateformat() {
-        let calendar = NSCalendar.current
-        var tomorrowVoteStartTime = calendar.date(byAdding: .day, value: 1, to: Date())
-        tomorrowVoteStartTime = calendar.date(bySettingHour: 11, minute: 0, second: 0, of: tomorrowVoteStartTime!)
-        let now = Date()
-        
-        if now > voteStartTime! && now < voteEndTime! {
-            timeBeforeStateText = "투표종료까지 남은시간"
-            nowStateText = "투표중"
-            timeBeforeText = stringFromTimeInterval(interval: voteEndTime!.timeIntervalSince(Date()))
-        } else if now < voteStartTime! {
-            timeBeforeStateText = "투표시작까지 남은시간"
-            nowStateText = "투표대기중"
-            timeBeforeText = stringFromTimeInterval(interval: voteStartTime!.timeIntervalSince(Date()))
-        } else  if now < anounceStartTime! {
-            timeBeforeStateText = "발표시작까지 남은시간"
-            nowStateText = "결과 집계 중"
-            timeBeforeText = stringFromTimeInterval(interval: anounceStartTime!.timeIntervalSince(Date()))
-        } else {
-            timeBeforeStateText = "내일 투표시작까지 남은시간"
-            nowStateText = "당첨자발표중"
-            timeBeforeText = stringFromTimeInterval(interval: tomorrowVoteStartTime!.timeIntervalSince(Date()))
-        }
+        tomorrowVoteStartTime = NSCalendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: tomorrowVoteStartTime!)
+        dateFomatter.dateFormat = "yyyy.MM.dd"
+        appStartDate = dateFomatter.date(from: "2016.12.17")
     }
     
     public func getVoteStartTime() -> Date {
@@ -77,19 +49,23 @@ class Time {
     public func getTomorrowVoteStartTime() -> Date {
         return tomorrowVoteStartTime!
     }
-
-//    public func getTimeBeforeStateText() -> String {
-//        return timeBeforeStateText
-//    }
-//    
-//    public func getNowStateText() -> String {
-//        return nowStateText
-//    }
-//    
-//    public func getTimeBeforeText() -> String {
-//        return timeBeforeText
-//    }
     
+    public func getAppStartDate() -> Date {
+        return appStartDate
+    }
+
+    public func dateyyyyMM(date: Date) -> String {
+        let format = DateFormatter()
+        format.dateFormat = "yyyy년MM월"
+        return format.string(from: date)
+    }
+
+    public func dateyyyyMMdd(date: Date) -> String {
+        let format = DateFormatter()
+        format.dateFormat = "yyyy년MM월dd일"
+        return format.string(from: date)
+    }
+
     func stringFromTimeInterval(interval:TimeInterval) -> String {
         let ti = Int(interval)
         let seconds = ti % 60

@@ -106,10 +106,7 @@ class ViewController: UIViewController {
     }
     
     func alamofireFunction() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년MM월dd일"
-        let todayDate = dateFormatter.string(from: Date())
-        
+        let todayDate = Time.sharedInstance.dateyyyyMMdd(date: Date())
         let URL = "http://onepercentserver.azurewebsites.net/OnePercentServer/voteNumber.do"
         let parameters: Parameters = ["vote_date": todayDate]
         
@@ -121,7 +118,6 @@ class ViewController: UIViewController {
                 if let voteresult = response.result.value?.voteResult {
                     for n in voteresult {
                         if let number = n.number {
-                            print("ryan : \(number)")
                             self.entryNumberLabel.text = String(number)
                         }
                     }
@@ -135,7 +131,6 @@ class ViewController: UIViewController {
                 if let mainResult = response.result.value?.mainResult {
                     for n in mainResult {
                         if let giftName = n.giftName {
-                            print("ryan : \(giftName)")
                             self.productLabel.text = giftName
                         }
                         //png 처리
