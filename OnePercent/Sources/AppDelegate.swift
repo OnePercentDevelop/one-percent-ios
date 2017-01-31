@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //FIRApp.configure()
         // Override point for customization after application launch.
 
-        Time.sharedInstance.startTimer()
         var url = ""
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
@@ -59,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
         }
+        
         return true
     }
 
@@ -81,7 +81,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        Time.sharedInstance.stopTimer()
 
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }

@@ -16,17 +16,13 @@ class ViewController: UIViewController {
     
     // MARK: - Property
     @IBOutlet weak var timeLabel: UILabel!
-    
     @IBOutlet weak var timeBeforeStateLabel: UILabel!
-    
     @IBOutlet weak var nowStateLabel: UILabel!
     @IBOutlet weak var entryNumberLabel: UILabel!
     @IBOutlet weak var productLabel: UILabel!
     @IBOutlet weak var productImageView: UIImageView!
+    
     var timer: Timer?
-    let voteStartTime = NSCalendar.current.date(bySettingHour: 6, minute: 0, second: 0, of: Date())
-    let voteEndTime = NSCalendar.current.date(bySettingHour: 14, minute: 0, second: 0, of: Date())
-    let anounceStartTime = NSCalendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: Date())
     
     // MARK: - IBAction
     
@@ -74,34 +70,30 @@ class ViewController: UIViewController {
     
     // MARK: - Personal Function
     func dateformat() {
-        let calendar = NSCalendar.current
-        var tomorrowVoteStartTime = calendar.date(byAdding: .day, value: 1, to: Date())
-        tomorrowVoteStartTime = calendar.date(bySettingHour: 11, minute: 0, second: 0, of: tomorrowVoteStartTime!)
         var nowState = ""
         let now = Date()
-
-        if now > voteStartTime! && now < voteEndTime! {
+        
+        if now > Time.sharedInstance.getVoteStartTime() && now < Time.sharedInstance.getVoteEndTime() {
             timeBeforeStateLabel.text = "투표종료까지 남은시간"
             nowState = "투표 중"
-            timeLabel.text = stringFromTimeInterval(interval: voteEndTime!.timeIntervalSince(Date()))
-
-        } else if now < voteStartTime! {
-            timeLabel.text = stringFromTimeInterval(interval: voteStartTime!.timeIntervalSince(Date()))
+            timeLabel.text = stringFromTimeInterval(interval: Time.sharedInstance.getVoteEndTime().timeIntervalSince(now))
+            
+        } else if now < Time.sharedInstance.getVoteStartTime() {
+            timeLabel.text = stringFromTimeInterval(interval: Time.sharedInstance.getVoteStartTime().timeIntervalSince(now))
             timeBeforeStateLabel.text = "투표시작까지 남은시간"
             nowState = "투표 대기 중"
-        } else  if now < anounceStartTime! {
+        } else  if now < Time.sharedInstance.getAnounceStartTime() {
             timeBeforeStateLabel.text = "발표시작까지 남은시간"
             nowState = "결과 집계 중"
-            timeLabel.text = stringFromTimeInterval(interval: anounceStartTime!.timeIntervalSince(Date()))
+            timeLabel.text = stringFromTimeInterval(interval: Time.sharedInstance.getAnounceStartTime().timeIntervalSince(now))
         } else {
             timeBeforeStateLabel.text = "내일 투표시작까지 남은시간"
             nowState = "당첨자발표중"
-            timeLabel.text = stringFromTimeInterval(interval: tomorrowVoteStartTime!.timeIntervalSince(Date()))
+            timeLabel.text = stringFromTimeInterval(interval: Time.sharedInstance.getTomorrowVoteStartTime().timeIntervalSince(now))
         }
         
         nowStateLabel.text = nowState
         // Do any additional setup after loading the view, typically from a nib.
-        
     }
     
     func stringFromTimeInterval(interval:TimeInterval) -> String {
@@ -140,32 +132,15 @@ class ViewController: UIViewController {
             .request("http://onepercentserver.azurewebsites.net/OnePercentServer/main.do", method: .get)
             .log(level: .verbose)
             .responseObject { (response: DataResponse<HomeInformationResponse>) in
-                print(" : \(response.result.isSuccess)")
                 if let mainResult = response.result.value?.mainResult {
                     for n in mainResult {
                         if let giftName = n.giftName {
                             print("ryan : \(giftName)")
                             self.productLabel.text = giftName
                         }
-                        for i in n.example! {
-                            print(i.firstQuestion)
-                            print(i.secondQuestion)
-                            print(i.thirdQuestion)
-                            print(i.fourthQuestion)
-                        }
                         //png 처리
                         if let giftPng = n.giftPng {
                             let url = "http://onepercentserver.azurewebsites.net/OnePercentServer/resources/common/image/" + giftPng
-                            //                            Alamofire.request(url).responseImage { response in
-                            //                                print(response.request)
-                            //                                print(response.response)
-                            //                                debugPrint(response.result)
-                            //
-                            //                                if let image = response.result.value {
-                            //                                    print("image downloaded: \(image)")
-                            //
-                            //                                }
-                            //                            }
                             self.productImageView.af_setImage(withURL: NSURL(string: url) as! URL)
                             
                         }

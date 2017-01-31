@@ -13,48 +13,35 @@ import UIKit
 class Time {
     var timer: Timer?
  
-    private let voteStartTime = NSCalendar.current.date(bySettingHour: 6, minute: 0, second: 0, of: Date())
-    private let voteEndTime = NSCalendar.current.date(bySettingHour: 14, minute: 0, second: 0, of: Date())
-    private let anounceStartTime = NSCalendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: Date())
+//    private let voteStartTime = NSCalendar.current.date(bySettingHour: 6, minute: 0, second: 0, of: Date())
+//    private let voteEndTime = NSCalendar.current.date(bySettingHour: 14, minute: 0, second: 0, of: Date())
+//    private let anounceStartTime = NSCalendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: Date())
 
+    private let voteStartTime = NSCalendar.current.date(bySettingHour: 17, minute: 38, second: 0, of: Date())
+    private let voteEndTime = NSCalendar.current.date(bySettingHour: 18, minute: 35, second: 0, of: Date())
+    private let anounceStartTime = NSCalendar.current.date(bySettingHour: 19, minute: 36, second: 0, of: Date())
+    private var  tomorrowVoteStartTime = NSCalendar.current.date(byAdding: .day, value: 1, to: Date())
+
+    
     private var nowStateText: String = ""
     private var timeBeforeStateText: String = ""
     private var timeBeforeText: String = ""
+    
     
     static let sharedInstance: Time = {
         let instance = Time()
         return instance
     }()
     
-    func startTimer() {
-        if timer != nil {
-            stopTimer()
-        }
-        
-        self.updateTodayLeftTime()
-        timer = Timer.new(every: 0.5.second, updateTodayLeftTime)
-        timer?.start()
+    init() {
+        tomorrowVoteStartTime = NSCalendar.current.date(bySettingHour: 11, minute: 0, second: 0, of: tomorrowVoteStartTime!)
     }
     
-    fileprivate func updateTodayLeftTime() {
-        dateformat()
-    }
-    
-    public func stopTimer() {
-        timer?.invalidate()
-        timer = nil
-    }
-
     func dateformat() {
         let calendar = NSCalendar.current
         var tomorrowVoteStartTime = calendar.date(byAdding: .day, value: 1, to: Date())
         tomorrowVoteStartTime = calendar.date(bySettingHour: 11, minute: 0, second: 0, of: tomorrowVoteStartTime!)
         let now = Date()
-        
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let voteVC = storyboard.instantiateViewController(withIdentifier: "VoteViewController") as! VoteViewController
-        
-//        voteVC.voteSendButton.setTitle("test!", for: .normal)
         
         if now > voteStartTime! && now < voteEndTime! {
             timeBeforeStateText = "투표종료까지 남은시간"
@@ -75,17 +62,33 @@ class Time {
         }
     }
     
-    public func getTimeBeforeStateText() -> String {
-        return timeBeforeStateText
+    public func getVoteStartTime() -> Date {
+        return voteStartTime!
     }
     
-    public func getNowStateText() -> String {
-        return nowStateText
+    public func getVoteEndTime() -> Date {
+        return voteEndTime!
+    }
+
+    public func getAnounceStartTime() -> Date {
+        return anounceStartTime!
     }
     
-    public func getTimeBeforeText() -> String {
-        return timeBeforeText
+    public func getTomorrowVoteStartTime() -> Date {
+        return tomorrowVoteStartTime!
     }
+
+//    public func getTimeBeforeStateText() -> String {
+//        return timeBeforeStateText
+//    }
+//    
+//    public func getNowStateText() -> String {
+//        return nowStateText
+//    }
+//    
+//    public func getTimeBeforeText() -> String {
+//        return timeBeforeText
+//    }
     
     func stringFromTimeInterval(interval:TimeInterval) -> String {
         let ti = Int(interval)
@@ -95,4 +98,6 @@ class Time {
         
         return String(format: "%0.2d:%0.2d:%0.2d",hours,minutes,seconds)
     }
+    
+
 }
