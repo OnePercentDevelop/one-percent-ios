@@ -22,10 +22,10 @@ class HomeInformationResponse: Mappable {
 }
 
 class HomeInformation:Mappable {
-    var winner: String?
-    var question: String?
+//    var winner: String?
+//    var question: String?
     var giftName: String?
-    var example: [Example]?
+//    var example: [Example]?
     var giftPng: String?
     
     required init?(map: Map) {
@@ -33,34 +33,34 @@ class HomeInformation:Mappable {
     }
     
     func mapping(map: Map) {
-        winner <- map["winner"]
-        question <- map["question"]
+//        winner <- map["winner"]
+//        question <- map["question"]
         giftName <- map["gift_name"]
-        example <- map["example"]
+//        example <- map["example"]
         giftPng <- map["gift_png"]
 
     }
 }
 
-class Example: Mappable {
-    /// This function can be used to validate JSON prior to mapping. Return nil to cancel mapping at this point
-    
-    var firstQuestion: String?
-    var secondQuestion: String?
-    var thirdQuestion: String?
-    var fourthQuestion: String?
-
-    required init?(map: Map) {
-        
-    }
-
-    
-    func mapping(map: Map) {
-        firstQuestion <- map["1"]
-        secondQuestion <- map["2"]
-        thirdQuestion <- map["3"]
-        fourthQuestion <- map["4"]
-
-    }
-
-}
+//class Example: Mappable {
+//    /// This function can be used to validate JSON prior to mapping. Return nil to cancel mapping at this point
+//    
+//    var firstQuestion: String?
+//    var secondQuestion: String?
+//    var thirdQuestion: String?
+//    var fourthQuestion: String?
+//
+//    required init?(map: Map) {
+//        
+//    }
+//
+//    
+//    func mapping(map: Map) {
+//        firstQuestion <- map["1"]
+//        secondQuestion <- map["2"]
+//        thirdQuestion <- map["3"]
+//        fourthQuestion <- map["4"]
+//
+//    }
+//
+//}

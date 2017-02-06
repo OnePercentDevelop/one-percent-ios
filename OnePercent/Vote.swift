@@ -68,3 +68,15 @@ class Vote: Object, Mappable {
 //  }
 }
 
+class voteResultSince: Mappable {
+    var voteTotalResult: [Vote]?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        voteTotalResult <- map["voteResultSince"]
+    }
+}
+
