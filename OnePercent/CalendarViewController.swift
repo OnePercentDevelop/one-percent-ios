@@ -55,6 +55,8 @@ class CalendarViewController: UIViewController {
         disablePreviousDays()
         disableAfterDays()
 
+        view.backgroundColor = UIColor.gray.withAlphaComponent(0.7)
+        view.isOpaque = false
     }
     
     override func viewWillAppear(_ animated: Bool) {

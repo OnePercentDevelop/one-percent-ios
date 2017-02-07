@@ -18,8 +18,8 @@ class Time {
     
     
     private let voteStartTime = NSCalendar.current.date(bySettingHour: 16, minute: 38, second: 0, of: Date())
-    private let voteEndTime = NSCalendar.current.date(bySettingHour: 16, minute: 39, second: 0, of: Date())
-    private let anounceStartTime = NSCalendar.current.date(bySettingHour: 16, minute: 58, second: 0, of: Date())
+    private let voteEndTime = NSCalendar.current.date(bySettingHour: 19, minute: 39, second: 0, of: Date())
+    private let anounceStartTime = NSCalendar.current.date(bySettingHour: 19, minute: 58, second: 0, of: Date())
     private var  tomorrowVoteStartTime = NSCalendar.current.date(byAdding: .day, value: 1, to: Date())
     private let appStartDate: Date!
 
@@ -64,6 +64,18 @@ class Time {
         let format = DateFormatter()
         format.dateFormat = "yyyy년MM월dd일"
         return format.string(from: date)
+    }
+    
+    public func stringFromDateDotyyyyMMdd(date: Date) -> String {
+        let format = DateFormatter()
+        format.dateFormat = "yyyy.MM.dd"
+        return format.string(from: date)
+    }
+    
+    public func dateFromStringDotyyyyMMdd(date: String) -> Date {
+        let format = DateFormatter()
+        format.dateFormat = "yyyy.MM.dd"
+        return format.date(from: date)!
     }
 
     func stringFromTimeInterval(interval:TimeInterval) -> String {
