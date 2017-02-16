@@ -22,10 +22,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var productLabel: UILabel!
     @IBOutlet weak var productImageView: UIImageView!
     
+    @IBOutlet weak var informationView: UIView!
     var timer: Timer?
     
     // MARK: - IBAction
     
+    @IBAction func openInformatioinViewButton(_ sender: AnyObject) {
+        informationView.isHidden = false
+    }
+    
+    @IBAction func closeInformatioinViewButton(_ sender: AnyObject) {
+        informationView.isHidden = true
+    }
+   
     // MARK: - FilePrivate Function
     fileprivate func startTimer() {
         if timer != nil {
@@ -61,6 +70,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         startTimer()
+        informationView.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -123,26 +133,25 @@ class ViewController: UIViewController {
                     }
                 }
         }
-        
+
         Alamofire
-            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/main.do", method: .get)
-            .log(level: .verbose)
-            .responseObject { (response: DataResponse<HomeInformationResponse>) in
-                if let mainResult = response.result.value?.mainResult {
-                    for n in mainResult {
-                        if let giftName = n.giftName {
-                            self.productLabel.text = giftName
+                .request("http://onepercentserver.azurewebsites.net/OnePercentServer/todayGift.do?vote_date=\(todayDate)", method: .get)
+                .log(level: .verbose)
+                .responseObject { (response: DataResponse<GiftResponse>) in
+                    if let giftResponse = response.result.value?.giftResult {
+                        for n in giftResponse {
+                            if let giftName = n.giftName {
+                                self.productLabel.text = giftName
+                            }
+                            //png 처리
+                            if let giftPng = n.giftPng {
+                                let url = "http://onepercentserver.azurewebsites.net/OnePercentServer/resources/common/image/" + giftPng
+                                self.productImageView.af_setImage(withURL: NSURL(string: url) as! URL)
+                            }
                         }
-                        //png 처리
-                        if let giftPng = n.giftPng {
-                            let url = "http://onepercentserver.azurewebsites.net/OnePercentServer/resources/common/image/" + giftPng
-                            self.productImageView.af_setImage(withURL: NSURL(string: url) as! URL)
-                            
-                        }
-                        
                     }
-                }
-        }
+            }
+
     }
 }
 

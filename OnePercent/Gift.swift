@@ -7,3 +7,30 @@
 //
 
 import Foundation
+import ObjectMapper
+
+class GiftResponse: Mappable {
+    var giftResult: [Gift]?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        giftResult <- map["todayGift_result"]
+    }
+}
+
+class Gift: Mappable {
+    var giftName: String?
+    var giftPng: String?
+    
+    required init?(map: Map) {
+        
+    }
+    func mapping(map: Map) {
+        giftName <- map["gift_name"]
+        giftPng <- map["gift_png"]
+    }
+
+}
