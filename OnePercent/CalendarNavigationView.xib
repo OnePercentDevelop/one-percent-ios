@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CalendarNavigationView" customModule="OnePercent" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="584" height="63"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="HSQ-6G-Qku">
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQ8-RS-EeA">
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="QIl-bB-w4R"/>
+                            </constraints>
+                            <state key="normal" title="&lt;"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cnf-yc-4yf">
+                            <state key="normal" title="Button"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOe-os-MOZ">
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="TiZ-wE-VDb"/>
+                            </constraints>
+                            <state key="normal" title="&gt;"/>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="HSQ-6G-Qku" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="Ovk-TZ-Uij"/>
+                <constraint firstItem="HSQ-6G-Qku" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="RCJ-ub-elp"/>
+                <constraint firstItem="HSQ-6G-Qku" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ZWN-yp-sIU"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="moveToTomorrowButton" destination="oOe-os-MOZ" id="39z-zj-Obx"/>
+                <outlet property="moveToYesterDayButton" destination="DQ8-RS-EeA" id="8sx-uP-t0A"/>
+                <outlet property="openCalendarButton" destination="cnf-yc-4yf" id="ixE-SG-7Yg"/>
+            </connections>
+            <point key="canvasLocation" x="-24" y="-99.5"/>
+        </view>
+    </objects>
+</document>

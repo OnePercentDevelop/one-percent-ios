@@ -19,6 +19,9 @@
 		C940CE561E124E0300E2AF9E /* Prize.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940CE551E124E0300E2AF9E /* Prize.swift */; };
 		C940CE581E124EBC00E2AF9E /* MyVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940CE571E124EBC00E2AF9E /* MyVote.swift */; };
 		C940CE5A1E125CDE00E2AF9E /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940CE591E125CDE00E2AF9E /* CalendarViewController.swift */; };
+		C952D0751E55A26500DAEE40 /* CalendarNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C952D0741E55A26500DAEE40 /* CalendarNavigationView.xib */; };
+		C952D0781E55A4A600DAEE40 /* CalendarNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C952D0771E55A4A600DAEE40 /* CalendarNavigationView.swift */; };
+		C952D07B1E55A61000DAEE40 /* WinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C952D07A1E55A61000DAEE40 /* WinnerViewController.swift */; };
 		C95338591DCEE0EE00FDE4F3 /* SignUpResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95338581DCEE0EE00FDE4F3 /* SignUpResult.swift */; };
 		C953385B1DCEE10B00FDE4F3 /* LoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C953385A1DCEE10B00FDE4F3 /* LoginResult.swift */; };
 		C97B1AB41DD06AA7009CC477 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B1AB31DD06AA7009CC477 /* MoreViewController.swift */; };
@@ -35,6 +38,8 @@
 		C9CDA7F71DC75FAA0044CB65 /* AlamofireLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CDA7F61DC75FAA0044CB65 /* AlamofireLogger.swift */; };
 		C9CDA7F91DC889FA0044CB65 /* EntryNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CDA7F81DC889FA0044CB65 /* EntryNumber.swift */; };
 		C9D200171E408CB200F5E44A /* Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D200161E408CB200F5E44A /* Example.swift */; };
+		C9EF25A01E55CAC50023C494 /* Gift.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF259F1E55CAC50023C494 /* Gift.swift */; };
+		C9EF25A21E55D9340023C494 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF25A11E55D9340023C494 /* Question.swift */; };
 		C9F0D37F1DC649C300B9B03B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F0D37E1DC649C300B9B03B /* SignUpViewController.swift */; };
 		C9F0D3821DC64BD500B9B03B /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F0D3811DC64BD500B9B03B /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
@@ -59,6 +64,9 @@
 		C940CE551E124E0300E2AF9E /* Prize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prize.swift; sourceTree = "<group>"; };
 		C940CE571E124EBC00E2AF9E /* MyVote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyVote.swift; sourceTree = "<group>"; };
 		C940CE591E125CDE00E2AF9E /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		C952D0741E55A26500DAEE40 /* CalendarNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarNavigationView.xib; sourceTree = "<group>"; };
+		C952D0771E55A4A600DAEE40 /* CalendarNavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarNavigationView.swift; sourceTree = "<group>"; };
+		C952D07A1E55A61000DAEE40 /* WinnerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerViewController.swift; sourceTree = "<group>"; };
 		C95338581DCEE0EE00FDE4F3 /* SignUpResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpResult.swift; sourceTree = "<group>"; };
 		C953385A1DCEE10B00FDE4F3 /* LoginResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginResult.swift; sourceTree = "<group>"; };
 		C97B1AB31DD06AA7009CC477 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoreViewController.swift; path = Sources/MoreViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +83,8 @@
 		C9CDA7F61DC75FAA0044CB65 /* AlamofireLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireLogger.swift; sourceTree = "<group>"; };
 		C9CDA7F81DC889FA0044CB65 /* EntryNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryNumber.swift; sourceTree = "<group>"; };
 		C9D200161E408CB200F5E44A /* Example.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Example.swift; sourceTree = "<group>"; };
+		C9EF259F1E55CAC50023C494 /* Gift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gift.swift; sourceTree = "<group>"; };
+		C9EF25A11E55D9340023C494 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		C9F0D37E1DC649C300B9B03B /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpViewController.swift; path = Sources/SignUpViewController.swift; sourceTree = "<group>"; };
 		C9F0D3811DC64BD500B9B03B /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = Sources/SettingViewController.swift; sourceTree = "<group>"; };
 		D90E4C80152C792A97308648 /* Pods_OnePercentUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnePercentUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +155,22 @@
 			path = OnePercent;
 			sourceTree = "<group>";
 		};
+		C952D0761E55A47400DAEE40 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				C952D0771E55A4A600DAEE40 /* CalendarNavigationView.swift */,
+			);
+			name = Calendar;
+			sourceTree = "<group>";
+		};
+		C952D0791E55A5F500DAEE40 /* Winner */ = {
+			isa = PBXGroup;
+			children = (
+				C952D07A1E55A61000DAEE40 /* WinnerViewController.swift */,
+			);
+			name = Winner;
+			sourceTree = "<group>";
+		};
 		C97B1AB21DD06A90009CC477 /* More */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +202,8 @@
 				C940CE571E124EBC00E2AF9E /* MyVote.swift */,
 				C912B6B41E1E4D9B0023A49F /* Time.swift */,
 				C9D200161E408CB200F5E44A /* Example.swift */,
+				C9EF259F1E55CAC50023C494 /* Gift.swift */,
+				C9EF25A11E55D9340023C494 /* Question.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -198,6 +226,7 @@
 				C92EC0401DBD1D58005D7D8B /* Main.storyboard */,
 				C92EC0451DBD1D58005D7D8B /* LaunchScreen.storyboard */,
 				C92EC0431DBD1D58005D7D8B /* Assets.xcassets */,
+				C952D0741E55A26500DAEE40 /* CalendarNavigationView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -255,6 +284,8 @@
 		C9F0D3861DC65A3000B9B03B /* ViewComponents */ = {
 			isa = PBXGroup;
 			children = (
+				C952D0791E55A5F500DAEE40 /* Winner */,
+				C952D0761E55A47400DAEE40 /* Calendar */,
 				C98EB05E1DC3462800B22C16 /* Model */,
 				C97B1AB21DD06A90009CC477 /* More */,
 				C9F0D3831DC64E7600B9B03B /* Home */,
@@ -348,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C92EC0471DBD1D58005D7D8B /* LaunchScreen.storyboard in Resources */,
+				C952D0751E55A26500DAEE40 /* CalendarNavigationView.xib in Resources */,
 				C9C610581DBF539F005849C3 /* GoogleService-Info.plist in Resources */,
 				C92EC0441DBD1D58005D7D8B /* Assets.xcassets in Resources */,
 				C92EC0421DBD1D58005D7D8B /* Main.storyboard in Resources */,
@@ -412,13 +444,17 @@
 				C9A93D741DCB0849008B06C2 /* HomeInformation.swift in Sources */,
 				C95338591DCEE0EE00FDE4F3 /* SignUpResult.swift in Sources */,
 				C98EB05B1DC2EA6400B22C16 /* VoteViewController.swift in Sources */,
+				C9EF25A21E55D9340023C494 /* Question.swift in Sources */,
 				C940CE561E124E0300E2AF9E /* Prize.swift in Sources */,
 				C9D200171E408CB200F5E44A /* Example.swift in Sources */,
 				C940CE5A1E125CDE00E2AF9E /* CalendarViewController.swift in Sources */,
 				C9CDA7F91DC889FA0044CB65 /* EntryNumber.swift in Sources */,
+				C9EF25A01E55CAC50023C494 /* Gift.swift in Sources */,
 				C9F0D37F1DC649C300B9B03B /* SignUpViewController.swift in Sources */,
+				C952D0781E55A4A600DAEE40 /* CalendarNavigationView.swift in Sources */,
 				C97B1AB41DD06AA7009CC477 /* MoreViewController.swift in Sources */,
 				C9C6108F1DC1B696005849C3 /* LoginViewController.swift in Sources */,
+				C952D07B1E55A61000DAEE40 /* WinnerViewController.swift in Sources */,
 				C940CE541E1248EF00E2AF9E /* Vote.swift in Sources */,
 				C9CDA7F51DC75DAC0044CB65 /* Alamofire+OnePercent.swift in Sources */,
 				C91D92F51E0CED7D007B5034 /* OnePercentColor.swift in Sources */,
