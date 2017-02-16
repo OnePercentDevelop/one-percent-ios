@@ -30,7 +30,7 @@ class VoteViewController: UIViewController {
     @IBOutlet weak var winnerNumberLabel: UILabel!
     
     var selectedItem : Int? = nil
-    var examples = [String]()
+    var examples = Array.init(repeating: "", count: 4)//[String]()
     var counts = Array.init(repeating: 0, count: 4)
     var todayDate: String!
     var nowstate: String!
@@ -43,30 +43,39 @@ class VoteViewController: UIViewController {
     
     // MARK: - IBAction
     @IBAction func moveToYesterDay(_ sender: AnyObject) {
-        let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: dateFormatter.date(from: selectedDate!)!)
-        let yesterdayString = dateFormatter.string(from: yesterDay!)
+        if Defaults[.isSignIn] == false {
+            signUpAlert()
+        } else {
+            let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: dateFormatter.date(from: selectedDate!)!)
+            let yesterdayString = dateFormatter.string(from: yesterDay!)
 
-        reloadOpenCalendarView(selectedDate: yesterdayString)
-
-        initData()
-
-        voteCollectionView.reloadData()
-
+            reloadOpenCalendarView(selectedDate: yesterdayString)
+            initData()
+            voteCollectionView.reloadData()
+        }
     }
     
     @IBAction func moveToTomorrow(_ sender: AnyObject) {
-        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: selectedDate)!)//Time.sharedInstance.dateFomatter.date(from: selectedDate)!)
-        let tomorrowString = dateFormatter.string(from: tomorrow!)//Time.sharedInstance.dateFomatter.string(from: tomorrow!)
-        reloadOpenCalendarView(selectedDate: tomorrowString)
-        initData()
-        voteCollectionView.reloadData()
+        if Defaults[.isSignIn] == false {
+            signUpAlert()
+        } else {
+            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: selectedDate)!)//Time.sharedInstance.dateFomatter.date(from: selectedDate)!)
+            let tomorrowString = dateFormatter.string(from: tomorrow!)//Time.sharedInstance.dateFomatter.string(from: tomorrow!)
+            reloadOpenCalendarView(selectedDate: tomorrowString)
+            initData()
+            voteCollectionView.reloadData()
+        }
     }
     
     @IBAction func calendarOpenButton(_ sender: AnyObject) {
-        calendarViewController?.delegate = self
-        calendarViewController?.selectedDate = selectedDate
-        calendarViewController?.modalPresentationStyle = .overCurrentContext
-        present(calendarViewController!, animated: true, completion: nil)
+        if Defaults[.isSignIn] == false {
+            signUpAlert()
+        } else {
+            calendarViewController?.delegate = self
+            calendarViewController?.selectedDate = selectedDate
+            calendarViewController?.modalPresentationStyle = .overCurrentContext
+            present(calendarViewController!, animated: true, completion: nil)
+        }
     }
     
     @IBAction func voteSendButton(_ sender: AnyObject) {
@@ -106,6 +115,7 @@ class VoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dateFormatter.dateFormat = "yyyy.MM.dd"
+        //(response: DataResponse<HomeInformationResponse>) in
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,7 +127,14 @@ class VoteViewController: UIViewController {
         
         initCalendarFunction()
         reloadOpenCalendarView(selectedDate: todayDate)
-        initData()
+        
+        // TODO: 발표전이면 todayquestion에서 데이터 받기 발표후면 initData에서 받기
+        if Date() < Time.sharedInstance.getAnounceStartTime() {
+            getTodayQuestion()
+        } else {
+            initData()
+        }
+        
         voteCollectionView.reloadData()
     }
     
@@ -169,12 +186,15 @@ class VoteViewController: UIViewController {
 //            } else { //투표후
 //                initVoteViewWithHiddenProperty(voteSendButton: true, voteEntryWinnerView: true, voteCollectionView: false, nowStateLabel: false, nowStateLabelTxt: "오늘의 투표에 이미 참여하셨습니다")
 //            }
-            if let lastDate = uiRealm.objects(MyVote.self).sorted(byKeyPath: "myVoteDate").last?.myVoteDate {
-                if let today = todayDate {
-                    if lastDate != todayDate! || uiRealm.objects(MyVote.self).count == 0 {
-                        initVoteViewWithHiddenProperty(voteSendButton: false, voteEntryWinnerView: true, voteCollectionView: true, nowStateLabel: true, nowStateLabelTxt: "")
-                    } else {
-                        initVoteViewWithHiddenProperty(voteSendButton: true, voteEntryWinnerView: true, voteCollectionView: false, nowStateLabel: false, nowStateLabelTxt: "오늘의 투표에 이미 참여하셨습니다")
+        // TODO: 로그인여부확인
+            if Defaults[.isSignIn] == true {
+                if let lastDate = uiRealm.objects(MyVote.self).sorted(byKeyPath: "myVoteDate").last?.myVoteDate {
+                    if let today = todayDate {
+                        if lastDate != todayDate! || uiRealm.objects(MyVote.self).count == 0 {
+                            initVoteViewWithHiddenProperty(voteSendButton: false, voteEntryWinnerView: true, voteCollectionView: true, nowStateLabel: true, nowStateLabelTxt: "")
+                        } else {
+                            initVoteViewWithHiddenProperty(voteSendButton: true, voteEntryWinnerView: true, voteCollectionView: false, nowStateLabel: false, nowStateLabelTxt: "오늘의 투표에 이미 참여하셨습니다")
+                        }
                     }
                 }
             }
@@ -226,15 +246,15 @@ class VoteViewController: UIViewController {
     func initData() {
         if let todayVoteInfo = uiRealm.objects(Vote.self).filter("voteDate == '\(selectedDate!)'").first {
             self.questionLabel.text = (todayVoteInfo.question)
-            self.examples.insert(todayVoteInfo.ex4, at: 0)
-            self.examples.insert(todayVoteInfo.ex3, at: 0)
-            self.examples.insert(todayVoteInfo.ex2, at: 0)
-            self.examples.insert(todayVoteInfo.ex1, at: 0)
+//            self.examples.insert(todayVoteInfo.ex4, at: 0)
+//            self.examples.insert(todayVoteInfo.ex3, at: 0)
+//            self.examples.insert(todayVoteInfo.ex2, at: 0)
+//            self.examples.insert(todayVoteInfo.ex1, at: 0)
 //
-//            examples[0] = todayVoteInfo.ex1
-//            examples[1] = todayVoteInfo.ex2
-//            examples[2] = todayVoteInfo.ex3
-//            examples[3] = todayVoteInfo.ex4
+            examples[0] = todayVoteInfo.ex1
+            examples[1] = todayVoteInfo.ex2
+            examples[2] = todayVoteInfo.ex3
+            examples[3] = todayVoteInfo.ex4
 //
 //            self.counts.insert(todayVoteInfo.count4, at: 0)
 //            self.counts.insert(todayVoteInfo.count3, at: 0)
@@ -253,6 +273,32 @@ class VoteViewController: UIViewController {
             
             findMaxVotedIndex()
         } else {
+        }
+    }
+    
+    func getTodayQuestion() {
+        Alamofire
+            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/todayQuestion.do")
+            .log(level: .verbose)
+            .responseObject { (response: DataResponse<QuestionResponse>) in
+                if let todayQuestion = response.result.value?.todayQuestion {
+                    for question in todayQuestion {
+                        self.questionLabel.text = question.question
+                        if let ex1 = question.ex1 {
+                            self.examples[0] = ex1
+                        } else { self.examples[0] = "데이터없음" }
+                        if let ex2 = question.ex2 {
+                            self.examples[1] = ex2
+                        } else { self.examples[1] = "데이터없음" }
+                        if let ex3 = question.ex3 {
+                            self.examples[2] = ex3
+                        } else { self.examples[2] = "데이터없음" }
+                        if let ex4 = question.ex4 {
+                            self.examples[3] = ex4
+                        } else { self.examples[3] = "데이터없음" }
+                    }
+                }
+                
         }
     }
     
@@ -290,6 +336,27 @@ class VoteViewController: UIViewController {
         let maxN = counts.reduce(0) { currentMax, i in max(currentMax, i) }
         maxVotedIndex = counts.index(of: maxN)
     }
+    
+    func signUpAlert() {
+//        if Defaults[.isSignIn] == false {
+            let alertController = UIAlertController(title: "", message: "인증이 필요한 서비스입니다ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
+            
+            alertController.addAction(UIAlertAction(title: "로그인", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
+                self.present(vc!, animated: true, completion: nil)
+            })
+            
+            alertController.addAction(UIAlertAction(title: "회원가입", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController")
+                self.present(vc!, animated: true, completion: nil)
+            })
+            
+            alertController.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+
+//    }
 }
 
 // MARK: - public function
@@ -325,13 +392,17 @@ extension VoteViewController: UICollectionViewDataSource {
         }
         
         // TODO: 내가 선택한 것 표시
-        let selectedDateVote = uiRealm.objects(MyVote.self).filter("myVoteDate == '\(selectedDate!)'")
-        let selectedDateVoteNumber = selectedDateVote.first?.selectedNumber
-        if indexPath.row == selectedDateVoteNumber {
-            cell.mySelectPresentImageView.isHidden = false
-            
-        } else {
-            cell.mySelectPresentImageView.isHidden = true
+        if Defaults[.isSignIn] == true {
+            let selectedDateVote = uiRealm.objects(MyVote.self).filter("myVoteDate == '\(selectedDate!)'")
+            let selectedDateVoteNumber = selectedDateVote.first?.selectedNumber
+            if indexPath.row == selectedDateVoteNumber {
+                cell.mySelectPresentImageView.isHidden = false
+                cell.backgroundColor = UIColor.blue
+            } else {
+                cell.mySelectPresentImageView.isHidden = true
+                cell.backgroundColor = UIColor.gray
+
+            }
         }
         
         return cell
@@ -342,44 +413,53 @@ extension VoteViewController: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         let cell = voteCollectionView.cellForItem(at: indexPath)
         
-        cell?.backgroundColor = UIColor(red: 85, green: 160, blue: 214)
+        cell?.backgroundColor = UIColor.cyan//UIColor(red: 85, green: 160, blue: 214)
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if Defaults[.isSignIn] == false {
-            let alertController = UIAlertController(title: "", message: "인증이 필요한 서비스입니다ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
-            
-            alertController.addAction(UIAlertAction(title: "로그인", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
-                self.present(vc!, animated: true, completion: nil)
-            })
-            
-            alertController.addAction(UIAlertAction(title: "회원가입", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController")
-                self.present(vc!, animated: true, completion: nil)
-            })
-            
-            alertController.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil))
-        
-            self.present(alertController, animated: true, completion: nil)
+            signUpAlert()
         }
+//        if Defaults[.isSignIn] == false {
+//            let alertController = UIAlertController(title: "", message: "인증이 필요한 서비스입니다ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
+//            
+//            alertController.addAction(UIAlertAction(title: "로그인", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
+//                self.present(vc!, animated: true, completion: nil)
+//            })
+//            
+//            alertController.addAction(UIAlertAction(title: "회원가입", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController")
+//                self.present(vc!, animated: true, completion: nil)
+//            })
+//            
+//            alertController.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil))
+//        
+//            self.present(alertController, animated: true, completion: nil)
+//        }
         
         if let cell = voteCollectionView.cellForItem(at: indexPath) {
             selectedItem = indexPath.row
             cell.backgroundColor = UIColor(red: 85, green: 160, blue: 214)
         }
+        let voteCollectionViewCell = voteCollectionView.cellForItem(at: indexPath) as! VoteCollectionViewCell
+        voteCollectionViewCell.mySelectPresentImageView.isHidden = false
+        print("selctedItem1>>\(selectedItem)")
     }
     
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if let cell = voteCollectionView.cellForItem(at: indexPath) {
             cell.backgroundColor = UIColor(red: 217, green: 217, blue: 217)
         }
+        let voteCollectionViewCell = voteCollectionView.cellForItem(at: indexPath) as! VoteCollectionViewCell
+        voteCollectionViewCell.mySelectPresentImageView.isHidden = true
     }
 }
 
 extension VoteViewController: CalendarViewControllerDelegate {
     func dateSelectDone(date: String) {
         reloadOpenCalendarView(selectedDate: date)
+        // TODO: 오늘날짜 선택시 발표전이면 todayquestion에서 데이터 받기 그외 initData에서 받기
         initData()
         voteCollectionView.reloadData()
     }

@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 //import Firebase
 import Alamofire
+import SwiftyUserDefaults
 
 let uiRealm = try! Realm()
 
@@ -84,7 +85,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                     }
             }
-
+            // 사용자가 투표했던 목록 가져오기
+            url = "onepercentserver.azurewebsites.net/OnePercentServer/userVoteList.do?user_id=\(Defaults[.id])"
+            Alamofire.request(url)
+                .log(level: .verbose)
+                .responseObject { (response: DataResponse<MyVoteResponse>) in
+                    if let myVoteResult = response.result.value?.uservoteList {
+                        for n in myVoteResult {
+                            let myVote = MyVote()
+                            myVote.myVoteDate = n.myVoteDate
+                            myVote.selectedNumber = n.selectedNumber
+                            try! uiRealm.write {
+                                uiRealm.add(myVote)
+                            }
+                        }
+                    }
+            }
+            
         }
         
         return true
