@@ -29,6 +29,10 @@ class VoteViewController: UIViewController {
     @IBOutlet weak var entryNumberLabel: UILabel!
     @IBOutlet weak var winnerNumberLabel: UILabel!
     
+    @IBOutlet weak var timeInformationLabel: UILabel!
+    
+    @IBOutlet weak var nowStateStackView: UIStackView!
+    
     var selectedItem : Int? = nil
     var examples = Array.init(repeating: "", count: 4)//[String]()
     var counts = Array.init(repeating: 0, count: 4)
@@ -50,7 +54,16 @@ class VoteViewController: UIViewController {
             let yesterdayString = dateFormatter.string(from: yesterDay!)
 
             reloadOpenCalendarView(selectedDate: yesterdayString)
-            initData()
+            if selectedDate == todayDate {
+                if Date() < Time.sharedInstance.getAnounceStartTime() {
+                    getTodayQuestion()
+                } else {
+                    initData()
+                }
+            } else {
+                initData()
+            }
+            //initData()
             voteCollectionView.reloadData()
         }
     }
@@ -62,7 +75,16 @@ class VoteViewController: UIViewController {
             let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: selectedDate)!)//Time.sharedInstance.dateFomatter.date(from: selectedDate)!)
             let tomorrowString = dateFormatter.string(from: tomorrow!)//Time.sharedInstance.dateFomatter.string(from: tomorrow!)
             reloadOpenCalendarView(selectedDate: tomorrowString)
-            initData()
+            if selectedDate == todayDate {
+                if Date() < Time.sharedInstance.getAnounceStartTime() {
+                    getTodayQuestion()
+                } else {
+                    initData()
+                }
+            } else {
+                initData()
+            }
+            //zinitData()
             voteCollectionView.reloadData()
         }
     }
@@ -174,10 +196,11 @@ class VoteViewController: UIViewController {
         let now = Date()
         if selectedDate != todayDate {
             nowstate = "이전투표보는중"
-            initVoteViewWithHiddenProperty(voteSendButton: true, voteEntryWinnerView: false, voteCollectionView: false, nowStateLabel: true, nowStateLabelTxt: "")
+            initVoteViewWithHiddenProperty(isHidevoteSendButton: true, isHidevoteEntryWinnerView: false, isHidevoteCollectionView: false, isHidenowStateView: true,nowStateLabelTxt: "", timeInformationLabelTxt: "")
         } else if now > Time.sharedInstance.getAnounceStartTime() && now < Time.sharedInstance.getTomorrowVoteStartTime() {
             nowstate = "당첨자발표중"
-            initVoteViewWithHiddenProperty(voteSendButton: true, voteEntryWinnerView: false, voteCollectionView: false, nowStateLabel: true, nowStateLabelTxt: "")
+            initVoteViewWithHiddenProperty(isHidevoteSendButton: true, isHidevoteEntryWinnerView: false, isHidevoteCollectionView: false, isHidenowStateView: true,nowStateLabelTxt: "", timeInformationLabelTxt: "")
+
         } else if now > Time.sharedInstance.getVoteStartTime() && now < Time.sharedInstance.getVoteEndTime() {
             nowstate = "투표 중"
             voteSendButton.setTitle("투표하기", for: .normal)
@@ -190,58 +213,32 @@ class VoteViewController: UIViewController {
             if Defaults[.isSignIn] == true {
                 if let lastDate = uiRealm.objects(MyVote.self).sorted(byKeyPath: "myVoteDate").last?.myVoteDate {
                     if let today = todayDate {
-                        if lastDate != todayDate! || uiRealm.objects(MyVote.self).count == 0 {
-                            initVoteViewWithHiddenProperty(voteSendButton: false, voteEntryWinnerView: true, voteCollectionView: true, nowStateLabel: true, nowStateLabelTxt: "")
+                        if lastDate != today || uiRealm.objects(MyVote.self).count == 0 {
+                            initVoteViewWithHiddenProperty(isHidevoteSendButton: false, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: true, isHidenowStateView: true,nowStateLabelTxt: "", timeInformationLabelTxt: "")
+
                         } else {
-                            initVoteViewWithHiddenProperty(voteSendButton: true, voteEntryWinnerView: true, voteCollectionView: false, nowStateLabel: false, nowStateLabelTxt: "오늘의 투표에 이미 참여하셨습니다")
+                            initVoteViewWithHiddenProperty(isHidevoteSendButton: true, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: false, isHidenowStateView: false,nowStateLabelTxt: "투표 완료", timeInformationLabelTxt: "결과 발표 : 06:45 PM")
+
                         }
                     }
                 }
             }
         } else if now < Time.sharedInstance.getVoteStartTime() {
             nowstate = "투표 대기 중"
-            
-            initVoteViewWithHiddenProperty(voteSendButton: true, voteEntryWinnerView: true, voteCollectionView: false, nowStateLabel: false, nowStateLabelTxt: "투표시작을 기다려주세요")
+            initVoteViewWithHiddenProperty(isHidevoteSendButton: true, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: false, isHidenowStateView: false,nowStateLabelTxt: "투표 준비 중", timeInformationLabelTxt: "투표 시작 : 06:00 AM")
+
             voteSendButton.setTitle(nowstate, for: .normal)
         } else  if now < Time.sharedInstance.getAnounceStartTime() {
             nowstate = "결과 집계 중"
-            initVoteViewWithHiddenProperty(voteSendButton: true, voteEntryWinnerView: true, voteCollectionView: false, nowStateLabel: false, nowStateLabelTxt: "집계중입니다")
+            initVoteViewWithHiddenProperty(isHidevoteSendButton: true, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: false, isHidenowStateView: false,nowStateLabelTxt: "결과 집계 중", timeInformationLabelTxt: "결과 발표 : 06:45 PM")
+
         } else {
             
         }
     }
     
     // MARK: - init Functions
-//    func initAlamofireFunction() {
-//        Alamofire
-//            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/main.do", method: .get)
-//            .log(level: .verbose)
-//            .responseObject { (response: DataResponse<HomeInformationResponse>) in
-//                if let mainResult = response.result.value?.mainResult {
-//                    for result in mainResult {
-//                        if let question = result.question {
-//                            self.questionLabel.text = question
-//                        }
-//                        
-//                        for example in result.example! {
-//                            if let q = example.firstQuestion {
-//                                self.examples.append(q)
-//                            }
-//                            if let q = example.secondQuestion {
-//                                self.examples.append(q)
-//                            }
-//                            if let q = example.thirdQuestion {
-//                                self.examples.append(q)
-//                            }
-//                            if let q = example.fourthQuestion {
-//                                self.examples.append(q)
-//                            }
-//                        }
-//                    }
-//                    self.voteCollectionView.reloadData()
-//                }
-//        }
-//    }
+
     
     func initData() {
         if let todayVoteInfo = uiRealm.objects(Vote.self).filter("voteDate == '\(selectedDate!)'").first {
@@ -275,7 +272,36 @@ class VoteViewController: UIViewController {
         } else {
         }
     }
-    
+    //    func initAlamofireFunction() {
+    //        Alamofire
+    //            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/main.do", method: .get)
+    //            .log(level: .verbose)
+    //            .responseObject { (response: DataResponse<HomeInformationResponse>) in
+    //                if let mainResult = response.result.value?.mainResult {
+    //                    for result in mainResult {
+    //                        if let question = result.question {
+    //                            self.questionLabel.text = question
+    //                        }
+    //
+    //                        for example in result.example! {
+    //                            if let q = example.firstQuestion {
+    //                                self.examples.append(q)
+    //                            }
+    //                            if let q = example.secondQuestion {
+    //                                self.examples.append(q)
+    //                            }
+    //                            if let q = example.thirdQuestion {
+    //                                self.examples.append(q)
+    //                            }
+    //                            if let q = example.fourthQuestion {
+    //                                self.examples.append(q)
+    //                            }
+    //                        }
+    //                    }
+    //                    self.voteCollectionView.reloadData()
+    //                }
+    //        }
+    //    }
     func getTodayQuestion() {
         Alamofire
             .request("http://onepercentserver.azurewebsites.net/OnePercentServer/todayQuestion.do")
@@ -286,7 +312,7 @@ class VoteViewController: UIViewController {
                         self.questionLabel.text = question.question
                         if let ex1 = question.ex1 {
                             self.examples[0] = ex1
-                        } else { self.examples[0] = "데이터없음" }
+                        } else { self.examples[0] = "데이터없음"}
                         if let ex2 = question.ex2 {
                             self.examples[1] = ex2
                         } else { self.examples[1] = "데이터없음" }
@@ -308,12 +334,14 @@ class VoteViewController: UIViewController {
     }
     
     
-    func initVoteViewWithHiddenProperty(voteSendButton: Bool, voteEntryWinnerView: Bool, voteCollectionView: Bool, nowStateLabel: Bool,nowStateLabelTxt: String) {
-        self.voteSendButton.isHidden = voteSendButton
-        self.voteEntryWinnerView.isHidden = voteEntryWinnerView
-        self.voteCollectionView.allowsSelection = voteCollectionView
-        self.nowStateLabel.isHidden = nowStateLabel
+    func initVoteViewWithHiddenProperty(isHidevoteSendButton: Bool, isHidevoteEntryWinnerView: Bool, isHidevoteCollectionView: Bool, isHidenowStateView: Bool,nowStateLabelTxt: String, timeInformationLabelTxt: String) {
+        self.voteSendButton.isHidden = isHidevoteSendButton
+        self.voteEntryWinnerView.isHidden = isHidevoteEntryWinnerView
+        self.voteCollectionView.allowsSelection = isHidevoteCollectionView
+//        self.nowStateLabel.isHidden = isHidenowStateView
+        self.nowStateStackView.isHidden = isHidenowStateView
         self.nowStateLabel.text = nowStateLabelTxt
+        self.timeInformationLabel.text = timeInformationLabelTxt
     }
     
     func reloadOpenCalendarView(selectedDate: String) {
@@ -379,13 +407,13 @@ extension VoteViewController: UICollectionViewDataSource {
             cell.chargeImageView.frame = CGRect(origin: cell.bounds.origin , size: CGSize(width: cell.frame.width * rate, height: cell.frame.height))
             if let maxVotedIndex = maxVotedIndex {
                 if maxVotedIndex == indexPath.row {
-                    cell.chargeImageView.backgroundColor = UIColor.red
+                    cell.chargeImageView.backgroundColor = UIColor(red: 85, green: 160, blue: 214)
                 } else {
-                    cell.chargeImageView.backgroundColor = UIColor.blue
+                    cell.chargeImageView.backgroundColor = UIColor(red: 158, green: 167, blue: 185)
                 }
                 
             }
-            initVoteViewWithHiddenProperty(voteSendButton: true, voteEntryWinnerView: false, voteCollectionView: false, nowStateLabel: true, nowStateLabelTxt: "")
+            initVoteViewWithHiddenProperty(isHidevoteSendButton: true, isHidevoteEntryWinnerView: false, isHidevoteCollectionView: false, isHidenowStateView: true,nowStateLabelTxt: "", timeInformationLabelTxt: "")
         } else {
             cell.voteResultView.isHidden = true
             cell.chargeImageView.frame = CGRect(origin: cell.bounds.origin , size: CGSize(width: cell.frame.width * 0, height: cell.frame.height))
@@ -401,7 +429,7 @@ extension VoteViewController: UICollectionViewDataSource {
             } else {
                 cell.mySelectPresentImageView.isHidden = true
                 cell.backgroundColor = UIColor.gray
-
+                
             }
         }
         
@@ -460,7 +488,16 @@ extension VoteViewController: CalendarViewControllerDelegate {
     func dateSelectDone(date: String) {
         reloadOpenCalendarView(selectedDate: date)
         // TODO: 오늘날짜 선택시 발표전이면 todayquestion에서 데이터 받기 그외 initData에서 받기
-        initData()
+        if date == todayDate {
+            if Date() < Time.sharedInstance.getAnounceStartTime() {
+                getTodayQuestion()
+            } else {
+                initData()
+            }
+        } else {
+            initData()
+        }
+        //initData()
         voteCollectionView.reloadData()
     }
 }
