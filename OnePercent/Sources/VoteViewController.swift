@@ -231,7 +231,6 @@ class VoteViewController: UIViewController {
         } else  if now < Time.sharedInstance.getAnounceStartTime() {
             nowstate = "결과 집계 중"
             initVoteViewWithHiddenProperty(isHidevoteSendButton: true, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: false, isHidenowStateView: false,nowStateLabelTxt: "결과 집계 중", timeInformationLabelTxt: "결과 발표 : 06:45 PM")
-
         } else {
             
         }
@@ -399,6 +398,8 @@ extension VoteViewController: UICollectionViewDataSource {
         let cell = voteCollectionView.dequeueReusableCell(withReuseIdentifier: "voteCollectionViewCell", for: indexPath) as! VoteCollectionViewCell
         cell.questionLabel.text = examples[indexPath.row]
         
+        cell.mySelectPresentImageView.isHidden = true
+        
         if nowstate == "당첨자발표중" || Time.sharedInstance.dateFromStringDotyyyyMMdd(date: selectedDate) != Time.sharedInstance.dateFromStringDotyyyyMMdd(date: todayDate) {//dateFomatter.date(from: selectedDate) != Time.sharedInstance.dateFomatter.date(from: todayDate) {
             cell.voteResultView.isHidden = false
             let count = counts[indexPath.row]
@@ -425,10 +426,11 @@ extension VoteViewController: UICollectionViewDataSource {
             let selectedDateVoteNumber = selectedDateVote.first?.selectedNumber
             if indexPath.row == selectedDateVoteNumber {
                 cell.mySelectPresentImageView.isHidden = false
-                cell.backgroundColor = UIColor.blue
+                cell.backgroundColor = UIColor(red: 85, green: 160, blue: 214)
+                cell.questionLabel.tintColor = UIColor.white
             } else {
                 cell.mySelectPresentImageView.isHidden = true
-                cell.backgroundColor = UIColor.gray
+                cell.backgroundColor = UIColor(red: 217, green: 217, blue: 217)
                 
             }
         }
@@ -441,7 +443,7 @@ extension VoteViewController: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         let cell = voteCollectionView.cellForItem(at: indexPath)
         
-        cell?.backgroundColor = UIColor.cyan//UIColor(red: 85, green: 160, blue: 214)
+        cell?.backgroundColor = UIColor(red: 85, green: 160, blue: 214)
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -472,7 +474,8 @@ extension VoteViewController: UICollectionViewDelegate {
         }
         let voteCollectionViewCell = voteCollectionView.cellForItem(at: indexPath) as! VoteCollectionViewCell
         voteCollectionViewCell.mySelectPresentImageView.isHidden = false
-        print("selctedItem1>>\(selectedItem)")
+//        voteCollectionViewCell.questionLabel.textColor = UIColor.white
+//        print("selctedItem1>>\(selectedItem)")
     }
     
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -481,6 +484,7 @@ extension VoteViewController: UICollectionViewDelegate {
         }
         let voteCollectionViewCell = voteCollectionView.cellForItem(at: indexPath) as! VoteCollectionViewCell
         voteCollectionViewCell.mySelectPresentImageView.isHidden = true
+//        voteCollectionViewCell.questionLabel.textColor = UIColor.black
     }
 }
 
