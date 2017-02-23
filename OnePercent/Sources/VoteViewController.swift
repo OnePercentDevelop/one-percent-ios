@@ -13,6 +13,7 @@ import CVCalendar
 import RealmSwift
 
 class VoteViewController: UIViewController {
+    // TODO: 회원인증 cancle누르면 deselect 되게
     // MARK: - calendar property
     var calendarViewController: CalendarViewController?
     
@@ -169,7 +170,8 @@ class VoteViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         stopTimer()
-        
+        self.voteCollectionView.deselectAllItems(animated: false)
+        self.voteCollectionView.reloadData()
     }
     
     // MARK: - FilePrivate Function
@@ -210,18 +212,34 @@ class VoteViewController: UIViewController {
 //                initVoteViewWithHiddenProperty(voteSendButton: true, voteEntryWinnerView: true, voteCollectionView: false, nowStateLabel: false, nowStateLabelTxt: "오늘의 투표에 이미 참여하셨습니다")
 //            }
         // TODO: 로그인여부확인
-            if Defaults[.isSignIn] == true {
-                if let lastDate = uiRealm.objects(MyVote.self).sorted(byKeyPath: "myVoteDate").last?.myVoteDate {
-                    if let today = todayDate {
-                        if lastDate != today || uiRealm.objects(MyVote.self).count == 0 {
-                            initVoteViewWithHiddenProperty(isHidevoteSendButton: false, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: true, isHidenowStateView: true,nowStateLabelTxt: "", timeInformationLabelTxt: "")
+            initVoteViewWithHiddenProperty(isHidevoteSendButton: false, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: true, isHidenowStateView: true,nowStateLabelTxt: "", timeInformationLabelTxt: "")
 
-                        } else {
-                            initVoteViewWithHiddenProperty(isHidevoteSendButton: true, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: false, isHidenowStateView: false,nowStateLabelTxt: "투표 완료", timeInformationLabelTxt: "결과 발표 : 06:45 PM")
+            if Defaults[.isSignIn] == true {
+                print("hye1")
+                if let lastDate = uiRealm.objects(MyVote.self).sorted(byKeyPath: "myVoteDate").last?.myVoteDate, let today = todayDate {
+                    print("hye2")
+
+//                    if let today = todayDate {
+//                        print("hye3")
+
+//                        if lastDate != today || uiRealm.objects(MyVote.self).count == 0 {
+//                            print("hye4")
+//
+//                            initVoteViewWithHiddenProperty(isHidevoteSendButton: false, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: true, isHidenowStateView: true,nowStateLabelTxt: "", timeInformationLabelTxt: "")
+//
+//                        } else {
+                    if lastDate == today {
+                        print("hye5")
+
+                        initVoteViewWithHiddenProperty(isHidevoteSendButton: true, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: false, isHidenowStateView: false,nowStateLabelTxt: "투표 완료", timeInformationLabelTxt: "결과 발표 : 06:45 PM")
 
                         }
-                    }
+//                    }
                 }
+            } else {
+                print("hye6")
+
+                initVoteViewWithHiddenProperty(isHidevoteSendButton: false, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: true, isHidenowStateView: true,nowStateLabelTxt: "", timeInformationLabelTxt: "")
             }
         } else if now < Time.sharedInstance.getVoteStartTime() {
             nowstate = "투표 대기 중"
@@ -378,8 +396,13 @@ class VoteViewController: UIViewController {
                 self.present(vc!, animated: true, completion: nil)
             })
             
-            alertController.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil))
-            
+//            alertController.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil))
+        
+            alertController.addAction(UIAlertAction(title: "cancle", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+                self.voteCollectionView.deselectAllItems(animated: false)
+                self.voteCollectionView.reloadData()
+            })
+        
             self.present(alertController, animated: true, completion: nil)
         }
 
@@ -503,5 +526,14 @@ extension VoteViewController: CalendarViewControllerDelegate {
         }
         //initData()
         voteCollectionView.reloadData()
+    }
+}
+
+extension UICollectionView {
+    func deselectAllItems(animated: Bool = false) {
+        for indexPath in self.indexPathsForSelectedItems ?? [] {
+            self.deselectItem(at: indexPath, animated: animated)
+            self.cellForItem(at: indexPath)?.backgroundColor = UIColor(red: 217, green: 217, blue: 217)
+        }
     }
 }
