@@ -10,29 +10,30 @@ import UIKit
 
 class WinnerViewController: UIViewController {
 
-    @IBOutlet weak var scrollView: UIScrollView!
+    var test = ["01000000000", "01000000000", "01000000000", "01000000000", "01000000000", "01000000000", "01000000000", "01000000000", "01000000000", "01000000000", "01000000000", "01000000000", "01000000000", "01000000000", "01000000000", "01000000000", "01000000000", "01000000000" ]
     
-    @IBOutlet weak var firstWinnerCollectionView: UIScrollView!
-
-    @IBOutlet weak var secondWinnerCollectionView: UICollectionView!
     
+    @IBOutlet weak var winnerCollectionView: UICollectionView!
     @IBOutlet weak var calendarNavigationView: CalendarNavigationView!
     
-    @IBOutlet weak var openSecondCollectionViewButton: UIButton!
+    @IBOutlet weak var showMoreCollectionViewButton: UIButton!
+    
     @IBAction func openSecondCollectionViewButton(_ sender: AnyObject) {
-        scrollView.isScrollEnabled = true
-        secondWinnerCollectionView.isHidden = false
-        openSecondCollectionViewButton.isHidden = true
-
+        winnerCollectionView.isScrollEnabled = true
+//        print("origin:\(winnerCollectionView.bounds.origin)>>\(winnerCollectionView.frame.origin)")
+        
+        
+        winnerCollectionView.frame = CGRect(origin: winnerCollectionView.frame.origin , size: CGSize(width: winnerCollectionView.frame.width, height: winnerCollectionView.frame.height + 10.0))
+        showMoreCollectionViewButton.isHidden = true
+        
     }
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.isScrollEnabled = false
-        secondWinnerCollectionView.isHidden = true
-        // Do any additional setup after loading the view.
+        winnerCollectionView.isScrollEnabled = false
+                // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,5 +51,53 @@ class WinnerViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+}
+
+extension WinnerViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return test.count
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = winnerCollectionView.dequeueReusableCell(withReuseIdentifier: "winnerCollectionViewCell", for: indexPath) as! WinnerCollectionViewCell
+        
+        cell.winnerIdLabel.text = test[indexPath.row]
+        
+        return cell
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionElementKindSectionFooter:
+            let footerView = winnerCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "winnerCollectionFooterView", for: indexPath) as! winnerCollectionFooterView
+            footerView.info.text = "hi"
+            return footerView
+        default:
+            assert(false, "Unexpected element kind")
+        }
+    }
+    
+    /*
+     override func collectionView(_ collectionView: UICollectionView,
+     viewForSupplementaryElementOfKind kind: String,
+     at indexPath: IndexPath) -> UICollectionReusableView {
+     //1
+     switch kind {
+     //2
+     case UICollectionElementKindSectionHeader:
+     //3
+     let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+     withReuseIdentifier: "FlickrPhotoHeaderView",
+     for: indexPath) as! FlickrPhotoHeaderView
+     headerView.label.text = searches[(indexPath as NSIndexPath).section].searchTerm
+     return headerView
+     default:
+     //4
+     assert(false, "Unexpected element kind")
+     }
+     }
+     */
 
 }
