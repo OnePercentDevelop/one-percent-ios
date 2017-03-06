@@ -49,7 +49,10 @@ class VoteViewController: UIViewController {
     // MARK: - IBAction
     @IBAction func moveToYesterDay(_ sender: AnyObject) {
         if Defaults[.isSignIn] == false {
-            signUpAlert()
+//            signUpAlert()
+            signUpAlert(viewController: self)
+            self.voteCollectionView.deselectAllItems(animated: false)
+            self.voteCollectionView.reloadData()
         } else {
             let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: dateFormatter.date(from: selectedDate!)!)
             let yesterdayString = dateFormatter.string(from: yesterDay!)
@@ -71,7 +74,10 @@ class VoteViewController: UIViewController {
     
     @IBAction func moveToTomorrow(_ sender: AnyObject) {
         if Defaults[.isSignIn] == false {
-            signUpAlert()
+//            signUpAlert()
+            signUpAlert(viewController: self)
+            self.voteCollectionView.deselectAllItems(animated: false)
+            self.voteCollectionView.reloadData()
         } else {
             let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: selectedDate)!)//Time.sharedInstance.dateFomatter.date(from: selectedDate)!)
             let tomorrowString = dateFormatter.string(from: tomorrow!)//Time.sharedInstance.dateFomatter.string(from: tomorrow!)
@@ -92,7 +98,10 @@ class VoteViewController: UIViewController {
     
     @IBAction func calendarOpenButton(_ sender: AnyObject) {
         if Defaults[.isSignIn] == false {
-            signUpAlert()
+//            signUpAlert()
+            signUpAlert(viewController: self)
+            self.voteCollectionView.deselectAllItems(animated: false)
+            self.voteCollectionView.reloadData()
         } else {
             calendarViewController?.delegate = self
             calendarViewController?.selectedDate = selectedDate
@@ -382,29 +391,29 @@ class VoteViewController: UIViewController {
         maxVotedIndex = counts.index(of: maxN)
     }
     
-    func signUpAlert() {
-//        if Defaults[.isSignIn] == false {
-            let alertController = UIAlertController(title: "", message: "인증이 필요한 서비스입니다ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
-            
-            alertController.addAction(UIAlertAction(title: "로그인", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
-                self.present(vc!, animated: true, completion: nil)
-            })
-            
-            alertController.addAction(UIAlertAction(title: "회원가입", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController")
-                self.present(vc!, animated: true, completion: nil)
-            })
-            
-//            alertController.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil))
-        
-            alertController.addAction(UIAlertAction(title: "cancle", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-                self.voteCollectionView.deselectAllItems(animated: false)
-                self.voteCollectionView.reloadData()
-            })
-        
-            self.present(alertController, animated: true, completion: nil)
-        }
+//    func signUpAlert() {
+////        if Defaults[.isSignIn] == false {
+//            let alertController = UIAlertController(title: "", message: "인증이 필요한 서비스입니다ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
+//            
+//            alertController.addAction(UIAlertAction(title: "로그인", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
+//                self.present(vc!, animated: true, completion: nil)
+//            })
+//            
+//            alertController.addAction(UIAlertAction(title: "회원가입", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController")
+//                self.present(vc!, animated: true, completion: nil)
+//            })
+//            
+////            alertController.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil))
+//        
+//            alertController.addAction(UIAlertAction(title: "cancle", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+//                self.voteCollectionView.deselectAllItems(animated: false)
+//                self.voteCollectionView.reloadData()
+//            })
+//        
+//            self.present(alertController, animated: true, completion: nil)
+//        }
 
 //    }
 }
@@ -471,34 +480,22 @@ extension VoteViewController: UICollectionViewDelegate {
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if Defaults[.isSignIn] == false {
-            signUpAlert()
+//            signUpAlert()
+            signUpAlert(viewController: self)
+            self.voteCollectionView.deselectAllItems(animated: false)
+            self.voteCollectionView.reloadData()
         }
-//        if Defaults[.isSignIn] == false {
-//            let alertController = UIAlertController(title: "", message: "인증이 필요한 서비스입니다ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
-//            
-//            alertController.addAction(UIAlertAction(title: "로그인", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
-//                self.present(vc!, animated: true, completion: nil)
-//            })
-//            
-//            alertController.addAction(UIAlertAction(title: "회원가입", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController")
-//                self.present(vc!, animated: true, completion: nil)
-//            })
-//            
-//            alertController.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil))
-//        
-//            self.present(alertController, animated: true, completion: nil)
-//        }
-        
+
         if let cell = voteCollectionView.cellForItem(at: indexPath) {
             selectedItem = indexPath.row
             cell.backgroundColor = UIColor(red: 85, green: 160, blue: 214)
         }
-        let voteCollectionViewCell = voteCollectionView.cellForItem(at: indexPath) as! VoteCollectionViewCell
-        voteCollectionViewCell.mySelectPresentImageView.isHidden = false
+        // TODO: 셀선택시 fatal error: unexpectedly found nil while unwrapping an Optional value
+        
+        if let voteCollectionViewCell = voteCollectionView.cellForItem(at: indexPath) as? VoteCollectionViewCell {
+            voteCollectionViewCell.mySelectPresentImageView.isHidden = false
+        }
 //        voteCollectionViewCell.questionLabel.textColor = UIColor.white
-//        print("selctedItem1>>\(selectedItem)")
     }
     
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
