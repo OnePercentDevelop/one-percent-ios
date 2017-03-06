@@ -8,20 +8,38 @@
 
 import Foundation
 import RealmSwift
+import ObjectMapper
 
-class Prize: Object {
+class PrizeResponse: Mappable {
+    var winnerResult: [Prize]?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        winnerResult <- map["winnerResult"]
+    }
+}
+
+class Prize: Object, Mappable {
     dynamic var prizeDate = ""
     dynamic var winner = ""
     dynamic var giftName = ""
     dynamic var giftUrl = ""
     
+    required convenience init?(map: Map) {
+        self.init()
+    }
+  
+    func mapping(map: Map) {
+        prizeDate <- map["vote_date"]
+        winner <- map["winner"]
+        giftName <- map["gift_name"]
+        giftUrl <- map["gift_png"]
+    }
+    
     override static func primaryKey() -> String? {
         return "prizeDate"
     }
-    
-// Specify properties to ignore (Realm won't persist these)
-    
-//  override static func ignoredProperties() -> [String] {
-//    return []
-//  }
 }

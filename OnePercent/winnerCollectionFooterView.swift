@@ -9,6 +9,10 @@
 import UIKit
 
 class winnerCollectionFooterView: UICollectionReusableView {
-    @IBOutlet weak var info: UILabel!
+    
+    @IBOutlet weak var showMoreCollectionViewButton: NSLayoutConstraint!
+    
+    @IBAction func showMoreCollectionViewButton(_ sender: Any) {
         
+    }
 }

@@ -104,6 +104,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
+        if let lastDownloadedPrizeDate = uiRealm.objects(Prize.self).sorted(byKeyPath: "prizeDate").last?.prizeDate {
+            if lastDownloadedPrizeDate != dateFormatter.string(from: Date()) {
+                let oneDayAfterLastDownloadedDate = Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: lastDownloadedPrizeDate)!)
+                url = "http://onepercentserver.azurewebsites.net/OnePercentServer/WinnerResultSince.do"
+                Alamofire.request(url)
+                    .log(level: .verbose)
+                    .responseObject { (response: DataResponse<PrizeResponse>) in
+                        if let winnerResult = response.result.value?.winnerResult {
+                            for winner in winnerResult {
+                                let prize = Prize()
+                                prize.prizeDate = winner.prizeDate
+                                prize.winner = winner.winner
+                                prize.giftUrl = winner.giftUrl
+                                prize.giftName = winner.giftName
+                                
+                                try! uiRealm.write {
+                                    uiRealm.add(prize)
+                                }
+                            }
+                        }
+                }
+
+
+            }
+            
+        } else {
+            url = "http://onepercentserver.azurewebsites.net/OnePercentServer/WinnerResult.do"
+            Alamofire.request(url)
+                .log(level: .verbose)
+                .responseObject { (response: DataResponse<PrizeResponse>) in
+                    if let winnerResult = response.result.value?.winnerResult {
+                        for winner in winnerResult {
+                            let prize = Prize()
+                            prize.prizeDate = winner.prizeDate
+                            prize.winner = winner.winner
+                            prize.giftUrl = winner.giftUrl
+                            prize.giftName = winner.giftName
+                            
+                            try! uiRealm.write {
+                                uiRealm.add(prize)
+                            }
+                        }
+                    }
+            }
+        }
+        
+        print(Realm.Configuration.defaultConfiguration.fileURL)
+        
         return true
     }
 
