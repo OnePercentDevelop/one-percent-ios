@@ -25,6 +25,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var informationView: UIView!
     var timer: Timer?
     
+    var todayDate: String {
+        return "2017.03.01"
+        //        return dateFormatter.string(from: Date())
+    }
     // MARK: - IBAction
     
     @IBAction func openInformatioinViewButton(_ sender: AnyObject) {
@@ -58,7 +62,8 @@ class ViewController: UIViewController {
     // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
-        alamofireFunction()
+        setVoteNumber()
+        setGiftImage()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -115,7 +120,7 @@ class ViewController: UIViewController {
         return String(format: "%0.2d:%0.2d:%0.2d",hours,minutes,seconds)
     }
     
-    func alamofireFunction() {
+    func setVoteNumber() {
         let todayDate = Time.sharedInstance.dateyyyyMMdd(date: Date())
         let URL = "http://onepercentserver.azurewebsites.net/OnePercentServer/voteNumber.do"
         let parameters: Parameters = ["vote_date": todayDate]
@@ -133,25 +138,28 @@ class ViewController: UIViewController {
                     }
                 }
         }
-
+    }
+    
+    func setGiftImage() {
         Alamofire
-                .request("http://onepercentserver.azurewebsites.net/OnePercentServer/todayGift.do?vote_date=\(todayDate)", method: .get)
-                .log(level: .verbose)
-                .responseObject { (response: DataResponse<GiftResponse>) in
-                    if let giftResponse = response.result.value?.giftResult {
-                        for n in giftResponse {
-                            if let giftName = n.giftName {
-                                self.productLabel.text = giftName
-                            }
-                            //png 처리
-                            if let giftPng = n.giftPng {
-                                let url = "http://onepercentserver.azurewebsites.net/OnePercentServer/resources/common/image/" + giftPng
-                                self.productImageView.af_setImage(withURL: NSURL(string: url) as! URL)
-                            }
+            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/todayGift.do?vote_date=\(todayDate)", method: .get)
+            .log(level: .verbose)
+            .responseObject { (response: DataResponse<GiftResponse>) in
+                if let giftResponse = response.result.value?.giftResult {
+                    for n in giftResponse {
+                        if let giftName = n.giftName {
+                            self.productLabel.text = giftName
+                        }
+                        //png 처리
+                        if let giftPng = n.giftPng {
+                            let url = "http://onepercentserver.azurewebsites.net/OnePercentServer/resources/common/image/" + giftPng
+                            self.productImageView.af_setImage(withURL: NSURL(string: url) as! URL)
                         }
                     }
-            }
-
+                }
+        }
     }
+
+
 }
 
