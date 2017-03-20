@@ -1,24 +1,15 @@
 //
-//  MoreViewController.swift
+//  MoreWithViewViewController.swift
 //  OnePercent
 //
-//  Created by 김혜원 on 2016. 11. 7..
-//  Copyright © 2016년 김혜원. All rights reserved.
+//  Created by 김혜원 on 2017. 3. 10..
+//  Copyright © 2017년 김혜원. All rights reserved.
 //
 
 import UIKit
-import SwiftyUserDefaults
 
-class MoreViewController: UIViewController {
-    // MARK: - Property
-    
-    // MARK: - IBAction
-    
-    @IBAction func logOutButtonClick(_ sender: AnyObject) {
-        Defaults[.isSignIn] = false
-        Defaults[.id] = ""
-    }
-    // MARK: - Recycle Function
+class MoreWithViewViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
