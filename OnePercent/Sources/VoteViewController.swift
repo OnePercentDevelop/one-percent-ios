@@ -147,6 +147,7 @@ class VoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dateFormatter.dateFormat = "yyyy.MM.dd"
+        
         //(response: DataResponse<HomeInformationResponse>) in
     }
     
@@ -224,21 +225,16 @@ class VoteViewController: UIViewController {
             initVoteViewWithHiddenProperty(isHidevoteSendButton: false, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: true, isHidenowStateView: true,nowStateLabelTxt: "", timeInformationLabelTxt: "")
 
             if Defaults[.isSignIn] == true {
-                print("hye1")
                 if let lastDate = uiRealm.objects(MyVote.self).sorted(byKeyPath: "myVoteDate").last?.myVoteDate, let today = todayDate {
-                    print("hye2")
 
 //                    if let today = todayDate {
-//                        print("hye3")
 
 //                        if lastDate != today || uiRealm.objects(MyVote.self).count == 0 {
-//                            print("hye4")
 //
 //                            initVoteViewWithHiddenProperty(isHidevoteSendButton: false, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: true, isHidenowStateView: true,nowStateLabelTxt: "", timeInformationLabelTxt: "")
 //
 //                        } else {
                     if lastDate == today {
-                        print("hye5")
 
                         initVoteViewWithHiddenProperty(isHidevoteSendButton: true, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: false, isHidenowStateView: false,nowStateLabelTxt: "투표 완료", timeInformationLabelTxt: "결과 발표 : 06:45 PM")
 
@@ -246,7 +242,6 @@ class VoteViewController: UIViewController {
 //                    }
                 }
             } else {
-                print("hye6")
 
                 initVoteViewWithHiddenProperty(isHidevoteSendButton: false, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: true, isHidenowStateView: true,nowStateLabelTxt: "", timeInformationLabelTxt: "")
             }
@@ -506,6 +501,15 @@ extension VoteViewController: UICollectionViewDelegate {
         voteCollectionViewCell.mySelectPresentImageView.isHidden = true
 //        voteCollectionViewCell.questionLabel.textColor = UIColor.black
     }
+}
+
+extension VoteViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellSize = CGSize(width: voteCollectionView.frame.width, height: (voteCollectionView.frame.height - 40) / 4)//voteCollectionView.frame.size
+        return cellSize
+        
+    }
+
 }
 
 extension VoteViewController: CalendarViewControllerDelegate {
