@@ -13,7 +13,6 @@ class QuestionResponse: Mappable {
     var todayQuestion: [Question]?
     
     required init?(map: Map) {
-        
     }
     
     func mapping(map: Map) {
@@ -22,14 +21,13 @@ class QuestionResponse: Mappable {
 }
 
 class Question: Mappable {
-    var question: String?
-    var ex1: String?
-    var ex2: String?
-    var ex3: String?
-    var ex4: String?
+    var question: String = ""
+    var ex1: String = ""
+    var ex2: String = ""
+    var ex3: String = ""
+    var ex4: String = ""
     
     required init(map: Map) {
-        
     }
     
     func mapping(map: Map) {

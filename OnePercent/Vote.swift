@@ -14,7 +14,6 @@ class VoteResponse: Mappable {
     var voteTotalResult: [Vote]?
     
     required init?(map: Map) {
-        
     }
     
     func mapping(map: Map) {
@@ -23,7 +22,6 @@ class VoteResponse: Mappable {
 }
 
 class Vote: Object, Mappable {
-    
     dynamic var voteDate = ""
     dynamic var question = ""
     dynamic var ex1 = ""
@@ -60,19 +58,12 @@ class Vote: Object, Mappable {
         winnerAmount <- map["prize_count"]
 
     }
-    
-// Specify properties to ignore (Realm won't persist these)
-    
-//  override static func ignoredProperties() -> [String] {
-//    return []
-//  }
 }
 
 class voteResultSince: Mappable {
     var voteTotalResult: [Vote]?
     
     required init?(map: Map) {
-        
     }
     
     func mapping(map: Map) {

@@ -14,7 +14,6 @@ class OnePercentResponse: Mappable {
     var voteResult: [EntryNumber]?
     
     required init?(map: Map) {
-        
     }
     
     func mapping(map: Map) {
@@ -26,7 +25,6 @@ class EntryNumber: Mappable {
     var number: Int?
     
     required init?(map: Map) {
-        
     }
     
     func mapping(map: Map) {

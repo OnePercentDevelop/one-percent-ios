@@ -13,7 +13,6 @@ class GiftResponse: Mappable {
     var giftResult: [Gift]?
     
     required init?(map: Map) {
-        
     }
     
     func mapping(map: Map) {
@@ -26,8 +25,8 @@ class Gift: Mappable {
     var giftPng: String?
     
     required init?(map: Map) {
-        
     }
+
     func mapping(map: Map) {
         giftName <- map["gift_name"]
         giftPng <- map["gift_png"]

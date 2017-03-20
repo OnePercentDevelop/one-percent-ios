@@ -14,7 +14,6 @@ class PrizeResponse: Mappable {
     var winnerResult: [Prize]?
     
     required init?(map: Map) {
-        
     }
     
     func mapping(map: Map) {

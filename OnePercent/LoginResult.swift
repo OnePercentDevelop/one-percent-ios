@@ -13,7 +13,6 @@ class LoginResultResponse: Mappable {
     var loginResult: [LoginResult]?
     
     required init?(map: Map) {
-        
     }
     
     func mapping(map: Map) {
@@ -25,7 +24,6 @@ class LoginResult: Mappable {
     var state: String?
     
     required init?(map: Map) {
-        
     }
     
     func mapping(map: Map) {

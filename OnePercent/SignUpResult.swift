@@ -13,7 +13,6 @@ class SignUpResultResponse: Mappable {
     var signUpResult: [SignUpResult]?
     
     required init?(map: Map) {
-        
     }
     
     func mapping(map: Map) {
@@ -25,7 +24,6 @@ class SignUpResult: Mappable {
     var state: String?
     
     required init?(map: Map) {
-        
     }
     
     func mapping(map: Map) {
