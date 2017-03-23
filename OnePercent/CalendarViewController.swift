@@ -13,8 +13,7 @@ import CVCalendar
 
 class CalendarViewController: UIViewController {
     // TODO: Seugue로보낸 selectedDate 색칠 -> presentedDateUpdated()
-    
-    @IBOutlet weak var menuView: CVCalendarMenuView!
+@IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calendarView: CVCalendarView!
     @IBAction func selectDoneButton(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)

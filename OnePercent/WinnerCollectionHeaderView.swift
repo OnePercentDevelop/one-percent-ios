@@ -9,6 +9,5 @@
 import UIKit
 
 class WinnerCollectionHeaderView: UICollectionReusableView {
-        
     @IBOutlet weak var winnerCountLabel: UILabel!
 }

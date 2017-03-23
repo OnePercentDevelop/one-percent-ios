@@ -32,16 +32,11 @@ class OnePercentButton: UIButton {
     @IBInspectable var shadowRadius: CGFloat = 0 {
         didSet { setNeedsDisplay() }
     }
-//    @IBInspectable var shadowOffset: CGSize = CGSizeMake(0, 0) {
-//        didSet { updateLayerProperties() }
-//    }
-    
+
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         updateLayerProperties()
     }
-    
-    //    2F4586
     
     func updateLayerProperties() {
         layer.backgroundColor = buttonBackgroundColor.cgColor
@@ -53,7 +48,6 @@ class OnePercentButton: UIButton {
         layer.shadowColor = shadowColor.cgColor
         layer.shadowOpacity = CFloat(shadowOpacity)
         layer.shadowRadius = shadowRadius
-//        layer.shadowOffset = shadowOffset
         layer.masksToBounds = false
     }
     

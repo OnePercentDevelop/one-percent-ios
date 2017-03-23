@@ -14,30 +14,16 @@ import RealmSwift
 
 class VoteViewController: UIViewController {
     // TODO: 회원인증 cancle누르면 deselect 되게
-    // MARK: - calendar property
+    // MARK: - Calendar Property
     var calendarViewController: CalendarViewController?
     
     // MARK: - Property
-    @IBOutlet weak var voteCollectionView: UICollectionView!
-    @IBOutlet weak var questionLabel: UILabel!
-    @IBOutlet weak var voteEntryWinnerView: UIView!
-    @IBOutlet weak var calendarOpenButton: UIButton!
-    
-    @IBOutlet weak var nowStateLabel: UILabel!
-    @IBOutlet weak var voteSendButton: OnePercentButton!
-    @IBOutlet weak var moveToYesterDay: UIButton!
-    @IBOutlet weak var moveToTomorrow: UIButton!
-    @IBOutlet weak var entryNumberLabel: UILabel!
-    @IBOutlet weak var winnerNumberLabel: UILabel!
-    
-    @IBOutlet weak var timeInformationLabel: UILabel!
-    
-    @IBOutlet weak var nowStateStackView: UIStackView!
-    
-    var selectedItem : Int? = nil
-    var examples = Array.init(repeating: "", count: 4)//[String]()
+    var selectedItem: Int? = nil
+    var examples = Array.init(repeating: "", count: 4)
     var counts = Array.init(repeating: 0, count: 4)
-    var todayDate: String!
+    var todayDate: String {
+        return dateFormatter.string(from: Date())
+    }
     var nowstate: String!
     var selectedDate: String!
     var entryAmount: Int = 0
@@ -45,19 +31,32 @@ class VoteViewController: UIViewController {
     var timer: Timer?
     let dateFormatter = DateFormatter()
     
+    // MARK: - IBOutlet
+    @IBOutlet weak var voteCollectionView: UICollectionView!
+    @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var voteEntryWinnerView: UIView!
+    @IBOutlet weak var calendarOpenButton: UIButton!
+    @IBOutlet weak var nowStateLabel: UILabel!
+    @IBOutlet weak var voteSendButton: OnePercentButton!
+    @IBOutlet weak var moveToYesterDay: UIButton!
+    @IBOutlet weak var moveToTomorrow: UIButton!
+    @IBOutlet weak var entryNumberLabel: UILabel!
+    @IBOutlet weak var winnerNumberLabel: UILabel!
+    @IBOutlet weak var timeInformationLabel: UILabel!
+    @IBOutlet weak var nowStateStackView: UIStackView!
     
     // MARK: - IBAction
     @IBAction func moveToYesterDay(_ sender: AnyObject) {
         if Defaults[.isSignIn] == false {
-//            signUpAlert()
             signUpAlert(viewController: self)
             self.voteCollectionView.deselectAllItems(animated: false)
             self.voteCollectionView.reloadData()
         } else {
-            let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: dateFormatter.date(from: selectedDate!)!)
-            let yesterdayString = dateFormatter.string(from: yesterDay!)
-
-            reloadOpenCalendarView(selectedDate: yesterdayString)
+            if let selectedDate = selectedDate {
+                let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: dateFormatter.date(from: selectedDate)!)
+                reloadOpenCalendarView(selectedDate: Time.sharedInstance.stringFromDateDotyyyyMMdd(date: yesterDay!))
+            }
+            
             if selectedDate == todayDate {
                 if Date() < Time.sharedInstance.getAnounceStartTime() {
                     getTodayQuestion()
@@ -67,20 +66,18 @@ class VoteViewController: UIViewController {
             } else {
                 initData()
             }
-            //initData()
             voteCollectionView.reloadData()
         }
     }
     
     @IBAction func moveToTomorrow(_ sender: AnyObject) {
         if Defaults[.isSignIn] == false {
-//            signUpAlert()
             signUpAlert(viewController: self)
             self.voteCollectionView.deselectAllItems(animated: false)
             self.voteCollectionView.reloadData()
         } else {
-            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: selectedDate)!)//Time.sharedInstance.dateFomatter.date(from: selectedDate)!)
-            let tomorrowString = dateFormatter.string(from: tomorrow!)//Time.sharedInstance.dateFomatter.string(from: tomorrow!)
+            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: selectedDate)!)
+            let tomorrowString = dateFormatter.string(from: tomorrow!)
             reloadOpenCalendarView(selectedDate: tomorrowString)
             if selectedDate == todayDate {
                 if Date() < Time.sharedInstance.getAnounceStartTime() {
@@ -91,14 +88,12 @@ class VoteViewController: UIViewController {
             } else {
                 initData()
             }
-            //zinitData()
             voteCollectionView.reloadData()
         }
     }
     
     @IBAction func calendarOpenButton(_ sender: AnyObject) {
         if Defaults[.isSignIn] == false {
-//            signUpAlert()
             signUpAlert(viewController: self)
             self.voteCollectionView.deselectAllItems(animated: false)
             self.voteCollectionView.reloadData()
@@ -112,20 +107,16 @@ class VoteViewController: UIViewController {
     
     @IBAction func voteSendButton(_ sender: AnyObject) {
         if selectedItem != nil { //투표
-            //request
             let parameters: Parameters = [
                 "user_id" : Defaults[.id],
-                "vote_date" : todayDate!,
+                "vote_date" : todayDate,
                 "vote_answer" : selectedItem!
             ]
             
             Alamofire
                 .request("http://onepercentserver.azurewebsites.net/OnePercentServer/insertVote.do", method: .post, parameters: parameters, encoding: JSONEncoding.default)
                 .log(level: .verbose)
-            //                .responseObject { (response : DataResponse<>) in
-            //            }
             
-            //realm
             let newVote = MyVote()
             newVote.myVoteDate = todayDate
             newVote.selectedNumber = selectedItem!
@@ -134,7 +125,6 @@ class VoteViewController: UIViewController {
                 uiRealm.add(newVote)
             }
             
-            //확인
             voteCollectionView.reloadData()
         } else {
             let alertController = UIAlertController(title: "", message: "보기를 선택해주세요ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
@@ -147,34 +137,24 @@ class VoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dateFormatter.dateFormat = "yyyy.MM.dd"
-        
-        //(response: DataResponse<HomeInformationResponse>) in
+        voteCollectionView.allowsMultipleSelection = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        //        initAlamofireFunction()
-        startTimer()
-        
-        todayDate = dateFormatter.string(from: Date())//Time.sharedInstance.dateFomatter.string(from: Date())
-        
         initCalendarFunction()
+        ///
+        dateformat()
+        ///
+        
         reloadOpenCalendarView(selectedDate: todayDate)
         
-        // TODO: 발표전이면 todayquestion에서 데이터 받기 발표후면 initData에서 받기
         if Date() < Time.sharedInstance.getAnounceStartTime() {
             getTodayQuestion()
         } else {
             initData()
         }
-        
         voteCollectionView.reloadData()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-        voteCollectionView.allowsMultipleSelection = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -204,6 +184,7 @@ class VoteViewController: UIViewController {
         timer = nil
     }
     
+    // MARK: - UI, Data Set Function
     func dateformat() {
         let now = Date()
         if selectedDate != todayDate {
@@ -212,43 +193,27 @@ class VoteViewController: UIViewController {
         } else if now > Time.sharedInstance.getAnounceStartTime() && now < Time.sharedInstance.getTomorrowVoteStartTime() {
             nowstate = "당첨자발표중"
             initVoteViewWithHiddenProperty(isHidevoteSendButton: true, isHidevoteEntryWinnerView: false, isHidevoteCollectionView: false, isHidenowStateView: true,nowStateLabelTxt: "", timeInformationLabelTxt: "")
-
+            
         } else if now > Time.sharedInstance.getVoteStartTime() && now < Time.sharedInstance.getVoteEndTime() {
             nowstate = "투표 중"
             voteSendButton.setTitle("투표하기", for: .normal)
-//            if uiRealm.objects(MyVote.self).count == 0 || uiRealm.objects(MyVote.self).last!.myVoteDate != todayDate! { //투표전
-//                initVoteViewWithHiddenProperty(voteSendButton: false, voteEntryWinnerView: true, voteCollectionView: true, nowStateLabel: true, nowStateLabelTxt: "")
-//            } else { //투표후
-//                initVoteViewWithHiddenProperty(voteSendButton: true, voteEntryWinnerView: true, voteCollectionView: false, nowStateLabel: false, nowStateLabelTxt: "오늘의 투표에 이미 참여하셨습니다")
-//            }
-        // TODO: 로그인여부확인
             initVoteViewWithHiddenProperty(isHidevoteSendButton: false, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: true, isHidenowStateView: true,nowStateLabelTxt: "", timeInformationLabelTxt: "")
-
+            
             if Defaults[.isSignIn] == true {
-                if let lastDate = uiRealm.objects(MyVote.self).sorted(byKeyPath: "myVoteDate").last?.myVoteDate, let today = todayDate {
-
-//                    if let today = todayDate {
-
-//                        if lastDate != today || uiRealm.objects(MyVote.self).count == 0 {
-//
-//                            initVoteViewWithHiddenProperty(isHidevoteSendButton: false, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: true, isHidenowStateView: true,nowStateLabelTxt: "", timeInformationLabelTxt: "")
-//
-//                        } else {
-                    if lastDate == today {
-
+                if let lastDate = uiRealm.objects(MyVote.self).sorted(byKeyPath: "myVoteDate").last?.myVoteDate {
+                    if lastDate == todayDate {
                         initVoteViewWithHiddenProperty(isHidevoteSendButton: true, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: false, isHidenowStateView: false,nowStateLabelTxt: "투표 완료", timeInformationLabelTxt: "결과 발표 : 06:45 PM")
-
-                        }
-//                    }
+                        
+                    }
                 }
             } else {
-
+                
                 initVoteViewWithHiddenProperty(isHidevoteSendButton: false, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: true, isHidenowStateView: true,nowStateLabelTxt: "", timeInformationLabelTxt: "")
             }
         } else if now < Time.sharedInstance.getVoteStartTime() {
             nowstate = "투표 대기 중"
             initVoteViewWithHiddenProperty(isHidevoteSendButton: true, isHidevoteEntryWinnerView: true, isHidevoteCollectionView: false, isHidenowStateView: false,nowStateLabelTxt: "투표 준비 중", timeInformationLabelTxt: "투표 시작 : 06:00 AM")
-
+            
             voteSendButton.setTitle(nowstate, for: .normal)
         } else  if now < Time.sharedInstance.getAnounceStartTime() {
             nowstate = "결과 집계 중"
@@ -258,71 +223,37 @@ class VoteViewController: UIViewController {
         }
     }
     
-    // MARK: - init Functions
-
     
     func initData() {
         if let todayVoteInfo = uiRealm.objects(Vote.self).filter("voteDate == '\(selectedDate!)'").first {
+            
+            //ui
             self.questionLabel.text = (todayVoteInfo.question)
-//            self.examples.insert(todayVoteInfo.ex4, at: 0)
-//            self.examples.insert(todayVoteInfo.ex3, at: 0)
-//            self.examples.insert(todayVoteInfo.ex2, at: 0)
-//            self.examples.insert(todayVoteInfo.ex1, at: 0)
-//
+            
+            //data
             examples[0] = todayVoteInfo.ex1
             examples[1] = todayVoteInfo.ex2
             examples[2] = todayVoteInfo.ex3
             examples[3] = todayVoteInfo.ex4
-//
-//            self.counts.insert(todayVoteInfo.count4, at: 0)
-//            self.counts.insert(todayVoteInfo.count3, at: 0)
-//            self.counts.insert(todayVoteInfo.count2, at: 0)
-//            self.counts.insert(todayVoteInfo.count1, at: 0)
-
+            
             counts[0] = todayVoteInfo.count1
             counts[1] = todayVoteInfo.count2
             counts[2] = todayVoteInfo.count3
             counts[3] = todayVoteInfo.count4
-
-            self.entryAmount = todayVoteInfo.entryAmount
-            self.entryNumberLabel.text = String(entryAmount)
             
+            self.entryAmount = todayVoteInfo.entryAmount
+            
+            //ui
+            self.entryNumberLabel.text = String(entryAmount)
             self.winnerNumberLabel.text = "오늘의 1% 는" + String(todayVoteInfo.winnerAmount) + "명 입니다"
             
-            findMaxVotedIndex()
-        } else {
+            findMostVotedIndex()
         }
     }
-    //    func initAlamofireFunction() {
-    //        Alamofire
-    //            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/main.do", method: .get)
-    //            .log(level: .verbose)
-    //            .responseObject { (response: DataResponse<HomeInformationResponse>) in
-    //                if let mainResult = response.result.value?.mainResult {
-    //                    for result in mainResult {
-    //                        if let question = result.question {
-    //                            self.questionLabel.text = question
-    //                        }
-    //
-    //                        for example in result.example! {
-    //                            if let q = example.firstQuestion {
-    //                                self.examples.append(q)
-    //                            }
-    //                            if let q = example.secondQuestion {
-    //                                self.examples.append(q)
-    //                            }
-    //                            if let q = example.thirdQuestion {
-    //                                self.examples.append(q)
-    //                            }
-    //                            if let q = example.fourthQuestion {
-    //                                self.examples.append(q)
-    //                            }
-    //                        }
-    //                    }
-    //                    self.voteCollectionView.reloadData()
-    //                }
-    //        }
-    //    }
+    
+    // TODO: UI, Data 함수 나누기
+    
+    
     func getTodayQuestion() {
         Alamofire
             .request("http://onepercentserver.azurewebsites.net/OnePercentServer/todayQuestion.do")
@@ -331,19 +262,24 @@ class VoteViewController: UIViewController {
                 if let todayQuestion = response.result.value?.todayQuestion {
                     for question in todayQuestion {
                         self.questionLabel.text = question.question
-                        if let ex1 = question.ex1 {
-                            self.examples[0] = ex1
-                        } else { self.examples[0] = "데이터없음"}
-                        if let ex2 = question.ex2 {
-                            self.examples[1] = ex2
-                        } else { self.examples[1] = "데이터없음" }
-                        if let ex3 = question.ex3 {
-                            self.examples[2] = ex3
-                        } else { self.examples[2] = "데이터없음" }
-                        if let ex4 = question.ex4 {
-                            self.examples[3] = ex4
-                        } else { self.examples[3] = "데이터없음" }
-                    }
+                        print("question>>\(question.ex1)>>\(question.ex2)")
+//                            if let ex1 = question.ex1 {
+//                                self.examples[0] = ex1
+//                            } else { self.examples[0] = "데이터없음"}
+//                            if let ex2 = question.ex2 {
+//                                self.examples[1] = ex2
+//                            } else { self.examples[1] = "데이터없음" }
+//                            if let ex3 = question.ex3 {
+//                                self.examples[2] = ex3
+//                            } else { self.examples[2] = "데이터없음" }
+//                            if let ex4 = question.ex4 {
+//                                self.examples[3] = ex4
+//                            } else { self.examples[3] = "데이터없음" }
+                        self.examples[0] = question.ex1
+                        self.examples[1] = question.ex2
+                        self.examples[2] = question.ex3
+                        self.examples[3] = question.ex4
+                        }
                 }
                 
         }
@@ -355,20 +291,20 @@ class VoteViewController: UIViewController {
     }
     
     
-    func initVoteViewWithHiddenProperty(isHidevoteSendButton: Bool, isHidevoteEntryWinnerView: Bool, isHidevoteCollectionView: Bool, isHidenowStateView: Bool,nowStateLabelTxt: String, timeInformationLabelTxt: String) {
+    func initVoteViewWithHiddenProperty(isHidevoteSendButton: Bool, isHidevoteEntryWinnerView: Bool, isHidevoteCollectionView: Bool, isHidenowStateView: Bool,nowStateLabelTxt: String, timeInformationLabelTxt: String) { //이름 바꾸기 setView
         self.voteSendButton.isHidden = isHidevoteSendButton
         self.voteEntryWinnerView.isHidden = isHidevoteEntryWinnerView
         self.voteCollectionView.allowsSelection = isHidevoteCollectionView
-//        self.nowStateLabel.isHidden = isHidenowStateView
+        //        self.nowStateLabel.isHidden = isHidenowStateView
         self.nowStateStackView.isHidden = isHidenowStateView
         self.nowStateLabel.text = nowStateLabelTxt
         self.timeInformationLabel.text = timeInformationLabelTxt
     }
     
-    func reloadOpenCalendarView(selectedDate: String) {
+    func reloadOpenCalendarView(selectedDate: String) { //ui // , data setSelectedDate 함수로 나누기
         self.selectedDate = selectedDate
         calendarOpenButton.setTitle(selectedDate, for: .normal)
-        let dateSelectedDate = dateFormatter.date(from: selectedDate)//Time.sharedInstance.dateFromStringDotyyyyMMdd(date: selectedDate)//Time.sharedInstance.dateFomatter.date(from: selectedDate)
+        let dateSelectedDate = dateFormatter.date(from: selectedDate)
         
         if dateSelectedDate?.compare(Time.sharedInstance.getAppStartDate()) == ComparisonResult.orderedSame {
             moveToYesterDay.isHidden = true
@@ -381,41 +317,13 @@ class VoteViewController: UIViewController {
         else { moveToTomorrow.isHidden = false }
     }
     
-    func findMaxVotedIndex() {
+    func findMostVotedIndex() { //고민
         let maxN = counts.reduce(0) { currentMax, i in max(currentMax, i) }
         maxVotedIndex = counts.index(of: maxN)
     }
-    
-//    func signUpAlert() {
-////        if Defaults[.isSignIn] == false {
-//            let alertController = UIAlertController(title: "", message: "인증이 필요한 서비스입니다ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
-//            
-//            alertController.addAction(UIAlertAction(title: "로그인", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController")
-//                self.present(vc!, animated: true, completion: nil)
-//            })
-//            
-//            alertController.addAction(UIAlertAction(title: "회원가입", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController")
-//                self.present(vc!, animated: true, completion: nil)
-//            })
-//            
-////            alertController.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default, handler: nil))
-//        
-//            alertController.addAction(UIAlertAction(title: "cancle", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-//                self.voteCollectionView.deselectAllItems(animated: false)
-//                self.voteCollectionView.reloadData()
-//            })
-//        
-//            self.present(alertController, animated: true, completion: nil)
-//        }
-
-//    }
 }
 
-// MARK: - public function
-
-// MARK: - extension VoteViewController
+// MARK: - extension UICollectionViewDataSource
 extension VoteViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return examples.count
@@ -427,7 +335,7 @@ extension VoteViewController: UICollectionViewDataSource {
         
         cell.mySelectPresentImageView.isHidden = true
         
-        if nowstate == "당첨자발표중" || Time.sharedInstance.dateFromStringDotyyyyMMdd(date: selectedDate) != Time.sharedInstance.dateFromStringDotyyyyMMdd(date: todayDate) {//dateFomatter.date(from: selectedDate) != Time.sharedInstance.dateFomatter.date(from: todayDate) {
+        if nowstate == "당첨자발표중" || Time.sharedInstance.dateFromStringDotyyyyMMdd(date: selectedDate) != Time.sharedInstance.dateFromStringDotyyyyMMdd(date: todayDate) {
             cell.voteResultView.isHidden = false
             let count = counts[indexPath.row]
             let rate:CGFloat = CGFloat(count) / CGFloat(entryAmount)
@@ -466,6 +374,7 @@ extension VoteViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - extension UICollectionViewDelegate
 extension VoteViewController: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         let cell = voteCollectionView.cellForItem(at: indexPath)
@@ -475,12 +384,11 @@ extension VoteViewController: UICollectionViewDelegate {
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if Defaults[.isSignIn] == false {
-//            signUpAlert()
             signUpAlert(viewController: self)
             self.voteCollectionView.deselectAllItems(animated: false)
             self.voteCollectionView.reloadData()
         }
-
+        
         if let cell = voteCollectionView.cellForItem(at: indexPath) {
             selectedItem = indexPath.row
             cell.backgroundColor = UIColor(red: 85, green: 160, blue: 214)
@@ -490,7 +398,7 @@ extension VoteViewController: UICollectionViewDelegate {
         if let voteCollectionViewCell = voteCollectionView.cellForItem(at: indexPath) as? VoteCollectionViewCell {
             voteCollectionViewCell.mySelectPresentImageView.isHidden = false
         }
-//        voteCollectionViewCell.questionLabel.textColor = UIColor.white
+        //        voteCollectionViewCell.questionLabel.textColor = UIColor.white
     }
     
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -499,19 +407,21 @@ extension VoteViewController: UICollectionViewDelegate {
         }
         let voteCollectionViewCell = voteCollectionView.cellForItem(at: indexPath) as! VoteCollectionViewCell
         voteCollectionViewCell.mySelectPresentImageView.isHidden = true
-//        voteCollectionViewCell.questionLabel.textColor = UIColor.black
+        //        voteCollectionViewCell.questionLabel.textColor = UIColor.black
     }
 }
 
+// MARK: - extension UICollectionViewDelegateFlowLayout
 extension VoteViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellSize = CGSize(width: voteCollectionView.frame.width, height: (voteCollectionView.frame.height - 40) / 4)//voteCollectionView.frame.size
+        let cellSize = CGSize(width: voteCollectionView.frame.width, height: (voteCollectionView.frame.height - 40) / 4)
         return cellSize
         
     }
-
+    
 }
 
+// MARK: - extension CalendarViewControllerDelegate
 extension VoteViewController: CalendarViewControllerDelegate {
     func dateSelectDone(date: String) {
         reloadOpenCalendarView(selectedDate: date)
@@ -525,11 +435,11 @@ extension VoteViewController: CalendarViewControllerDelegate {
         } else {
             initData()
         }
-        //initData()
         voteCollectionView.reloadData()
     }
 }
 
+// MARK: - extension UICollectionView
 extension UICollectionView {
     func deselectAllItems(animated: Bool = false) {
         for indexPath in self.indexPathsForSelectedItems ?? [] {

@@ -7,89 +7,90 @@
 //
 
 import UIKit
+import SwiftyUserDefaults
 
 class MoreTableViewController: UITableViewController {
 
+    //MARK: - Property
+    var textLabelArray: [String] = []
+    
+    //MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        guard let title = title else {
+            return
+        }
+        switch title {
+        case "계정관리":
+            let arr = ["나의정보","pw변경","마이페이지","회원탈퇴","로그아웃"]
+            textLabelArray.append(contentsOf: arr)
+        case "공지사항": break
+        case "고객센터":
+            let arr = ["Q&A(문의하기)","FAQ(도움말)","약관및정책","회사소개"]
+            textLabelArray.append(contentsOf: arr)
+        case "push": break
+        case "고객센터/약관및정책":
+            let arr = ["이용약관","개인정보처리방침","운영정책"]
+            textLabelArray.append(contentsOf: arr)
+        default: break
+            
+        }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-
+    // MARK: - Table View Data Source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return textLabelArray.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MoreTableViewCell", for: indexPath) as! MoreTableViewCell
+        cell.nameLabel.text = textLabelArray[indexPath.row]
+        
+        switch title! {
+        case "계정관리":
+            if indexPath.row == 0 {
+                cell.detailTextLabel?.text = Defaults[.id]
+            } else {
+                cell.detailTextLabel?.text = ">"
+            }
+        default:
+            cell.detailTextLabel?.text = ""
+        }
+        
         return cell
     }
-    */
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var viewController: UIViewController? = nil
+        
+        guard let labelText = tableView.cellForRow(at: indexPath)?.textLabel?.text else {
+            return
+        }
+        
+        switch labelText {
+        case "Q&A(문의하기)":
+            viewController = self.storyboard?.instantiateViewController(withIdentifier: "MoreWithViewViewController")
+            viewController?.title = "고객센터/문의하기"
+        case "약관및정책":
+            viewController = self.storyboard?.instantiateViewController(withIdentifier: "MoreTableViewController")
+            viewController?.title = "고객센터/약관및정책"
+            print("약관및정책")
+        
+        case "로그아웃":
+            Defaults[.isSignIn] = false
+        default: break
+        }
+        
+        if let viewController = viewController {
+            self.navigationController?.pushViewController(viewController , animated: true)
+            
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+

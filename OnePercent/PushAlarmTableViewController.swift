@@ -10,9 +10,45 @@ import UIKit
 
 class PushAlarmTableViewController: UITableViewController {
 
+    @IBOutlet weak var pushAlarmVoteStart: UISwitch!
+    @IBOutlet weak var silenceVoteStart: UISwitch!
+    
+    @IBOutlet weak var pushAlarmVoteEnd: UISwitch!
+    @IBOutlet weak var silenceVoteEnd: UISwitch!
+    
+    @IBOutlet weak var pushAlarmWinner: UISwitch!
+    @IBOutlet weak var silenceWinner: UISwitch!
+    
+    @IBAction func pushAlarmVoteStart(_ sender: Any) {
+        if !pushAlarmVoteStart.isOn {
+            silenceVoteStart.isOn = false
+        }
+    }
+    
+    @IBAction func silenceVoteStart(_ sender: Any) {
+        
+    }
+    
+    @IBAction func pushAlarmVoteEnd(_ sender: Any) {
+        if !pushAlarmVoteEnd.isOn {
+            silenceVoteEnd.isOn = false
+        }
+    }
+    
+    @IBAction func silenceVoteEnd(_ sender: Any) {
+    }
+    
+    @IBAction func pushAlarmWinner(_ sender: Any) {
+        if !pushAlarmWinner.isOn {
+            silenceWinner.isOn = false
+        }
+    }
+    
+    @IBAction func silenceWinner(_ sender: Any) {
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -29,14 +65,14 @@ class PushAlarmTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 2
     }
-
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)

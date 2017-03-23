@@ -38,10 +38,9 @@ class LoginViewController: UIViewController {
                 print(s)
             }
             .addDisposableTo(disposeBag)
-
         
         let userIdValid = idTextField.rx.text.asDriver().map {
-            $0!.utf8.count > 10 && $0?.rangeOfCharacter(from: NSCharacterSet.decimalDigits, options: NSString.CompareOptions(), range: nil) != nil && $0?.rangeOfCharacter(from: NSCharacterSet.letters) == nil
+            $0!.utf8.count > 9 && $0?.rangeOfCharacter(from: NSCharacterSet.decimalDigits, options: NSString.CompareOptions(), range: nil) != nil && $0?.rangeOfCharacter(from: NSCharacterSet.letters) == nil
         }
         
         let userPasswordValid = passwordTextField.rx.text.asDriver().map {
@@ -122,15 +121,4 @@ class LoginViewController: UIViewController {
                 }
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

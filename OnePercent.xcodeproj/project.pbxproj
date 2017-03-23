@@ -31,7 +31,6 @@
 		C98EB05B1DC2EA6400B22C16 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05A1DC2EA6400B22C16 /* VoteViewController.swift */; };
 		C98EB05D1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05C1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift */; };
 		C98EB0601DC3464900B22C16 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05F1DC3464900B22C16 /* User.swift */; };
-		C9A93D741DCB0849008B06C2 /* HomeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A93D731DCB0849008B06C2 /* HomeInformation.swift */; };
 		C9AE60FE1E7192E300B4A081 /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE60FD1E7192E300B4A081 /* MoreTableViewController.swift */; };
 		C9AE61001E729ED200B4A081 /* MoreWithViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE60FF1E729ED200B4A081 /* MoreWithViewViewController.swift */; };
 		C9AE61021E729EFD00B4A081 /* MoreWithTableVIewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE61011E729EFD00B4A081 /* MoreWithTableVIewViewController.swift */; };
@@ -43,6 +42,7 @@
 		C9C6108F1DC1B696005849C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C6108E1DC1B696005849C3 /* LoginViewController.swift */; };
 		C9CAC9EC1E767CED009A4836 /* MoreList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CAC9EB1E767CED009A4836 /* MoreList.swift */; };
 		C9CAC9EE1E79277B009A4836 /* PushAlarmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CAC9ED1E79277B009A4836 /* PushAlarmTableViewController.swift */; };
+		C9CAC9F01E8016BF009A4836 /* Onepercent+DefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CAC9EF1E8016BF009A4836 /* Onepercent+DefaultKeys.swift */; };
 		C9CDA7F11DC752290044CB65 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CDA7F01DC752290044CB65 /* HTTPMethod.swift */; };
 		C9CDA7F51DC75DAC0044CB65 /* Alamofire+OnePercent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CDA7F41DC75DAC0044CB65 /* Alamofire+OnePercent.swift */; };
 		C9CDA7F71DC75FAA0044CB65 /* AlamofireLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CDA7F61DC75FAA0044CB65 /* AlamofireLogger.swift */; };
@@ -51,7 +51,6 @@
 		C9EF25A01E55CAC50023C494 /* Gift.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF259F1E55CAC50023C494 /* Gift.swift */; };
 		C9EF25A21E55D9340023C494 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF25A11E55D9340023C494 /* Question.swift */; };
 		C9F0D37F1DC649C300B9B03B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F0D37E1DC649C300B9B03B /* SignUpViewController.swift */; };
-		C9F0D3821DC64BD500B9B03B /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F0D3811DC64BD500B9B03B /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,7 +85,6 @@
 		C98EB05A1DC2EA6400B22C16 /* VoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VoteViewController.swift; path = Sources/VoteViewController.swift; sourceTree = "<group>"; };
 		C98EB05C1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VoteCollectionViewCell.swift; path = Sources/VoteCollectionViewCell.swift; sourceTree = "<group>"; };
 		C98EB05F1DC3464900B22C16 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Sources/User.swift; sourceTree = "<group>"; };
-		C9A93D731DCB0849008B06C2 /* HomeInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInformation.swift; sourceTree = "<group>"; };
 		C9AE60FD1E7192E300B4A081 /* MoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
 		C9AE60FF1E729ED200B4A081 /* MoreWithViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreWithViewViewController.swift; sourceTree = "<group>"; };
 		C9AE61011E729EFD00B4A081 /* MoreWithTableVIewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreWithTableVIewViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +96,7 @@
 		C9C6108E1DC1B696005849C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Sources/LoginViewController.swift; sourceTree = "<group>"; };
 		C9CAC9EB1E767CED009A4836 /* MoreList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreList.swift; sourceTree = "<group>"; };
 		C9CAC9ED1E79277B009A4836 /* PushAlarmTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAlarmTableViewController.swift; sourceTree = "<group>"; };
+		C9CAC9EF1E8016BF009A4836 /* Onepercent+DefaultKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Onepercent+DefaultKeys.swift"; sourceTree = "<group>"; };
 		C9CDA7F01DC752290044CB65 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		C9CDA7F41DC75DAC0044CB65 /* Alamofire+OnePercent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire+OnePercent.swift"; sourceTree = "<group>"; };
 		C9CDA7F61DC75FAA0044CB65 /* AlamofireLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireLogger.swift; sourceTree = "<group>"; };
@@ -106,7 +105,6 @@
 		C9EF259F1E55CAC50023C494 /* Gift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gift.swift; sourceTree = "<group>"; };
 		C9EF25A11E55D9340023C494 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		C9F0D37E1DC649C300B9B03B /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpViewController.swift; path = Sources/SignUpViewController.swift; sourceTree = "<group>"; };
-		C9F0D3811DC64BD500B9B03B /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = Sources/SettingViewController.swift; sourceTree = "<group>"; };
 		D90E4C80152C792A97308648 /* Pods_OnePercentUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnePercentUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD5D3F20F52375E1D82A2789 /* Pods-OnePercentTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePercentTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnePercentTests/Pods-OnePercentTests.release.xcconfig"; sourceTree = "<group>"; };
 		E666AEE99FF67B194C2EAED3 /* Pods-OnePercentUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePercentUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnePercentUITests/Pods-OnePercentUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -225,7 +223,6 @@
 				C98EB05F1DC3464900B22C16 /* User.swift */,
 				C9CDA7F01DC752290044CB65 /* HTTPMethod.swift */,
 				C9CDA7F81DC889FA0044CB65 /* EntryNumber.swift */,
-				C9A93D731DCB0849008B06C2 /* HomeInformation.swift */,
 				C95338581DCEE0EE00FDE4F3 /* SignUpResult.swift */,
 				C953385A1DCEE10B00FDE4F3 /* LoginResult.swift */,
 				C940CE571E124EBC00E2AF9E /* MyVote.swift */,
@@ -234,6 +231,7 @@
 				C9EF259F1E55CAC50023C494 /* Gift.swift */,
 				C9EF25A11E55D9340023C494 /* Question.swift */,
 				C9CAC9EB1E767CED009A4836 /* MoreList.swift */,
+				C9CAC9EF1E8016BF009A4836 /* Onepercent+DefaultKeys.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -285,14 +283,6 @@
 			name = SignUp;
 			sourceTree = "<group>";
 		};
-		C9F0D3801DC64BC000B9B03B /* Setting */ = {
-			isa = PBXGroup;
-			children = (
-				C9F0D3811DC64BD500B9B03B /* SettingViewController.swift */,
-			);
-			name = Setting;
-			sourceTree = "<group>";
-		};
 		C9F0D3831DC64E7600B9B03B /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,7 +308,6 @@
 				C98EB05E1DC3462800B22C16 /* Model */,
 				C97B1AB21DD06A90009CC477 /* More */,
 				C9F0D3831DC64E7600B9B03B /* Home */,
-				C9F0D3801DC64BC000B9B03B /* Setting */,
 				C9F0D37D1DC6496800B9B03B /* SignUp */,
 				C98EB0591DC2EA4400B22C16 /* Vote */,
 				C9C6108B1DC1B62C005849C3 /* Login */,
@@ -471,7 +460,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9A93D741DCB0849008B06C2 /* HomeInformation.swift in Sources */,
 				C95338591DCEE0EE00FDE4F3 /* SignUpResult.swift in Sources */,
 				C98EB05B1DC2EA6400B22C16 /* VoteViewController.swift in Sources */,
 				C9EF25A21E55D9340023C494 /* Question.swift in Sources */,
@@ -481,6 +469,7 @@
 				C940CE5A1E125CDE00E2AF9E /* CalendarViewController.swift in Sources */,
 				C9CAC9EC1E767CED009A4836 /* MoreList.swift in Sources */,
 				C9CAC9EE1E79277B009A4836 /* PushAlarmTableViewController.swift in Sources */,
+				C9CAC9F01E8016BF009A4836 /* Onepercent+DefaultKeys.swift in Sources */,
 				C9CDA7F91DC889FA0044CB65 /* EntryNumber.swift in Sources */,
 				C9AE61041E729F4000B4A081 /* MoreMainTableViewController.swift in Sources */,
 				C9EF25A01E55CAC50023C494 /* Gift.swift in Sources */,
@@ -494,7 +483,6 @@
 				C9AE60FE1E7192E300B4A081 /* MoreTableViewController.swift in Sources */,
 				C91D92F51E0CED7D007B5034 /* OnePercentColor.swift in Sources */,
 				C912B6B51E1E4D9B0023A49F /* Time.swift in Sources */,
-				C9F0D3821DC64BD500B9B03B /* SettingViewController.swift in Sources */,
 				C9AE61061E72A3FF00B4A081 /* MoreTableViewCell.swift in Sources */,
 				C96002311E65400D00658F61 /* OnePercentSignUpAlert.swift in Sources */,
 				C98EB0601DC3464900B22C16 /* User.swift in Sources */,

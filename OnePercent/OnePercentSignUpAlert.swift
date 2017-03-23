@@ -23,8 +23,6 @@ func signUpAlert(viewController: UIViewController) {
     })
     
     alertController.addAction(UIAlertAction(title: "cancel", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-//        viewController.voteCollectionView.deselectAllItems(animated: false)
-//        viewController.voteCollectionView.reloadData()
     })
     
     viewController.present(alertController, animated: true, completion: nil)

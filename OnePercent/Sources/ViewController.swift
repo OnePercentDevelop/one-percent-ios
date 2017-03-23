@@ -15,26 +15,24 @@ import AlamofireImage
 class ViewController: UIViewController {
     
     // MARK: - Property
+    var timer: Timer?
+    var todayDate: String {
+        return Time.sharedInstance.stringFromDateDotyyyyMMdd(date: Date())
+    }
+    
+    // MARK: - IBOutlet
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var timeBeforeStateLabel: UILabel!
     @IBOutlet weak var nowStateLabel: UILabel!
     @IBOutlet weak var entryNumberLabel: UILabel!
     @IBOutlet weak var productLabel: UILabel!
     @IBOutlet weak var productImageView: UIImageView!
-    
     @IBOutlet weak var informationView: UIView!
-    var timer: Timer?
     
-    var todayDate: String {
-        return "2017.03.01"
-        //        return dateFormatter.string(from: Date())
-    }
     // MARK: - IBAction
-    
     @IBAction func openInformatioinViewButton(_ sender: AnyObject) {
         informationView.isHidden = false
     }
-    
     @IBAction func closeInformatioinViewButton(_ sender: AnyObject) {
         informationView.isHidden = true
     }
@@ -62,19 +60,13 @@ class ViewController: UIViewController {
     // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
-        setVoteNumber()
         setGiftImage()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         startTimer()
+        setVoteNumber()
         informationView.isHidden = true
     }
     
@@ -83,7 +75,7 @@ class ViewController: UIViewController {
         stopTimer()
     }
     
-    // MARK: - Personal Function
+    // MARK: - UI Set Function
     func dateformat() {
         var nowState = ""
         let now = Date()
@@ -106,9 +98,7 @@ class ViewController: UIViewController {
             nowState = "당첨자발표중"
             timeLabel.text = stringFromTimeInterval(interval: Time.sharedInstance.getTomorrowVoteStartTime().timeIntervalSince(now))
         }
-        
         nowStateLabel.text = nowState
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     func stringFromTimeInterval(interval:TimeInterval) -> String {
@@ -120,6 +110,7 @@ class ViewController: UIViewController {
         return String(format: "%0.2d:%0.2d:%0.2d",hours,minutes,seconds)
     }
     
+    // MARK: - Data Set Function
     func setVoteNumber() {
         let todayDate = Time.sharedInstance.dateyyyyMMdd(date: Date())
         let URL = "http://onepercentserver.azurewebsites.net/OnePercentServer/voteNumber.do"
@@ -150,7 +141,6 @@ class ViewController: UIViewController {
                         if let giftName = n.giftName {
                             self.productLabel.text = giftName
                         }
-                        //png 처리
                         if let giftPng = n.giftPng {
                             let url = "http://onepercentserver.azurewebsites.net/OnePercentServer/resources/common/image/" + giftPng
                             self.productImageView.af_setImage(withURL: NSURL(string: url) as! URL)

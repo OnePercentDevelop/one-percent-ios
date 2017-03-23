@@ -9,6 +9,5 @@
 import UIKit
 
 class WinnerCollectionViewCell: UICollectionViewCell {
-    
     @IBOutlet weak var winnerIdLabel: UILabel!
 }
