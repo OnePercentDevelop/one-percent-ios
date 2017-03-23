@@ -56,20 +56,8 @@ class VoteViewController: UIViewController {
                 let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: dateFormatter.date(from: selectedDate)!)
                 setSelectedDate(new: Time.sharedInstance.stringFromDateDotyyyyMMdd(date: yesterDay!))
                 setCalendarNavigationView()
-                //reloadOpenCalendarView(selectedDate: Time.sharedInstance.stringFromDateDotyyyyMMdd(date: yesterDay!))
+                setData()
             }
-            
-            /*if selectedDate == todayDate {
-                if Date() < Time.sharedInstance.getAnounceStartTime() {
-                    setTodayQuestion()
-                } else {
-                    setSelectedDatedData()
-                }
-            } else {
-                setSelectedDatedData()
-            }
-            voteCollectionView.reloadData()*/
-            setData()
         }
     }
     
@@ -80,20 +68,8 @@ class VoteViewController: UIViewController {
             self.voteCollectionView.reloadData()
         } else {
             let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: selectedDate)!)
-            //let tomorrowString = dateFormatter.string(from: tomorrow!)
             setSelectedDate(new: Time.sharedInstance.stringFromDateDotyyyyMMdd(date: tomorrow!))
             setCalendarNavigationView()
-            //reloadOpenCalendarView(selectedDate: tomorrowString)
-            /*if selectedDate == todayDate {
-                if Date() < Time.sharedInstance.getAnounceStartTime() {
-                    setTodayQuestion()
-                } else {
-                    setSelectedDatedData()
-                }
-            } else {
-                setSelectedDatedData()
-            }
-            voteCollectionView.reloadData()*/
             setData()
         }
     }
@@ -150,20 +126,8 @@ class VoteViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setSelectedDate(new: todayDate)
-        //initCalendarFunction()
-        ///
         dateformat()
-        ///
-        
-        //reloadOpenCalendarView(selectedDate: todayDate)
         setCalendarNavigationView()
-        
-        /*if Date() < Time.sharedInstance.getAnounceStartTime() {
-            setTodayQuestion()
-        } else {
-            setSelectedDatedData()
-        }
-        voteCollectionView.reloadData()*/
         setData()
     }
     
@@ -230,12 +194,7 @@ class VoteViewController: UIViewController {
             
         }
     }
-    
-    //func initCalendarFunction() {
-    //    calendarViewController = (self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as! CalendarViewController) //viewDidLoad
-    //    selectedDate = todayDate //setSelectedDate
-    //}
-    
+
     // MARK: - UI Set Function
     func setView(isHidevoteSendButton: Bool, isHidevoteEntryWinnerView: Bool, isHidevoteCollectionView: Bool, isHidenowStateView: Bool,nowStateLabelTxt: String, timeInformationLabelTxt: String) {
         self.voteSendButton.isHidden = isHidevoteSendButton
@@ -265,24 +224,6 @@ class VoteViewController: UIViewController {
         }
     }
     
-    /*func reloadOpenCalendarView(selectedDate: String) { //ui setNavigationView // , data setSelectedDate 함수로 나누기
-        self.selectedDate = selectedDate
-        calendarOpenButton.setTitle(selectedDate, for: .normal)
-        let dateSelectedDate = dateFormatter.date(from: selectedDate)
-        
-        if dateSelectedDate?.compare(Time.sharedInstance.getAppStartDate()) == ComparisonResult.orderedSame {
-            moveToYesterDay.isHidden = true
-        } else {
-            moveToYesterDay.isHidden = false
-        }
-        
-        // TODO: 날짜비교로 수정하기
-        if selectedDate == todayDate { moveToTomorrow.isHidden = true }
-        else { moveToTomorrow.isHidden = false }
-    }*/
-    
-   
-    
     // MARK: - Data Set Function
     func setData() {
         if selectedDate == todayDate {
@@ -297,7 +238,7 @@ class VoteViewController: UIViewController {
         voteCollectionView.reloadData()
     }
     
-     func findMostVotedIndex() { //고민
+     func findMostVotedIndex() {
         let maxN = counts.reduce(0) { currentMax, i in max(currentMax, i) }
         maxVotedIndex = counts.index(of: maxN)
     }
@@ -306,7 +247,7 @@ class VoteViewController: UIViewController {
         selectedDate = date
     }
     
-    func setTodayQuestion() { //고민
+    func setTodayQuestion() {
         Alamofire
             .request("http://onepercentserver.azurewebsites.net/OnePercentServer/todayQuestion.do")
             .log(level: .verbose)
@@ -335,15 +276,11 @@ class VoteViewController: UIViewController {
         }
     }
     
-    func setSelectedDatedData() { //고민
+    func setSelectedDatedData() {
         /*guard let todayVoteInfo = uiRealm.objects(Vote.self).filter("voteDate == '\(selectedDate!)'").first else {
             return
         }*/
          if let todayVoteInfo = uiRealm.objects(Vote.self).filter("voteDate == '\(selectedDate!)'").first {
-        
-        //ui
-        self.questionLabel.text = (todayVoteInfo.question)
-        
         //TODO: 함수화??
         examples[0] = todayVoteInfo.ex1
         examples[1] = todayVoteInfo.ex2
@@ -356,21 +293,12 @@ class VoteViewController: UIViewController {
         counts[3] = todayVoteInfo.count4
         
         self.entryAmount = todayVoteInfo.entryAmount
-        
-        //ui
-        self.entryNumberLabel.text = String(entryAmount)
-        self.winnerNumberLabel.text = "오늘의 1% 는" + String(todayVoteInfo.winnerAmount) + "명 입니다"
-        
+
         findMostVotedIndex()
         
-        //setView(question: todayVoteInfo.question, entryAmount: String(todayVoteInfo.entryAmount), winnerAmount: String(todayVoteInfo.winnerAmount))
-         } else {
-            //setView(question: "aa", entryAmount: "0", winnerAmount: "0")
-
-
-        }
+        setView(question: todayVoteInfo.question, entryAmount: String(todayVoteInfo.entryAmount), winnerAmount: String(todayVoteInfo.winnerAmount))
+         }
     }
-
 }
 
 // MARK: - extension UICollectionViewDataSource
@@ -473,18 +401,6 @@ extension VoteViewController: CalendarViewControllerDelegate {
     func dateSelectDone(date: String) {
         setSelectedDate(new: date)
         setCalendarNavigationView()
-        //reloadOpenCalendarView(selectedDate: date)
-        // TODO: 오늘날짜 선택시 발표전이면 todayquestion에서 데이터 받기 그외 setSelectedDatedData에서 받기
-        /*if date == todayDate {
-            if Date() < Time.sharedInstance.getAnounceStartTime() {
-                setTodayQuestion()
-            } else {
-                setSelectedDatedData()
-            }
-        } else {
-            setSelectedDatedData()
-        }
-        voteCollectionView.reloadData()*/
         setData()
     }
 }
