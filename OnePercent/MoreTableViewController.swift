@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyUserDefaults
+import RealmSwift
 
 class MoreTableViewController: UITableViewController {
 
@@ -24,15 +25,11 @@ class MoreTableViewController: UITableViewController {
         case "계정관리":
             let arr = ["나의정보","pw변경","마이페이지","회원탈퇴","로그아웃"]
             textLabelArray.append(contentsOf: arr)
-        case "공지사항": break
         case "고객센터":
             let arr = ["Q&A(문의하기)","FAQ(도움말)","약관및정책","회사소개"]
             textLabelArray.append(contentsOf: arr)
         case "push": break
-        case "고객센터/약관및정책":
-            let arr = ["이용약관","개인정보처리방침","운영정책"]
-            textLabelArray.append(contentsOf: arr)
-        default: break
+                default: break
             
         }
     }
@@ -61,7 +58,6 @@ class MoreTableViewController: UITableViewController {
         default:
             cell.detailTextLabel?.text = ""
         }
-        
         return cell
     }
 
@@ -83,12 +79,15 @@ class MoreTableViewController: UITableViewController {
         
         case "로그아웃":
             Defaults[.isSignIn] = false
+            try! uiRealm.write {
+                //todo: db에서 내가투표한 목록만 삭제
+                //uiRealm.deleteAll()
+            }
         default: break
         }
         
         if let viewController = viewController {
             self.navigationController?.pushViewController(viewController , animated: true)
-            
         }
     }
 }

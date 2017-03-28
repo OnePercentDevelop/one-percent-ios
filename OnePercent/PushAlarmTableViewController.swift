@@ -7,45 +7,31 @@
 //
 
 import UIKit
+import SwiftyUserDefaults
 
 class PushAlarmTableViewController: UITableViewController {
 
-    @IBOutlet weak var pushAlarmVoteStart: UISwitch!
-    @IBOutlet weak var silenceVoteStart: UISwitch!
+    @IBOutlet weak var pushAlarmSwitch: UISwitch!
     
-    @IBOutlet weak var pushAlarmVoteEnd: UISwitch!
-    @IBOutlet weak var silenceVoteEnd: UISwitch!
+    @IBOutlet weak var silenceSwitch: UISwitch!
     
-    @IBOutlet weak var pushAlarmWinner: UISwitch!
-    @IBOutlet weak var silenceWinner: UISwitch!
-    
-    @IBAction func pushAlarmVoteStart(_ sender: Any) {
-        if !pushAlarmVoteStart.isOn {
-            silenceVoteStart.isOn = false
+    @IBAction func pushAlarmSwitch(_ sender: Any) {
+        if !pushAlarmSwitch.isOn {
+            silenceSwitch.isOn = false
+            Defaults[.pushAlarm] = false
+        } else {
+            Defaults[.pushAlarm] = true
         }
     }
     
-    @IBAction func silenceVoteStart(_ sender: Any) {
-        
-    }
-    
-    @IBAction func pushAlarmVoteEnd(_ sender: Any) {
-        if !pushAlarmVoteEnd.isOn {
-            silenceVoteEnd.isOn = false
+    @IBAction func sileceSwitch(_ sender: Any) {
+        if silenceSwitch.isOn {
+            Defaults[.silence] = true
+        } else {
+            Defaults[.silence] = false
         }
     }
     
-    @IBAction func silenceVoteEnd(_ sender: Any) {
-    }
-    
-    @IBAction func pushAlarmWinner(_ sender: Any) {
-        if !pushAlarmWinner.isOn {
-            silenceWinner.isOn = false
-        }
-    }
-    
-    @IBAction func silenceWinner(_ sender: Any) {
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,7 +51,7 @@ class PushAlarmTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

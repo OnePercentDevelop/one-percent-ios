@@ -12,4 +12,6 @@ import SwiftyUserDefaults
 extension DefaultsKeys {
     static let isSignIn = DefaultsKey<Bool>("false")
     static let id = DefaultsKey<String>("id")
+    static let pushAlarm = DefaultsKey<Bool>("true")
+    static let silence = DefaultsKey<Bool>("true")
 }
