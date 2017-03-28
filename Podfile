@@ -16,6 +16,7 @@ target 'OnePercent' do
   pod ‘RealmSwift’
   pod 'CVCalendar', '~> 1.4.1'
   pod 'ObjectMapper+Realm'
+  pod 'DeviceGuru'
   
   # MARK: - Rx Libs
   pod 'RxSwift',    '~> 3.0'
