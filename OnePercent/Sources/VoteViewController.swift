@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyUserDefaults
 import CVCalendar
 import RealmSwift
+import DeviceGuru
 
 class VoteViewController: UIViewController {
     // TODO: 회원인증 cancle누르면 deselect 되게
@@ -45,6 +46,15 @@ class VoteViewController: UIViewController {
     @IBOutlet weak var timeInformationLabel: UILabel!
     @IBOutlet weak var nowStateStackView: UIStackView!
     
+    //layout
+    @IBOutlet weak var todayQuestionStackViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var partitionImagViewLeading: NSLayoutConstraint!
+    @IBOutlet weak var voteEntryViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var voteEntryViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var voteCollectionViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var voteSendButtonHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var voteSendButtonTopConstraint: NSLayoutConstraint!
     // MARK: - IBAction
     @IBAction func moveToYesterDay(_ sender: AnyObject) {
         if Defaults[.isSignIn] == false {
@@ -121,6 +131,7 @@ class VoteViewController: UIViewController {
         dateFormatter.dateFormat = "yyyy.MM.dd"
         voteCollectionView.allowsMultipleSelection = false
         calendarViewController = (self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as! CalendarViewController)
+        setLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -212,6 +223,7 @@ class VoteViewController: UIViewController {
     }
     
     func setCalendarNavigationView() {
+        
         calendarOpenButton.setTitle(selectedDate, for: .normal)
 
         if selectedDate == todayDate {
@@ -222,6 +234,38 @@ class VoteViewController: UIViewController {
             moveToTomorrow.isHidden = false
             moveToYesterDay.isHidden = false
         }
+    }
+    
+    func setLayout() {
+        switch DeviceGuru.hardware() {
+        case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE:
+            todayQuestionStackViewTopConstraint.constant = 40
+            partitionImagViewLeading.constant = 43
+            voteEntryViewTopConstraint.constant = 15
+            voteEntryViewBottomConstraint.constant = 20
+            voteCollectionViewTopConstraint.constant = 30
+            voteSendButtonTopConstraint.constant = 25
+            
+        case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
+            todayQuestionStackViewTopConstraint.constant = 60
+            partitionImagViewLeading.constant = 70
+            voteEntryViewTopConstraint.constant = 25
+            voteEntryViewBottomConstraint.constant = 35
+            voteCollectionViewTopConstraint.constant = 50
+            voteSendButtonTopConstraint.constant = 30
+
+        case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS:
+            todayQuestionStackViewTopConstraint.constant = 80
+            partitionImagViewLeading.constant = 85
+            voteEntryViewTopConstraint.constant = 25
+            voteEntryViewBottomConstraint.constant = 40
+            voteCollectionViewTopConstraint.constant = 55
+            voteSendButtonTopConstraint.constant = 38
+            
+        default: break
+        }
+        
+        voteSendButtonHeightConstraint.constant = (voteCollectionView.frame.height - 40) / 4
     }
     
     // MARK: - Data Set Function
@@ -374,8 +418,8 @@ extension VoteViewController: UICollectionViewDelegate {
         
         if let voteCollectionViewCell = voteCollectionView.cellForItem(at: indexPath) as? VoteCollectionViewCell {
             voteCollectionViewCell.mySelectPresentImageView.isHidden = false
+            //voteCollectionViewCell.questionLabel.textColor = UIColor.white
         }
-        //        voteCollectionViewCell.questionLabel.textColor = UIColor.white
     }
     
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -384,7 +428,7 @@ extension VoteViewController: UICollectionViewDelegate {
         }
         let voteCollectionViewCell = voteCollectionView.cellForItem(at: indexPath) as! VoteCollectionViewCell
         voteCollectionViewCell.mySelectPresentImageView.isHidden = true
-        //        voteCollectionViewCell.questionLabel.textColor = UIColor.black
+        //voteCollectionViewCell.questionLabel.textColor = UIColor.black
     }
 }
 
