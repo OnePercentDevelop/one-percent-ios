@@ -21,10 +21,12 @@ class CalendarViewController: UIViewController {
         if let day = selectedDay {
             selectedDate = day.date.commonDescriptionYYMMddDot
         }
-       
         _ = delegate?.dateSelectDone(date: selectedDate!)
     }
     
+    @IBAction func dismissButton(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
     @IBOutlet weak var monthLabel: UILabel!
 
     var todayDate = String()
