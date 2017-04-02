@@ -17,7 +17,7 @@ class PushAlarmTableViewController: UITableViewController {
     
     @IBAction func pushAlarmSwitch(_ sender: Any) {
         if !pushAlarmSwitch.isOn {
-            silenceSwitch.isOn = false
+            silenceSwitch.setOn(false, animated: true)
             Defaults[.pushAlarm] = false
         } else {
             Defaults[.pushAlarm] = true
