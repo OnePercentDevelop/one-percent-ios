@@ -114,14 +114,14 @@
                                         <rect key="frame" x="122.5" y="53.5" width="130" height="130"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="130" id="2TI-ze-W73"/>
-                                            <constraint firstAttribute="width" constant="130" id="QkD-Xy-AxO"/>
+                                            <constraint firstAttribute="width" secondItem="ZLT-TT-8Dy" secondAttribute="height" multiplier="1:1" id="TyG-FH-k12"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TWq-zU-waV">
                                         <rect key="frame" x="142.5" y="74" width="90" height="90"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="7n0-YT-R7F"/>
-                                            <constraint firstAttribute="width" constant="90" id="h2X-k3-1Gq"/>
+                                            <constraint firstAttribute="width" secondItem="TWq-zU-waV" secondAttribute="height" multiplier="1:1" id="sUn-vQ-0gB"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스타벅스 아메리카노" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKn-K1-Cju">
@@ -138,21 +138,21 @@
                                         </constraints>
                                         <inset key="scrollIndicatorInsets" minX="1" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OpY-cF-oD2">
-                                            <size key="itemSize" width="114" height="15"/>
+                                            <size key="itemSize" width="272" height="15"/>
                                             <size key="headerReferenceSize" width="50" height="50"/>
                                             <size key="footerReferenceSize" width="50" height="50"/>
                                             <inset key="sectionInset" minX="6" minY="0.0" maxX="6" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="winnerCollectionViewCell" id="c63-jl-JLH" customClass="WinnerCollectionViewCell" customModule="OnePercent" customModuleProvider="target">
-                                                <rect key="frame" x="6" y="50" width="114" height="15"/>
+                                                <rect key="frame" x="6" y="50" width="272" height="15"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="114" height="15"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="272" height="15"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Nn-Vo-OVp">
-                                                            <rect key="frame" x="41" y="0.0" width="33" height="16"/>
+                                                            <rect key="frame" x="119.5" y="0.0" width="33" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -163,7 +163,7 @@
                                                     <constraint firstItem="5Nn-Vo-OVp" firstAttribute="centerX" secondItem="c63-jl-JLH" secondAttribute="centerX" id="2Na-i7-Ndo"/>
                                                     <constraint firstItem="5Nn-Vo-OVp" firstAttribute="centerY" secondItem="c63-jl-JLH" secondAttribute="centerY" id="Pj9-WD-LLp"/>
                                                 </constraints>
-                                                <size key="customSize" width="114" height="15"/>
+                                                <size key="customSize" width="272" height="15"/>
                                                 <connections>
                                                     <outlet property="winnerIdLabel" destination="5Nn-Vo-OVp" id="JYT-C7-tJL"/>
                                                 </connections>
@@ -278,9 +278,13 @@
                         <outlet property="beforeAnounceView" destination="umg-ol-1kC" id="LTY-gz-67R"/>
                         <outlet property="calendarOpenButton" destination="Dqa-bI-Eya" id="RXv-An-zZd"/>
                         <outlet property="giftImageView" destination="TWq-zU-waV" id="Z1i-Gy-2jP"/>
+                        <outlet property="giftImageViewHeightConstraint" destination="7n0-YT-R7F" id="62n-Xx-g7y"/>
                         <outlet property="giftNameLabel" destination="WKn-K1-Cju" id="pzr-8p-EYZ"/>
                         <outlet property="moveToTomorrow" destination="ZRu-o5-4xm" id="thh-3c-rLF"/>
                         <outlet property="moveToYesterDay" destination="QEe-5c-40g" id="Amk-3X-TpH"/>
+                        <outlet property="noticeWinnerLabelTopConstraint" destination="7BZ-HR-P5e" id="gme-GH-HRu"/>
+                        <outlet property="prizeItemBackroundImageViewHeightConstraint" destination="2TI-ze-W73" id="3Dj-4n-W9c"/>
+                        <outlet property="scrollView" destination="eR1-ph-9mL" id="XsL-7C-gNm"/>
                         <outlet property="winnerCollectionView" destination="JTZ-PR-cew" id="noB-1Y-YlH"/>
                         <outlet property="winnerCollectionViewHeight" destination="ARN-Jh-tqj" id="nvE-Ai-lft"/>
                     </connections>
@@ -304,7 +308,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IoU-Ns-RdA" id="u1v-L3-we6">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_login_person" translatesAutoresizingMaskIntoConstraints="NO" id="yFs-kX-GIN">
@@ -334,7 +338,7 @@
                                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MsU-fv-qCL" id="6zG-G1-LU5">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="service_center_icon" translatesAutoresizingMaskIntoConstraints="NO" id="wuy-St-pqY">
@@ -364,7 +368,7 @@
                                         <rect key="frame" x="0.0" y="88" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X8y-K2-wbh" id="I12-cM-b87">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="push_icon" translatesAutoresizingMaskIntoConstraints="NO" id="9Go-pO-kiA">
@@ -605,7 +609,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="heb-FZ-ezE" id="Qnn-X2-Sdf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -620,7 +624,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nwT-w8-9wZ" id="yTu-Nj-q3B">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -649,7 +653,7 @@
                                         <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kEc-pX-iz4" id="Fum-WO-g3J">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PUSH 알림" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kw5-W0-FKN">
@@ -677,7 +681,7 @@
                                         <rect key="frame" x="0.0" y="100" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aih-jW-EAk" id="WnP-CF-e4y">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="무음" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="neO-fi-wge">
@@ -1413,13 +1417,13 @@
                                         <rect key="frame" x="46" y="107" width="25" height="37"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="participants_icon" translatesAutoresizingMaskIntoConstraints="NO" id="XaO-8e-b7E">
-                                                <rect key="frame" x="0.0" y="0.0" width="25" height="16"/>
+                                                <rect key="frame" x="0.5" y="0.0" width="25" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="XaO-8e-b7E" secondAttribute="height" multiplier="25:16" id="mGU-2h-BP5"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ca-fd-Hf3">
-                                                <rect key="frame" x="8" y="21" width="8.5" height="16"/>
+                                                <rect key="frame" x="8.5" y="21" width="8.5" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1455,7 +1459,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="information" translatesAutoresizingMaskIntoConstraints="NO" id="sUA-0N-c0c">
-                                        <rect key="frame" x="98.5" y="65" width="78" height="79"/>
+                                        <rect key="frame" x="98" y="65" width="79" height="79"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="sUA-0N-c0c" secondAttribute="height" multiplier="1:1" id="yWP-5y-cpy"/>
                                         </constraints>
@@ -1493,11 +1497,10 @@
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e9q-3t-4Mz">
-                                        <rect key="frame" x="30" y="71.5" width="283" height="248"/>
-                                        <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timetable" translatesAutoresizingMaskIntoConstraints="NO" id="e9q-3t-4Mz">
+                                        <rect key="frame" x="30" y="71.5" width="283" height="220"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="e9q-3t-4Mz" secondAttribute="height" multiplier="8:7" id="rn6-3a-hCw"/>
+                                            <constraint firstAttribute="width" secondItem="e9q-3t-4Mz" secondAttribute="height" multiplier="9:7" id="rn6-3a-hCw"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ail-Y0-Vit">
@@ -1679,6 +1682,7 @@
         <image name="prize_plus_icon" width="36" height="36"/>
         <image name="push_icon" width="32" height="32"/>
         <image name="service_center_icon" width="32" height="32"/>
+        <image name="timetable" width="909" height="701"/>
         <image name="vote_choose_btn" width="25" height="25"/>
         <image name="vote_not_choose_btn" width="25" height="25"/>
     </resources>
