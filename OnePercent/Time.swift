@@ -53,6 +53,12 @@ class Time {
     public func getAppStartDate() -> Date {
         return appStartDate
     }
+    
+    public func getAppStartStringDate() -> String {
+        let format = DateFormatter()
+        format.dateFormat = "yyyy년MM월dd일"
+        return format.string(from: appStartDate)
+    }
 
     public func dateyyyyMM(date: Date) -> String {
         let format = DateFormatter()
@@ -83,7 +89,6 @@ class Time {
         let seconds = ti % 60
         let minutes = (ti / 60) % 60
         let hours = (ti / 3600)
-        
         return String(format: "%0.2d:%0.2d:%0.2d",hours,minutes,seconds)
     }
     
