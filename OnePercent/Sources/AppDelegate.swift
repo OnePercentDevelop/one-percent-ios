@@ -22,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         //FIRApp.configure()
         // Override point for customization after application launch.
+        let appDependencies = AppDependencies()
+
+        appDependencies.installRootViewControllerIntoWindow(window: window!)
 
         var url = ""
         let dateFormatter = DateFormatter()
@@ -150,7 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        print(Realm.Configuration.defaultConfiguration.fileURL)
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
         
         return true
     }

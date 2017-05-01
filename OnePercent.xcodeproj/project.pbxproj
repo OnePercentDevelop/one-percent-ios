@@ -12,6 +12,11 @@
 		C91916AF1E5C277C00644444 /* WinnerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91916AE1E5C277C00644444 /* WinnerCollectionViewCell.swift */; };
 		C91916B11E5C3D6400644444 /* winnerCollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91916B01E5C3D6400644444 /* winnerCollectionFooterView.swift */; };
 		C91D92F51E0CED7D007B5034 /* OnePercentColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91D92F41E0CED7D007B5034 /* OnePercentColor.swift */; };
+		C92347C91EB75CCA005A4E3A /* CalendarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92347C81EB75CCA005A4E3A /* CalendarInteractor.swift */; };
+		C92347CB1EB75CDA005A4E3A /* CalendarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92347CA1EB75CDA005A4E3A /* CalendarProtocol.swift */; };
+		C92347CD1EB75CF5005A4E3A /* CalendarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92347CC1EB75CF5005A4E3A /* CalendarPresenter.swift */; };
+		C92347CF1EB75D03005A4E3A /* CalendarWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92347CE1EB75D03005A4E3A /* CalendarWireframe.swift */; };
+		C92347D11EB76AD7005A4E3A /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92347D01EB76AD7005A4E3A /* AppDependencies.swift */; };
 		C92EC03D1DBD1D58005D7D8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EC03C1DBD1D58005D7D8B /* AppDelegate.swift */; };
 		C92EC03F1DBD1D58005D7D8B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EC03E1DBD1D58005D7D8B /* ViewController.swift */; };
 		C92EC0421DBD1D58005D7D8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C92EC0401DBD1D58005D7D8B /* Main.storyboard */; };
@@ -69,6 +74,11 @@
 		C91916AE1E5C277C00644444 /* WinnerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerCollectionViewCell.swift; sourceTree = "<group>"; };
 		C91916B01E5C3D6400644444 /* winnerCollectionFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = winnerCollectionFooterView.swift; sourceTree = "<group>"; };
 		C91D92F41E0CED7D007B5034 /* OnePercentColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnePercentColor.swift; sourceTree = "<group>"; };
+		C92347C81EB75CCA005A4E3A /* CalendarInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarInteractor.swift; sourceTree = "<group>"; };
+		C92347CA1EB75CDA005A4E3A /* CalendarProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarProtocol.swift; sourceTree = "<group>"; };
+		C92347CC1EB75CF5005A4E3A /* CalendarPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPresenter.swift; sourceTree = "<group>"; };
+		C92347CE1EB75D03005A4E3A /* CalendarWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarWireframe.swift; sourceTree = "<group>"; };
+		C92347D01EB76AD7005A4E3A /* AppDependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
 		C92EC0391DBD1D58005D7D8B /* OnePercent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePercent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C92EC03C1DBD1D58005D7D8B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/AppDelegate.swift; sourceTree = "<group>"; };
 		C92EC03E1DBD1D58005D7D8B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Sources/ViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +165,79 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C92347BE1EB75C55005A4E3A /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				C92347C71EB75CB0005A4E3A /* Presenter */,
+				C92347C61EB75CAB005A4E3A /* View */,
+				C92347C51EB75CA4005A4E3A /* Wireframe */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
+		C92347BF1EB75C62005A4E3A /* Module Interface */ = {
+			isa = PBXGroup;
+			children = (
+				C92347CA1EB75CDA005A4E3A /* CalendarProtocol.swift */,
+			);
+			name = "Module Interface";
+			sourceTree = "<group>";
+		};
+		C92347C01EB75C6C005A4E3A /* Application Logic */ = {
+			isa = PBXGroup;
+			children = (
+				C92347C41EB75C97005A4E3A /* Interactor */,
+				C92347C31EB75C8E005A4E3A /* Manager */,
+				C92347C11EB75C77005A4E3A /* Model */,
+			);
+			name = "Application Logic";
+			sourceTree = "<group>";
+		};
+		C92347C11EB75C77005A4E3A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		C92347C31EB75C8E005A4E3A /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
+		C92347C41EB75C97005A4E3A /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				C92347C81EB75CCA005A4E3A /* CalendarInteractor.swift */,
+			);
+			name = Interactor;
+			sourceTree = "<group>";
+		};
+		C92347C51EB75CA4005A4E3A /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				C92347CE1EB75D03005A4E3A /* CalendarWireframe.swift */,
+			);
+			name = Wireframe;
+			sourceTree = "<group>";
+		};
+		C92347C61EB75CAB005A4E3A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		C92347C71EB75CB0005A4E3A /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				C92347CC1EB75CF5005A4E3A /* CalendarPresenter.swift */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
 		C92EC0301DBD1D58005D7D8B = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +269,9 @@
 		C952D0761E55A47400DAEE40 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				C92347C01EB75C6C005A4E3A /* Application Logic */,
+				C92347BF1EB75C62005A4E3A /* Module Interface */,
+				C92347BE1EB75C55005A4E3A /* User Interface */,
 				C952D0741E55A26500DAEE40 /* CalendarNavigationView.xib */,
 				C952D0771E55A4A600DAEE40 /* CalendarNavigationView.swift */,
 			);
@@ -326,8 +412,9 @@
 		C9C610551DBF520C005849C3 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				C9CDA7F31DC75D840044CB65 /* Utils */,
 				C92EC03C1DBD1D58005D7D8B /* AppDelegate.swift */,
+				C92347D01EB76AD7005A4E3A /* AppDependencies.swift */,
+				C9CDA7F31DC75D840044CB65 /* Utils */,
 				C9F0D3861DC65A3000B9B03B /* ViewComponents */,
 				C9F0D3881DC65A7800B9B03B /* CustomViews */,
 				C9F0D3871DC65A7000B9B03B /* Vipers */,
@@ -547,6 +634,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C92347CD1EB75CF5005A4E3A /* CalendarPresenter.swift in Sources */,
+				C92347CF1EB75D03005A4E3A /* CalendarWireframe.swift in Sources */,
 				C95338591DCEE0EE00FDE4F3 /* SignUpResult.swift in Sources */,
 				C98EB05B1DC2EA6400B22C16 /* VoteViewController.swift in Sources */,
 				C9EF25A21E55D9340023C494 /* Question.swift in Sources */,
@@ -560,6 +649,7 @@
 				C9CDA7F91DC889FA0044CB65 /* EntryNumber.swift in Sources */,
 				C9AE61041E729F4000B4A081 /* MoreMainTableViewController.swift in Sources */,
 				C9EF25A01E55CAC50023C494 /* Gift.swift in Sources */,
+				C92347CB1EB75CDA005A4E3A /* CalendarProtocol.swift in Sources */,
 				C9F0D37F1DC649C300B9B03B /* SignUpViewController.swift in Sources */,
 				C952D0781E55A4A600DAEE40 /* CalendarNavigationView.swift in Sources */,
 				C9C6108F1DC1B696005849C3 /* LoginViewController.swift in Sources */,
@@ -568,9 +658,11 @@
 				C91916B11E5C3D6400644444 /* winnerCollectionFooterView.swift in Sources */,
 				C9CDA7F51DC75DAC0044CB65 /* Alamofire+OnePercent.swift in Sources */,
 				C9A6090D1EB1FD0B0026C45E /* WinnerProtocol.swift in Sources */,
+				C92347D11EB76AD7005A4E3A /* AppDependencies.swift in Sources */,
 				C9AE60FE1E7192E300B4A081 /* MoreTableViewController.swift in Sources */,
 				C91D92F51E0CED7D007B5034 /* OnePercentColor.swift in Sources */,
 				C912B6B51E1E4D9B0023A49F /* Time.swift in Sources */,
+				C92347C91EB75CCA005A4E3A /* CalendarInteractor.swift in Sources */,
 				C9AE61061E72A3FF00B4A081 /* MoreTableViewCell.swift in Sources */,
 				C96002311E65400D00658F61 /* OnePercentSignUpAlert.swift in Sources */,
 				C98EB0601DC3464900B22C16 /* User.swift in Sources */,

@@ -14,7 +14,7 @@ protocol WinenrViewInterfaceProtocol: class {
 }
 
 //presenter
-protocol WinnerFromViewToPresenterProtocol: class {
+protocol WinnerFromViewToPresenterProtocol {
     func updateView(date: String) // yesterday, tomorrow, selected date 포함
     func showCalendar(date: String)
 //    func showAllWinners()

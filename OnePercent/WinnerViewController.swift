@@ -15,19 +15,23 @@ import DeviceGuru
 
 //todo: cell size, viewsize
 
-class WinnerViewController: UIViewController {
+class WinnerViewController: UIViewController, WinenrViewInterfaceProtocol {
     var calendarViewController: CalendarViewController?
 
     //MARK: - Property
-    var sixTestInfo: [String] = []
-    var showMoreFlag: Bool = false
-    let dateFormatter = DateFormatter()
+//    var sixTestInfo: [String] = []
+//    var showMoreFlag: Bool = false
+//    let dateFormatter = DateFormatter()
     var selectedDate: String!
-    var winnerArray:[String] = []
+    var winners: [String] = []
+    var presentedWinnersCount: Int = 0 // winners.count
+
+    var presenter: WinnerFromViewToPresenterProtocol!
     var todayDate: String {
-        return dateFormatter.string(from: Date())
+        return Time.sharedInstance.stringFromDateDotyyyyMMdd(date: Date())
     }
-    let minimumShowWinnerNumber = 4
+    let minimumPresentingCount: Int = 6
+
     
     //MARK: - IBOutlet
     @IBOutlet weak var scrollView: UIScrollView!
@@ -45,11 +49,25 @@ class WinnerViewController: UIViewController {
     @IBOutlet weak var prizeItemBackroundImageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var giftImageViewHeightConstraint: NSLayoutConstraint!
     
+    // MARK: - WinenrViewInterfaceProtocol
+    func showWinnerData(winners: [String]) {
+        self.winners = winners
+        setWinnerCollectionViewSize(cellCount: winners.count)
+        winnerCollectionView.reloadData()
+    }
+    
+    func showGiftData(gift: Gift) {
+        //TODO: Gift nil 처리
+        self.giftNameLabel.text = gift.giftName
+        self.giftImageView.af_setImage(withURL: NSURL(string: gift.giftPng!)! as URL)
+    }
+    
     //MARK: - IBAction
-    @IBAction func show(_ sender: Any) {
-        showMoreFlag = true
+    @IBAction func showAllWinners(_ sender: Any) {
+//        showMoreFlag = true
         scrollView.isScrollEnabled = true
-        setCollectionViewSize(cellCount: winnerArray.count)
+//        self.presenter.showAllWinners()
+        setWinnerCollectionViewSize(cellCount: winners.count)
         winnerCollectionView.reloadData()
     }
 
@@ -59,10 +77,12 @@ class WinnerViewController: UIViewController {
             self.winnerCollectionView.reloadData()
         } else {
             if let selectedDate =  selectedDate {
-                let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: dateFormatter.date(from: selectedDate)!)
+                let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: Time.sharedInstance.dateFromStringDotyyyyMMdd(date: selectedDate))
                 setSelectedDate(new: Time.sharedInstance.stringFromDateDotyyyyMMdd(date: yesterDay!))
-                setCalendarNavigationView()
-                setData()
+                setCalendarNavigationViewUI()
+                print(selectedDate)
+            
+                self.presenter.updateView(date: "2017.03.03")
             }
         }
     }
@@ -71,10 +91,11 @@ class WinnerViewController: UIViewController {
         if Defaults[.isSignIn] == false {
             signUpAlert(viewController: self)
         } else {
-            calendarViewController?.delegate = self
-            calendarViewController?.selectedDate = selectedDate
-            calendarViewController?.modalPresentationStyle = .overCurrentContext
-            present(calendarViewController!, animated: true, completion: nil)
+//            calendarViewController?.delegate = self
+//            calendarViewController?.selectedDate = selectedDate
+//            calendarViewController?.modalPresentationStyle = .overCurrentContext
+//            present(calendarViewController!, animated: true, completion: nil)
+            self.presenter.showCalendar(date: selectedDate)
         }
     }
     
@@ -82,80 +103,68 @@ class WinnerViewController: UIViewController {
         if Defaults[.isSignIn] == false {
             signUpAlert(viewController: self)
         } else {
-            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: selectedDate)!)
+            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Time.sharedInstance.dateFromStringDotyyyyMMdd(date: selectedDate))
             setSelectedDate(new: Time.sharedInstance.stringFromDateDotyyyyMMdd(date: tomorrow!))
-            setCalendarNavigationView()
-            setData()
+            setCalendarNavigationViewUI()
+            self.presenter.updateView(date: selectedDate)
         }
     }
     
     //MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
 
-        setGiftImage()
-        setLayout()
+        
+        setWinnerViewLayout()
+
+//        dateFormatter.dateFormat = "yyyy.MM.dd"
+
+//        setGiftImage()
+//        setLayout()
         
         //set collectionview option
-        winnerCollectionView.isScrollEnabled = false
-        winnerCollectionView.layer.borderWidth = 1
-        winnerCollectionView.layer.borderColor = UIColor.lightGray.cgColor
+//        winnerCollectionView.isScrollEnabled = false
+//        winnerCollectionView.layer.borderWidth = 1
+//        winnerCollectionView.layer.borderColor = UIColor.lightGray.cgColor
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        scrollView.isScrollEnabled = false
+//        scrollView.isScrollEnabled = false
+//        setSelectedDate(new: todayDate)
+//        setData()
+//        setCalendarNavigationView()
+//        
+//        setCollectionViewSize(cellCount: sixTestInfo.count)
+//        initCalendarFunction()
         setSelectedDate(new: todayDate)
-        setData()
-        setCalendarNavigationView()
-        
-        setCollectionViewSize(cellCount: sixTestInfo.count)
-        initCalendarFunction()
+        setCalendarNavigationViewUI()
+        setWinnerViewUI()
+        setWinnerCollectionViewSize(cellCount: minimumPresentingCount)
     }
     
-    //MARK - UI Set Function
-    func setCollectionViewSize(cellCount: Int) {
-        if showMoreFlag {
-            if cellCount > minimumShowWinnerNumber {
-                let cellHeight = (winnerCollectionView.frame.height - 100) / 5
-                let height = CGFloat(cellCount) * (cellHeight + 10)
-                self.winnerCollectionViewHeight.constant = height
-            }
-        } else {
+    //MARK - Layout Set Function
+    func setWinnerCollectionViewSize(cellCount: Int) {
+        if winners.count <= minimumPresentingCount {
             switch DeviceGuru.hardware() {
             case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE:
-                self.winnerCollectionViewHeight.constant = 170
+                self.winnerCollectionViewHeight.constant = CGFloat(WinnerCollectionViewHeightEnum.size5.rawValue)
             case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
-                self.winnerCollectionViewHeight.constant = 225
-            case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS: break
+                self.winnerCollectionViewHeight.constant = CGFloat(WinnerCollectionViewHeightEnum.size6.rawValue)
+            case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS:
+                self.winnerCollectionViewHeight.constant = CGFloat(WinnerCollectionViewHeightEnum.size6plus.rawValue)
             default:
                 self.winnerCollectionViewHeight.constant = 170
             }
-        }
-    }
-    
-    func initCalendarFunction() {
-        calendarViewController = (self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as! CalendarViewController)
-    }
-    
-    func setView() {
-        
-    }
-    
-    func setCalendarNavigationView() {
-        calendarOpenButton.setTitle(selectedDate, for: .normal)
-        
-        if selectedDate == todayDate {
-            moveToTomorrow.isHidden = true
-        } else if selectedDate == Time.sharedInstance.getAppStartStringDate() {
-            moveToYesterDay.isHidden = true
         } else {
-            moveToTomorrow.isHidden = false
-            moveToYesterDay.isHidden = false
+             let cellHeight = (winnerCollectionView.frame.height - 100) / 5
+             let height = CGFloat(cellCount) * (cellHeight + 10)
+             self.winnerCollectionViewHeight.constant = height
         }
+        //TODO: winnerCollectionViewWidth
+        //TODO: cell sizse
     }
 
-    func setLayout() {
+    func setWinnerViewLayout() {
         switch DeviceGuru.hardware() {
         case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE: break
         case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
@@ -171,87 +180,79 @@ class WinnerViewController: UIViewController {
             giftImageViewHeightConstraint.constant = 60
         }
     }
+
+    //MARK - UI Set Function
+    func initCalendarFunction() {
+        calendarViewController = (self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as! CalendarViewController)
+    }
     
-    //MARK - Data Set Function
-    func setData() {
-        showMoreFlag = false
+    func setCalendarNavigationViewUI() {
+        calendarOpenButton.setTitle(selectedDate, for: .normal)
+        
+        if selectedDate == todayDate {
+            moveToTomorrow.isHidden = true
+        } else if selectedDate == Time.sharedInstance.getAppStartStringDate() {
+            moveToYesterDay.isHidden = true
+        } else {
+            moveToTomorrow.isHidden = false
+            moveToYesterDay.isHidden = false
+        }
+    }
+
+    func setWinnerViewUI() {
+        //        winnerCollectionView.isScrollEnabled = false
+        winnerCollectionView.layer.borderWidth = 1
+        winnerCollectionView.layer.borderColor = UIColor.lightGray.cgColor
+        
         if selectedDate == todayDate {
             if Date() < Time.sharedInstance.getAnounceStartTime() {
                 beforeAnounceView.isHidden = false
             } else {
-                setWinnerArray()
                 beforeAnounceView.isHidden = true
             }
         } else {
-            setWinnerArray()
             beforeAnounceView.isHidden = true
         }
-        setCollectionViewSize(cellCount: winnerArray.count)
+        //    setWinnerCollectionViewSize(cellCount: minimumPresentingCount)
         winnerCollectionView.reloadData()
     }
     
-    func setWinnerArray() {
-        var winnerName = ""
-        winnerArray.removeAll()
-        print("prizeDate == '\(selectedDate!)'")
-        if let winner = uiRealm.objects(Prize.self).filter("prizeDate == '\(selectedDate!)'").last?.winner {
-            for i in winner.characters {
-                if i == " " {
-                    winnerArray.append(winnerName)
-                    winnerName = ""
-                } else { winnerName.append(i) }
-            }
-        }
-        winnerArray.append(winnerName)
-        
-        if winnerArray.count > minimumShowWinnerNumber {
-            sixTestInfo.removeAll()
-            sixTestInfo.append(contentsOf: winnerArray[0..<minimumShowWinnerNumber])
-        } else {
-            sixTestInfo = winnerArray
-        }
-    }
-    
-    func setGiftImage() {
-        Alamofire
-            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/todayGift.do?vote_date=\(todayDate)", method: .get)
-            .log(level: .verbose)
-            .responseObject { (response: DataResponse<GiftResponse>) in
-                if let giftResponse = response.result.value?.giftResult {
-                    for n in giftResponse {
-                        if let giftName = n.giftName {
-                            self.giftNameLabel.text = giftName
-                        }
-                        //png 처리
-                        if let giftPng = n.giftPng {
-                            let url = "http://onepercentserver.azurewebsites.net/OnePercentServer/resources/common/image/" + giftPng
-                            self.giftImageView.af_setImage(withURL: NSURL(string: url) as! URL)
-                        }
-                    }
-                }
-        }
-    }
-
     func setSelectedDate(new date: String) {
         selectedDate = date
     }
+
+    
+    //MARK - Data Set Function
+//    func setData() {
+//        showMoreFlag = false
+//        if selectedDate == todayDate {
+//            if Date() < Time.sharedInstance.getAnounceStartTime() {
+//                beforeAnounceView.isHidden = false
+//            } else {
+//                setWinnerArray()
+//                beforeAnounceView.isHidden = true
+//            }
+//        } else {
+//            setWinnerArray()
+//            beforeAnounceView.isHidden = true
+//        }
+//        setCollectionViewSize(cellCount: winnerArray.count)
+//        winnerCollectionView.reloadData()
+//    }
 }
 
 //MARK: - Extension UICollectionViewDataSource
 extension WinnerViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if showMoreFlag {
-            return winnerArray.count
-        } else {
-            return sixTestInfo.count
-        }
+//        return presentedWinnersCount
+        return winners.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = winnerCollectionView.dequeueReusableCell(withReuseIdentifier: "winnerCollectionViewCell", for: indexPath) as! WinnerCollectionViewCell
-        print("seletectDate:\(selectedDate)>>winnerArray:\(winnerArray)")
-        cell.winnerIdLabel.text = winnerArray[indexPath.row]
-        if winnerArray[indexPath.row] == Defaults[.id] {
+        cell.winnerIdLabel.text = winners[indexPath.row]
+        
+        if winners[indexPath.row] == Defaults[.id] {
             cell.winnerIdLabel.tintColor = UIColor.red
         } else {
             cell.winnerIdLabel.tintColor = UIColor.black
@@ -263,11 +264,11 @@ extension WinnerViewController: UICollectionViewDataSource {
         switch kind {
         case UICollectionElementKindSectionHeader:
             let headerView = winnerCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "winnerCollectionHeaderView", for: indexPath) as! WinnerCollectionHeaderView
-                headerView.winnerCountLabel.text = "(\(winnerArray.count) 명)"
+            headerView.winnerCountLabel.text = "(\(winners.count) 명)"
             return headerView
         case UICollectionElementKindSectionFooter:
             let footerView = winnerCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "winnerCollectionFooterView", for: indexPath) as! winnerCollectionFooterView
-            if winnerArray.count < minimumShowWinnerNumber {
+            if winners.count < minimumPresentingCount {
                 footerView.frame.size = CGSize(width: footerView.frame.width, height: 0)
             }
             return footerView
@@ -276,21 +277,25 @@ extension WinnerViewController: UICollectionViewDataSource {
         }
     }
 }
-
-// MARK: - extension UICollectionViewDelegateFlowLayout
-extension WinnerViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellSize = CGSize(width: winnerCollectionView.frame.width, height: (winnerCollectionView.frame.height - 130) / CGFloat(minimumShowWinnerNumber))
-        return cellSize
-    }
+enum WinnerCollectionViewHeightEnum: Int {
+    case size5 = 170
+    case size6 = 225
+    case size6plus = 300 //임의로 작성
 }
+// MARK: - extension UICollectionViewDelegateFlowLayout
+//extension WinnerViewController: UICollectionViewDelegateFlowLayout {
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let cellSize = CGSize(width: winnerCollectionView.frame.width, height: (winnerCollectionView.frame.height - 130) / CGFloat(minimumShowWinnerNumber))
+//        return cellSize
+//    }
+//}
 
 //MARK: - Extension CalendarViewControllerDelegate
-extension WinnerViewController: CalendarViewControllerDelegate {
-    func dateSelectDone(date: String) {
-        setSelectedDate(new: date)
-        setCalendarNavigationView()
-        setData()
-//        setCollectionViewSize(cellCount: winnerArray.count)
-    }
-}
+//extension WinnerViewController: CalendarViewControllerDelegate {
+//    func dateSelectDone(date: String) {
+//        setSelectedDate(new: date)
+//        setCalendarNavigationView()
+//        setData()
+////        setCollectionViewSize(cellCount: winnerArray.count)
+//    }
+//}
