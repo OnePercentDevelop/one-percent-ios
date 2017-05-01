@@ -31,6 +31,11 @@
 		C98EB05B1DC2EA6400B22C16 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05A1DC2EA6400B22C16 /* VoteViewController.swift */; };
 		C98EB05D1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05C1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift */; };
 		C98EB0601DC3464900B22C16 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05F1DC3464900B22C16 /* User.swift */; };
+		C9A609071EB1FB3C0026C45E /* WinnerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A609061EB1FB3C0026C45E /* WinnerInteractor.swift */; };
+		C9A609091EB1FB4C0026C45E /* WinnerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A609081EB1FB4C0026C45E /* WinnerPresenter.swift */; };
+		C9A6090B1EB1FB5E0026C45E /* WinnerWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A6090A1EB1FB5E0026C45E /* WinnerWireframe.swift */; };
+		C9A6090D1EB1FD0B0026C45E /* WinnerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A6090C1EB1FD0B0026C45E /* WinnerProtocol.swift */; };
+		C9A6090F1EB5BB000026C45E /* WinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A6090E1EB5BB000026C45E /* WinnerView.swift */; };
 		C9AE60FE1E7192E300B4A081 /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE60FD1E7192E300B4A081 /* MoreTableViewController.swift */; };
 		C9AE61001E729ED200B4A081 /* MoreWithViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE60FF1E729ED200B4A081 /* MoreWithViewViewController.swift */; };
 		C9AE61021E729EFD00B4A081 /* MoreWithTableVIewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AE61011E729EFD00B4A081 /* MoreWithTableVIewViewController.swift */; };
@@ -85,6 +90,11 @@
 		C98EB05A1DC2EA6400B22C16 /* VoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VoteViewController.swift; path = Sources/VoteViewController.swift; sourceTree = "<group>"; };
 		C98EB05C1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VoteCollectionViewCell.swift; path = Sources/VoteCollectionViewCell.swift; sourceTree = "<group>"; };
 		C98EB05F1DC3464900B22C16 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Sources/User.swift; sourceTree = "<group>"; };
+		C9A609061EB1FB3C0026C45E /* WinnerInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerInteractor.swift; sourceTree = "<group>"; };
+		C9A609081EB1FB4C0026C45E /* WinnerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerPresenter.swift; sourceTree = "<group>"; };
+		C9A6090A1EB1FB5E0026C45E /* WinnerWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerWireframe.swift; sourceTree = "<group>"; };
+		C9A6090C1EB1FD0B0026C45E /* WinnerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerProtocol.swift; sourceTree = "<group>"; };
+		C9A6090E1EB5BB000026C45E /* WinnerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerView.swift; sourceTree = "<group>"; };
 		C9AE60FD1E7192E300B4A081 /* MoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
 		C9AE60FF1E729ED200B4A081 /* MoreWithViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreWithViewViewController.swift; sourceTree = "<group>"; };
 		C9AE61011E729EFD00B4A081 /* MoreWithTableVIewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreWithTableVIewViewController.swift; sourceTree = "<group>"; };
@@ -185,10 +195,9 @@
 		C952D0791E55A5F500DAEE40 /* Winner */ = {
 			isa = PBXGroup;
 			children = (
-				C952D07A1E55A61000DAEE40 /* WinnerViewController.swift */,
-				C91916AE1E5C277C00644444 /* WinnerCollectionViewCell.swift */,
-				C91916B01E5C3D6400644444 /* winnerCollectionFooterView.swift */,
-				C934F3331E5EA72D00525C90 /* WinnerCollectionHeaderView.swift */,
+				C9A608FD1EB1FAA00026C45E /* Application Logic */,
+				C9A608FF1EB1FAC80026C45E /* Module Interface */,
+				C9A608FE1EB1FAAD0026C45E /* User Interface */,
 			);
 			name = Winner;
 			sourceTree = "<group>";
@@ -234,6 +243,84 @@
 				C9CAC9EF1E8016BF009A4836 /* Onepercent+DefaultKeys.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		C9A608FD1EB1FAA00026C45E /* Application Logic */ = {
+			isa = PBXGroup;
+			children = (
+				C9A609021EB1FAF50026C45E /* Interactor */,
+				C9A609011EB1FAEC0026C45E /* Manager */,
+				C9A609001EB1FAE70026C45E /* Model */,
+			);
+			name = "Application Logic";
+			sourceTree = "<group>";
+		};
+		C9A608FE1EB1FAAD0026C45E /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				C9A609051EB1FB080026C45E /* Presenter */,
+				C9A609041EB1FB020026C45E /* View */,
+				C9A609031EB1FAFC0026C45E /* Wireframe */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
+		C9A608FF1EB1FAC80026C45E /* Module Interface */ = {
+			isa = PBXGroup;
+			children = (
+				C9A6090C1EB1FD0B0026C45E /* WinnerProtocol.swift */,
+			);
+			name = "Module Interface";
+			sourceTree = "<group>";
+		};
+		C9A609001EB1FAE70026C45E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		C9A609011EB1FAEC0026C45E /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
+		C9A609021EB1FAF50026C45E /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				C9A609061EB1FB3C0026C45E /* WinnerInteractor.swift */,
+			);
+			name = Interactor;
+			sourceTree = "<group>";
+		};
+		C9A609031EB1FAFC0026C45E /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				C9A6090A1EB1FB5E0026C45E /* WinnerWireframe.swift */,
+			);
+			name = Wireframe;
+			sourceTree = "<group>";
+		};
+		C9A609041EB1FB020026C45E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C952D07A1E55A61000DAEE40 /* WinnerViewController.swift */,
+				C91916AE1E5C277C00644444 /* WinnerCollectionViewCell.swift */,
+				C91916B01E5C3D6400644444 /* winnerCollectionFooterView.swift */,
+				C934F3331E5EA72D00525C90 /* WinnerCollectionHeaderView.swift */,
+				C9A6090E1EB5BB000026C45E /* WinnerView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		C9A609051EB1FB080026C45E /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				C9A609081EB1FB4C0026C45E /* WinnerPresenter.swift */,
+			);
+			name = Presenter;
 			sourceTree = "<group>";
 		};
 		C9C610551DBF520C005849C3 /* Sources */ = {
@@ -480,6 +567,7 @@
 				C940CE541E1248EF00E2AF9E /* Vote.swift in Sources */,
 				C91916B11E5C3D6400644444 /* winnerCollectionFooterView.swift in Sources */,
 				C9CDA7F51DC75DAC0044CB65 /* Alamofire+OnePercent.swift in Sources */,
+				C9A6090D1EB1FD0B0026C45E /* WinnerProtocol.swift in Sources */,
 				C9AE60FE1E7192E300B4A081 /* MoreTableViewController.swift in Sources */,
 				C91D92F51E0CED7D007B5034 /* OnePercentColor.swift in Sources */,
 				C912B6B51E1E4D9B0023A49F /* Time.swift in Sources */,
@@ -487,8 +575,10 @@
 				C96002311E65400D00658F61 /* OnePercentSignUpAlert.swift in Sources */,
 				C98EB0601DC3464900B22C16 /* User.swift in Sources */,
 				C9AE61001E729ED200B4A081 /* MoreWithViewViewController.swift in Sources */,
+				C9A609091EB1FB4C0026C45E /* WinnerPresenter.swift in Sources */,
 				C9CDA7F71DC75FAA0044CB65 /* AlamofireLogger.swift in Sources */,
 				C91916AF1E5C277C00644444 /* WinnerCollectionViewCell.swift in Sources */,
+				C9A6090F1EB5BB000026C45E /* WinnerView.swift in Sources */,
 				C9CDA7F11DC752290044CB65 /* HTTPMethod.swift in Sources */,
 				C98EB05D1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift in Sources */,
 				C953385B1DCEE10B00FDE4F3 /* LoginResult.swift in Sources */,
@@ -496,6 +586,8 @@
 				C92EC03D1DBD1D58005D7D8B /* AppDelegate.swift in Sources */,
 				C934F3341E5EA72D00525C90 /* WinnerCollectionHeaderView.swift in Sources */,
 				C9BFF70E1DEC592A00C7F76A /* OnePercentButton.swift in Sources */,
+				C9A609071EB1FB3C0026C45E /* WinnerInteractor.swift in Sources */,
+				C9A6090B1EB1FB5E0026C45E /* WinnerWireframe.swift in Sources */,
 				C9BFF70C1DEC4E5400C7F76A /* MainTabBarController.swift in Sources */,
 				C940CE581E124EBC00E2AF9E /* MyVote.swift in Sources */,
 			);

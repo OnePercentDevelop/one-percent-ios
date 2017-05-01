@@ -24,6 +24,11 @@ class Gift: Mappable {
     var giftName: String?
     var giftPng: String?
     
+    init(name: String, url: String) {
+        self.giftName = name
+        self.giftPng = url
+    }
+    
     required init?(map: Map) {
     }
 
