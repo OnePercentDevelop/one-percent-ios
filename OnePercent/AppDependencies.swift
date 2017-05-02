@@ -11,28 +11,8 @@ import UIKit
 
 class AppDependencies {
     var winnerWireframe = WinnerWireframe()
-    
-    init() {
-        configureDependencies()
-    }
-    
-    func installRootViewControllerIntoWindow(window: UIWindow) {
-        winnerWireframe.presentWinnerInterfaceFromWindow(window: window)
-    }
-    
-    func configureDependencies() {
-        
-        let winnerPresenter = WinnerPresenter()
-        let winnerInteractor = WinnerInteractor()
 
-        winnerInteractor.output = winnerPresenter
-        
-        winnerPresenter.interactor = winnerInteractor
-        winnerPresenter.wireframe = winnerWireframe
-        
-        //calendar wireframe set
-        winnerWireframe.winnerPresenter = winnerPresenter
-        
-        
+    func installWinnerViewControllerIntoWindow(winnerViewController: WinnerViewController) {
+        winnerWireframe.presentWinnerInterfaceFromWindow(viewController: winnerViewController)
     }
 }

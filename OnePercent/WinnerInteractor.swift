@@ -10,23 +10,12 @@ import Foundation
 import RealmSwift
 import Alamofire
 
-class WinnerInteractor: WinnerInteractorInputProtocol {
+class WinnerInteractor {
     //MARK: - Property
-    var todayDate: String {
-        return Time.sharedInstance.stringFromDateDotyyyyMMdd(date: Date())
-    }
     weak var output: WinnerFromInteractorToPresenterProtocol!
     
-    // MARK: - WinnerInteractorInputProtocol
-    func fetchWinners(selectedDate date: String) {
-        output.winnersFetched(winners: getWinnersArray(selectedDate: date))
-        if let gift = getGift(selectedDate: date) {
-            output.giftFetched(gift: gift)
-        }
-    }
-
-    // MARK: - Private
-    private func getWinnersArray(selectedDate: String) -> [String] {
+    // MARK: - Internal
+    internal func getWinnersArray(selectedDate: String) -> [String] {
         if let winners = uiRealm.objects(Prize.self).filter("prizeDate == '\(selectedDate)'").last?.winner {
             return winners.components(separatedBy: ",")
         } else {
@@ -34,7 +23,7 @@ class WinnerInteractor: WinnerInteractorInputProtocol {
         }
     }
     
-    private func getGift(selectedDate: String) -> Gift? {
+    internal func getGift(selectedDate: String) -> Gift? {
         var gift: Gift?
         Alamofire
             .request("http://onepercentserver.azurewebsites.net/OnePercentServer/todayGift.do?vote_date=\(selectedDate)", method: .get)
@@ -56,5 +45,15 @@ class WinnerInteractor: WinnerInteractorInputProtocol {
     }
     
 }
+
+// MARK: - WinnerInteractorInputProtocol
+extension WinnerInteractor: WinnerInteractorInputProtocol {
+    func fetchWinnersAndGift(selectedDate date: String) {
+        output.winnersFetched(winners: getWinnersArray(selectedDate: date))
+        if let gift = getGift(selectedDate: date) { output.giftFetched(gift: gift) }
+    }
+}
+
+
 
 

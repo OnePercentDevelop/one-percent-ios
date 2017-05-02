@@ -18,10 +18,6 @@ import DeviceGuru
 class WinnerViewController: UIViewController, WinenrViewInterfaceProtocol {
     var calendarViewController: CalendarViewController?
 
-    //MARK: - Property
-//    var sixTestInfo: [String] = []
-//    var showMoreFlag: Bool = false
-//    let dateFormatter = DateFormatter()
     var selectedDate: String!
     var winners: [String] = []
     var presentedWinnersCount: Int = 0 // winners.count
@@ -62,52 +58,38 @@ class WinnerViewController: UIViewController, WinenrViewInterfaceProtocol {
         self.giftImageView.af_setImage(withURL: NSURL(string: gift.giftPng!)! as URL)
     }
     
+    func setCalendarNavigationUI(selectedDate date: String) {
+        calendarOpenButton.setTitle(date, for: .normal)
+        if date == todayDate {
+            moveToTomorrow.isHidden = true
+        } else if date == Time.sharedInstance.getAppStartStringDate() {
+            moveToYesterDay.isHidden = true
+        } else {
+            moveToTomorrow.isHidden = false
+            moveToYesterDay.isHidden = false
+        }
+    }
+    
     //MARK: - IBAction
     @IBAction func showAllWinners(_ sender: Any) {
 //        showMoreFlag = true
-        scrollView.isScrollEnabled = true
-//        self.presenter.showAllWinners()
-        setWinnerCollectionViewSize(cellCount: winners.count)
-        winnerCollectionView.reloadData()
+//        scrollView.isScrollEnabled = true
+////        self.presenter.showAllWinners()
+//        setWinnerCollectionViewSize(cellCount: winners.count)
+//        winnerCollectionView.reloadData()
+        self.presenter.showAllWinnersDidClick()
     }
 
     @IBAction func moveToYesterDay(_ sender: Any) {
-        if Defaults[.isSignIn] == false {
-            signUpAlert(viewController: self)
-            self.winnerCollectionView.reloadData()
-        } else {
-            if let selectedDate =  selectedDate {
-                let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: Time.sharedInstance.dateFromStringDotyyyyMMdd(date: selectedDate))
-                setSelectedDate(new: Time.sharedInstance.stringFromDateDotyyyyMMdd(date: yesterDay!))
-                setCalendarNavigationViewUI()
-                print(selectedDate)
-            
-                self.presenter.updateView(date: "2017.03.03")
-            }
-        }
+        self.presenter.moveToYesterDayDidClick()
     }
     
     @IBAction func calendarOpenButton(_ sender: Any) {
-        if Defaults[.isSignIn] == false {
-            signUpAlert(viewController: self)
-        } else {
-//            calendarViewController?.delegate = self
-//            calendarViewController?.selectedDate = selectedDate
-//            calendarViewController?.modalPresentationStyle = .overCurrentContext
-//            present(calendarViewController!, animated: true, completion: nil)
-            self.presenter.showCalendar(date: selectedDate)
-        }
+        self.presenter.calendarOpenButtonClick(winnerViewController: self)
     }
     
     @IBAction func moveToTomorrow(_ sender: Any) {
-        if Defaults[.isSignIn] == false {
-            signUpAlert(viewController: self)
-        } else {
-            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Time.sharedInstance.dateFromStringDotyyyyMMdd(date: selectedDate))
-            setSelectedDate(new: Time.sharedInstance.stringFromDateDotyyyyMMdd(date: tomorrow!))
-            setCalendarNavigationViewUI()
-            self.presenter.updateView(date: selectedDate)
-        }
+        self.presenter.moveToTomorrowDidClick()
     }
     
     //MARK: - Recycle Function
@@ -126,6 +108,11 @@ class WinnerViewController: UIViewController, WinenrViewInterfaceProtocol {
 //        winnerCollectionView.isScrollEnabled = false
 //        winnerCollectionView.layer.borderWidth = 1
 //        winnerCollectionView.layer.borderColor = UIColor.lightGray.cgColor
+        let appDependencies = AppDependencies()
+        
+        appDependencies.installWinnerViewControllerIntoWindow(winnerViewController: self)
+        
+        self.presenter.viewDidLoad()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -137,7 +124,7 @@ class WinnerViewController: UIViewController, WinenrViewInterfaceProtocol {
 //        setCollectionViewSize(cellCount: sixTestInfo.count)
 //        initCalendarFunction()
         setSelectedDate(new: todayDate)
-        setCalendarNavigationViewUI()
+//        setCalendarNavigationViewUI()
         setWinnerViewUI()
         setWinnerCollectionViewSize(cellCount: minimumPresentingCount)
     }
@@ -186,18 +173,18 @@ class WinnerViewController: UIViewController, WinenrViewInterfaceProtocol {
         calendarViewController = (self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as! CalendarViewController)
     }
     
-    func setCalendarNavigationViewUI() {
-        calendarOpenButton.setTitle(selectedDate, for: .normal)
-        
-        if selectedDate == todayDate {
-            moveToTomorrow.isHidden = true
-        } else if selectedDate == Time.sharedInstance.getAppStartStringDate() {
-            moveToYesterDay.isHidden = true
-        } else {
-            moveToTomorrow.isHidden = false
-            moveToYesterDay.isHidden = false
-        }
-    }
+//    func setCalendarNavigationViewUI() {
+//        calendarOpenButton.setTitle(selectedDate, for: .normal)
+//        
+//        if selectedDate == todayDate {
+//            moveToTomorrow.isHidden = true
+//        } else if selectedDate == Time.sharedInstance.getAppStartStringDate() {
+//            moveToYesterDay.isHidden = true
+//        } else {
+//            moveToTomorrow.isHidden = false
+//            moveToYesterDay.isHidden = false
+//        }
+//    }
 
     func setWinnerViewUI() {
         //        winnerCollectionView.isScrollEnabled = false

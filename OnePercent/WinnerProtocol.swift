@@ -11,13 +11,18 @@ import Foundation
 protocol WinenrViewInterfaceProtocol: class {
     func showWinnerData(winners: [String])
     func showGiftData(gift: Gift)
+    func setCalendarNavigationUI(selectedDate date: String)
 }
 
 //presenter
 protocol WinnerFromViewToPresenterProtocol {
-    func updateView(date: String) // yesterday, tomorrow, selected date 포함
+    func updateView(date: String)
     func showCalendar(date: String)
-//    func showAllWinners()
+    func showAllWinnersDidClick()
+    func moveToYesterDayDidClick()
+    func calendarOpenButtonClick(winnerViewController: WinnerViewController)
+    func moveToTomorrowDidClick()
+    func viewDidLoad()
 }
 
 protocol WinnerFromInteractorToPresenterProtocol: class {
@@ -27,11 +32,12 @@ protocol WinnerFromInteractorToPresenterProtocol: class {
 
 //interactor
 protocol WinnerInteractorInputProtocol: class {
-    func fetchWinners(selectedDate date: String)
+    func fetchWinnersAndGift(selectedDate date: String)
 }
 
 //wireframe
 protocol WinnerWireframeInputProtocol {
-    func presentationCalendarInterfaceForWinner(date: String)
+    func presentationCalendarInterfaceForWinner(from view: WinenrViewInterfaceProtocol)
+    func presentationSignUpAlertView()
 }
 

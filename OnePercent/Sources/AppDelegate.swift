@@ -21,11 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         //FIRApp.configure()
-        // Override point for customization after application launch.
-        let appDependencies = AppDependencies()
-
-        appDependencies.installRootViewControllerIntoWindow(window: window!)
-
         var url = ""
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"

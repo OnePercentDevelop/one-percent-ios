@@ -174,7 +174,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="8AD-IM-avN">
-                                                    <rect key="frame" x="55.5" y="13" width="184.5" height="24"/>
+                                                    <rect key="frame" x="168" y="13" width="184.5" height="24"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘의 1% 주인공" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kXV-pD-l94">
                                                             <rect key="frame" x="0.0" y="0.0" width="138.5" height="24"/>
@@ -204,7 +204,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kIz-cr-T4K">
-                                                    <rect key="frame" x="135" y="13" width="25" height="25"/>
+                                                    <rect key="frame" x="247.5" y="13" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="SlH-gJ-211"/>
                                                         <constraint firstAttribute="height" constant="25" id="ZTb-rq-6c4"/>
@@ -229,7 +229,7 @@
                                         </connections>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8n1-hg-q8c">
-                                        <rect key="frame" x="40" y="319.5" width="295" height="54"/>
+                                        <rect key="frame" x="40" y="319.5" width="295" height="32.5"/>
                                         <string key="text">-  본 상품(기프티콘)은 당일 문자로 발송 됩니다.
 - 본 상품(기프티콘)은 수령 후 최대 90일 까지 사용 가능하며 기한에 대한 알림은 별도로 제공 하지 않습니다.
 - 잘못된 개인정보 혹은 발송 메세지 삭제/분실 및 본인의 과실에 대해서는 고객센터로 문의 바랍니다</string>
@@ -508,7 +508,7 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="J1a-EO-bsX">
-                                        <rect key="frame" x="157" y="49" width="90" height="51"/>
+                                        <rect key="frame" x="157" y="49.5" width="90" height="51"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8e-uZ-mVK">
                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="20.5"/>
@@ -1230,7 +1230,7 @@
         <!--Calendar Appearance Delegate-->
         <scene sceneID="keX-Ic-2m9">
             <objects>
-                <viewController storyboardIdentifier="CalendarViewController" modalPresentationStyle="overCurrentContext" id="UAi-DL-jjZ" customClass="CalendarViewController" customModule="OnePercent" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CalendarViewController" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UAi-DL-jjZ" customClass="CalendarViewController" customModule="OnePercent" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0Dy-xS-yQr"/>
                         <viewControllerLayoutGuide type="bottom" id="7TT-Ed-IHd"/>
@@ -1388,25 +1388,25 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="WXF-OJ-9RM" userLabel="includedInCircleView">
-                                <rect key="frame" x="130" y="165" width="116.5" height="144"/>
+                                <rect key="frame" x="129.5" y="165.5" width="116.5" height="144"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="투표대기중" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1h4-js-4Sq">
-                                        <rect key="frame" x="21.5" y="0.0" width="74" height="20.5"/>
+                                        <rect key="frame" x="21" y="0.5" width="74" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.33333333329999998" green="0.62745098040000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="6JM-lt-0T5">
-                                        <rect key="frame" x="0.0" y="40.5" width="116.5" height="46.5"/>
+                                        <rect key="frame" x="0.0" y="41" width="116.5" height="46.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="투표시작까지 남은시간" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Zi-Ll-hm2">
-                                                <rect key="frame" x="0.0" y="0.0" width="116.5" height="16"/>
+                                                <rect key="frame" x="0.0" y="0.5" width="116.5" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9P-5u-zqe">
-                                                <rect key="frame" x="38" y="21" width="41" height="25.5"/>
+                                                <rect key="frame" x="37.5" y="21.5" width="41" height="25.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1414,16 +1414,16 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="center" axis="vertical" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="qKL-Pe-Vum">
-                                        <rect key="frame" x="46" y="107" width="25" height="37"/>
+                                        <rect key="frame" x="45.5" y="107.5" width="25" height="37"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="participants_icon" translatesAutoresizingMaskIntoConstraints="NO" id="XaO-8e-b7E">
-                                                <rect key="frame" x="0.5" y="0.0" width="25" height="16"/>
+                                                <rect key="frame" x="0.0" y="0.5" width="25" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="XaO-8e-b7E" secondAttribute="height" multiplier="25:16" id="mGU-2h-BP5"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ca-fd-Hf3">
-                                                <rect key="frame" x="8.5" y="21" width="8.5" height="16"/>
+                                                <rect key="frame" x="8.5" y="21.5" width="8.5" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>

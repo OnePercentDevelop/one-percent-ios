@@ -8,38 +8,55 @@
 
 import Foundation
 import UIKit
-let WinnerViewControllerIdentifier = "WinnerViewController"
 
-class WinnerWireframe: NSObject, WinnerWireframeInputProtocol {
+let winnerViewControllerIdentifier = "WinnerViewController"
+let calendarViewControllerIdentifier = "CalendarViewController"
+
+class WinnerWireframe: NSObject {
     weak var winnerViewController: WinnerViewController!
+    var calendarWireframe: CalendarWireframe!
     
-    var winnerPresenter = WinnerPresenter()
-    // MARK: - WinnerWireframeInputProtocol
-    func presentationCalendarInterfaceForWinner(date: String) {
-                
-        // TODO calendarWireFrame 초기화, date 전달, calendar view 화면 present
-                //present(calendarViewController!, animated: true, completion: nil)
+    // MARK: - function
+    func presentWinnerInterfaceFromWindow(viewController: WinnerViewController) {
+        let presenter = WinnerPresenter()
+        let wireframe = WinnerWireframe()
+        let interactor = WinnerInteractor()
         
-    }
+        viewController.presenter = presenter
+        
+        presenter.view = viewController
+        presenter.wireframe = wireframe
+        presenter.interactor = interactor
+        
+        wireframe.winnerViewController = viewController
     
-    func presentWinnerInterfaceFromWindow(window: UIWindow) {
-        let viewController = winnerViewControllerFromStoryboard()
-        viewController.presenter = winnerPresenter
-        winnerViewController = viewController
-        winnerPresenter.view = viewController
+        interactor.output = presenter
     }
 
     func winnerViewControllerFromStoryboard() -> WinnerViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let viewController = storyboard.instantiateViewController(withIdentifier: WinnerViewControllerIdentifier) as! WinnerViewController
+        let viewController = storyboard.instantiateViewController(withIdentifier: winnerViewControllerIdentifier) as! WinnerViewController
         return viewController
     }
     
-    // MARK: - Private
-//    private func sendDateToCalendarPresenter() {//(calendarPresenter: CalendarPresenter, date: Date) {
-////        calendarPresenter.date = date
-//
-//    }
+    func calendarViewControllerFromStoryboard() -> CalendarViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let viewController = storyboard.instantiateViewController(withIdentifier: calendarViewControllerIdentifier) as! CalendarViewController
+        return viewController
+    }
+}
+
+// MARK: - WinnerWireframeInputProtocol
+extension WinnerWireframe: WinnerWireframeInputProtocol {
+    func presentationCalendarInterfaceForWinner(from view: WinenrViewInterfaceProtocol) {
+        let calendarViewController = calendarViewControllerFromStoryboard()
+        
+        if let sourceView = view as? WinnerViewController {
+            sourceView.present(calendarViewController, animated: true, completion: nil)
+        }
+    }
     
-    
+    func presentationSignUpAlertView() {
+        signUpAlert(viewController: winnerViewController)
+    }
 }
