@@ -14,7 +14,7 @@ let calendarViewControllerIdentifier = "CalendarViewController"
 
 class WinnerWireframe: NSObject {
     weak var winnerViewController: WinnerViewController!
-    var calendarWireframe: CalendarWireframe!
+//    var calendarWireframe: CalendarWireframe!
     
     // MARK: - function
     func presentWinnerInterfaceFromWindow(viewController: WinnerViewController) {

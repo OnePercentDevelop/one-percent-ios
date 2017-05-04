@@ -33,6 +33,7 @@ PODS:
   - RxCocoa (3.3.1):
     - RxSwift (~> 3.3)
   - RxSwift (3.3.1)
+  - SwiftDate (4.1.1)
   - SwiftyTimer (2.0.0)
   - SwiftyUserDefaults (3.0.0)
 
@@ -48,6 +49,7 @@ DEPENDENCIES:
   - RealmSwift
   - RxCocoa (~> 3.0)
   - RxSwift (~> 3.0)
+  - SwiftDate
   - SwiftyTimer
   - SwiftyUserDefaults
 
@@ -69,9 +71,10 @@ SPEC CHECKSUMS:
   RealmSwift: 0c02b9f2d4be4301c497ed10e53a0580584eb1dd
   RxCocoa: 7dcb7a1860fc9cd0e23dae67ab105fc2916670b6
   RxSwift: 8fc9f2de6275a9101d518444e00bf32f1a42caac
+  SwiftDate: ae615078806a322183e5f64e02e80ca8d939bf48
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
   SwiftyUserDefaults: 0f1d45fc3aafb9064dac661e367f8f83fe21a4b4
 
-PODFILE CHECKSUM: c2d324e2d1f1b1c5d53da03540eb177b9e2ef2cc
+PODFILE CHECKSUM: 95aaac9e4f381df6a58ec121332d5d12bfa2eff8
 
 COCOAPODS: 1.2.0

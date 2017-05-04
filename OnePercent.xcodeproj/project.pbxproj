@@ -17,7 +17,7 @@
 		C92347CD1EB75CF5005A4E3A /* CalendarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92347CC1EB75CF5005A4E3A /* CalendarPresenter.swift */; };
 		C92347CF1EB75D03005A4E3A /* CalendarWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92347CE1EB75D03005A4E3A /* CalendarWireframe.swift */; };
 		C92347D11EB76AD7005A4E3A /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92347D01EB76AD7005A4E3A /* AppDependencies.swift */; };
-		C92347D31EB78DD9005A4E3A /* CVDate + Onepercent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92347D21EB78DD9005A4E3A /* CVDate + Onepercent.swift */; };
+		C92347D31EB78DD9005A4E3A /* CVDate+Onepercent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92347D21EB78DD9005A4E3A /* CVDate+Onepercent.swift */; };
 		C92EC03D1DBD1D58005D7D8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EC03C1DBD1D58005D7D8B /* AppDelegate.swift */; };
 		C92EC03F1DBD1D58005D7D8B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C92EC03E1DBD1D58005D7D8B /* ViewController.swift */; };
 		C92EC0421DBD1D58005D7D8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C92EC0401DBD1D58005D7D8B /* Main.storyboard */; };
@@ -59,6 +59,7 @@
 		C9CDA7F71DC75FAA0044CB65 /* AlamofireLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CDA7F61DC75FAA0044CB65 /* AlamofireLogger.swift */; };
 		C9CDA7F91DC889FA0044CB65 /* EntryNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CDA7F81DC889FA0044CB65 /* EntryNumber.swift */; };
 		C9D200171E408CB200F5E44A /* Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D200161E408CB200F5E44A /* Example.swift */; };
+		C9E8AF501EBB7CD900FE58DD /* NSLayoutConstraint+OnePercent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E8AF4F1EBB7CD900FE58DD /* NSLayoutConstraint+OnePercent.swift */; };
 		C9EF25A01E55CAC50023C494 /* Gift.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF259F1E55CAC50023C494 /* Gift.swift */; };
 		C9EF25A21E55D9340023C494 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF25A11E55D9340023C494 /* Question.swift */; };
 		C9F0D37F1DC649C300B9B03B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F0D37E1DC649C300B9B03B /* SignUpViewController.swift */; };
@@ -80,7 +81,7 @@
 		C92347CC1EB75CF5005A4E3A /* CalendarPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPresenter.swift; sourceTree = "<group>"; };
 		C92347CE1EB75D03005A4E3A /* CalendarWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarWireframe.swift; sourceTree = "<group>"; };
 		C92347D01EB76AD7005A4E3A /* AppDependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
-		C92347D21EB78DD9005A4E3A /* CVDate + Onepercent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CVDate + Onepercent.swift"; sourceTree = "<group>"; };
+		C92347D21EB78DD9005A4E3A /* CVDate+Onepercent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CVDate+Onepercent.swift"; sourceTree = "<group>"; };
 		C92EC0391DBD1D58005D7D8B /* OnePercent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePercent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C92EC03C1DBD1D58005D7D8B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/AppDelegate.swift; sourceTree = "<group>"; };
 		C92EC03E1DBD1D58005D7D8B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Sources/ViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +125,7 @@
 		C9CDA7F61DC75FAA0044CB65 /* AlamofireLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireLogger.swift; sourceTree = "<group>"; };
 		C9CDA7F81DC889FA0044CB65 /* EntryNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryNumber.swift; sourceTree = "<group>"; };
 		C9D200161E408CB200F5E44A /* Example.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Example.swift; sourceTree = "<group>"; };
+		C9E8AF4F1EBB7CD900FE58DD /* NSLayoutConstraint+OnePercent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+OnePercent.swift"; sourceTree = "<group>"; };
 		C9EF259F1E55CAC50023C494 /* Gift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gift.swift; sourceTree = "<group>"; };
 		C9EF25A11E55D9340023C494 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		C9F0D37E1DC649C300B9B03B /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignUpViewController.swift; path = Sources/SignUpViewController.swift; sourceTree = "<group>"; };
@@ -447,7 +449,8 @@
 			children = (
 				C9CDA7F41DC75DAC0044CB65 /* Alamofire+OnePercent.swift */,
 				C9CDA7F61DC75FAA0044CB65 /* AlamofireLogger.swift */,
-				C92347D21EB78DD9005A4E3A /* CVDate + Onepercent.swift */,
+				C92347D21EB78DD9005A4E3A /* CVDate+Onepercent.swift */,
+				C9E8AF4F1EBB7CD900FE58DD /* NSLayoutConstraint+OnePercent.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -659,10 +662,11 @@
 				C952D07B1E55A61000DAEE40 /* WinnerViewController.swift in Sources */,
 				C940CE541E1248EF00E2AF9E /* Vote.swift in Sources */,
 				C91916B11E5C3D6400644444 /* winnerCollectionFooterView.swift in Sources */,
+				C9E8AF501EBB7CD900FE58DD /* NSLayoutConstraint+OnePercent.swift in Sources */,
 				C9CDA7F51DC75DAC0044CB65 /* Alamofire+OnePercent.swift in Sources */,
 				C9A6090D1EB1FD0B0026C45E /* WinnerProtocol.swift in Sources */,
 				C92347D11EB76AD7005A4E3A /* AppDependencies.swift in Sources */,
-				C92347D31EB78DD9005A4E3A /* CVDate + Onepercent.swift in Sources */,
+				C92347D31EB78DD9005A4E3A /* CVDate+Onepercent.swift in Sources */,
 				C9AE60FE1E7192E300B4A081 /* MoreTableViewController.swift in Sources */,
 				C91D92F51E0CED7D007B5034 /* OnePercentColor.swift in Sources */,
 				C912B6B51E1E4D9B0023A49F /* Time.swift in Sources */,

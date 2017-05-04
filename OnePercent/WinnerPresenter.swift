@@ -8,82 +8,114 @@
 
 import Foundation
 import SwiftyUserDefaults
+import SwiftDate
 
 class WinnerPresenter {
+    
     weak var view: WinenrViewInterfaceProtocol!
     var interactor: WinnerInteractorInputProtocol!
     var wireframe: WinnerWireframeInputProtocol!
-    var calendarViewController: CalendarViewController?
     
     // MAKR: - Property
-    var selectedDate: String!
-    var todayDate: String {
-        return Time.sharedInstance.stringFromDateDotyyyyMMdd(date: Date())
-    }
-
-    // MARK: - Internal Function
-    internal func calendarNavigationViewFetched(date: String) {
-        self.view.setCalendarNavigationUI(selectedDate: date)
-    }
-    
-    internal func winnerViewControllerFetched(date: String) {
-        self.view.setWinnerViewUI(selectedDate: date)
-    }
-    
-    func presentWinnersCount(isExtend : Bool, count: Int) -> Int {
-        var presentWinnersCount: Int = 0
-        if isExtend {
-            presentWinnersCount = count
-        } else {
-            if count > minimumPresentingCount {
-                presentWinnersCount = minimumPresentingCount
-            } else {
-                presentWinnersCount = count
-            }
+    var selectedDate: String = Date().string(with: .dotyyyyMMdd) {
+        didSet {
+            isExtended = false
         }
-        return presentWinnersCount
     }
-}
-
-// MARK: - WinnerFromInteractorToPresenterProtocol
-extension WinnerPresenter: WinnerFromInteractorToPresenterProtocol {
-    func winnersFetched(winners: [String]) {
-        let cellCount = presentWinnersCount(isExtend: false, count: winners.count)
-        self.view.setPresentWinnersCount(cellCount: cellCount)
-        self.view.setWinnerCollectionViewUI(cellCount: cellCount)
-        self.view.showWinnerData(winners: winners)
+    var todayDate: String { return Date().string(with: .dotyyyyMMdd) }
+    var winners: [String] = []
+    var isExtended: Bool = false
+    
+    var winnersCount: Int { return (isExtended ? winners.count : min(minimumPresentingCount, winners.count)) }
+    var winnersCollectionHeaderText: String { return "\(winners.count) 명" }
+    var isExtendedButtonHidden: Bool { return winners.count < minimumPresentingCount || isExtended }
+    
+    fileprivate func setCalendarNavigationUI(selectedDate date: String) {
+        view.dateTitle = date
+        if date == todayDate {
+            view.isMoveToTomorrowButtonHidden = true
+        } else if date == Time.sharedInstance.getAppStartStringDate() {
+            view.isMoveToYesterdayButtonHidden = true
+        } else {
+            view.isMoveToTomorrowButtonHidden = false
+            view.isMoveToYesterdayButtonHidden = false
+        }
     }
     
-    func giftFetched(gift: Gift) {
-        self.view.showGiftData(gift: gift)
+    fileprivate func setWinnerViewUI(selectedDate: String) {
+        if selectedDate == todayDate {
+            if Date() < Time.sharedInstance.getAnounceStartTime() {
+                view.isBeforeAnounceViewHidden = false
+            } else {
+                view.isBeforeAnounceViewHidden = true
+            }
+        } else {
+            view.isBeforeAnounceViewHidden = true
+        }
     }
+    
 }
 
 // MARK: - WinnerFromViewToPresenterProtocol
 extension WinnerPresenter: WinnerFromViewToPresenterProtocol {
-    func showAllWinnersDidClick(winnersCount: Int) {
-        let count = presentWinnersCount(isExtend: true, count: winnersCount)
-        self.view.setPresentWinnersCount(cellCount: count)
-        self.view.setWinnerCollectionViewUI(cellCount: count)
+    
+    func viewDidLoad() {
+        setCalendarNavigationUI(selectedDate: selectedDate)
+        setWinnerViewUI(selectedDate: selectedDate)
+        view.setWinnersCollectionExtended(isExtended)
+        
+        interactor.fetchWinnersAndGift(selectedDate: selectedDate)
+    }
+    
+    func bind(_ cell: WinnerCollectionViewCell, at row: Int) {
+        cell.winnerIdLabel.text = winners[row]
+        if winners[row] == Defaults[.id] {
+            cell.winnerIdLabel.tintColor = UIColor.red
+        } else {
+            cell.winnerIdLabel.tintColor = UIColor.black
+        }
+    }
+    
+    func showAllWinnersDidClick() {
+        isExtended = true
+        view.setWinnersCollectionExtended(isExtended)
+        view.reloadWinnersCollection()
     }
     
     func moveToYesterDayDidClick() {
-        //로그인 되어있는지 확인하기
-        if Defaults[.isSignIn] {
-            //어제 날짜 계산해 selectedDate 값으로 초기화
-            let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: Time.sharedInstance.dateFromStringDotyyyyMMdd(date: selectedDate))
-            selectedDate = Time.sharedInstance.stringFromDateDotyyyyMMdd(date: yesterDay!)
-            
-            //navigation ui 변경
-            calendarNavigationViewFetched(date: selectedDate)
-            self.view.setWinnerViewUI(selectedDate: selectedDate)
-
-            //interactor 날짜 전달하여 데이터 불러오게하기
-            self.interactor.fetchWinnersAndGift(selectedDate: selectedDate)
-        } else {
-            //signUpAlert present
-            self.wireframe.presentationSignUpAlertView()
+        guard Defaults[.isSignIn] else {
+            wireframe.presentationSignUpAlertView()
+            return
         }
+        
+        //어제 날짜 계산해 selectedDate 값으로 초기화
+        let selectedDateObj = self.selectedDate.date(with: .dotyyyyMMdd)
+        let yesterDay = selectedDateObj.add(components: [.day: -1])
+        
+        selectedDate = yesterDay.string(with: .dotyyyyMMdd)
+        
+        //navigation ui 변경
+        setCalendarNavigationUI(selectedDate: selectedDate)
+        setWinnerViewUI(selectedDate: selectedDate)
+        
+        //interactor 날짜 전달하여 데이터 불러오게하기
+        interactor.fetchWinnersAndGift(selectedDate: selectedDate)
+    }
+    
+    func moveToTomorrowDidClick() {
+        guard Defaults[.isSignIn] else {
+            wireframe.presentationSignUpAlertView()
+            return
+        }
+        let selectedDateObj = selectedDate.date(with: .dotyyyyMMdd)
+        let tomorrow = selectedDateObj.add(components: [.day: 1])
+        
+        selectedDate = tomorrow.string(with: .dotyyyyMMdd)
+        
+        setCalendarNavigationUI(selectedDate: selectedDate)
+        setWinnerViewUI(selectedDate: selectedDate)
+        
+        interactor.fetchWinnersAndGift(selectedDate: selectedDate)
     }
     
     func calendarOpenButtonClick(winnerViewController: WinnerViewController) {
@@ -94,30 +126,28 @@ extension WinnerPresenter: WinnerFromViewToPresenterProtocol {
         }
     }
     
-    func moveToTomorrowDidClick() {
-        if Defaults[.isSignIn] {
-            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Time.sharedInstance.dateFromStringDotyyyyMMdd(date: selectedDate))
-            selectedDate = Time.sharedInstance.stringFromDateDotyyyyMMdd(date: tomorrow!)
-            calendarNavigationViewFetched(date: selectedDate)
-            self.view.setWinnerViewUI(selectedDate: selectedDate)
-            self.interactor.fetchWinnersAndGift(selectedDate: selectedDate)
-        } else {
-            self.wireframe.presentationSignUpAlertView()
-        }
-    }
-    
-    func viewDidLoad() {
-        selectedDate = todayDate
-        calendarNavigationViewFetched(date: todayDate)
-        self.view.setWinnerViewUI(selectedDate: todayDate)
-        self.view.setWinnerCollectionViewUI(cellCount: minimumPresentingCount)
-        self.interactor.fetchWinnersAndGift(selectedDate: todayDate)
-    }
-    
     func calendarVCDelegateDateSelectDoneClick(date: String) {
         selectedDate = date
-        calendarNavigationViewFetched(date: selectedDate)
-        self.view.setWinnerViewUI(selectedDate: selectedDate)
-        self.interactor.fetchWinnersAndGift(selectedDate: selectedDate)
+        
+        setCalendarNavigationUI(selectedDate: selectedDate)
+        setWinnerViewUI(selectedDate: selectedDate)
+        
+        interactor.fetchWinnersAndGift(selectedDate: selectedDate)
     }
+    
+}
+
+// MARK: - WinnerFromInteractorToPresenterProtocol
+extension WinnerPresenter: WinnerFromInteractorToPresenterProtocol {
+    
+    func winnersFetched(winners: [String]) {
+        self.winners = winners
+        view.setWinnersCollectionExtended(isExtended)
+        view.reloadWinnersCollection()
+    }
+    
+    func giftFetched(gift: Gift) {
+        view.showGiftData(gift: gift)
+    }
+    
 }

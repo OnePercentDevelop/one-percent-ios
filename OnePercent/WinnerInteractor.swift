@@ -16,32 +16,23 @@ class WinnerInteractor {
     
     // MARK: - Internal
     internal func getWinnersArray(selectedDate: String) -> [String] {
-        if let winners = uiRealm.objects(Prize.self).filter("prizeDate == '\(selectedDate)'").last?.winner {
-            return winners.components(separatedBy: " ")
-        } else {
+        guard let winners = uiRealm.objects(Prize.self).filter("prizeDate == '\(selectedDate)'").last?.winner else {
             return []
         }
+        return winners.components(separatedBy: " ")
     }
     
-    internal func getGift(selectedDate: String) -> Gift? {
-        var gift: Gift?
+    internal func fetchGift(selectedDate: String) {
         Alamofire
             .request("http://onepercentserver.azurewebsites.net/OnePercentServer/todayGift.do?vote_date=\(selectedDate)", method: .get)
             .log(level: .verbose)
-            .responseObject { (response: DataResponse<GiftResponse>) in
-                if let giftResponse = response.result.value?.giftResult {
-                    for n in giftResponse {
-                        guard let giftName = n.giftName  else {
-                            return
-                        }
-                        guard let giftPng = n.giftPng else {
-                            return
-                        }
-                        gift = Gift(name: giftName, url: "http://onepercentserver.azurewebsites.net/OnePercentServer/resources/common/image/" + giftPng)
-                    }
+            .responseObject { [weak self] (response: DataResponse<GiftResponse>) in
+                guard let giftResponse = response.result.value?.giftResult?.first, let giftName = giftResponse.giftName, let giftPng = giftResponse.giftPng else  {
+                    return
                 }
+                let gift = Gift(name: giftName, url: "http://onepercentserver.azurewebsites.net/OnePercentServer/resources/common/image/" + giftPng)
+                self?.output.giftFetched(gift: gift)
             }
-        return gift
     }
     
 }
@@ -49,8 +40,9 @@ class WinnerInteractor {
 // MARK: - WinnerInteractorInputProtocol
 extension WinnerInteractor: WinnerInteractorInputProtocol {
     func fetchWinnersAndGift(selectedDate date: String) {
-        output.winnersFetched(winners: getWinnersArray(selectedDate: date))
-        if let gift = getGift(selectedDate: date) { output.giftFetched(gift: gift) }
+        let winnersArray = getWinnersArray(selectedDate: date)
+        output.winnersFetched(winners: winnersArray)
+        fetchGift(selectedDate: date)
     }
 }
 

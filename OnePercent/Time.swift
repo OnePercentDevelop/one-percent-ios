@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyTimer
 import UIKit
+import SwiftDate
 
 class Time {
 //    private let voteStartTime = NSCalendar.current.date(bySettingHour: 6, minute: 0, second: 0, of: Date())
@@ -18,8 +19,8 @@ class Time {
     
     
     private let voteStartTime = NSCalendar.current.date(bySettingHour: 16, minute: 38, second: 0, of: Date())
-    private let voteEndTime = NSCalendar.current.date(bySettingHour: 19, minute: 39, second: 0, of: Date())
-    private let anounceStartTime = NSCalendar.current.date(bySettingHour: 19, minute: 58, second: 0, of: Date())
+    private let voteEndTime = NSCalendar.current.date(bySettingHour: 22, minute: 50, second: 0, of: Date())
+    private let anounceStartTime = NSCalendar.current.date(bySettingHour: 22, minute: 58, second: 0, of: Date())
     private var  tomorrowVoteStartTime = NSCalendar.current.date(byAdding: .day, value: 1, to: Date())
     private let appStartDate: Date!
 
@@ -92,5 +93,32 @@ class Time {
         return String(format: "%0.2d:%0.2d:%0.2d",hours,minutes,seconds)
     }
     
+}
 
+extension String {
+    
+    func date(with format: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.date(from: self)!
+    }
+    
+    func date(with format: DateStringFormat) -> Date {
+        return date(with: format.rawValue)
+    }
+    
+}
+
+extension Date {
+    
+    func string(with format: DateStringFormat) -> String {
+        return string(custom: format.rawValue)
+    }
+    
+}
+
+enum DateStringFormat: String {
+    case yyyyMM = "yyyyMM"
+    case dotyyyyMMdd = "yyyy.MM.dd"
+    case koreanyyyyMMdd = "yyyy년 MM월 dd일"
 }

@@ -74,67 +74,85 @@
                                     <constraint firstItem="Dqa-bI-Eya" firstAttribute="centerY" secondItem="4RO-Yg-Uxv" secondAttribute="centerY" id="syG-Le-BDZ"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="umg-ol-1kC">
-                                <rect key="frame" x="0.0" y="102" width="375" height="516"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mark_img" translatesAutoresizingMaskIntoConstraints="NO" id="nlG-Re-Hak">
-                                        <rect key="frame" x="100" y="100" width="175" height="175"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="nlG-Re-Hak" secondAttribute="height" multiplier="1:1" id="2Ik-db-Au4"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오후 6시45분에 당첨자를 확인해 주세요" textAlignment="center" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OtN-Fv-0ed">
-                                        <rect key="frame" x="10" y="305" width="355" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.33333333329999998" green="0.62745098040000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="nlG-Re-Hak" secondAttribute="trailing" constant="100" id="IVt-8Z-IEK"/>
-                                    <constraint firstItem="OtN-Fv-0ed" firstAttribute="top" secondItem="nlG-Re-Hak" secondAttribute="bottom" constant="30" id="Inp-Ho-0qY"/>
-                                    <constraint firstItem="nlG-Re-Hak" firstAttribute="leading" secondItem="umg-ol-1kC" secondAttribute="leading" constant="100" id="JHm-Mr-0Lt"/>
-                                    <constraint firstItem="nlG-Re-Hak" firstAttribute="top" secondItem="umg-ol-1kC" secondAttribute="top" constant="100" id="Qu9-Mc-YhL"/>
-                                    <constraint firstAttribute="trailing" secondItem="OtN-Fv-0ed" secondAttribute="trailing" constant="10" id="SVz-3q-EZr"/>
-                                    <constraint firstItem="OtN-Fv-0ed" firstAttribute="leading" secondItem="umg-ol-1kC" secondAttribute="leading" constant="10" id="WJ2-hO-pcM"/>
-                                    <constraint firstItem="OtN-Fv-0ed" firstAttribute="centerX" secondItem="umg-ol-1kC" secondAttribute="centerX" id="ykn-u5-7Q5"/>
-                                </constraints>
-                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eR1-ph-9mL">
                                 <rect key="frame" x="0.0" y="102" width="375" height="516"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="당 첨 자 발 표" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VC2-Ag-4JF">
-                                        <rect key="frame" x="140" y="20" width="95" height="21.5"/>
+                                        <rect key="frame" x="140.5" y="20" width="95" height="22"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="textColor" red="0.33333333329999998" green="0.62745098040000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="prize_item_background" translatesAutoresizingMaskIntoConstraints="NO" id="ZLT-TT-8Dy">
-                                        <rect key="frame" x="122.5" y="53.5" width="130" height="130"/>
+                                        <rect key="frame" x="122.5" y="54" width="130" height="130"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="130" id="2TI-ze-W73"/>
+                                            <constraint firstAttribute="height" constant="130" id="2TI-ze-W73" customClass="DeviceConstraints" customModule="OnePercent" customModuleProvider="target">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="iPhone5Constant">
+                                                        <real key="value" value="100"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="iPhone6Constant">
+                                                        <real key="value" value="130"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="defaultConstant">
+                                                        <real key="value" value="130"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="iPhone6PlusConstant">
+                                                        <real key="value" value="130"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </constraint>
                                             <constraint firstAttribute="width" secondItem="ZLT-TT-8Dy" secondAttribute="height" multiplier="1:1" id="TyG-FH-k12"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TWq-zU-waV">
                                         <rect key="frame" x="142.5" y="74" width="90" height="90"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="90" id="7n0-YT-R7F"/>
+                                            <constraint firstAttribute="height" constant="90" id="7n0-YT-R7F" customClass="DeviceConstraints" customModule="OnePercent" customModuleProvider="target">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="iPhone5Constant">
+                                                        <real key="value" value="60"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="iPhone6Constant">
+                                                        <real key="value" value="90"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="iPhone6PlusConstant">
+                                                        <real key="value" value="90"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="defaultConstant">
+                                                        <real key="value" value="90"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </constraint>
                                             <constraint firstAttribute="width" secondItem="TWq-zU-waV" secondAttribute="height" multiplier="1:1" id="sUn-vQ-0gB"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스타벅스 아메리카노" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKn-K1-Cju">
-                                        <rect key="frame" x="127" y="186.5" width="121" height="18"/>
+                                        <rect key="frame" x="127.5" y="187" width="121" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JTZ-PR-cew">
-                                        <rect key="frame" x="40" y="212" width="295" height="100"/>
+                                        <rect key="frame" x="40" y="213" width="295" height="100"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="ARN-Jh-tqj"/>
+                                            <constraint firstAttribute="height" constant="100" id="ARN-Jh-tqj" customClass="DeviceConstraints" customModule="OnePercent" customModuleProvider="target">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="iPhone5Constant">
+                                                        <real key="value" value="170"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="iPhone6Constant">
+                                                        <real key="value" value="225"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="iPhone6PlusConstant">
+                                                        <real key="value" value="260"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="defaultConstant">
+                                                        <real key="value" value="200"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </constraint>
                                         </constraints>
                                         <inset key="scrollIndicatorInsets" minX="1" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OpY-cF-oD2">
@@ -152,7 +170,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Nn-Vo-OVp">
-                                                            <rect key="frame" x="118.5" y="0.0" width="33" height="16"/>
+                                                            <rect key="frame" x="120" y="0.0" width="33" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -173,7 +191,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="8AD-IM-avN">
-                                                    <rect key="frame" x="168" y="13" width="184.5" height="24"/>
+                                                    <rect key="frame" x="55.5" y="13" width="184.5" height="24"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘의 1% 주인공" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kXV-pD-l94">
                                                             <rect key="frame" x="0.0" y="0.0" width="138.5" height="24"/>
@@ -203,7 +221,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kIz-cr-T4K">
-                                                    <rect key="frame" x="247.5" y="13" width="25" height="25"/>
+                                                    <rect key="frame" x="135" y="13" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="SlH-gJ-211"/>
                                                         <constraint firstAttribute="height" constant="25" id="ZTb-rq-6c4"/>
@@ -228,7 +246,7 @@
                                         </connections>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8n1-hg-q8c">
-                                        <rect key="frame" x="40" y="319.5" width="295" height="32.5"/>
+                                        <rect key="frame" x="40" y="320" width="295" height="32.5"/>
                                         <string key="text">-  본 상품(기프티콘)은 당일 문자로 발송 됩니다.
 - 본 상품(기프티콘)은 수령 후 최대 90일 까지 사용 가능하며 기한에 대한 알림은 별도로 제공 하지 않습니다.
 - 잘못된 개인정보 혹은 발송 메세지 삭제/분실 및 본인의 과실에 대해서는 고객센터로 문의 바랍니다</string>
@@ -241,7 +259,22 @@
                                     <constraint firstItem="JTZ-PR-cew" firstAttribute="centerX" secondItem="eR1-ph-9mL" secondAttribute="centerX" id="1he-jt-Kns"/>
                                     <constraint firstItem="8n1-hg-q8c" firstAttribute="width" secondItem="JTZ-PR-cew" secondAttribute="width" id="37B-za-u7I"/>
                                     <constraint firstItem="WKn-K1-Cju" firstAttribute="centerX" secondItem="eR1-ph-9mL" secondAttribute="centerX" id="4Rc-hu-wJW"/>
-                                    <constraint firstItem="VC2-Ag-4JF" firstAttribute="top" secondItem="eR1-ph-9mL" secondAttribute="top" constant="20" id="7BZ-HR-P5e"/>
+                                    <constraint firstItem="VC2-Ag-4JF" firstAttribute="top" secondItem="eR1-ph-9mL" secondAttribute="top" constant="20" id="7BZ-HR-P5e" customClass="DeviceConstraints" customModule="OnePercent" customModuleProvider="target">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="iPhone5Constant">
+                                                <real key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="iPhone6Constant">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="iPhone6PlusConstant">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="defaultConstant">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
                                     <constraint firstItem="8n1-hg-q8c" firstAttribute="centerX" secondItem="eR1-ph-9mL" secondAttribute="centerX" id="7dz-Ay-NSk"/>
                                     <constraint firstItem="ZLT-TT-8Dy" firstAttribute="centerX" secondItem="eR1-ph-9mL" secondAttribute="centerX" id="A8g-8k-haV"/>
                                     <constraint firstItem="JTZ-PR-cew" firstAttribute="leading" secondItem="eR1-ph-9mL" secondAttribute="leading" constant="40" id="FGQ-7f-0oI"/>
@@ -256,6 +289,33 @@
                                     <constraint firstItem="JTZ-PR-cew" firstAttribute="top" secondItem="WKn-K1-Cju" secondAttribute="bottom" constant="8" id="w5L-cI-ned"/>
                                 </constraints>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="umg-ol-1kC">
+                                <rect key="frame" x="0.0" y="102" width="375" height="516"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mark_img" translatesAutoresizingMaskIntoConstraints="NO" id="nlG-Re-Hak">
+                                        <rect key="frame" x="100" y="100" width="175" height="175"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="nlG-Re-Hak" secondAttribute="height" multiplier="1:1" id="2Ik-db-Au4"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오후 6시45분에 당첨자를 확인해 주세요" textAlignment="center" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OtN-Fv-0ed">
+                                        <rect key="frame" x="10" y="305" width="355" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.33333333329999998" green="0.62745098040000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="nlG-Re-Hak" secondAttribute="trailing" constant="100" id="IVt-8Z-IEK"/>
+                                    <constraint firstItem="OtN-Fv-0ed" firstAttribute="top" secondItem="nlG-Re-Hak" secondAttribute="bottom" constant="30" id="Inp-Ho-0qY"/>
+                                    <constraint firstItem="nlG-Re-Hak" firstAttribute="leading" secondItem="umg-ol-1kC" secondAttribute="leading" constant="100" id="JHm-Mr-0Lt"/>
+                                    <constraint firstItem="nlG-Re-Hak" firstAttribute="top" secondItem="umg-ol-1kC" secondAttribute="top" constant="100" id="Qu9-Mc-YhL"/>
+                                    <constraint firstAttribute="trailing" secondItem="OtN-Fv-0ed" secondAttribute="trailing" constant="10" id="SVz-3q-EZr"/>
+                                    <constraint firstItem="OtN-Fv-0ed" firstAttribute="leading" secondItem="umg-ol-1kC" secondAttribute="leading" constant="10" id="WJ2-hO-pcM"/>
+                                    <constraint firstItem="OtN-Fv-0ed" firstAttribute="centerX" secondItem="umg-ol-1kC" secondAttribute="centerX" id="ykn-u5-7Q5"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -277,15 +337,12 @@
                         <outlet property="beforeAnounceView" destination="umg-ol-1kC" id="LTY-gz-67R"/>
                         <outlet property="calendarOpenButton" destination="Dqa-bI-Eya" id="RXv-An-zZd"/>
                         <outlet property="giftImageView" destination="TWq-zU-waV" id="Z1i-Gy-2jP"/>
-                        <outlet property="giftImageViewHeightConstraint" destination="7n0-YT-R7F" id="62n-Xx-g7y"/>
                         <outlet property="giftNameLabel" destination="WKn-K1-Cju" id="pzr-8p-EYZ"/>
                         <outlet property="moveToTomorrow" destination="ZRu-o5-4xm" id="thh-3c-rLF"/>
                         <outlet property="moveToYesterDay" destination="QEe-5c-40g" id="Amk-3X-TpH"/>
-                        <outlet property="noticeWinnerLabelTopConstraint" destination="7BZ-HR-P5e" id="gme-GH-HRu"/>
-                        <outlet property="prizeItemBackroundImageViewHeightConstraint" destination="2TI-ze-W73" id="3Dj-4n-W9c"/>
                         <outlet property="scrollView" destination="eR1-ph-9mL" id="XsL-7C-gNm"/>
                         <outlet property="winnerCollectionView" destination="JTZ-PR-cew" id="noB-1Y-YlH"/>
-                        <outlet property="winnerCollectionViewHeight" destination="ARN-Jh-tqj" id="nvE-Ai-lft"/>
+                        <outlet property="winnerCollectionViewHeight" destination="ARN-Jh-tqj" id="5bx-om-6cM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q5H-hZ-f9l" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -507,7 +564,7 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="J1a-EO-bsX">
-                                        <rect key="frame" x="157" y="49.5" width="90" height="51"/>
+                                        <rect key="frame" x="157" y="49" width="90" height="51"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8e-uZ-mVK">
                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="20.5"/>
@@ -656,7 +713,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PUSH 알림" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kw5-W0-FKN">
-                                                    <rect key="frame" x="18" y="11" width="79.5" height="20.5"/>
+                                                    <rect key="frame" x="18" y="11" width="80" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -690,7 +747,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eeP-Ly-Yd0">
-                                                    <rect key="frame" x="316" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="316" y="7" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="sileceSwitch:" destination="z3b-sj-6k8" eventType="valueChanged" id="rkO-Z7-d2r"/>
                                                     </connections>
@@ -999,7 +1056,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Sh0-s3-RlI">
-                                <rect key="frame" x="40" y="270" width="295" height="209.5"/>
+                                <rect key="frame" x="40" y="270" width="295" height="209"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Sh0-s3-RlI" secondAttribute="height" multiplier="810:575" id="zaA-BW-m2E"/>
@@ -1096,7 +1153,7 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THg-7S-r6w" customClass="OnePercentButton" customModule="OnePercent" customModuleProvider="target">
-                                <rect key="frame" x="40" y="504.5" width="295" height="44"/>
+                                <rect key="frame" x="40" y="504" width="295" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="k7A-2X-Kao"/>
                                 </constraints>
@@ -1120,7 +1177,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="22V-YL-0BP">
-                                <rect key="frame" x="100" y="504.5" width="175" height="73.5"/>
+                                <rect key="frame" x="100" y="504" width="175" height="74"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="participants_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Qt9-pE-w01">
                                         <rect key="frame" x="70" y="0.0" width="35" height="21"/>
@@ -1135,7 +1192,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="오늘의 1%는 10명 입니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7N-Dy-40O">
-                                        <rect key="frame" x="20" y="57.5" width="135" height="16"/>
+                                        <rect key="frame" x="20" y="58" width="135" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1152,7 +1209,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="1in-zt-aQ1">
-                                <rect key="frame" x="166.5" y="507" width="42" height="39.5"/>
+                                <rect key="frame" x="166.5" y="506.5" width="42" height="39.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T97-sU-oiB">
                                         <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
@@ -1297,7 +1354,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAm-fS-Y4u">
-                                        <rect key="frame" x="10" y="4.5" width="39" height="30"/>
+                                        <rect key="frame" x="10" y="5" width="39" height="30"/>
                                         <state key="normal" title="today">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -1387,25 +1444,25 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="WXF-OJ-9RM" userLabel="includedInCircleView">
-                                <rect key="frame" x="129.5" y="165.5" width="116.5" height="144"/>
+                                <rect key="frame" x="130" y="165" width="116.5" height="144"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="투표대기중" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1h4-js-4Sq">
-                                        <rect key="frame" x="21" y="0.5" width="74" height="20.5"/>
+                                        <rect key="frame" x="21.5" y="0.0" width="74" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.33333333329999998" green="0.62745098040000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="6JM-lt-0T5">
-                                        <rect key="frame" x="0.0" y="41" width="116.5" height="46.5"/>
+                                        <rect key="frame" x="0.0" y="40.5" width="116.5" height="46.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="투표시작까지 남은시간" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Zi-Ll-hm2">
-                                                <rect key="frame" x="0.0" y="0.5" width="116.5" height="16"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="116.5" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9P-5u-zqe">
-                                                <rect key="frame" x="37.5" y="21.5" width="41" height="25.5"/>
+                                                <rect key="frame" x="38" y="21" width="41" height="25.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1413,16 +1470,16 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="center" axis="vertical" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="qKL-Pe-Vum">
-                                        <rect key="frame" x="45.5" y="107.5" width="25" height="37"/>
+                                        <rect key="frame" x="46" y="107" width="25" height="37"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="participants_icon" translatesAutoresizingMaskIntoConstraints="NO" id="XaO-8e-b7E">
-                                                <rect key="frame" x="0.0" y="0.5" width="25" height="16"/>
+                                                <rect key="frame" x="0.5" y="0.0" width="25" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="XaO-8e-b7E" secondAttribute="height" multiplier="25:16" id="mGU-2h-BP5"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ca-fd-Hf3">
-                                                <rect key="frame" x="8.5" y="21.5" width="8.5" height="16"/>
+                                                <rect key="frame" x="8.5" y="21" width="8.5" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
