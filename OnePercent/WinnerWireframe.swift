@@ -50,6 +50,8 @@ class WinnerWireframe: NSObject {
 extension WinnerWireframe: WinnerWireframeInputProtocol {
     func presentationCalendarInterfaceForWinner(from view: WinenrViewInterfaceProtocol) {
         let calendarViewController = calendarViewControllerFromStoryboard()
+        //TODO: calendarViewController delegate 초기화
+        calendarViewController.delegate = winnerViewController
         
         if let sourceView = view as? WinnerViewController {
             sourceView.present(calendarViewController, animated: true, completion: nil)
@@ -60,3 +62,4 @@ extension WinnerWireframe: WinnerWireframeInputProtocol {
         signUpAlert(viewController: winnerViewController)
     }
 }
+

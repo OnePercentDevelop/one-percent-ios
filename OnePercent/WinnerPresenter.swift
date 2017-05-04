@@ -25,6 +25,10 @@ class WinnerPresenter {
     internal func calendarNavigationViewFetched(date: String) {
         self.view.setCalendarNavigationUI(selectedDate: date)
     }
+    
+    internal func winnerViewControllerFetched(date: String) {
+        self.view.setWinnerViewUI(selectedDate: date)
+    }
 }
 
 // MARK: - WinnerFromInteractorToPresenterProtocol
@@ -62,7 +66,8 @@ extension WinnerPresenter: WinnerFromViewToPresenterProtocol {
             
             //navigation ui 변경
             calendarNavigationViewFetched(date: selectedDate)
-            
+            self.view.setWinnerViewUI(selectedDate: selectedDate)
+
             //interactor 날짜 전달하여 데이터 불러오게하기
             self.interactor.fetchWinnersAndGift(selectedDate: selectedDate)
         } else {
@@ -84,6 +89,7 @@ extension WinnerPresenter: WinnerFromViewToPresenterProtocol {
             let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Time.sharedInstance.dateFromStringDotyyyyMMdd(date: selectedDate))
             selectedDate = Time.sharedInstance.stringFromDateDotyyyyMMdd(date: tomorrow!)
             calendarNavigationViewFetched(date: selectedDate)
+            self.view.setWinnerViewUI(selectedDate: selectedDate)
             self.interactor.fetchWinnersAndGift(selectedDate: selectedDate)
         } else {
             self.wireframe.presentationSignUpAlertView()
@@ -93,5 +99,21 @@ extension WinnerPresenter: WinnerFromViewToPresenterProtocol {
     func viewDidLoad() {
         selectedDate = todayDate
         calendarNavigationViewFetched(date: todayDate)
+        self.view.setWinnerViewUI(selectedDate: todayDate)
+    }
+    
+    func calendarVCDelegateDateSelectDoneClick(date: String) {
+        selectedDate = date
+        calendarNavigationViewFetched(date: selectedDate)
+        self.view.setWinnerViewUI(selectedDate: selectedDate)
+        self.interactor.fetchWinnersAndGift(selectedDate: selectedDate)
     }
 }
+//
+//extension WinnerPresenter: CalendarViewControllerDelegate {
+//    func dateSelectDone(date: String) {
+//        selectedDate = date
+//        calendarNavigationViewFetched(date: selectedDate)
+//        self.interactor.fetchWinnersAndGift(selectedDate: selectedDate)
+//    }
+//}

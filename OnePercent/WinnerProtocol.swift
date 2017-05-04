@@ -12,6 +12,7 @@ protocol WinenrViewInterfaceProtocol: class {
     func showWinnerData(winners: [String])
     func showGiftData(gift: Gift)
     func setCalendarNavigationUI(selectedDate date: String)
+    func setWinnerViewUI(selectedDate: String)
 }
 
 //presenter
@@ -23,6 +24,7 @@ protocol WinnerFromViewToPresenterProtocol {
     func calendarOpenButtonClick(winnerViewController: WinnerViewController)
     func moveToTomorrowDidClick()
     func viewDidLoad()
+    func calendarVCDelegateDateSelectDoneClick(date: String)
 }
 
 protocol WinnerFromInteractorToPresenterProtocol: class {
