@@ -13,13 +13,13 @@ class WinnerPresenter {
     weak var view: WinenrViewInterfaceProtocol!
     var interactor: WinnerInteractorInputProtocol!
     var wireframe: WinnerWireframeInputProtocol!
+    var calendarViewController: CalendarViewController?
     
     // MAKR: - Property
     var selectedDate: String!
     var todayDate: String {
         return Time.sharedInstance.stringFromDateDotyyyyMMdd(date: Date())
     }
-    var calendarViewController: CalendarViewController?
 
     // MARK: - Internal Function
     internal func calendarNavigationViewFetched(date: String) {
@@ -29,11 +29,28 @@ class WinnerPresenter {
     internal func winnerViewControllerFetched(date: String) {
         self.view.setWinnerViewUI(selectedDate: date)
     }
+    
+    func presentWinnersCount(isExtend : Bool, count: Int) -> Int {
+        var presentWinnersCount: Int = 0
+        if isExtend {
+            presentWinnersCount = count
+        } else {
+            if count > minimumPresentingCount {
+                presentWinnersCount = minimumPresentingCount
+            } else {
+                presentWinnersCount = count
+            }
+        }
+        return presentWinnersCount
+    }
 }
 
 // MARK: - WinnerFromInteractorToPresenterProtocol
 extension WinnerPresenter: WinnerFromInteractorToPresenterProtocol {
     func winnersFetched(winners: [String]) {
+        let cellCount = presentWinnersCount(isExtend: false, count: winners.count)
+        self.view.setPresentWinnersCount(cellCount: cellCount)
+        self.view.setWinnerCollectionViewUI(cellCount: cellCount)
         self.view.showWinnerData(winners: winners)
     }
     
@@ -44,17 +61,10 @@ extension WinnerPresenter: WinnerFromInteractorToPresenterProtocol {
 
 // MARK: - WinnerFromViewToPresenterProtocol
 extension WinnerPresenter: WinnerFromViewToPresenterProtocol {
-    func updateView(date: String) {
-        self.interactor.fetchWinnersAndGift(selectedDate: date)
-    }
-    
-    func showCalendar(date: String) {
-        //        self.wireframe.presentationCalendarInterfaceForWinner(date: date)
-    }
-    
-    func showAllWinnersDidClick() {
-        //TODO: collection view return cellcount 되는것 리턴숫자변경하기
-        //TODO: view reload 되게하기
+    func showAllWinnersDidClick(winnersCount: Int) {
+        let count = presentWinnersCount(isExtend: true, count: winnersCount)
+        self.view.setPresentWinnersCount(cellCount: count)
+        self.view.setWinnerCollectionViewUI(cellCount: count)
     }
     
     func moveToYesterDayDidClick() {
@@ -100,6 +110,8 @@ extension WinnerPresenter: WinnerFromViewToPresenterProtocol {
         selectedDate = todayDate
         calendarNavigationViewFetched(date: todayDate)
         self.view.setWinnerViewUI(selectedDate: todayDate)
+        self.view.setWinnerCollectionViewUI(cellCount: minimumPresentingCount)
+        self.interactor.fetchWinnersAndGift(selectedDate: todayDate)
     }
     
     func calendarVCDelegateDateSelectDoneClick(date: String) {
@@ -109,11 +121,3 @@ extension WinnerPresenter: WinnerFromViewToPresenterProtocol {
         self.interactor.fetchWinnersAndGift(selectedDate: selectedDate)
     }
 }
-//
-//extension WinnerPresenter: CalendarViewControllerDelegate {
-//    func dateSelectDone(date: String) {
-//        selectedDate = date
-//        calendarNavigationViewFetched(date: selectedDate)
-//        self.interactor.fetchWinnersAndGift(selectedDate: selectedDate)
-//    }
-//}

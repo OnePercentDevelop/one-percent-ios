@@ -17,7 +17,7 @@ class WinnerInteractor {
     // MARK: - Internal
     internal func getWinnersArray(selectedDate: String) -> [String] {
         if let winners = uiRealm.objects(Prize.self).filter("prizeDate == '\(selectedDate)'").last?.winner {
-            return winners.components(separatedBy: ",")
+            return winners.components(separatedBy: " ")
         } else {
             return []
         }

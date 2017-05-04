@@ -14,17 +14,16 @@ import RealmSwift
 import DeviceGuru
 
 let winnerCollectionViewCellIdentifier = "winnerCollectionViewCell"
-class WinnerViewController: UIViewController {
-    var calendarViewController: CalendarViewController?
-    var winners: [String] = []
-    
-    var presentWinnersCount: Int = 0
+let minimumPresentingCount: Int = 4
 
+class WinnerViewController: UIViewController {
     var presenter: WinnerFromViewToPresenterProtocol!
+
+    var winners: [String] = []
     var todayDate: String {
         return Time.sharedInstance.stringFromDateDotyyyyMMdd(date: Date())
     }
-    let minimumPresentingCount: Int = 6
+    var presentWinnersCount: Int!
 
     //MARK: - IBOutlet
     @IBOutlet weak var scrollView: UIScrollView!
@@ -41,13 +40,13 @@ class WinnerViewController: UIViewController {
     @IBOutlet weak var noticeWinnerLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var prizeItemBackroundImageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var giftImageViewHeightConstraint: NSLayoutConstraint!
+    var cellSize: CGSize!
+    let cellSpacing: CGFloat = 10
+    let reuseableHeight: CGFloat = 60
     
     //MARK: - IBAction
     @IBAction func showAllWinners(_ sender: Any) {
-//        setWinnerCollectionViewSize(cellCount: winners.count)
-        setPresentWinnersCount(isExtend: true)
-        winnerCollectionView.reloadData()
-        self.presenter.showAllWinnersDidClick()
+        self.presenter.showAllWinnersDidClick(winnersCount: winners.count)
     }
 
     @IBAction func moveToYesterDay(_ sender: Any) {
@@ -65,83 +64,52 @@ class WinnerViewController: UIViewController {
     //MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
-        setWinnerViewLayout()
         let appDependencies = AppDependencies()
         appDependencies.installWinnerViewControllerIntoWindow(winnerViewController: self)
+        setWinnerViewLayout()
+        winnerCollectionView.layer.borderWidth = 1
+        winnerCollectionView.layer.borderColor = UIColor.lightGray.cgColor
         self.presenter.viewDidLoad()
     }
     
     //MARK - Layout Set Function
-    func setWinnerCollectionViewSize(cellCount: Int) {
-        if winners.count <= minimumPresentingCount {
-            switch DeviceGuru.hardware() {
-            case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE:
-                self.winnerCollectionViewHeight.constant = CGFloat(WinnerCollectionViewHeightEnum.size5.rawValue)
-            case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
-                self.winnerCollectionViewHeight.constant = CGFloat(WinnerCollectionViewHeightEnum.size6.rawValue)
-            case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS:
-                self.winnerCollectionViewHeight.constant = CGFloat(WinnerCollectionViewHeightEnum.size6plus.rawValue)
-            default:
-                self.winnerCollectionViewHeight.constant = 170
-            }
-        } else {
-             let cellHeight = (winnerCollectionView.frame.height - 100) / 5
-             let height = CGFloat(cellCount) * (cellHeight + 10)
-             self.winnerCollectionViewHeight.constant = height
-        }
-        //TODO: winnerCollectionViewWidth
-        //TODO: cell size
-    }
-
     func setWinnerViewLayout() {
         switch DeviceGuru.hardware() {
-        case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE: break
+        case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE:
+            self.winnerCollectionViewHeight.constant = 170
+            noticeWinnerLabelTopConstraint.constant = 15
+            prizeItemBackroundImageViewHeightConstraint.constant = 100
+            giftImageViewHeightConstraint.constant = 60
         case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
             self.winnerCollectionViewHeight.constant = 225
             noticeWinnerLabelTopConstraint.constant = 20
             prizeItemBackroundImageViewHeightConstraint.constant = 130
             giftImageViewHeightConstraint.constant = 90
         case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS: break
-        default:
-            self.winnerCollectionViewHeight.constant = 170
-            noticeWinnerLabelTopConstraint.constant = 15
-            prizeItemBackroundImageViewHeightConstraint.constant = 100
-            giftImageViewHeightConstraint.constant = 60
+        default: //출시할때 없애기
+            self.winnerCollectionViewHeight.constant = 225
+            noticeWinnerLabelTopConstraint.constant = 20
+            prizeItemBackroundImageViewHeightConstraint.constant = 130
+            giftImageViewHeightConstraint.constant = 90
         }
+        cellSize = CGSize(width: winnerCollectionView.frame.width, height: (winnerCollectionViewHeight.constant - (reuseableHeight + cellSpacing) * 2) / CGFloat(minimumPresentingCount) - cellSpacing)
     }
-    
-    //수정 제대로 안됨
-    func setPresentWinnersCount(isExtend : Bool) {
-        if isExtend {
-            self.presentWinnersCount = self.winners.count
-        } else {
-            if winners.count > minimumPresentingCount {
-                self.presentWinnersCount = minimumPresentingCount
-            } else {
-                self.presentWinnersCount = self.winners.count
-            }
-        }
-    }
-    
 }
 
 //MARK: - Extension UICollectionViewDataSource
 extension WinnerViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //return presentWinnersCount
-        return winners.count
+        return presentWinnersCount!
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = winnerCollectionView.dequeueReusableCell(withReuseIdentifier: winnerCollectionViewCellIdentifier, for: indexPath) as! WinnerCollectionViewCell
         cell.winnerIdLabel.text = winners[indexPath.row]
-        
         if winners[indexPath.row] == Defaults[.id] {
             cell.winnerIdLabel.tintColor = UIColor.red
         } else {
             cell.winnerIdLabel.tintColor = UIColor.black
         }
-        
         return cell
     }
     
@@ -153,7 +121,7 @@ extension WinnerViewController: UICollectionViewDataSource {
             return headerView
         case UICollectionElementKindSectionFooter:
             let footerView = winnerCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "winnerCollectionFooterView", for: indexPath) as! winnerCollectionFooterView
-            if winners.count < minimumPresentingCount {
+            if winners.count < minimumPresentingCount || presentWinnersCount > minimumPresentingCount {
                 footerView.frame.size = CGSize(width: footerView.frame.width, height: 0)
             }
             return footerView
@@ -167,11 +135,6 @@ extension WinnerViewController: UICollectionViewDataSource {
 extension WinnerViewController: WinenrViewInterfaceProtocol {
     func showWinnerData(winners: [String]) {
         self.winners = winners
-//        setWinnerCollectionViewSize(cellCount: winners.count)
-        
-        setPresentWinnersCount(isExtend: false)
-        print("setPresentWinnersCount:\(presentWinnersCount)")
-
         winnerCollectionView.reloadData()
     }
 
@@ -180,6 +143,7 @@ extension WinnerViewController: WinenrViewInterfaceProtocol {
         self.giftImageView.af_setImage(withURL: NSURL(string: gift.giftPng!)! as URL)
     }
 
+    //TODO: if 없애기 - present로?
     func setCalendarNavigationUI(selectedDate date: String) {
         calendarOpenButton.setTitle(date, for: .normal)
         if date == todayDate {
@@ -191,12 +155,8 @@ extension WinnerViewController: WinenrViewInterfaceProtocol {
             moveToYesterDay.isHidden = false
         }
     }
-    
+
     func setWinnerViewUI(selectedDate: String) {
-        //        winnerCollectionView.isScrollEnabled = false
-        winnerCollectionView.layer.borderWidth = 1
-        winnerCollectionView.layer.borderColor = UIColor.lightGray.cgColor
-        
         if selectedDate == todayDate {
             if Date() < Time.sharedInstance.getAnounceStartTime() {
                 beforeAnounceView.isHidden = false
@@ -206,10 +166,29 @@ extension WinnerViewController: WinenrViewInterfaceProtocol {
         } else {
             beforeAnounceView.isHidden = true
         }
-        //    setWinnerCollectionViewSize(cellCount: minimumPresentingCount)
-                winnerCollectionView.reloadData()
     }
-
+    
+    func setWinnerCollectionViewUI(cellCount: Int) {
+        if cellCount <= minimumPresentingCount {
+            switch DeviceGuru.hardware() {
+            case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE:
+                self.winnerCollectionViewHeight.constant = CGFloat(WinnerCollectionViewHeightEnum.size5.rawValue)
+            case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
+                self.winnerCollectionViewHeight.constant = CGFloat(WinnerCollectionViewHeightEnum.size6.rawValue)
+            case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS:
+                self.winnerCollectionViewHeight.constant = CGFloat(WinnerCollectionViewHeightEnum.size6plus.rawValue)
+            default:
+                self.winnerCollectionViewHeight.constant = 170
+            }
+        } else {
+            self.winnerCollectionViewHeight.constant = (cellSize.height + cellSpacing) * CGFloat(cellCount) + reuseableHeight
+        }
+        winnerCollectionView.reloadData()
+    }
+    
+    func setPresentWinnersCount(cellCount: Int) {
+        self.presentWinnersCount = cellCount
+    }
 }
 
 enum WinnerCollectionViewHeightEnum: Int {
@@ -217,18 +196,17 @@ enum WinnerCollectionViewHeightEnum: Int {
     case size6 = 225
     case size6plus = 300 //임의로 작성
 }
+
 // MARK: - extension UICollectionViewDelegateFlowLayout
-//extension WinnerViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let cellSize = CGSize(width: winnerCollectionView.frame.width, height: (winnerCollectionView.frame.height - 130) / CGFloat(minimumShowWinnerNumber))
-//        return cellSize
-//    }
-//}
+extension WinnerViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return cellSize
+    }
+}
 
 //MARK: - Extension CalendarViewControllerDelegate
 extension WinnerViewController: CalendarViewControllerDelegate {
     func dateSelectDone(date: String) {
         self.presenter.calendarVCDelegateDateSelectDoneClick(date: date)
-////        setCollectionViewSize(cellCount: winnerArray.count)
     }
 }

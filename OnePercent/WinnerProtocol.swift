@@ -13,13 +13,15 @@ protocol WinenrViewInterfaceProtocol: class {
     func showGiftData(gift: Gift)
     func setCalendarNavigationUI(selectedDate date: String)
     func setWinnerViewUI(selectedDate: String)
+    func setWinnerCollectionViewUI(cellCount: Int)
+    func setPresentWinnersCount(cellCount: Int)
 }
 
 //presenter
 protocol WinnerFromViewToPresenterProtocol {
-    func updateView(date: String)
-    func showCalendar(date: String)
-    func showAllWinnersDidClick()
+//    func updateView(date: String)
+//    func showCalendar(date: String)
+    func showAllWinnersDidClick(winnersCount: Int)
     func moveToYesterDayDidClick()
     func calendarOpenButtonClick(winnerViewController: WinnerViewController)
     func moveToTomorrowDidClick()

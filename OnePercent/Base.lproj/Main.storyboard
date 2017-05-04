@@ -130,7 +130,7 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JTZ-PR-cew">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JTZ-PR-cew">
                                         <rect key="frame" x="40" y="212" width="295" height="100"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -152,7 +152,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Nn-Vo-OVp">
-                                                            <rect key="frame" x="119.5" y="0.0" width="33" height="16"/>
+                                                            <rect key="frame" x="118.5" y="0.0" width="33" height="16"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -163,7 +163,6 @@
                                                     <constraint firstItem="5Nn-Vo-OVp" firstAttribute="centerX" secondItem="c63-jl-JLH" secondAttribute="centerX" id="2Na-i7-Ndo"/>
                                                     <constraint firstItem="5Nn-Vo-OVp" firstAttribute="centerY" secondItem="c63-jl-JLH" secondAttribute="centerY" id="Pj9-WD-LLp"/>
                                                 </constraints>
-                                                <size key="customSize" width="272" height="15"/>
                                                 <connections>
                                                     <outlet property="winnerIdLabel" destination="5Nn-Vo-OVp" id="JYT-C7-tJL"/>
                                                 </connections>
