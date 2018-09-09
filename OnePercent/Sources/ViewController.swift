@@ -14,6 +14,7 @@ import AlamofireImage
 
 class ViewController: UIViewController {
     
+
     // MARK: - Property
     var timer: Timer?
     var todayDate: String {

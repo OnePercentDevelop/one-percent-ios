@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftyUserDefaults
-import SwiftDate
+//import SwiftDate
 
 class WinnerPresenter {
     
@@ -17,12 +17,17 @@ class WinnerPresenter {
     var wireframe: WinnerWireframeInputProtocol!
     
     // MAKR: - Property
-    var selectedDate: String = Date().string(with: .dotyyyyMMdd) {
-        didSet {
-            isExtended = false
-        }
-    }
-    var todayDate: String { return Date().string(with: .dotyyyyMMdd) }
+//    var selectedDate: String = Date().string(with: .dotyyyyMMdd) {
+//        didSet {
+//            isExtended = false
+//        }
+//    }
+    //위주석대신임시
+    var selectedDate = "2018.08.31"
+//    var todayDate: String { return Date().string(with: .dotyyyyMMdd) }
+    //위주석대신임시
+    var todayDate = "2018.08.30"
+    
     var winners: [String] = []
     var isExtended: Bool = false
     
@@ -90,9 +95,12 @@ extension WinnerPresenter: WinnerFromViewToPresenterProtocol {
         
         //어제 날짜 계산해 selectedDate 값으로 초기화
         let selectedDateObj = self.selectedDate.date(with: .dotyyyyMMdd)
-        let yesterDay = selectedDateObj.add(components: [.day: -1])
+//        let yesterDay = selectedDateObj.add(components: [.day: -1])
         
-        selectedDate = yesterDay.string(with: .dotyyyyMMdd)
+//        selectedDate = yesterDay.string(with: .dotyyyyMMdd)
+        //위두문장대신임시
+        selectedDate = "2018.09.01"
+        
         
         //navigation ui 변경
         setCalendarNavigationUI(selectedDate: selectedDate)
@@ -108,9 +116,12 @@ extension WinnerPresenter: WinnerFromViewToPresenterProtocol {
             return
         }
         let selectedDateObj = selectedDate.date(with: .dotyyyyMMdd)
-        let tomorrow = selectedDateObj.add(components: [.day: 1])
+        //let tomorrow = selectedDateObj.add(components: [.day: 1])
         
-        selectedDate = tomorrow.string(with: .dotyyyyMMdd)
+        //selectedDate = tomorrow.string(with: .dotyyyyMMdd)
+        //위두문장대신 임시
+        selectedDate = "2018.09.01"
+        
         
         setCalendarNavigationUI(selectedDate: selectedDate)
         setWinnerViewUI(selectedDate: selectedDate)

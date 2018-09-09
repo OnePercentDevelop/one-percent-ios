@@ -33,22 +33,22 @@ class DeviceConstraints: NSLayoutConstraint {
         }
     }
     
-    override var constant: CGFloat {
-        get {
-            switch DeviceGuru.hardware() {
-            case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE:
-                return iPhone5Constant
-            case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
-                return iPhone6Constant
-            case Hardware.iphone_6_PLUS, Hardware.iphone_6S_PLUS, Hardware.iphone_7_PLUS:
-                return iPhone6PlusConstant
-            default:
-                return defaultConstant
-            }
-        }
-        set {
-            defaultConstant = newValue
-        }
-    }
+//    override var constant: CGFloat {
+//        get {
+//            switch DeviceGuru.hardware() {
+//            case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE:
+//                return iPhone5Constant
+//            case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
+//                return iPhone6Constant
+//            case Hardware.iphone_6_PLUS, Hardware.iphone_6S_PLUS, Hardware.iphone_7_PLUS:
+//                return iPhone6PlusConstant
+//            default:
+//                return defaultConstant
+//            }
+//        }
+//        set {
+//            defaultConstant = newValue
+//        }
+//    }
     
 }

@@ -24,6 +24,7 @@
 		C92EC0441DBD1D58005D7D8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C92EC0431DBD1D58005D7D8B /* Assets.xcassets */; };
 		C92EC0471DBD1D58005D7D8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C92EC0451DBD1D58005D7D8B /* LaunchScreen.storyboard */; };
 		C934F3341E5EA72D00525C90 /* WinnerCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C934F3331E5EA72D00525C90 /* WinnerCollectionHeaderView.swift */; };
+		C93BEE38213D9B9D006D951A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C93BEE37213D9B9D006D951A /* GoogleService-Info.plist */; };
 		C940CE541E1248EF00E2AF9E /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940CE531E1248EF00E2AF9E /* Vote.swift */; };
 		C940CE561E124E0300E2AF9E /* Prize.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940CE551E124E0300E2AF9E /* Prize.swift */; };
 		C940CE581E124EBC00E2AF9E /* MyVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940CE571E124EBC00E2AF9E /* MyVote.swift */; };
@@ -58,6 +59,8 @@
 		C9CDA7F51DC75DAC0044CB65 /* Alamofire+OnePercent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CDA7F41DC75DAC0044CB65 /* Alamofire+OnePercent.swift */; };
 		C9CDA7F71DC75FAA0044CB65 /* AlamofireLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CDA7F61DC75FAA0044CB65 /* AlamofireLogger.swift */; };
 		C9CDA7F91DC889FA0044CB65 /* EntryNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CDA7F81DC889FA0044CB65 /* EntryNumber.swift */; };
+		C9CFEF531EC468E70020CF61 /* VoteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CFEF521EC468E70020CF61 /* VoteInteractor.swift */; };
+		C9CFEF551EC468F10020CF61 /* VoteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CFEF541EC468F10020CF61 /* VoteProtocol.swift */; };
 		C9D200171E408CB200F5E44A /* Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D200161E408CB200F5E44A /* Example.swift */; };
 		C9E8AF501EBB7CD900FE58DD /* NSLayoutConstraint+OnePercent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E8AF4F1EBB7CD900FE58DD /* NSLayoutConstraint+OnePercent.swift */; };
 		C9EF25A01E55CAC50023C494 /* Gift.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF259F1E55CAC50023C494 /* Gift.swift */; };
@@ -90,6 +93,7 @@
 		C92EC0461DBD1D58005D7D8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C92EC0481DBD1D58005D7D8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		C934F3331E5EA72D00525C90 /* WinnerCollectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerCollectionHeaderView.swift; sourceTree = "<group>"; };
+		C93BEE37213D9B9D006D951A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C940CE531E1248EF00E2AF9E /* Vote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vote.swift; sourceTree = "<group>"; };
 		C940CE551E124E0300E2AF9E /* Prize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prize.swift; sourceTree = "<group>"; };
 		C940CE571E124EBC00E2AF9E /* MyVote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyVote.swift; sourceTree = "<group>"; };
@@ -124,6 +128,8 @@
 		C9CDA7F41DC75DAC0044CB65 /* Alamofire+OnePercent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire+OnePercent.swift"; sourceTree = "<group>"; };
 		C9CDA7F61DC75FAA0044CB65 /* AlamofireLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireLogger.swift; sourceTree = "<group>"; };
 		C9CDA7F81DC889FA0044CB65 /* EntryNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryNumber.swift; sourceTree = "<group>"; };
+		C9CFEF521EC468E70020CF61 /* VoteInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteInteractor.swift; sourceTree = "<group>"; };
+		C9CFEF541EC468F10020CF61 /* VoteProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteProtocol.swift; sourceTree = "<group>"; };
 		C9D200161E408CB200F5E44A /* Example.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Example.swift; sourceTree = "<group>"; };
 		C9E8AF4F1EBB7CD900FE58DD /* NSLayoutConstraint+OnePercent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+OnePercent.swift"; sourceTree = "<group>"; };
 		C9EF259F1E55CAC50023C494 /* Gift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gift.swift; sourceTree = "<group>"; };
@@ -263,6 +269,7 @@
 		C92EC03B1DBD1D58005D7D8B /* OnePercent */ = {
 			isa = PBXGroup;
 			children = (
+				C93BEE37213D9B9D006D951A /* GoogleService-Info.plist */,
 				C9C610551DBF520C005849C3 /* Sources */,
 				C9C610561DBF5215005849C3 /* Resources */,
 				C9F0D3851DC659CF00B9B03B /* Supports */,
@@ -308,6 +315,9 @@
 		C98EB0591DC2EA4400B22C16 /* Vote */ = {
 			isa = PBXGroup;
 			children = (
+				C9CFEF4F1EC468910020CF61 /* Application Logic */,
+				C9CFEF4E1EC468890020CF61 /* Module Interface */,
+				C9CFEF4D1EC4687F0020CF61 /* User Interface */,
 				C98EB05A1DC2EA6400B22C16 /* VoteViewController.swift */,
 				C98EB05C1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift */,
 			);
@@ -455,6 +465,69 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
+		C9CFEF4D1EC4687F0020CF61 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				C9CFEF581EC4690C0020CF61 /* Presenter */,
+				C9CFEF571EC469060020CF61 /* View */,
+				C9CFEF561EC468FE0020CF61 /* Wireframe */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
+		C9CFEF4E1EC468890020CF61 /* Module Interface */ = {
+			isa = PBXGroup;
+			children = (
+				C9CFEF541EC468F10020CF61 /* VoteProtocol.swift */,
+			);
+			name = "Module Interface";
+			sourceTree = "<group>";
+		};
+		C9CFEF4F1EC468910020CF61 /* Application Logic */ = {
+			isa = PBXGroup;
+			children = (
+				C9CFEF501EC468A00020CF61 /* Interactor */,
+				C9CFEF511EC468A60020CF61 /* Model */,
+			);
+			name = "Application Logic";
+			sourceTree = "<group>";
+		};
+		C9CFEF501EC468A00020CF61 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				C9CFEF521EC468E70020CF61 /* VoteInteractor.swift */,
+			);
+			name = Interactor;
+			sourceTree = "<group>";
+		};
+		C9CFEF511EC468A60020CF61 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		C9CFEF561EC468FE0020CF61 /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Wireframe;
+			sourceTree = "<group>";
+		};
+		C9CFEF571EC469060020CF61 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		C9CFEF581EC4690C0020CF61 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
 		C9F0D37D1DC6496800B9B03B /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -526,7 +599,7 @@
 				C92EC0361DBD1D58005D7D8B /* Frameworks */,
 				C92EC0371DBD1D58005D7D8B /* Resources */,
 				FE0C238516E2FCFD91A861F4 /* [CP] Embed Pods Frameworks */,
-				CB273EFF693026CCCAD70266 /* [CP] Copy Pods Resources */,
+				BE24E22D59AE8C4957FF2356 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -549,8 +622,9 @@
 				TargetAttributes = {
 					C92EC0381DBD1D58005D7D8B = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 4RQU4C3Q95;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -582,6 +656,7 @@
 				C9C610581DBF539F005849C3 /* GoogleService-Info.plist in Resources */,
 				C92EC0441DBD1D58005D7D8B /* Assets.xcassets in Resources */,
 				C92EC0421DBD1D58005D7D8B /* Main.storyboard in Resources */,
+				C93BEE38213D9B9D006D951A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,24 +669,30 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OnePercent-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CB273EFF693026CCCAD70266 /* [CP] Copy Pods Resources */ = {
+		BE24E22D59AE8C4957FF2356 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-OnePercent/Pods-OnePercent-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -624,9 +705,50 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-OnePercent/Pods-OnePercent-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/AsyncSwift/Async.framework",
+				"${BUILT_PRODUCTS_DIR}/CVCalendar/CVCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceGuru/DeviceGuru.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper+Realm/ObjectMapper_Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyTimer/SwiftyTimer.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyUserDefaults/SwiftyUserDefaults.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Async.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CVCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeviceGuru.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper_Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyTimer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyUserDefaults.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -662,6 +784,7 @@
 				C952D07B1E55A61000DAEE40 /* WinnerViewController.swift in Sources */,
 				C940CE541E1248EF00E2AF9E /* Vote.swift in Sources */,
 				C91916B11E5C3D6400644444 /* winnerCollectionFooterView.swift in Sources */,
+				C9CFEF531EC468E70020CF61 /* VoteInteractor.swift in Sources */,
 				C9E8AF501EBB7CD900FE58DD /* NSLayoutConstraint+OnePercent.swift in Sources */,
 				C9CDA7F51DC75DAC0044CB65 /* Alamofire+OnePercent.swift in Sources */,
 				C9A6090D1EB1FD0B0026C45E /* WinnerProtocol.swift in Sources */,
@@ -680,6 +803,7 @@
 				C91916AF1E5C277C00644444 /* WinnerCollectionViewCell.swift in Sources */,
 				C9A6090F1EB5BB000026C45E /* WinnerView.swift in Sources */,
 				C9CDA7F11DC752290044CB65 /* HTTPMethod.swift in Sources */,
+				C9CFEF551EC468F10020CF61 /* VoteProtocol.swift in Sources */,
 				C98EB05D1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift in Sources */,
 				C953385B1DCEE10B00FDE4F3 /* LoginResult.swift in Sources */,
 				C92EC03F1DBD1D58005D7D8B /* ViewController.swift in Sources */,
@@ -814,7 +938,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4RQU4C3Q95;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -831,7 +957,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4RQU4C3Q95;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

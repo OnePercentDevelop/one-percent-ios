@@ -237,33 +237,33 @@ class VoteViewController: UIViewController {
     }
     
     func setLayout() {
-        switch DeviceGuru.hardware() {
-        case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE:
-            todayQuestionStackViewTopConstraint.constant = 40
-            partitionImagViewLeading.constant = 43
-            voteEntryViewTopConstraint.constant = 15
-            voteEntryViewBottomConstraint.constant = 20
-            voteCollectionViewTopConstraint.constant = 30
-            voteSendButtonTopConstraint.constant = 25
-            
-        case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
-            todayQuestionStackViewTopConstraint.constant = 60
-            partitionImagViewLeading.constant = 70
-            voteEntryViewTopConstraint.constant = 25
-            voteEntryViewBottomConstraint.constant = 35
-            voteCollectionViewTopConstraint.constant = 50
-            voteSendButtonTopConstraint.constant = 30
-
-        case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS:
-            todayQuestionStackViewTopConstraint.constant = 80
-            partitionImagViewLeading.constant = 85
-            voteEntryViewTopConstraint.constant = 25
-            voteEntryViewBottomConstraint.constant = 40
-            voteCollectionViewTopConstraint.constant = 55
-            voteSendButtonTopConstraint.constant = 38
-            
-        default: break
-        }
+//        switch DeviceGuru.hardware() {
+//        case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE:
+//            todayQuestionStackViewTopConstraint.constant = 40
+//            partitionImagViewLeading.constant = 43
+//            voteEntryViewTopConstraint.constant = 15
+//            voteEntryViewBottomConstraint.constant = 20
+//            voteCollectionViewTopConstraint.constant = 30
+//            voteSendButtonTopConstraint.constant = 25
+//            
+//        case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
+//            todayQuestionStackViewTopConstraint.constant = 60
+//            partitionImagViewLeading.constant = 70
+//            voteEntryViewTopConstraint.constant = 25
+//            voteEntryViewBottomConstraint.constant = 35
+//            voteCollectionViewTopConstraint.constant = 50
+//            voteSendButtonTopConstraint.constant = 30
+//
+//        case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS:
+//            todayQuestionStackViewTopConstraint.constant = 80
+//            partitionImagViewLeading.constant = 85
+//            voteEntryViewTopConstraint.constant = 25
+//            voteEntryViewBottomConstraint.constant = 40
+//            voteCollectionViewTopConstraint.constant = 55
+//            voteSendButtonTopConstraint.constant = 38
+//            
+//        default: break
+//        }
         
         voteSendButtonHeightConstraint.constant = (voteCollectionView.frame.height - 40) / 4
     }

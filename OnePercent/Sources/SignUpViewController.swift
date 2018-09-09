@@ -13,6 +13,8 @@ import Async
 import Alamofire
 import AlamofireObjectMapper
 import SwiftyUserDefaults
+import Firebase
+import GoogleSignIn
 
 class SignUpViewController: UIViewController {
     // MARK: - Property
@@ -42,6 +44,7 @@ class SignUpViewController: UIViewController {
             "user_token" : uuid,
             "sign_date" : todayDate,
        ]
+        
         let url = "http://onepercentserver.azurewebsites.net/OnePercentServer/insertUser.do"
         
         Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)

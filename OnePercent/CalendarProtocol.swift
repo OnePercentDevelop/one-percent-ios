@@ -7,3 +7,32 @@
 //
 
 import Foundation
+
+//view
+protocol CalendarViewInterfaceProtocol: class {
+    func setSelectedDate()
+}
+
+//presenter
+protocol CalendarFromViewToPresenterProtocol: class {
+    func selectDoneButtonClick()
+    func dateButtonClick()
+}
+
+protocol CalendarFromInteractorToPresenterProtocol: class {
+    
+}
+
+//interactor
+protocol CalendarInteratorInputProtocol: class {
+    
+}
+
+//wireframe
+protocol CalendarWireframeInputProtocol {
+    func dismissCalendarInterface()
+}
+
+protocol CalendarViewControllerDelegate {
+    func dateSelectDone(date: String)
+}

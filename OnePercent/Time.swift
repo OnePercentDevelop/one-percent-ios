@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyTimer
 import UIKit
-import SwiftDate
+//import SwiftDate
 
 class Time {
 //    private let voteStartTime = NSCalendar.current.date(bySettingHour: 6, minute: 0, second: 0, of: Date())
@@ -111,9 +111,9 @@ extension String {
 
 extension Date {
     
-    func string(with format: DateStringFormat) -> String {
-        return string(custom: format.rawValue)
-    }
+//    func string(with format: DateStringFormat) -> String {
+//        return string(custom: format.rawValue)
+//    }
     
 }
 

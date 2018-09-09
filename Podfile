@@ -13,11 +13,15 @@ target 'OnePercent' do
   pod 'AsyncSwift'
   pod 'AlamofireImage', '~> 3.1'
   pod 'SwiftyUserDefaults'
-  pod ‘RealmSwift’
+  pod ‘RealmSwift’, '2.8.1'
   pod 'CVCalendar', '~> 1.4.1'
   pod 'ObjectMapper+Realm'
   pod 'DeviceGuru'
-  pod 'SwiftDate'
+  #pod 'SwiftDate'
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
+  pod 'Firebase/Database'
   
   # MARK: - Rx Libs
   pod 'RxSwift',    '~> 3.0'

@@ -15,6 +15,9 @@ class CalendarViewController: UIViewController {
     // TODO: Seugue로보낸 selectedDate 색칠 -> presentedDateUpdated()
 @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calendarView: CVCalendarView!
+    @IBOutlet weak var monthLabel: UILabel!
+
+    //수정
     @IBAction func selectDoneButton(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
         
@@ -27,7 +30,7 @@ class CalendarViewController: UIViewController {
     @IBAction func dismissButton(_ sender: Any) {
         self.dismiss(animated: true)
     }
-    @IBOutlet weak var monthLabel: UILabel!
+    
 
     var todayDate = String()
     var delegate: CalendarViewControllerDelegate?
@@ -42,8 +45,9 @@ class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //수정
         todayDate = Time.sharedInstance.dateFomatter.string(from: Date())
-
+        //수정
         monthLabel.text = Time.sharedInstance.dateyyyyMM(date: Date())
         
         //calendar
@@ -60,20 +64,13 @@ class CalendarViewController: UIViewController {
         view.isOpaque = false
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         self.dismiss(animated: true, completion: nil)
     }
-
-    
     
     func disablePreviousDays() {
         // TODO: appStartDate 한번만 선언할수있게
-        
         let calendar = Calendar.current
         
         for weekV in calendarView.contentController.presentedMonthView.weekViews {
@@ -103,12 +100,6 @@ class CalendarViewController: UIViewController {
         
         menuView.commitMenuViewUpdate()
         calendarView.commitCalendarViewUpdate()
-    }
-
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 
@@ -224,8 +215,8 @@ extension CalendarViewController {
         self.calendarView.toggleViewWithDate(resultDate)
     }
 }
-
+//수정
 // MARK: -protocol
-protocol CalendarViewControllerDelegate {
-    func dateSelectDone(date: String)
-}
+//protocol CalendarViewControllerDelegate {
+//    func dateSelectDone(date: String)
+//}
