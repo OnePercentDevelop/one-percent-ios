@@ -96,33 +96,33 @@ class VoteViewController: UIViewController {
             present(calendarViewController!, animated: true, completion: nil)
         }
     }
-    
+    //TODO: self.ref = FIRDatabase.database().reference()
     @IBAction func voteSendButton(_ sender: AnyObject) {
-        if selectedItem != nil { //투표
-            let parameters: Parameters = [
-                "user_id" : Defaults[.id],
-                "vote_date" : todayDate,
-                "vote_answer" : selectedItem!
-            ]
-            
-            Alamofire
-                .request("http://onepercentserver.azurewebsites.net/OnePercentServer/insertVote.do", method: .post, parameters: parameters, encoding: JSONEncoding.default)
-                .log(level: .verbose)
-            
-            let newVote = MyVote()
-            newVote.myVoteDate = todayDate
-            newVote.selectedNumber = selectedItem!
-            
-            try! uiRealm.write {
-                uiRealm.add(newVote)
-            }
-            
-            voteCollectionView.reloadData()
-        } else {
-            let alertController = UIAlertController(title: "", message: "보기를 선택해주세요ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
-        }
+//        if selectedItem != nil { //투표
+//            let parameters: Parameters = [
+//                "user_id" : Defaults[.id],
+//                "vote_date" : todayDate,
+//                "vote_answer" : selectedItem!
+//            ]
+//
+//            Alamofire
+//                .request("http://onepercentserver.azurewebsites.net/OnePercentServer/insertVote.do", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+//                .log(level: .verbose)
+//
+//            let newVote = MyVote()
+//            newVote.myVoteDate = todayDate
+//            newVote.selectedNumber = selectedItem!
+//
+//            try! uiRealm.write {
+//                uiRealm.add(newVote)
+//            }
+//
+//            voteCollectionView.reloadData()
+//        } else {
+//            let alertController = UIAlertController(title: "", message: "보기를 선택해주세요ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
+//            alertController.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.default, handler: nil))
+//            self.present(alertController, animated: true, completion: nil)
+//        }
     }
     
     // MARK: - Recycle Function
@@ -237,35 +237,35 @@ class VoteViewController: UIViewController {
     }
     
     func setLayout() {
-        switch DeviceGuru.hardware() {
-        case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE:
-            todayQuestionStackViewTopConstraint.constant = 40
-            partitionImagViewLeading.constant = 43
-            voteEntryViewTopConstraint.constant = 15
-            voteEntryViewBottomConstraint.constant = 20
-            voteCollectionViewTopConstraint.constant = 30
-            voteSendButtonTopConstraint.constant = 25
-            
-        case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
-            todayQuestionStackViewTopConstraint.constant = 60
-            partitionImagViewLeading.constant = 70
-            voteEntryViewTopConstraint.constant = 25
-            voteEntryViewBottomConstraint.constant = 35
-            voteCollectionViewTopConstraint.constant = 50
-            voteSendButtonTopConstraint.constant = 30
-
-        case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS:
-            todayQuestionStackViewTopConstraint.constant = 80
-            partitionImagViewLeading.constant = 85
-            voteEntryViewTopConstraint.constant = 25
-            voteEntryViewBottomConstraint.constant = 40
-            voteCollectionViewTopConstraint.constant = 55
-            voteSendButtonTopConstraint.constant = 38
-            
-        default: break
-        }
-        
-        voteSendButtonHeightConstraint.constant = (voteCollectionView.frame.height - 40) / 4
+//        switch DeviceGuru.hardware() {
+//        case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE:
+//            todayQuestionStackViewTopConstraint.constant = 40
+//            partitionImagViewLeading.constant = 43
+//            voteEntryViewTopConstraint.constant = 15
+//            voteEntryViewBottomConstraint.constant = 20
+//            voteCollectionViewTopConstraint.constant = 30
+//            voteSendButtonTopConstraint.constant = 25
+//            
+//        case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
+//            todayQuestionStackViewTopConstraint.constant = 60
+//            partitionImagViewLeading.constant = 70
+//            voteEntryViewTopConstraint.constant = 25
+//            voteEntryViewBottomConstraint.constant = 35
+//            voteCollectionViewTopConstraint.constant = 50
+//            voteSendButtonTopConstraint.constant = 30
+//
+//        case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS:
+//            todayQuestionStackViewTopConstraint.constant = 80
+//            partitionImagViewLeading.constant = 85
+//            voteEntryViewTopConstraint.constant = 25
+//            voteEntryViewBottomConstraint.constant = 40
+//            voteCollectionViewTopConstraint.constant = 55
+//            voteSendButtonTopConstraint.constant = 38
+//            
+//        default: break
+//        }
+//        
+//        voteSendButtonHeightConstraint.constant = (voteCollectionView.frame.height - 40) / 4
     }
     
     // MARK: - Data Set Function
@@ -291,33 +291,40 @@ class VoteViewController: UIViewController {
         selectedDate = date
     }
     
+    //TODO: 데이터 읽어오기
     func setTodayQuestion() {
-        Alamofire
-            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/todayQuestion.do")
-            .log(level: .verbose)
-            .responseObject { (response: DataResponse<QuestionResponse>) in
-                if let todayQuestion = response.result.value?.todayQuestion {
-                    for question in todayQuestion {
-                        self.questionLabel.text = question.question
-                        //                            if let ex1 = question.ex1 {
-                        //                                self.examples[0] = ex1
-                        //                            } else { self.examples[0] = "데이터없음"}
-                        //                            if let ex2 = question.ex2 {
-                        //                                self.examples[1] = ex2
-                        //                            } else { self.examples[1] = "데이터없음" }
-                        //                            if let ex3 = question.ex3 {
-                        //                                self.examples[2] = ex3
-                        //                            } else { self.examples[2] = "데이터없음" }
-                        //                            if let ex4 = question.ex4 {
-                        //                                self.examples[3] = ex4
-                        //                            } else { self.examples[3] = "데이터없음" }
-                        self.examples[0] = question.ex1
-                        self.examples[1] = question.ex2
-                        self.examples[2] = question.ex3
-                        self.examples[3] = question.ex4
-                    }
-                }
-        }
+        //ex
+        self.examples[0] = "question.ex1"
+        self.examples[1] = "question.ex2"
+        self.examples[2] = "question.ex3"
+        self.examples[3] = "question.ex4"
+        
+//        Alamofire
+//            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/todayQuestion.do")
+//            .log(level: .verbose)
+//            .responseObject { (response: DataResponse<QuestionResponse>) in
+//                if let todayQuestion = response.result.value?.todayQuestion {
+//                    for question in todayQuestion {
+//                        self.questionLabel.text = question.question
+//                        //                            if let ex1 = question.ex1 {
+//                        //                                self.examples[0] = ex1
+//                        //                            } else { self.examples[0] = "데이터없음"}
+//                        //                            if let ex2 = question.ex2 {
+//                        //기self.examples[1] = ex2
+//                        //                            } else { self.examples[1] = "데이터없음" }
+//                        //                            if let ex3 = question.ex3 {
+//                        //                                self.examples[2] = ex3
+//                        //                            } else { self.examples[2] = "데이터없음" }
+//                        //                            if let ex4 = question.ex4 {
+//                        //                                self.examples[3] = ex4
+//                        //                            } else { self.examples[3] = "데이터없음" }
+//                        self.examples[0] = question.ex1
+//                        self.examples[1] = question.ex2
+//                        self.examples[2] = question.ex3
+//                        self.examples[3] = question.ex4
+//                    }
+//                }
+//        }
     }
     
     func setSelectedDatedData() {

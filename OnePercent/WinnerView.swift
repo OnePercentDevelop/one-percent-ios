@@ -60,19 +60,19 @@ class WinnerView: UIViewController, WinenrViewInterfaceProtocol {
     
     //MARK: - IBAction
     @IBAction func moveToYesterDay(_ sender: Any) {
-        self.presenter.updateView(date: selectedDate)
+//        self.presenter.updateView(date: selectedDate)
     }
     
     @IBAction func calendarOpenButton(_ sender: Any) {
-        self.presenter.showCalendar(date: selectedDate)
+//        self.presenter.showCalendar(date: selectedDate)
     }
     
     @IBAction func moveToTomorrow(_ sender: Any) {
-        self.presenter.updateView(date: selectedDate)
+//        self.presenter.updateView(date: selectedDate)
     }
     
     @IBAction func showAllWinners(_ sender: Any) {
-        self.presenter.showAllWinners()
+//        self.presenter.showAllWinners()
     }
 
     //MARK: - Recycle Function
@@ -93,16 +93,16 @@ class WinnerView: UIViewController, WinenrViewInterfaceProtocol {
     //MARK - Layout Set Function
     func setWinnerCollectionViewSize(cellCount: Int) {
         if winners.count <= minimumPresentingCount {
-            switch DeviceGuru.hardware() {
-            case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE:
-                self.winnerCollectionViewHeight.constant = CGFloat(WinnerCollectionViewHeightEnum.size5.rawValue)
-            case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
-                self.winnerCollectionViewHeight.constant = CGFloat(WinnerCollectionViewHeightEnum.size6.rawValue)
-            case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS:
-                self.winnerCollectionViewHeight.constant = CGFloat(WinnerCollectionViewHeightEnum.size6plus.rawValue)
-            default:
-                self.winnerCollectionViewHeight.constant = 170
-            }
+//            switch DeviceGuru.hardware() {
+//            case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE:
+//                self.winnerCollectionViewHeight.constant = CGFloat(WinnerCollectionViewHeightEnum.size5.rawValue)
+//            case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
+//                self.winnerCollectionViewHeight.constant = CGFloat(WinnerCollectionViewHeightEnum.size6.rawValue)
+//            case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS:
+//                self.winnerCollectionViewHeight.constant = CGFloat(WinnerCollectionViewHeightEnum.size6plus.rawValue)
+//            default:
+//                self.winnerCollectionViewHeight.constant = 170
+//            }
         } else {
             /*
              let cellHeight = (winnerCollectionView.frame.height - 100) / 5
@@ -115,34 +115,34 @@ class WinnerView: UIViewController, WinenrViewInterfaceProtocol {
     }
 
     func setWinnerViewLayout() {
-        switch DeviceGuru.hardware() {
-        case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE: break
-        case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
-            self.winnerCollectionViewHeight.constant = 225
-            noticeWinnerLabelTopConstraint.constant = 20
-            prizeItemBackroundImageViewHeightConstraint.constant = 130
-            giftImageViewHeightConstraint.constant = 90
-        case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS: break
-        default:
-            self.winnerCollectionViewHeight.constant = 170
-            noticeWinnerLabelTopConstraint.constant = 15
-            prizeItemBackroundImageViewHeightConstraint.constant = 100
-            giftImageViewHeightConstraint.constant = 60
-        }
+//        switch DeviceGuru.hardware() {
+//        case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE: break
+//        case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
+//            self.winnerCollectionViewHeight.constant = 225
+//            noticeWinnerLabelTopConstraint.constant = 20
+//            prizeItemBackroundImageViewHeightConstraint.constant = 130
+//            giftImageViewHeightConstraint.constant = 90
+//        case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS: break
+//        default:
+//            self.winnerCollectionViewHeight.constant = 170
+//            noticeWinnerLabelTopConstraint.constant = 15
+//            prizeItemBackroundImageViewHeightConstraint.constant = 100
+//            giftImageViewHeightConstraint.constant = 60
+//        }
     }
 
     //MARK - UI Data Set Function
     func setCalendarNavigationViewUI() {
         calendarOpenButton.setTitle(selectedDateString, for: .normal)
         
-        if selectedDate == todayDate {
-            moveToTomorrow.isHidden = true
-        } else if selectedDateString == Time.sharedInstance.getAppStartStringDate() {
-            moveToYesterDay.isHidden = true
-        } else {
-            moveToTomorrow.isHidden = false
-            moveToYesterDay.isHidden = false
-        }
+//        if selectedDate == todayDate {
+//            moveToTomorrow.isHidden = true
+//        } else if selectedDateString == Time.sharedInstance.getAppStartStringDate() {
+//            moveToYesterDay.isHidden = true
+//        } else {
+//            moveToTomorrow.isHidden = false
+//            moveToYesterDay.isHidden = false
+//        }
     }
     
     func setWinnerViewUI() {
@@ -204,12 +204,12 @@ extension WinnerView: UICollectionViewDataSource {
 }
 
 // MARK: - extension UICollectionViewDelegateFlowLayout
-extension WinnerViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellSize = CGSize(width: winnerCollectionView.frame.width, height: (winnerCollectionView.frame.height - 130) / CGFloat(minimumShowWinnerNumber))
-        return cellSize
-    }
-}
+//extension WinnerViewController: UICollectionViewDelegateFlowLayout {
+////    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+////        let cellSize = CGSize(width: winnerCollectionView.frame.width, height: (winnerCollectionView.frame.height - 130) / CGFloat(minimumShowWinnerNumber))
+////        return cellSize
+////    }
+//}
 
 enum WinnerCollectionViewHeightEnum: Int {
     case size5 = 170

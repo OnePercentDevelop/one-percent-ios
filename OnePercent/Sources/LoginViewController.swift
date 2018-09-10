@@ -11,23 +11,39 @@ import RxCocoa
 import RxSwift
 import Alamofire
 import SwiftyUserDefaults
+import Firebase
+import GoogleSignIn
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, GIDSignInUIDelegate {
     // MARK: - Property
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var logInButton: UIButton!
-    
     let disposeBag = DisposeBag()
     
     // MARK: - IBAction
     @IBAction func backButton(_ sender: AnyObject) {
         self.dismiss(animated: true)
     }
+    
+    @IBAction func googleButton(_ sender: Any) {
+        GIDSignIn.sharedInstance().signIn()
+        
+        
+        
+    }
 
     // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        GIDSignIn.sharedInstance().uiDelegate = self
+        
+        
+        // TODO(developer) Configure the sign-in button look/feel
+        // ...
+        
+        
         passwordTextField.isSecureTextEntry = true
         
         logInButton.addTarget(self, action: #selector(LoginViewController.loginButtonClick), for: .touchUpInside)
@@ -122,3 +138,4 @@ class LoginViewController: UIViewController {
         }
     }
 }
+

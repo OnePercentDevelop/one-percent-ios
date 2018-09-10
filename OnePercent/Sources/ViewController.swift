@@ -11,10 +11,12 @@ import SwiftyTimer
 import Alamofire
 import AlamofireObjectMapper
 import AlamofireImage
+import Firebase
 
 class ViewController: UIViewController {
     
     // MARK: - Property
+    
     var timer: Timer?
     var todayDate: String {
         return Time.sharedInstance.stringFromDateDotyyyyMMdd(date: Date())

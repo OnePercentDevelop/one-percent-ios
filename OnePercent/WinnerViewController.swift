@@ -122,15 +122,15 @@ class WinnerViewController: UIViewController {
                 self.winnerCollectionViewHeight.constant = height
             }
         } else {
-            switch DeviceGuru.hardware() {
-            case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE:
-                self.winnerCollectionViewHeight.constant = 170
-            case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
-                self.winnerCollectionViewHeight.constant = 225
-            case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS: break
-            default:
-                self.winnerCollectionViewHeight.constant = 170
-            }
+//            switch DeviceGuru.hardware() {
+//            case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE:
+//                self.winnerCollectionViewHeight.constant = 170
+//            case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
+//                self.winnerCollectionViewHeight.constant = 225
+//            case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS: break
+//            default:
+//                self.winnerCollectionViewHeight.constant = 170
+//            }
         }
     }
     
@@ -156,20 +156,20 @@ class WinnerViewController: UIViewController {
     }
 
     func setLayout() {
-        switch DeviceGuru.hardware() {
-        case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE: break
-        case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
-            self.winnerCollectionViewHeight.constant = 225
-            noticeWinnerLabelTopConstraint.constant = 20
-            prizeItemBackroundImageViewHeightConstraint.constant = 130
-            giftImageViewHeightConstraint.constant = 90
-        case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS: break
-        default:
-            self.winnerCollectionViewHeight.constant = 170
-            noticeWinnerLabelTopConstraint.constant = 15
-            prizeItemBackroundImageViewHeightConstraint.constant = 100
-            giftImageViewHeightConstraint.constant = 60
-        }
+//        switch DeviceGuru.hardware() {
+//        case Hardware.iphone_5, Hardware.iphone_5C, Hardware.iphone_5S, Hardware.iphone_SE: break
+//        case Hardware.iphone_6, Hardware.iphone_6S ,Hardware.iphone_7:
+//            self.winnerCollectionViewHeight.constant = 225
+//            noticeWinnerLabelTopConstraint.constant = 20
+//            prizeItemBackroundImageViewHeightConstraint.constant = 130
+//            giftImageViewHeightConstraint.constant = 90
+//        case Hardware.iphone_6_PLUS, Hardware.iphone_6_PLUS, Hardware.iphone_7_PLUS: break
+//        default:
+//            self.winnerCollectionViewHeight.constant = 170
+//            noticeWinnerLabelTopConstraint.constant = 15
+//            prizeItemBackroundImageViewHeightConstraint.constant = 100
+//            giftImageViewHeightConstraint.constant = 60
+//        }
     }
     
     //MARK - Data Set Function
@@ -279,10 +279,10 @@ extension WinnerViewController: UICollectionViewDataSource {
 
 // MARK: - extension UICollectionViewDelegateFlowLayout
 extension WinnerViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellSize = CGSize(width: winnerCollectionView.frame.width, height: (winnerCollectionView.frame.height - 130) / CGFloat(minimumShowWinnerNumber))
-        return cellSize
-    }
+//    private func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let cellSize = CGSize(width: winnerCollectionView.frame.width, height: (winnerCollectionView.frame.height - 130) / CGFloat(minimumShowWinnerNumber))
+//        return cellSize
+//    }
 }
 
 //MARK: - Extension CalendarViewControllerDelegate
