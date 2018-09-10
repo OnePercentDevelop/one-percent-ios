@@ -7,18 +7,23 @@ target 'OnePercent' do
 
   # Pods for OnePercent
   pod 'SwiftyTimer'
-  pod 'Firebase/Core'
-  pod 'Alamofire', '~> 4.0'
-  pod 'AlamofireObjectMapper'
   pod 'AsyncSwift'
-  pod 'AlamofireImage', '~> 3.1'
   pod 'SwiftyUserDefaults'
   pod ‘RealmSwift’
   pod 'CVCalendar', '~> 1.4.1'
   pod 'ObjectMapper+Realm'
   pod 'DeviceGuru'
+  
+  # MARK: - Alamofire
+  pod 'Alamofire', '~> 4.0'
+  pod 'AlamofireObjectMapper'
+  pod 'AlamofireImage', '~> 3.1'
+  
+  # MARK: - Firebase
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
+  pod 'Firebase/Database'
+  pod 'Firebase/Core'
   
   # MARK: - Rx Libs
   pod 'RxSwift',    '~> 3.0'

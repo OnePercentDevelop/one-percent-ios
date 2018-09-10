@@ -12,6 +12,7 @@ import SwiftyUserDefaults
 import CVCalendar
 import RealmSwift
 import DeviceGuru
+import Firebase
 
 class VoteViewController: UIViewController {
     // TODO: 회원인증 cancle누르면 deselect 되게
@@ -31,6 +32,7 @@ class VoteViewController: UIViewController {
     var maxVotedIndex: Int?
     var timer: Timer?
     let dateFormatter = DateFormatter()
+    var ref: DatabaseReference!
     
     // MARK: - IBOutlet
     @IBOutlet weak var voteCollectionView: UICollectionView!
@@ -96,8 +98,29 @@ class VoteViewController: UIViewController {
             present(calendarViewController!, animated: true, completion: nil)
         }
     }
-    //TODO: self.ref = FIRDatabase.database().reference()
+
     @IBAction func voteSendButton(_ sender: AnyObject) {
+//        self.ref = Database.database().reference()
+        if selectedItem != nil {
+            self.ref.child("vote/date").setValue(todayDate)
+            self.ref.child("vote/select").setValue(selectedItem)
+            
+            let newVote = MyVote()
+            newVote.myVoteDate = todayDate
+            newVote.selectedNumber = selectedItem!
+
+            try! uiRealm.write {
+                uiRealm.add(newVote)
+            }
+
+            voteCollectionView.reloadData()
+        } else {
+            let alertController = UIAlertController(title: "", message: "보기를 선택해주세요ㅎㅎ", preferredStyle: UIAlertControllerStyle.alert)
+        }
+        
+        
+        
+        
 //        if selectedItem != nil { //투표
 //            let parameters: Parameters = [
 //                "user_id" : Defaults[.id],
@@ -128,9 +151,12 @@ class VoteViewController: UIViewController {
     // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.ref = Database.database().reference()
+        
         dateFormatter.dateFormat = "yyyy.MM.dd"
         voteCollectionView.allowsMultipleSelection = false
         calendarViewController = (self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as! CalendarViewController)
+        setTodayQuestion()
         setLayout()
     }
     
@@ -293,12 +319,29 @@ class VoteViewController: UIViewController {
     
     //TODO: 데이터 읽어오기
     func setTodayQuestion() {
-        //ex
-        self.examples[0] = "question.ex1"
-        self.examples[1] = "question.ex2"
-        self.examples[2] = "question.ex3"
-        self.examples[3] = "question.ex4"
+        self.ref.child("todayQuestion/examples").observeSingleEvent(of: .value, with: {snapshot in
+            let snapshotValue = snapshot.value as! NSDictionary
+            self.examples[0] = snapshotValue["ex1"]as? String ?? ""
+            self.examples[1] = snapshotValue["ex2"]as? String ?? ""
+            self.examples[2] = snapshotValue["ex3"]as? String ?? ""
+            self.examples[3] = snapshotValue["ex4"]as? String ?? ""
+            self.voteCollectionView.reloadData()
+            
+//            print(snapshot.childSnapshot(forPath: "ex1").value as! String)
+            
+//            self.examples[0] = "\(String(describing: snapshot.childSnapshot(forPath: "ex1").value))"
+//            self.examples[1] = snapshot.childSnapshot(forPath: "ex1").value as! String
+//            self.examples[2] = snapshot.childSnapshot(forPath: "ex1").value as! String
+//            self.examples[3] = snapshot.childSnapshot(forPath: "ex1").value as! String
+        })
+    
         
+        //ex
+//        self.examples[0] = "question.ex1"
+//        self.examples[1] = "question.ex2"
+//        self.examples[2] = "question.ex3"
+//        self.examples[3] = "question.ex4"
+
 //        Alamofire
 //            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/todayQuestion.do")
 //            .log(level: .verbose)
