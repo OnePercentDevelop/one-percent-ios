@@ -12,6 +12,9 @@ import Alamofire
 import AlamofireObjectMapper
 import AlamofireImage
 import Firebase
+//import FirebaseStorageUI
+import FirebaseStorage
+import FirebaseUI
 
 class ViewController: UIViewController {
     
@@ -21,6 +24,9 @@ class ViewController: UIViewController {
     var todayDate: String {
         return Time.sharedInstance.stringFromDateDotyyyyMMdd(date: Date())
     }
+    
+    let your_firebase_storage_bucket = FirebaseOptions.defaultOptions()?.storageBucket ?? ""
+
     
     // MARK: - IBOutlet
     @IBOutlet weak var timeLabel: UILabel!
@@ -134,24 +140,34 @@ class ViewController: UIViewController {
     }
     
     func setGiftImage() {
-        Alamofire
-            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/todayGift.do?vote_date=\(todayDate)", method: .get)
-            .log(level: .verbose)
-            .responseObject { (response: DataResponse<GiftResponse>) in
-                if let giftResponse = response.result.value?.giftResult {
-                    for n in giftResponse {
-                        if let giftName = n.giftName {
-                            self.productLabel.text = giftName
-                        }
-                        if let giftPng = n.giftPng {
-                            let url = "http://onepercentserver.azurewebsites.net/OnePercentServer/resources/common/image/" + giftPng
-                            self.productImageView.af_setImage(withURL: NSURL(string: url) as! URL)
-                        }
-                    }
-                }
-        }
-    }
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+//        let imagesRef = storageRef.child("images")
+//        let fileName = "chocolet.jpg"
+//        var fileRef = imagesRef.child(fileName)
+        let reference = storageRef.child("images/chocolet.jpg")
 
+//        // Placeholder image
+        let placeholderImage = UIImage(named: "information")
+        self.productImageView.sd_setImage(with: reference, placeholderImage: placeholderImage)
+        
+//        Alamofire
+//            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/todayGift.do?vote_date=\(todayDate)", method: .get)
+//            .log(level: .verbose)
+//            .responseObject { (response: DataResponse<GiftResponse>) in
+//                if let giftResponse = response.result.value?.giftResult {
+//                    for n in giftResponse {
+//                        if let giftName = n.giftName {
+//                            self.productLabel.text = giftName
+//                        }
+//                        if let giftPng = n.giftPng {
+//                            let url = "http://onepercentserver.azurewebsites.net/OnePercentServer/resources/common/image/" + giftPng
+//                            self.productImageView.af_setImage(withURL: NSURL(string: url) as! URL)
+//                        }
+//                    }
+//                }
+//        }
+    }
 
 }
 

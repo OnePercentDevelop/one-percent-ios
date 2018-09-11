@@ -24,6 +24,8 @@ target 'OnePercent' do
   pod 'GoogleSignIn'
   pod 'Firebase/Database'
   pod 'Firebase/Core'
+  pod 'Firebase/Storage'
+  pod 'FirebaseUI/Storage'
   
   # MARK: - Rx Libs
   pod 'RxSwift',    '~> 3.0'
