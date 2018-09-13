@@ -55,8 +55,8 @@ class VoteViewController: UIViewController {
     @IBOutlet weak var voteEntryViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var voteCollectionViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var voteSendButtonHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var voteSendButtonTopConstraint: NSLayoutConstraint!
+    
     // MARK: - IBAction
     @IBAction func moveToYesterDay(_ sender: AnyObject) {
         if Defaults[.isSignIn] == false {
@@ -151,13 +151,16 @@ class VoteViewController: UIViewController {
     // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.ref = Database.database().reference()
         
         dateFormatter.dateFormat = "yyyy.MM.dd"
         voteCollectionView.allowsMultipleSelection = false
         calendarViewController = (self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as! CalendarViewController)
+        
         setTodayQuestion()
-        setLayout()
+        
+//        setLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -370,12 +373,13 @@ class VoteViewController: UIViewController {
 //        }
     }
     
+    //TODO:
     func setSelectedDatedData() {
         /*guard let todayVoteInfo = uiRealm.objects(Vote.self).filter("voteDate == '\(selectedDate!)'").first else {
             return
         }*/
          if let todayVoteInfo = uiRealm.objects(Vote.self).filter("voteDate == '\(selectedDate!)'").first {
-        //TODO: 함수화??
+        
         examples[0] = todayVoteInfo.ex1
         examples[1] = todayVoteInfo.ex2
         examples[2] = todayVoteInfo.ex3

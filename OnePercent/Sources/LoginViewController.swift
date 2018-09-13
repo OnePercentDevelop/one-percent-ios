@@ -28,9 +28,6 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
     
     @IBAction func googleButton(_ sender: Any) {
         GIDSignIn.sharedInstance().signIn()
-        
-        
-        
     }
 
     // MARK: - Recycle Function
