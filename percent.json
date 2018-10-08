@@ -1,0 +1,122 @@
+{
+  "present" : {
+    "20180917" : {
+      "name" : "가나초콜릿"
+    },
+    "20180918" : {
+      "name" : "가나초콜릿"
+    },
+    "20180919" : {
+      "name" : "콜라"
+    },
+    "20181004" : {
+      "name" : "사이다"
+    },
+    "20181005" : {
+      "name" : "카페라떼"
+    },
+    "20181006" : {
+      "name" : "아메리카노"
+    }
+  },
+  
+  "today_question" : {
+    "20180917" : {
+      "examples" : {
+        "ex1" : "red",
+        "ex2" : "blue",
+        "ex3" : "black",
+        "ex4" : "white"
+      },
+      "question" : "양말색",
+      "vote_num" : {
+        "ex1" : 1,
+        "ex2" : 2,
+        "ex3" : 3,
+        "ex4" : 4
+      },
+      "vote_total" : 10
+    },
+    "20180918" : {
+      "examples" : {
+        "ex1" : "red",
+        "ex2" : "blue",
+        "ex3" : "black",
+        "ex4" : "white"
+      },
+      "question" : "양말색",
+      "vote_num" : {
+        "ex1" : 1,
+        "ex2" : 2,
+        "ex3" : 3,
+        "ex4" : 4
+      },
+      "vote_total" : 10
+    },
+    "20180919" : {
+      "examples" : {
+        "ex1" : "red",
+        "ex2" : "blue",
+        "ex3" : "black",
+        "ex4" : "white"
+      },
+      "question" : "양말색",
+      "vote_num" : {
+        "ex1" : 1,
+        "ex2" : 2,
+        "ex3" : 3,
+        "ex4" : 4
+      },
+      "vote_total" : 10
+    },
+    "20181004" : {
+      "examples" : {
+        "ex1" : "red",
+        "ex2" : "blue",
+        "ex3" : "black",
+        "ex4" : "white"
+      },
+      "question" : "양말색",
+      "vote_num" : {
+        "ex1" : 1,
+        "ex2" : 2,
+        "ex3" : 3,
+        "ex4" : 4
+      },
+      "vote_total" : 10
+    },
+    "20181005" : {
+      "examples" : {
+        "ex1" : "콜라",
+        "ex2" : "사이다",
+        "ex3" : "환타",
+        "ex4" : "스프라이트"
+      },
+      "question" : "음료수",
+      "vote_num" : {
+        "ex1" : 1,
+        "ex2" : 2,
+        "ex3" : 3,
+        "ex4" : 4
+      },
+      "vote_total" : 10
+    },
+    "20181006" : {
+      "examples" : {
+        "ex1" : "빈츠",
+        "ex2" : "웨하스",
+        "ex3" : "새우깡",
+        "ex4" : "초코하임"
+      },
+      "question" : "과자",
+      "vote_num" : {
+        "ex1" : 1,
+        "ex2" : 2,
+        "ex3" : 3,
+        "ex4" : 4
+      } ,
+      "vote_total" : 10
+    }
+  },
+  "today_vote_num" : 1,
+}

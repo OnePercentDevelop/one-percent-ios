@@ -225,7 +225,7 @@ class WinnerViewController: UIViewController {
                         //png 처리
                         if let giftPng = n.giftPng {
                             let url = "http://onepercentserver.azurewebsites.net/OnePercentServer/resources/common/image/" + giftPng
-                            self.giftImageView.af_setImage(withURL: NSURL(string: url) as! URL)
+//                            self.giftImageView.af_setImage(withURL: NSURL(string: url) as! URL)
                         }
                     }
                 }

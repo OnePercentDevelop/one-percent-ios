@@ -19,6 +19,9 @@ PODS:
   - Firebase/Database (5.7.0):
     - Firebase/CoreOnly
     - FirebaseDatabase (= 5.0.2)
+  - Firebase/Messaging (5.7.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (= 3.1.1)
   - Firebase/Storage (5.7.0):
     - Firebase/CoreOnly
     - FirebaseStorage (= 3.0.1)
@@ -45,6 +48,11 @@ PODS:
   - FirebaseInstanceID (3.2.1):
     - FirebaseCore (~> 5.1)
     - GoogleUtilities/Environment (~> 5.2)
+  - FirebaseMessaging (3.1.1):
+    - FirebaseCore (~> 5.0)
+    - FirebaseInstanceID (~> 3.0)
+    - GoogleUtilities/Reachability (~> 5.2)
+    - Protobuf (~> 3.1)
   - FirebaseStorage (3.0.1):
     - FirebaseCore (~> 5.0)
     - GTMSessionFetcher/Core (~> 1.1)
@@ -103,6 +111,7 @@ PODS:
   - "ObjectMapper+Realm (0.6)":
     - ObjectMapper
     - RealmSwift
+  - Protobuf (3.6.1)
   - Realm (3.8.0):
     - Realm/Headers (= 3.8.0)
   - Realm/Headers (3.8.0)
@@ -127,6 +136,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
+  - Firebase/Messaging
   - Firebase/Storage
   - FirebaseUI/Storage
   - GoogleSignIn
@@ -152,6 +162,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseDatabase
     - FirebaseInstanceID
+    - FirebaseMessaging
     - FirebaseStorage
     - FirebaseUI
     - GoogleAppMeasurement
@@ -164,6 +175,7 @@ SPEC REPOS:
     - nanopb
     - ObjectMapper
     - "ObjectMapper+Realm"
+    - Protobuf
     - Realm
     - RealmSwift
     - RxCocoa
@@ -186,6 +198,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 3a97432acb324b439fbed338e642f9cbb516a63d
   FirebaseDatabase: 27be5ac5bc75e0b17537b2bbfada8258addcc8cd
   FirebaseInstanceID: ea5af6920d0a4a29b40459d055bebe4a6c1333c4
+  FirebaseMessaging: 698c94dd1e3436346c29bb9c85dcdca4c4a0c30b
   FirebaseStorage: 43f823b96b72a08539eba21a7de043348a69d4c6
   FirebaseUI: 0f6035898947af3e6ee9e9ab78ab57f8441bae56
   GoogleAppMeasurement: f7507b39b70ad0bd80b3d81518b2f43868974307
@@ -198,6 +211,7 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   "ObjectMapper+Realm": 4cf44ed3202a73f08594e21e13eb3f8aa9b5a664
+  Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   Realm: 3fdae59de78838064e9f77638d7cdb7b8cff9dc8
   RealmSwift: c990518b800e106d1f77099d3a4648c3b100337d
   RxCocoa: 84a08739ab186248c7f31ce4ee92d6f8a947d690
@@ -206,6 +220,6 @@ SPEC CHECKSUMS:
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
   SwiftyUserDefaults: 3d273b1739b68ada3145dc754a70ec775bc5c8be
 
-PODFILE CHECKSUM: 7235d406926c43651006b113d279a435f44f5ecf
+PODFILE CHECKSUM: 2563960a92c1b4be4fccd401f613a3a4ad8d21b6
 
 COCOAPODS: 1.5.3

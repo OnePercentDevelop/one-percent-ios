@@ -55,7 +55,7 @@ class WinnerView: UIViewController, WinenrViewInterfaceProtocol {
     func showGiftData(gift: Gift) {
         //TODO: Gift nil 처리
         self.giftNameLabel.text = gift.giftName
-        self.giftImageView.af_setImage(withURL: NSURL(string: gift.giftPng!)! as URL)
+//        self.giftImageView.af_setImage(withURL: NSURL(string: gift.giftPng!)! as URL)
     }
     
     //MARK: - IBAction

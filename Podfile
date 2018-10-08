@@ -26,6 +26,7 @@ target 'OnePercent' do
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
   pod 'FirebaseUI/Storage'
+  pod 'Firebase/Messaging'
   
   # MARK: - Rx Libs
   pod 'RxSwift',    '~> 3.0'

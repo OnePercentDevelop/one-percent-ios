@@ -8,25 +8,21 @@
 
 import UIKit
 import SwiftyTimer
-import Alamofire
-import AlamofireObjectMapper
-import AlamofireImage
 import Firebase
-//import FirebaseStorageUI
 import FirebaseStorage
 import FirebaseUI
 
 class ViewController: UIViewController {
     
     // MARK: - Property
-    
     var timer: Timer?
     var todayDate: String {
-        return Time.sharedInstance.stringFromDateDotyyyyMMdd(date: Date())
+        return Time.sharedInstance.stringFromDateNoneyyyyMMdd(date: Date())
     }
     
+    // firebase property
     let your_firebase_storage_bucket = FirebaseOptions.defaultOptions()?.storageBucket ?? ""
-
+    var ref: DatabaseReference!
     
     // MARK: - IBOutlet
     @IBOutlet weak var timeLabel: UILabel!
@@ -47,18 +43,14 @@ class ViewController: UIViewController {
    
     // MARK: - FilePrivate Function
     fileprivate func startTimer() {
-        if timer != nil {
-            stopTimer()
-        }
+        if timer != nil { stopTimer() }
         
         self.updateTodayLeftTime()
         timer = Timer.new(every: 0.5.second, updateTodayLeftTime)
         timer?.start()
     }
     
-    fileprivate func updateTodayLeftTime() {
-        dateformat()
-    }
+    fileprivate func updateTodayLeftTime() { dateformat() }
     
     fileprivate func stopTimer() {
         timer?.invalidate()
@@ -68,6 +60,7 @@ class ViewController: UIViewController {
     // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.ref = Database.database().reference()
         setGiftImage()
     }
     
@@ -120,54 +113,26 @@ class ViewController: UIViewController {
     
     // MARK: - Data Set Function
     func setVoteNumber() {
-        let todayDate = Time.sharedInstance.dateyyyyMMdd(date: Date())
-        let URL = "http://onepercentserver.azurewebsites.net/OnePercentServer/voteNumber.do"
-        let parameters: Parameters = ["vote_date": todayDate]
-        
-        Alamofire
-            .request(URL, parameters: parameters)
-            .log(level:  .verbose)
-            .responseObject { (response: DataResponse<OnePercentResponse>) in
-                
-                if let voteresult = response.result.value?.voteResult {
-                    for n in voteresult {
-                        if let number = n.number {
-                            self.entryNumberLabel.text = String(number)
-                        }
-                    }
-                }
-        }
+        self.ref.child("today_vote_num").observeSingleEvent(of: .value, with: {snapshot in
+            let snapshotValue = snapshot.value as! NSNumber
+//            print(snapshotValue.stringValue)
+            self.entryNumberLabel.text = snapshotValue.stringValue
+        })
     }
     
     func setGiftImage() {
+        //image set
         let storage = Storage.storage()
         let storageRef = storage.reference()
-//        let imagesRef = storageRef.child("images")
-//        let fileName = "chocolet.jpg"
-//        var fileRef = imagesRef.child(fileName)
-        let reference = storageRef.child("images/chocolet.jpg")
-
-//        // Placeholder image
+        let reference = storageRef.child("images/\(todayDate).jpg")
         let placeholderImage = UIImage(named: "information")
         self.productImageView.sd_setImage(with: reference, placeholderImage: placeholderImage)
         
-//        Alamofire
-//            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/todayGift.do?vote_date=\(todayDate)", method: .get)
-//            .log(level: .verbose)
-//            .responseObject { (response: DataResponse<GiftResponse>) in
-//                if let giftResponse = response.result.value?.giftResult {
-//                    for n in giftResponse {
-//                        if let giftName = n.giftName {
-//                            self.productLabel.text = giftName
-//                        }
-//                        if let giftPng = n.giftPng {
-//                            let url = "http://onepercentserver.azurewebsites.net/OnePercentServer/resources/common/image/" + giftPng
-//                            self.productImageView.af_setImage(withURL: NSURL(string: url) as! URL)
-//                        }
-//                    }
-//                }
-//        }
+        //image name set
+        self.ref.child("present/\(todayDate)").observeSingleEvent(of: .value, with: {snapshot in
+            let snapshotValue = snapshot.value as! NSDictionary
+            self.productLabel.text = snapshotValue["name"]as? String ?? ""
+        })
     }
-
 }
 

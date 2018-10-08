@@ -32,6 +32,7 @@ class VoteViewController: UIViewController {
     var maxVotedIndex: Int?
     var timer: Timer?
     let dateFormatter = DateFormatter()
+
     var ref: DatabaseReference!
     
     // MARK: - IBOutlet
@@ -66,7 +67,8 @@ class VoteViewController: UIViewController {
         } else {
             if let selectedDate = selectedDate {
                 let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: dateFormatter.date(from: selectedDate)!)
-                setSelectedDate(new: Time.sharedInstance.stringFromDateDotyyyyMMdd(date: yesterDay!))
+//                setSelectedDate(new: Time.sharedInstance.stringFromDateDotyyyyMMdd(date: yesterDay!))
+                setSelectedDate(new: Time.sharedInstance.stringFromDateNoneyyyyMMdd(date: yesterDay!))
                 setCalendarNavigationView()
                 setData()
             }
@@ -80,30 +82,34 @@ class VoteViewController: UIViewController {
             self.voteCollectionView.reloadData()
         } else {
             let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: selectedDate)!)
-            setSelectedDate(new: Time.sharedInstance.stringFromDateDotyyyyMMdd(date: tomorrow!))
+//            setSelectedDate(new: Time.sharedInstance.stringFromDateDotyyyyMMdd(date: tomorrow!))
+            setSelectedDate(new: Time.sharedInstance.stringFromDateNoneyyyyMMdd(date: tomorrow!))
             setCalendarNavigationView()
             setData()
         }
     }
     
     @IBAction func calendarOpenButton(_ sender: AnyObject) {
-        if Defaults[.isSignIn] == false {
-            signUpAlert(viewController: self)
-            self.voteCollectionView.deselectAllItems(animated: false)
-            self.voteCollectionView.reloadData()
-        } else {
+//        if Defaults[.isSignIn] == false {
+//            signUpAlert(viewController: self)
+//            self.voteCollectionView.deselectAllItems(animated: false)
+//            self.voteCollectionView.reloadData()
+//        } else {
             calendarViewController?.delegate = self
             calendarViewController?.selectedDate = selectedDate
             calendarViewController?.modalPresentationStyle = .overCurrentContext
             present(calendarViewController!, animated: true, completion: nil)
-        }
+//        }
     }
 
     @IBAction func voteSendButton(_ sender: AnyObject) {
 //        self.ref = Database.database().reference()
         if selectedItem != nil {
-            self.ref.child("vote/date").setValue(todayDate)
-            self.ref.child("vote/select").setValue(selectedItem)
+//            self.ref.child("my_vote/\(todayDate)").setValue(selectedItem)
+            if let selectedItem = selectedItem as NSNumber? {
+                self.ref.child("my_vote").setValue(["\(todayDate)": selectedItem])
+            }
+            
             
             let newVote = MyVote()
             newVote.myVoteDate = todayDate
@@ -154,11 +160,11 @@ class VoteViewController: UIViewController {
         
         self.ref = Database.database().reference()
         
-        dateFormatter.dateFormat = "yyyy.MM.dd"
+        dateFormatter.dateFormat = "yyyyMMdd"
         voteCollectionView.allowsMultipleSelection = false
         calendarViewController = (self.storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as! CalendarViewController)
-        
-        setTodayQuestion()
+//        setSelectedDate(new: todayDate)
+//        setTodayQuestion()
         
 //        setLayout()
     }
@@ -322,20 +328,30 @@ class VoteViewController: UIViewController {
     
     //TODO: 데이터 읽어오기
     func setTodayQuestion() {
-        self.ref.child("todayQuestion/examples").observeSingleEvent(of: .value, with: {snapshot in
+//        var todayDateNoneFormatter = Time.sharedInstance.stringFromDateNoneyyyyMMdd(date: Date())
+        
+//        var selectedDateNoneFormatter =
+        self.ref.child("today_question/\(selectedDate!)").observeSingleEvent(of: .value, with: {snapshot in
+            let snapshotValue = snapshot.value as! NSDictionary
+            self.questionLabel.text = snapshotValue["question"]as? String ?? ""
+        })
+        
+        self.ref.child("today_question/\(selectedDate!)/examples").observeSingleEvent(of: .value, with: {snapshot in
             let snapshotValue = snapshot.value as! NSDictionary
             self.examples[0] = snapshotValue["ex1"]as? String ?? ""
             self.examples[1] = snapshotValue["ex2"]as? String ?? ""
             self.examples[2] = snapshotValue["ex3"]as? String ?? ""
             self.examples[3] = snapshotValue["ex4"]as? String ?? ""
             self.voteCollectionView.reloadData()
-            
-//            print(snapshot.childSnapshot(forPath: "ex1").value as! String)
-            
-//            self.examples[0] = "\(String(describing: snapshot.childSnapshot(forPath: "ex1").value))"
-//            self.examples[1] = snapshot.childSnapshot(forPath: "ex1").value as! String
-//            self.examples[2] = snapshot.childSnapshot(forPath: "ex1").value as! String
-//            self.examples[3] = snapshot.childSnapshot(forPath: "ex1").value as! String
+        })
+        
+        self.ref.child("today_question/\(selectedDate!)/vote_num").observeSingleEvent(of: .value, with: {snapshot in
+            let snapshotValue = snapshot.value as! NSDictionary
+            self.counts[0] = snapshotValue["ex1"]as? Int ?? 50
+            self.counts[1] = snapshotValue["ex2"]as? Int ?? 50
+            self.counts[2] = snapshotValue["ex3"]as? Int ?? 50
+            self.counts[3] = snapshotValue["ex4"]as? Int ?? 50
+            self.voteCollectionView.reloadData()
         })
     
         
@@ -378,24 +394,33 @@ class VoteViewController: UIViewController {
         /*guard let todayVoteInfo = uiRealm.objects(Vote.self).filter("voteDate == '\(selectedDate!)'").first else {
             return
         }*/
-         if let todayVoteInfo = uiRealm.objects(Vote.self).filter("voteDate == '\(selectedDate!)'").first {
+//         if let todayVoteInfo = uiRealm.objects(Vote.self).filter("voteDate == '\(selectedDate!)'").first {
+//
+//        examples[0] = todayVoteInfo.ex1
+//        examples[1] = todayVoteInfo.ex2
+//        examples[2] = todayVoteInfo.ex3
+//        examples[3] = todayVoteInfo.ex4
+//
+//        counts[0] = todayVoteInfo.count1
+//        counts[1] = todayVoteInfo.count2
+//        counts[2] = todayVoteInfo.count3
+//        counts[3] = todayVoteInfo.count4
+//
+//        self.entryAmount = todayVoteInfo.entryAmount
+//
+//        findMostVotedIndex()
+//
+//        setView(question: todayVoteInfo.question, entryAmount: String(todayVoteInfo.entryAmount), winnerAmount: String(todayVoteInfo.winnerAmount))
+//         }
         
-        examples[0] = todayVoteInfo.ex1
-        examples[1] = todayVoteInfo.ex2
-        examples[2] = todayVoteInfo.ex3
-        examples[3] = todayVoteInfo.ex4
+        setTodayQuestion()
         
-        counts[0] = todayVoteInfo.count1
-        counts[1] = todayVoteInfo.count2
-        counts[2] = todayVoteInfo.count3
-        counts[3] = todayVoteInfo.count4
+        self.ref.child("today_question/\(selectedDate!)/vote_total").observeSingleEvent(of: .value, with: {snapshot in
+            let snapshotValue = snapshot.value as! NSNumber
+            self.entryNumberLabel.text = snapshotValue.stringValue
+        })
         
-        self.entryAmount = todayVoteInfo.entryAmount
-
         findMostVotedIndex()
-        
-        setView(question: todayVoteInfo.question, entryAmount: String(todayVoteInfo.entryAmount), winnerAmount: String(todayVoteInfo.winnerAmount))
-         }
     }
 }
 
