@@ -9,6 +9,9 @@
 import Foundation
 import RealmSwift
 import Alamofire
+import Firebase
+import FirebaseStorage
+import FirebaseUI
 
 class WinnerInteractor: WinnerInteractorInputProtocol {
     //MARK: - Property
@@ -16,6 +19,11 @@ class WinnerInteractor: WinnerInteractorInputProtocol {
         return Time.sharedInstance.stringFromDateDotyyyyMMdd(date: Date())
     }
     weak var output: WinnerFromInteractorToPresenterProtocol!
+    
+    // firebase property
+    let your_firebase_storage_bucket = FirebaseOptions.defaultOptions()?.storageBucket ?? ""
+    var ref: DatabaseReference!
+    
     
     // MARK: - WinnerInteractorInputProtocol
     func fetchWinners(selectedDate date: String) {

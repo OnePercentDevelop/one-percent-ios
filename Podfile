@@ -34,3 +34,14 @@ target 'OnePercent' do
 
 end
 
+target 'widget' do
+    use_frameworks!
+    
+    pod 'Firebase/Auth'
+    pod 'GoogleSignIn'
+    pod 'Firebase/Database'
+    pod 'Firebase/Core'
+    pod 'Firebase/Storage'
+    pod 'FirebaseUI/Storage'
+    pod 'Firebase/Messaging'
+    end
