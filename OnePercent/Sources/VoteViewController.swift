@@ -167,6 +167,9 @@ class VoteViewController: UIViewController {
 //        setTodayQuestion()
         
 //        setLayout()
+        
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -175,6 +178,7 @@ class VoteViewController: UIViewController {
         dateformat()
         setCalendarNavigationView()
         setData()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -333,7 +337,13 @@ class VoteViewController: UIViewController {
 //        var selectedDateNoneFormatter =
         self.ref.child("today_question/\(selectedDate!)").observeSingleEvent(of: .value, with: {snapshot in
             let snapshotValue = snapshot.value as! NSDictionary
-            self.questionLabel.text = snapshotValue["question"]as? String ?? ""
+            let question = snapshotValue["question"]as? String ?? ""
+            self.questionLabel.text = question
+            
+            let shareDefaults = UserDefaults(suiteName: "group.onepercent.TodayExtensionSharingDefaults")
+            shareDefaults!.set(question, forKey:"question")
+
+            
         })
         
         self.ref.child("today_question/\(selectedDate!)/examples").observeSingleEvent(of: .value, with: {snapshot in
@@ -353,6 +363,9 @@ class VoteViewController: UIViewController {
             self.counts[3] = snapshotValue["ex4"]as? Int ?? 50
             self.voteCollectionView.reloadData()
         })
+        
+        
+        
     
         
         //ex

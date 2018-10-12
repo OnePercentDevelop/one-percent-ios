@@ -20,11 +20,6 @@ class WinnerInteractor: WinnerInteractorInputProtocol {
     }
     weak var output: WinnerFromInteractorToPresenterProtocol!
     
-    // firebase property
-    let your_firebase_storage_bucket = FirebaseOptions.defaultOptions()?.storageBucket ?? ""
-    var ref: DatabaseReference!
-    
-    
     // MARK: - WinnerInteractorInputProtocol
     func fetchWinners(selectedDate date: String) {
         output.winnersFetched(winners: getWinnersArray(selectedDate: date))

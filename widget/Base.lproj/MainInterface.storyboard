@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T7o-sQ-i1J">
-                                <rect key="frame" x="0.0" y="0.0" width="55.5" height="37"/>
+                                <rect key="frame" x="4" y="4" width="31.5" height="21"/>
                                 <color key="backgroundColor" red="0.50196078430000002" green="0.32156862749999998" blue="1" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="T7o-sQ-i1J" secondAttribute="height" multiplier="1.5:1" id="RNB-V7-mff"/>
@@ -34,21 +31,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CJf-hv-Xgb">
-                                <rect key="frame" x="58" y="20" width="37" height="17.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CJf-hv-Xgb">
+                                <rect key="frame" x="58" y="20" width="246" height="18"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="CJf-hv-Xgb" firstAttribute="leading" secondItem="EBl-IF-2N8" secondAttribute="trailing" constant="114" id="4qj-qX-hgT"/>
                             <constraint firstItem="EBl-IF-2N8" firstAttribute="leading" secondItem="T7o-sQ-i1J" secondAttribute="trailing" constant="10" id="9Mg-Ac-OyR"/>
+                            <constraint firstItem="ssy-KU-ocm" firstAttribute="trailing" secondItem="CJf-hv-Xgb" secondAttribute="trailing" constant="10" id="9OB-94-cyE"/>
                             <constraint firstItem="CJf-hv-Xgb" firstAttribute="top" secondItem="EBl-IF-2N8" secondAttribute="bottom" constant="10" id="IgU-H4-hXj"/>
-                            <constraint firstItem="T7o-sQ-i1J" firstAttribute="leadingMargin" secondItem="ssy-KU-ocm" secondAttribute="leading" constant="8" id="NB1-Hw-A0c"/>
-                            <constraint firstItem="T7o-sQ-i1J" firstAttribute="topMargin" secondItem="ssy-KU-ocm" secondAttribute="top" constant="8" id="fd7-Xc-GdA"/>
+                            <constraint firstItem="T7o-sQ-i1J" firstAttribute="leadingMargin" secondItem="ssy-KU-ocm" secondAttribute="leading" constant="12" id="NB1-Hw-A0c"/>
+                            <constraint firstItem="T7o-sQ-i1J" firstAttribute="topMargin" secondItem="ssy-KU-ocm" secondAttribute="top" constant="12" id="fd7-Xc-GdA"/>
                             <constraint firstItem="EBl-IF-2N8" firstAttribute="top" secondItem="T7o-sQ-i1J" secondAttribute="top" constant="5" id="gmI-4J-6F7"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="T7o-sQ-i1J" secondAttribute="bottom" id="kCG-3a-gpH"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="T7o-sQ-i1J" secondAttribute="bottom" constant="12" id="kCG-3a-gpH"/>
+                            <constraint firstItem="CJf-hv-Xgb" firstAttribute="leading" secondItem="T7o-sQ-i1J" secondAttribute="trailing" constant="10" id="uqL-Lq-0mC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ssy-KU-ocm"/>
                     </view>

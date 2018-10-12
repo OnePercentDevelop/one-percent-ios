@@ -8,35 +8,41 @@
 
 import UIKit
 import NotificationCenter
-import Firebase
-//import FirebaseStorage
-//import FirebaseUI
 
 class TodayViewController: UIViewController, NCWidgetProviding {
         
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var presentImageView: UIImageView!
     
-
-    let dateFormatter = DateFormatter()
-    var todayDate: String {
-        return dateFormatter.string(from: Date())
-    }
-    var selectedDate: String {
-        return todayDate
-    }
-
-    var ref: DatabaseReference!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dateFormatter.dateFormat = "yyyyMMdd"
-//
-        self.ref = Database.database().reference()
+        //Question
+        let shareDefaults = UserDefaults(suiteName: "group.onepercent.TodayExtensionSharingDefaults")
+        let question = shareDefaults!.string(forKey: "question")
+        questionLabel.text = question
+        
+        //Image
+        let presentImageUrl = shareDefaults?.url(forKey: "presentImageUrl")
+        if let url = presentImageUrl {
+            DispatchQueue.global().async {
+                if let data = try? Data( contentsOf:url) {
+                    DispatchQueue.main.async {
+                        self.presentImageView.image = UIImage(data: data)
+                    }
+                }
+            }
+        }
 
-        setQuestion()
+//        let presentImageUrl = shareDefaults!.string(forKey: "presentImageUrl")
+//        let url = URL(string: presentImageUrl ?? "")
+//        print("Hyewonurl: \(url)")
+//        let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+//        presentImageView.image = UIImage(data: data!)
+//
+//
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -51,26 +57,4 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         completionHandler(NCUpdateResult.newData)
     }
-    
-    func setDate() {
-//        if now < Time.sharedInstance.getVoteStartTime() {
-        
-//        }
-    }
-    
-    func setQuestion() {
-        self.ref.child("today_question/\(selectedDate)").observeSingleEvent(of: .value, with: {snapshot in
-            let snapshotValue = snapshot.value as! NSDictionary
-            self.questionLabel.text = snapshotValue["question"]as? String ?? ""
-        })
-    }
-    
-    func setPresentImage() {
-//        let storage = Storage.storage()
-//        let storageRef = storage.reference()
-//        let reference = storageRef.child("images/\(selectedDate).jpg")
-//        let placeholderImage = UIImage(named: "information")
-//        self.presentImageView.sd_setImage(with: reference, placeholderImage: placeholderImage)
-    }
-    
 }

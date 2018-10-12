@@ -31,17 +31,20 @@ target 'OnePercent' do
   # MARK: - Rx Libs
   pod 'RxSwift',    '~> 3.0'
   pod 'RxCocoa',    '~> 3.0'
+  
+  # MARK: - design
+  pod 'NVActivityIndicatorView'
 
 end
 
-target 'widget' do
-    use_frameworks!
-    
-    pod 'Firebase/Auth'
-    pod 'GoogleSignIn'
-    pod 'Firebase/Database'
-    pod 'Firebase/Core'
-    pod 'Firebase/Storage'
-    pod 'FirebaseUI/Storage'
-    pod 'Firebase/Messaging'
-    end
+#target 'widget' do
+#    use_frameworks!
+#
+#    pod 'Firebase/Auth'
+#    pod 'GoogleSignIn'
+#    pod 'Firebase/Database'
+#    pod 'Firebase/Core'
+#    pod 'Firebase/Storage'
+#    pod 'FirebaseUI/Storage'
+#    pod 'Firebase/Messaging'
+#    end

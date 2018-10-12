@@ -11,8 +11,9 @@ import SwiftyTimer
 import Firebase
 import FirebaseStorage
 import FirebaseUI
+import NVActivityIndicatorView
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, NVActivityIndicatorViewable {
     
     // MARK: - Property
     var timer: Timer?
@@ -32,6 +33,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var productLabel: UILabel!
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var informationView: UIView!
+    @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
     
     // MARK: - IBAction
     @IBAction func openInformatioinViewButton(_ sender: AnyObject) {
@@ -60,8 +62,32 @@ class ViewController: UIViewController {
     // MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
+        // TODO: indicator
+//        let size = CGSize(width: 240, height: 240)
+//        startAnimating(size, message: "Loading...", type: NVActivityIndicatorType(rawValue: 28)!, fadeInAnimation: nil)
+        
+//        activityIndicatorView.type = NVActivityIndicatorType.ballGridBeat
+//        activityIndicatorView.color = UIColor(red: 255, green: 0, blue: 135)
+//        activityIndicatorView.startAnimating()
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+//            NVActivityIndicatorPresenter.sharedInstance.setMessage("Authenticating...")
+//        }
+//
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+//            self.stopAnimating(nil)
+//        }
+        
+//        let size = CGSize(width: 30, height: 30)
+        
+//        startAnimating(size, message: "Loading...", type: NVActivityIndicatorType.ballGridBeat, fadeInAnimation: nil)
+        
         self.ref = Database.database().reference()
         setGiftImage()
+        
+//        let shareDefaults = UserDefaults(suiteName: "group.onepercent.TodayExtensionSharingDefaults")
+//        shareDefaults!.set("testApp", forKey:"hyewonName")
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,24 +141,62 @@ class ViewController: UIViewController {
     func setVoteNumber() {
         self.ref.child("today_vote_num").observeSingleEvent(of: .value, with: {snapshot in
             let snapshotValue = snapshot.value as! NSNumber
-//            print(snapshotValue.stringValue)
             self.entryNumberLabel.text = snapshotValue.stringValue
         })
     }
     
     func setGiftImage() {
         //image set
-        let storage = Storage.storage()
+      let storage = Storage.storage()
         let storageRef = storage.reference()
-        let reference = storageRef.child("images/\(todayDate).jpg")
+        let starsRef = storageRef.child("images/\(todayDate).jpg")
         let placeholderImage = UIImage(named: "information")
-        self.productImageView.sd_setImage(with: reference, placeholderImage: placeholderImage)
+        self.productImageView.sd_setImage(with: starsRef, placeholderImage: placeholderImage)
+
+        // Fetch the download URL
+        starsRef.downloadURL { url, error in
+            if let error = error {
+                // Handle any errors
+            } else {
+                let shareDefaults = UserDefaults(suiteName: "group.onepercent.TodayExtensionSharingDefaults")
+                shareDefaults!.set(url, forKey:"presentImageUrl")
+                
+//                if let url = url {
+//                    DispatchQueue.global().async {
+//                        if let data = try? Data( contentsOf: url) {
+//                            DispatchQueue.main.async {
+//                                shareDefaults!.set(url, forKey:"presentImageUrl")
+//                                self.productImageView.image = UIImage( data:data)
+//                            }
+//                        }
+//                    }
+//                }
+
+                
+                // Get the download URL for 'images/stars.jpg'
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+//        if let presentImage = self.productImageView.image {
+//            let jpgImage = UIImageJPEGRepresentation(presentImage, 0.1)// 10분의 1로 축소
+//            UserDefaults.standard.set(jpgImage, forKey: "presentImage")
+//            UserDefaults.standard.synchronize()
+//        }
         
         //image name set
         self.ref.child("present/\(todayDate)").observeSingleEvent(of: .value, with: {snapshot in
             let snapshotValue = snapshot.value as! NSDictionary
             self.productLabel.text = snapshotValue["name"]as? String ?? ""
         })
+        
+        
+        
     }
 }
 

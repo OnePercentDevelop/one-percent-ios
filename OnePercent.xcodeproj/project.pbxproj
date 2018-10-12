@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		671587DF8175B3F18BE0AE80 /* Pods_OnePercent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D81F9C6D7691B2043DC12A /* Pods_OnePercent.framework */; };
-		6CDA536D394A752184818443 /* Pods_widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F20949AA7F64CBFA6815107 /* Pods_widget.framework */; };
 		C912B6B51E1E4D9B0023A49F /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = C912B6B41E1E4D9B0023A49F /* Time.swift */; };
 		C91916AF1E5C277C00644444 /* WinnerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91916AE1E5C277C00644444 /* WinnerCollectionViewCell.swift */; };
 		C91916B11E5C3D6400644444 /* winnerCollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C91916B01E5C3D6400644444 /* winnerCollectionFooterView.swift */; };
@@ -23,8 +22,6 @@
 		C93B4841216BD3F50086F6F5 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B4840216BD3F50086F6F5 /* TodayViewController.swift */; };
 		C93B4844216BD3F50086F6F5 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C93B4842216BD3F50086F6F5 /* MainInterface.storyboard */; };
 		C93B4848216BD3F50086F6F5 /* widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C93B483C216BD3F40086F6F5 /* widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		C93B485C216D0EE90086F6F5 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93B485B216D0EE80086F6F5 /* FirebaseCore.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		C93B485E216D0EE90086F6F5 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C93B485D216D0EE90086F6F5 /* FirebaseDatabase.framework */; };
 		C940CE541E1248EF00E2AF9E /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940CE531E1248EF00E2AF9E /* Vote.swift */; };
 		C940CE561E124E0300E2AF9E /* Prize.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940CE551E124E0300E2AF9E /* Prize.swift */; };
 		C940CE581E124EBC00E2AF9E /* MyVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940CE571E124EBC00E2AF9E /* MyVote.swift */; };
@@ -34,6 +31,7 @@
 		C952D07B1E55A61000DAEE40 /* WinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C952D07A1E55A61000DAEE40 /* WinnerViewController.swift */; };
 		C95338591DCEE0EE00FDE4F3 /* SignUpResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95338581DCEE0EE00FDE4F3 /* SignUpResult.swift */; };
 		C953385B1DCEE10B00FDE4F3 /* LoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C953385A1DCEE10B00FDE4F3 /* LoginResult.swift */; };
+		C958181B216F0A2500B8BF2F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C958181A216F0A2400B8BF2F /* GoogleService-Info.plist */; };
 		C96002311E65400D00658F61 /* OnePercentSignUpAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96002301E65400D00658F61 /* OnePercentSignUpAlert.swift */; };
 		C98EB05B1DC2EA6400B22C16 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05A1DC2EA6400B22C16 /* VoteViewController.swift */; };
 		C98EB05D1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98EB05C1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift */; };
@@ -94,9 +92,7 @@
 		19D81F9C6D7691B2043DC12A /* Pods_OnePercent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnePercent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E48A16E811BAF37F6F42875 /* Pods-OnePercentUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePercentUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnePercentUITests/Pods-OnePercentUITests.release.xcconfig"; sourceTree = "<group>"; };
 		2F20949AA7F64CBFA6815107 /* Pods_widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		456F842F23DF5766C15ABB0B /* Pods-widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-widget/Pods-widget.debug.xcconfig"; sourceTree = "<group>"; };
 		A1093B9C83B53C7D8589CC21 /* Pods_OnePercentTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnePercentTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A2088ED241F1373A589EA678 /* Pods-widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-widget/Pods-widget.release.xcconfig"; sourceTree = "<group>"; };
 		ADD3843C8BACA77BEABA1A28 /* Pods-OnePercent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePercent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnePercent/Pods-OnePercent.debug.xcconfig"; sourceTree = "<group>"; };
 		B08C263D874AC3AB2E759998 /* Pods-OnePercent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePercent.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnePercent/Pods-OnePercent.release.xcconfig"; sourceTree = "<group>"; };
 		C912B6B41E1E4D9B0023A49F /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
@@ -134,6 +130,13 @@
 		C952D07A1E55A61000DAEE40 /* WinnerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinnerViewController.swift; sourceTree = "<group>"; };
 		C95338581DCEE0EE00FDE4F3 /* SignUpResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpResult.swift; sourceTree = "<group>"; };
 		C953385A1DCEE10B00FDE4F3 /* LoginResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginResult.swift; sourceTree = "<group>"; };
+		C9581816216F098800B8BF2F /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9581818216F098800B8BF2F /* FirebaseDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C958181A216F0A2400B8BF2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C958181C216F0B1900B8BF2F /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C958181E216F0B2100B8BF2F /* FirebaseDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9581820217075C200B8BF2F /* OnePercent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OnePercent.entitlements; sourceTree = "<group>"; };
+		C95818212170764B00B8BF2F /* widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = widget.entitlements; sourceTree = "<group>"; };
 		C96002301E65400D00658F61 /* OnePercentSignUpAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnePercentSignUpAlert.swift; sourceTree = "<group>"; };
 		C98EB05A1DC2EA6400B22C16 /* VoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VoteViewController.swift; path = Sources/VoteViewController.swift; sourceTree = "<group>"; };
 		C98EB05C1DC2EA7D00B22C16 /* VoteCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VoteCollectionViewCell.swift; path = Sources/VoteCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -181,10 +184,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C93B485C216D0EE90086F6F5 /* FirebaseCore.framework in Frameworks */,
-				C93B485E216D0EE90086F6F5 /* FirebaseDatabase.framework in Frameworks */,
 				C93B483E216BD3F40086F6F5 /* NotificationCenter.framework in Frameworks */,
-				6CDA536D394A752184818443 /* Pods_widget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,8 +200,6 @@
 				DD5D3F20F52375E1D82A2789 /* Pods-OnePercentTests.release.xcconfig */,
 				E666AEE99FF67B194C2EAED3 /* Pods-OnePercentUITests.debug.xcconfig */,
 				1E48A16E811BAF37F6F42875 /* Pods-OnePercentUITests.release.xcconfig */,
-				456F842F23DF5766C15ABB0B /* Pods-widget.debug.xcconfig */,
-				A2088ED241F1373A589EA678 /* Pods-widget.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -209,6 +207,10 @@
 		81F1322D03BFEF19CB5102EE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C958181E216F0B2100B8BF2F /* FirebaseDatabase.framework */,
+				C958181C216F0B1900B8BF2F /* FirebaseCore.framework */,
+				C9581816216F098800B8BF2F /* FirebaseCore.framework */,
+				C9581818216F098800B8BF2F /* FirebaseDatabase.framework */,
 				C93B485B216D0EE80086F6F5 /* FirebaseCore.framework */,
 				C93B485D216D0EE90086F6F5 /* FirebaseDatabase.framework */,
 				C93B4853216BDFB70086F6F5 /* FirebaseAuth.framework */,
@@ -250,6 +252,7 @@
 		C92EC03B1DBD1D58005D7D8B /* OnePercent */ = {
 			isa = PBXGroup;
 			children = (
+				C9581820217075C200B8BF2F /* OnePercent.entitlements */,
 				C9C610551DBF520C005849C3 /* Sources */,
 				C9C610561DBF5215005849C3 /* Resources */,
 				C9F0D3851DC659CF00B9B03B /* Supports */,
@@ -260,6 +263,8 @@
 		C93B483F216BD3F50086F6F5 /* widget */ = {
 			isa = PBXGroup;
 			children = (
+				C95818212170764B00B8BF2F /* widget.entitlements */,
+				C958181A216F0A2400B8BF2F /* GoogleService-Info.plist */,
 				C93B4840216BD3F50086F6F5 /* TodayViewController.swift */,
 				C93B4842216BD3F50086F6F5 /* MainInterface.storyboard */,
 				C93B4845216BD3F50086F6F5 /* Info.plist */,
@@ -534,11 +539,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C93B4849216BD3F50086F6F5 /* Build configuration list for PBXNativeTarget "widget" */;
 			buildPhases = (
-				0D6301231B0DE11855E0F52B /* [CP] Check Pods Manifest.lock */,
 				C93B4838216BD3F40086F6F5 /* Sources */,
 				C93B4839216BD3F40086F6F5 /* Frameworks */,
 				C93B483A216BD3F40086F6F5 /* Resources */,
-				BBECFEB2751F0D699289585A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -564,11 +567,21 @@
 						DevelopmentTeam = 4RQU4C3Q95;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					C93B483B216BD3F40086F6F5 = {
 						CreatedOnToolsVersion = 9.4.1;
 						DevelopmentTeam = 4RQU4C3Q95;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -609,30 +622,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C93B4844216BD3F50086F6F5 /* MainInterface.storyboard in Resources */,
+				C958181B216F0A2500B8BF2F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0D6301231B0DE11855E0F52B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-widget-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		4C3631AC4B842ED9D6B6CD5C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -669,24 +665,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BBECFEB2751F0D699289585A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-widget/Pods-widget-resources.sh",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-widget/Pods-widget-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		FE0C238516E2FCFD91A861F4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -700,30 +678,23 @@
 				"${BUILT_PRODUCTS_DIR}/AsyncSwift/Async.framework",
 				"${BUILT_PRODUCTS_DIR}/CVCalendar/CVCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/DeviceGuru/DeviceGuru.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMOAuth2-iOS10.2/GTMOAuth2.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-iOS10.2/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS10.2/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities-iOS10.2/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper+Realm/ObjectMapper_Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS10.2/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS10.2/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyTimer/SwiftyTimer.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyUserDefaults/SwiftyUserDefaults.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library-iOS10.2/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb-iOS10.2/nanopb.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMOAuth2-iOS11.4/GTMOAuth2.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-iOS11.4/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-iOS11.4/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities-iOS11.4/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf-iOS11.4/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS11.4/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library-iOS11.4/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb-iOS11.4/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -737,6 +708,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper_Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -953,6 +925,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = OnePercent/OnePercent.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4RQU4C3Q95;
@@ -972,6 +945,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = OnePercent/OnePercent.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4RQU4C3Q95;
@@ -987,7 +961,6 @@
 		};
 		C93B484A216BD3F50086F6F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 456F842F23DF5766C15ABB0B /* Pods-widget.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1001,6 +974,7 @@
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = widget/widget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4RQU4C3Q95;
@@ -1018,7 +992,6 @@
 		};
 		C93B484B216BD3F50086F6F5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2088ED241F1373A589EA678 /* Pods-widget.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1032,6 +1005,7 @@
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = widget/widget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4RQU4C3Q95;

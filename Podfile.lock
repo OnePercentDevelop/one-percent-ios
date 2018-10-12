@@ -107,6 +107,9 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - NVActivityIndicatorView (4.3.0):
+    - NVActivityIndicatorView/Presenter (= 4.3.0)
+  - NVActivityIndicatorView/Presenter (4.3.0)
   - ObjectMapper (3.3.0)
   - "ObjectMapper+Realm (0.6)":
     - ObjectMapper
@@ -140,6 +143,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - FirebaseUI/Storage
   - GoogleSignIn
+  - NVActivityIndicatorView
   - "ObjectMapper+Realm"
   - RealmSwift
   - RxCocoa (~> 3.0)
@@ -173,6 +177,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - NVActivityIndicatorView
     - ObjectMapper
     - "ObjectMapper+Realm"
     - Protobuf
@@ -209,6 +214,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  NVActivityIndicatorView: 963f62bf9f993fcf23218e55958e5b1761b9504c
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   "ObjectMapper+Realm": 4cf44ed3202a73f08594e21e13eb3f8aa9b5a664
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
@@ -220,6 +226,6 @@ SPEC CHECKSUMS:
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
   SwiftyUserDefaults: 3d273b1739b68ada3145dc754a70ec775bc5c8be
 
-PODFILE CHECKSUM: 7f80d95a38f01b3b74e12f87b20006cfb5b63f14
+PODFILE CHECKSUM: 530d3ab31b8e9b70ff775e0d20f3f8dafd3c0560
 
 COCOAPODS: 1.5.3
