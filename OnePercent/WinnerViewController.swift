@@ -12,6 +12,9 @@ import Alamofire
 import CVCalendar
 import RealmSwift
 import DeviceGuru
+import Firebase
+import FirebaseStorage
+import FirebaseUI
 
 //todo: cell size, viewsize
 
@@ -25,9 +28,11 @@ class WinnerViewController: UIViewController {
     var selectedDate: String!
     var winnerArray:[String] = []
     var todayDate: String {
-        return dateFormatter.string(from: Date())
+        return Time.sharedInstance.stringFromDateNoneyyyyMMdd(date: Date())
     }
-    let minimumShowWinnerNumber = 4
+    let minimumShowWinnerNumber = 6
+    
+    var ref: DatabaseReference!
     
     //MARK: - IBOutlet
     @IBOutlet weak var scrollView: UIScrollView!
@@ -54,48 +59,55 @@ class WinnerViewController: UIViewController {
     }
 
     @IBAction func moveToYesterDay(_ sender: Any) {
-        if Defaults[.isSignIn] == false {
-            signUpAlert(viewController: self)
-            self.winnerCollectionView.reloadData()
-        } else {
+//        if Defaults[.isSignIn] == false {
+//            signUpAlert(viewController: self)
+//            self.winnerCollectionView.reloadData()
+//        } else {
             if let selectedDate =  selectedDate {
                 let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: dateFormatter.date(from: selectedDate)!)
-                setSelectedDate(new: Time.sharedInstance.stringFromDateDotyyyyMMdd(date: yesterDay!))
+//                setSelectedDate(new: Time.sharedInstance.stringFromDateDotyyyyMMdd(date: yesterDay!))
+                setSelectedDate(new: Time.sharedInstance.stringFromDateNoneyyyyMMdd(date: yesterDay!))
                 setCalendarNavigationView()
                 setData()
             }
-        }
+//        }
     }
     
     @IBAction func calendarOpenButton(_ sender: Any) {
-        if Defaults[.isSignIn] == false {
-            signUpAlert(viewController: self)
-        } else {
+//        if Defaults[.isSignIn] == false {
+//            signUpAlert(viewController: self)
+//        } else {
             calendarViewController?.delegate = self
             calendarViewController?.selectedDate = selectedDate
             calendarViewController?.modalPresentationStyle = .overCurrentContext
             present(calendarViewController!, animated: true, completion: nil)
-        }
+//        }
     }
     
     @IBAction func moveToTomorrow(_ sender: Any) {
-        if Defaults[.isSignIn] == false {
-            signUpAlert(viewController: self)
-        } else {
+//        if Defaults[.isSignIn] == false {
+//            signUpAlert(viewController: self)
+//        } else {
             let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: dateFormatter.date(from: selectedDate)!)
-            setSelectedDate(new: Time.sharedInstance.stringFromDateDotyyyyMMdd(date: tomorrow!))
+//            setSelectedDate(new: Time.sharedInstance.stringFromDateDotyyyyMMdd(date: tomorrow!))
+        setSelectedDate(new: Time.sharedInstance.stringFromDateNoneyyyyMMdd(date: tomorrow!))
             setCalendarNavigationView()
             setData()
-        }
+//        }
     }
     
     //MARK: - Recycle Function
     override func viewDidLoad() {
         super.viewDidLoad()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
+        
+        self.ref = Database.database().reference()
+        
+        dateFormatter.dateFormat = "yyyyMMdd"
+        setSelectedDate(new: todayDate)
 
         setGiftImage()
-        setLayout()
+        setData()
+//        setLayout()
         
         //set collectionview option
         winnerCollectionView.isScrollEnabled = false
@@ -105,11 +117,10 @@ class WinnerViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         scrollView.isScrollEnabled = false
-        setSelectedDate(new: todayDate)
-        setData()
+//        setData()
         setCalendarNavigationView()
         
-        setCollectionViewSize(cellCount: sixTestInfo.count)
+//        setCollectionViewSize(cellCount: sixTestInfo.count)
         initCalendarFunction()
     }
     
@@ -193,43 +204,46 @@ class WinnerViewController: UIViewController {
     func setWinnerArray() {
         var winnerName = ""
         winnerArray.removeAll()
-        print("prizeDate == '\(selectedDate!)'")
-        if let winner = uiRealm.objects(Prize.self).filter("prizeDate == '\(selectedDate!)'").last?.winner {
-            for i in winner.characters {
+        
+        // TODO : 동기, 비동기
+        self.ref.child("prizewinner").observeSingleEvent(of: .value, with: {snapshot in
+            let snapshotValue = snapshot.value as! NSDictionary
+            let winners = snapshotValue["\(self.selectedDate!)"]as? String ?? ""
+            print("hyewonWinners: \(winners)")
+            for i in winners.characters {
                 if i == " " {
-                    winnerArray.append(winnerName)
+                    self.winnerArray.append(winnerName)
+                    print("hyewonWinnerName: \(winnerName)")
                     winnerName = ""
                 } else { winnerName.append(i) }
             }
-        }
-        winnerArray.append(winnerName)
+            self.winnerArray.append(winnerName)
+            
+            if self.winnerArray.count > self.minimumShowWinnerNumber {
+                self.sixTestInfo.removeAll()
+                self.sixTestInfo.append(contentsOf: self.winnerArray[0..<self.minimumShowWinnerNumber])
+            } else {
+                self.sixTestInfo = self.winnerArray
+                print("hyewonSixTestInfo: \(self.sixTestInfo) winnerArray: \(self.winnerArray)")
+            }
+            self.winnerCollectionView.reloadData()
+
+        })
         
-        if winnerArray.count > minimumShowWinnerNumber {
-            sixTestInfo.removeAll()
-            sixTestInfo.append(contentsOf: winnerArray[0..<minimumShowWinnerNumber])
-        } else {
-            sixTestInfo = winnerArray
-        }
     }
     
     func setGiftImage() {
-        Alamofire
-            .request("http://onepercentserver.azurewebsites.net/OnePercentServer/todayGift.do?vote_date=\(todayDate)", method: .get)
-            .log(level: .verbose)
-            .responseObject { (response: DataResponse<GiftResponse>) in
-                if let giftResponse = response.result.value?.giftResult {
-                    for n in giftResponse {
-                        if let giftName = n.giftName {
-                            self.giftNameLabel.text = giftName
-                        }
-                        //png 처리
-                        if let giftPng = n.giftPng {
-                            let url = "http://onepercentserver.azurewebsites.net/OnePercentServer/resources/common/image/" + giftPng
-//                            self.giftImageView.af_setImage(withURL: NSURL(string: url) as! URL)
-                        }
-                    }
-                }
-        }
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        
+        let starsRef = storageRef.child("images/\(selectedDate!).jpg")
+        let placeholderImage = UIImage(named: "information")
+        self.giftImageView.sd_setImage(with: starsRef, placeholderImage: placeholderImage)
+        
+        self.ref.child("present/\(selectedDate!)").observeSingleEvent(of: .value, with: {snapshot in
+            let snapshotValue = snapshot.value as! NSDictionary
+            self.giftNameLabel.text = snapshotValue["name"]as? String ?? ""
+        })
     }
 
     func setSelectedDate(new date: String) {
@@ -243,7 +257,9 @@ extension WinnerViewController: UICollectionViewDataSource {
         if showMoreFlag {
             return winnerArray.count
         } else {
-            return sixTestInfo.count
+            print("hyewonCount: \(sixTestInfo.count)")
+//            return sixTestInfo.count
+            return winnerArray.count
         }
     }
     

@@ -176,13 +176,6 @@ class ViewController: UIViewController, NVActivityIndicatorViewable {
                 // Get the download URL for 'images/stars.jpg'
             }
         }
-        
-        
-        
-        
-        
-        
-        
 //        if let presentImage = self.productImageView.image {
 //            let jpgImage = UIImageJPEGRepresentation(presentImage, 0.1)// 10분의 1로 축소
 //            UserDefaults.standard.set(jpgImage, forKey: "presentImage")
@@ -194,9 +187,6 @@ class ViewController: UIViewController, NVActivityIndicatorViewable {
             let snapshotValue = snapshot.value as! NSDictionary
             self.productLabel.text = snapshotValue["name"]as? String ?? ""
         })
-        
-        
-        
     }
 }
 

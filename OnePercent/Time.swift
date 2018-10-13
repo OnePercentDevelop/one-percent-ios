@@ -18,8 +18,8 @@ class Time {
     
     
     private let voteStartTime = NSCalendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())
-    private let voteEndTime = NSCalendar.current.date(bySettingHour: 19, minute: 39, second: 0, of: Date())
-    private let anounceStartTime = NSCalendar.current.date(bySettingHour: 19, minute: 58, second: 0, of: Date())
+    private let voteEndTime = NSCalendar.current.date(bySettingHour: 0, minute: 2, second: 0, of: Date())
+    private let anounceStartTime = NSCalendar.current.date(bySettingHour: 0, minute: 4, second: 0, of: Date())
     private var tomorrowVoteStartTime = NSCalendar.current.date(byAdding: .day, value: 1, to: Date())
     private let appStartDate: Date!
 
